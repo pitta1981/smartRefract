@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module: org.myorg.myapi
+OpenIDE-Module-Implementation-Version: 20150715
+OpenIDE-Module-Layer: org/myorg/myapi/layer.xml
+OpenIDE-Module-Localizing-Bundle: org/myorg/myapi/Bundle.properties
+

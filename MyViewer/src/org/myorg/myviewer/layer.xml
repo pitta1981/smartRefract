@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+    
+    <folder name="Menu">
+        <folder name="Window">
+            <file name="MyViewerAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Window/org-myorg-myviewer-MyViewerAction.instance"/>
+            </file>
+        </folder>
+    </folder>
+    <folder name="Windows2">
+        <folder name="Components">
+            <file name="MyViewerTopComponent.settings" url="MyViewerTopComponentSettings.xml"/>
+        </folder>
+        <folder name="Modes">
+            <folder name="output">
+                <file name="MyViewerTopComponent.wstcref" url="MyViewerTopComponentWstcref.xml"/>
+            </folder>
+        </folder>
+    </folder>
+
+<folder name="Menu">
+    <folder name="File">
+        <file name="MyEditorAction.shadow">
+            <attr name="originalFile" stringvalue="Actions/File/org-myorg-myeditor-MyEditorAction.instance"/>
+           
+
+        </file>
+        <file name="MyEditorAction1.shadow">
+            <attr name="originalFile" stringvalue="Actions/File/it-vs30-myeditor-MyEditorAction1.instance"/>
+
+
+        </file>
+    </folder>
+</folder>
+
+
+</filesystem>

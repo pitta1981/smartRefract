@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module: org.smartRefract.benvenuto
+OpenIDE-Module-Implementation-Version: 20150715
+OpenIDE-Module-Localizing-Bundle: org/smartRefract/benvenuto/Bundle.properties
+OpenIDE-Module-Requires: org.openide.windows.WindowManager
+

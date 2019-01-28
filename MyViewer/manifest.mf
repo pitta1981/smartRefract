@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module: org.myorg.myviewer
+OpenIDE-Module-Implementation-Version: 20141110
+OpenIDE-Module-Layer: org/myorg/myviewer/layer.xml
+OpenIDE-Module-Localizing-Bundle: org/myorg/myviewer/Bundle.properties
+OpenIDE-Module-Requires: org.openide.windows.WindowManager
+

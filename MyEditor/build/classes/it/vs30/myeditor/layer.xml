@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+    <folder name="Actions">
+        
+
+        <folder name="File">
+            <file name="org-myorg-myeditor-MyEditorAction.instance_hidden">
+                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
+                <attr name="delegate" newvalue="it.vs30.myeditor.OpenEditorAction"/>
+                <attr name="displayName" stringvalue="New"/>
+            </file>
+            <file name="it-vs30-myeditor-MyEditorAction1.instance">
+                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
+                <attr name="delegate" newvalue="it.vs30.myeditor.Open_Trace"/>
+                <attr name="displayName" stringvalue="New - Open traces"/>
+            </file>
+            <file name="org-myorg-myviewer-SaveProject.instance">
+                <attr name="delegate" newvalue="it.vs30.myeditor.SaveProject"/>
+                <attr name="displayName" bundlevalue="org.myorg.myviewer.Bundle#CTL_SaveProject"/>
+                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
+                <attr name="noIconInMenu" boolvalue="false"/>
+            </file>
+        </folder>
+
+        
+        
+        
+        <folder name="Aggiungi">
+            <file name="org-myorg-myeditor-AddPenetrometrica.instance_hidden"/>
+        </folder>
+        <folder name="Edit">
+            <file name="org-openide-actions-FindAction.instance_hidden">
+                <attr name="displayName" stringvalue="\u0026Find..."/>
+                <attr name="iconBase" stringvalue="org/openide/resources/actions/find.gif"/>
+                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.callback"/>
+                <attr name="key" stringvalue="org.openide.actions.FindAction"/>
+                <attr name="noIconInMenu" boolvalue="true"/>
+            </file>
+        </folder>
+        
+        <folder name="File">
+            <file name="org-myorg-myeditor-OpenPrj.instance">
+                <attr name="delegate" newvalue="it.vs30.myeditor.OpenPrj"/>
+                <attr name="displayName" bundlevalue="it.vs30.myeditor.Bundle#CTL_OpenPrj"/>
+                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
+                <attr name="noIconInMenu" boolvalue="false"/>
+            </file>
+        </folder>
+        <folder name="Set">
+            <file name="org-myorg-myeditor-Set_geometry.instance">
+                <attr name="delegate" newvalue="it.vs30.myeditor.Set_geometry"/>
+                <attr name="displayName" bundlevalue="it.vs30.myeditor.Bundle#CTL_Set_geometry"/>
+                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
+                <attr name="name" stringvalue="org-myorg-myeditor-Imposta geometria"/>
+                <attr name="noIconInMenu" boolvalue="false"/>
+            </file>
+        </folder>
+        <folder name="Window">
+            <file name="org-myorg-myeditor-BenvenutoTopComponent.instance_hidden"/>
+        </folder>
+    </folder>
+    <folder name="Menu">
+        <file name="Edit_hidden"/>
+        
+           
+        <folder name="File">
+            
+            <file name="org-myorg-myviewer-SaveProject.shadow">
+                <attr name="originalFile" stringvalue="Actions/File/org-myorg-myviewer-SaveProject.instance"/>
+                <attr name="position" intvalue="1450"/>
+            </file>
+            <file name="org-openide-actions-SaveAsAction.shadow_hidden"/>
+        </folder>
+
+        
+        <folder name="Setting">
+            <attr name="position" intvalue="300"/>
+            <file name="org-myorg-myeditor-AddSPT.shadow_hidden"/>
+            <file name="org-myorg-myeditor-Set_geometry-separatorBefore.instance">
+                <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="0"/>
+            </file>
+            <file name="org-myorg-myeditor-Set_geometry.shadow">
+                <attr name="originalFile" stringvalue="Actions/Set/org-myorg-myeditor-Set_geometry.instance"/>
+                <attr name="position" intvalue="100"/>
+            </file>
+        </folder>
+        <folder name="File">
+            
+            <file name="org-myorg-myeditor-OpenPrj-separatorAfter.instance">
+                <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="1350"/>
+            </file>
+            <file name="org-myorg-myeditor-OpenPrj-separatorBefore.instance">
+                <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="1200"/>
+            </file>
+            <file name="org-myorg-myeditor-OpenPrj.shadow">
+                <attr name="originalFile" stringvalue="Actions/File/org-myorg-myeditor-OpenPrj.instance"/>
+                <attr name="position" intvalue="1300"/>
+            </file>
+        </folder>
+        <folder name="Tools">
+            <file name="org-netbeans-modules-favorites-templates-TemplatesAction.shadow_hidden"/>
+        </folder>
+        <folder name="View">
+            <attr name="position" intvalue="500"/>
+            <file name="org-netbeans-core-actions-HTMLViewAction.shadow_hidden"/>
+            <file name="org-netbeans-core-windows-actions-ToolbarsListAction.shadow_hidden"/>
+        </folder>
+    </folder>
+    <folder name="Toolbars">
+        <file name="File_hidden"/>
+        <file name="UndoRedo_hidden"/>
+    </folder>
+</filesystem>

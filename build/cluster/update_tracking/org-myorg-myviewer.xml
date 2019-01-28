@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.myorg.myviewer">
+    <module_version install_time="1548414514322" last="true" origin="installer" specification_version="2013.1.20141110">
+        <file crc="1659341623" name="config/Modules/org-myorg-myviewer.xml"/>
+        <file crc="836865863" name="modules/org-myorg-myviewer.jar"/>
+    </module_version>
+</module>
