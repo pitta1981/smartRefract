@@ -394,7 +394,7 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
                 obj.proj.max3 = obj.proj.count_element_layer(3, 0);
                 obj.proj.maxR3 = obj.proj.count_element_layer(3, 1);
                 obj.proj.sezDT_ver2016(true);
-                modify();
+               // modify();
 //      System.out.println(obj.proj.stesa);
 
             }
@@ -413,6 +413,9 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
         ((sideTools_TopComponent) tc).setTabSelected(jTabbedPane1.getSelectedIndex());
         ((sideTools_TopComponent) tc).jtr_dlg.setTraceView(tv);
         ((sideTools_TopComponent) tc).txt.setTTview(this.txV);
+        ((sideTools_TopComponent) tc).prfDlg.setSezView(this.sv);
+        
+        
         ((sideTools_TopComponent) tc).setAPIObject(obj);
 
         tc = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");

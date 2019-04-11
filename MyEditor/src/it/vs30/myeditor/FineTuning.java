@@ -36,6 +36,7 @@ public class FineTuning extends javax.swing.JDialog {
     protected JtV_draw tv_Draw = null;
     private Jsezdlg parentDlg;
     protected JtV_draw tg_Draw = null;
+    private JSezioneView sV;
 
     /**
      * Creates new form FineTuning
@@ -157,6 +158,7 @@ public class FineTuning extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel7 = new javax.swing.JPanel();
         button_saveTx = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jSplitPane2 = new javax.swing.JSplitPane();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -407,23 +409,31 @@ public class FineTuning extends javax.swing.JDialog {
             }
         });
 
+        org.openide.awt.Mnemonics.setLocalizedText(jButton1, org.openide.util.NbBundle.getMessage(FineTuning.class, "FineTuning.jButton1.text")); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE))
             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(button_saveTx)
+                .addGap(15, 15, 15))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(button_saveTx)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,7 +447,9 @@ public class FineTuning extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(button_saveTx)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(button_saveTx)
+                    .addComponent(jButton1))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -960,7 +972,7 @@ public class FineTuning extends javax.swing.JDialog {
         // TODO add your handling code here:
         int i = 0;
         int chanel = dati_sismici.stesa.get(0).ch;
-        dati_sismici.init_man_phantoming(chanel, dati_sismici.stesa);
+        dati_sismici.init_man_phantoming(chanel, dati_sismici.stesa,false);
 
         i = 0;
         for (JShot shot : dati_sismici.shots) {
@@ -1068,8 +1080,8 @@ public class FineTuning extends javax.swing.JDialog {
         
         
   //      dati_sismici.sezDT(true);
-        parentDlg.sV.invalidate();
-        parentDlg.sV.repaint();
+        sV.invalidate();
+        sV.repaint();
 
     }//GEN-LAST:event_button_applyActionPerformed
 
@@ -1334,8 +1346,16 @@ public class FineTuning extends javax.swing.JDialog {
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    public void setParentDialog(Jsezdlg argParent) {
-        parentDlg = argParent;
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int chanel = dati_sismici.stesa.get(0).ch;
+        dati_sismici.init_man_phantoming(chanel, dati_sismici.stesa,true);
+
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void setParentDialog(JSezioneView argParent) {
+        sV = argParent;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -1345,6 +1365,7 @@ public class FineTuning extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.JButton button_apply;
     private javax.swing.JButton button_saveTx;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1404,7 +1425,7 @@ public class FineTuning extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     Indagine dati_sismici;
 
-    void setProj(Indagine proj) {
+    public void setProj(Indagine proj) {
         dati_sismici = proj;
         dati_sismici.buildShots();
         this.phant_view.setProj(proj);

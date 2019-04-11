@@ -342,11 +342,11 @@ public class Indagine {
         }
     }
 
-    public void init_man_phantoming(int chanel, ArrayList<FirstBrakeList> mStesa) {
+    public void init_man_phantoming(int chanel, ArrayList<FirstBrakeList> mStesa, boolean forceInit) {
         //Se la traccia ricostruita è già stata inizializata controlla che sia completa
         //altrimenti la inizializza
 
-        if (man_phant_is_Empty()) {
+        if (forceInit || man_phant_is_Empty()) {
             init_man_phantoming(
                     chanel);
             int i = 0;

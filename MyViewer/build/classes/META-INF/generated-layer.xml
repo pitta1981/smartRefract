@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN"
+                            "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
 <filesystem>
     <folder name="xml">
         <folder name="entities">
@@ -25,8 +27,10 @@
             <folder name="org_myorg_myviewer">
                 <file name="MyViewer.instance">
                     <!--org.myorg.myviewer.MyViewerTopComponent-->
-                    <attr methodvalue="org.netbeans.api.settings.Factory.create" name="instanceCreate"/>
-                    <attr methodvalue="org.netbeans.api.settings.Factory.properties" name="settings.convertor"/>
+                    <attr
+                        methodvalue="org.netbeans.api.settings.Factory.create" name="instanceCreate"/>
+                    <attr
+                        methodvalue="org.netbeans.api.settings.Factory.properties" name="settings.convertor"/>
                     <attr name="settings.instanceClass" stringvalue="org.myorg.myviewer.MyViewerTopComponent"/>
                     <attr name="settings.instanceOf" stringvalue="org.myorg.myviewer.MyViewerTopComponent"/>
                     <attr boolvalue="true" name="xmlproperties.preventStoring"/>

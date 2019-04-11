@@ -39,6 +39,26 @@ public class JSezioneView extends javax.swing.JPanel {
     BufferedImage bIm2, bIm1;
     BufferedImage bIm3;
     boolean isWhite,proporz;
+    
+    //get, set method
+    public boolean isProporz(){
+        
+        return proporz;
+    }
+    public void setProporz(boolean b){
+        proporz=b;
+        obj.proporz=b;
+    }
+    
+    public boolean isBgWhite(){
+        
+        return isWhite;
+    }
+    public void setBgWhite(boolean b){
+        isWhite=b;
+    }
+    
+    
     private double maxv;
     APIObject obj;
     DrawingAPI dAPI;

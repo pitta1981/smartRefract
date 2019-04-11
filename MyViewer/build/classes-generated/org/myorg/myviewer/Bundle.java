@@ -1,5 +1,6 @@
 package org.myorg.myviewer;
 /** Localizable strings for {@link org.myorg.myviewer}. */
+@javax.annotation.Generated(value="org.netbeans.modules.openide.util.NbBundleProcessor")
 class Bundle {
     /**
      * @return <i>Geometry</i>

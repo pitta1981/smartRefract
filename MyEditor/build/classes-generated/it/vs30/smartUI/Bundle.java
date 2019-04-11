@@ -1,5 +1,6 @@
 package it.vs30.smartUI;
 /** Localizable strings for {@link it.vs30.smartUI}. */
+@javax.annotation.Generated(value="org.netbeans.modules.openide.util.NbBundleProcessor")
 class Bundle {
     /**
      * @return <i>smartGeometry</i>

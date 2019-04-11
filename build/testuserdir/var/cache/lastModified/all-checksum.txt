@@ -1,9 +1,9 @@
-netbeans/platform=1545016896000
-cluster.Source/smartrefract-2015_0-navette/smartrefract-navette/build/cluster=1548414515764
-cluster.netbeans/platform=1545016896000
-user=1548414515764
+/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/platform=1485035775000
+cluster./Users/simone/NetBeansProjects/smartRefract/build/cluster=1554967699000
+cluster./Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/platform=1485035775000
+user=1554967699000
 crc=7
 locale=it_IT
 branding=smartrefract
-java.version=10.0.2
-java.vm.version=10.0.2+13-Ubuntu-1ubuntu0.18.04.4
+java.version=1.8.0_131
+java.vm.version=25.131-b11

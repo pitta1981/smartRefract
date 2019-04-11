@@ -33,19 +33,19 @@
   </main-window>
     <editor-area state="joined" frame-state="0">
   <constraints>
-  <path orientation="horizontal" number="60" weight="0.8869844670594537" />
+  <path orientation="horizontal" number="60" weight="0.8263598326359832" />
   <path orientation="vertical" number="40" weight="0.8797399783315276" />
   <path orientation="horizontal" number="40" weight="0.7" />
   <path orientation="vertical" number="40" weight="0.5" />
   </constraints>
   <bounds x="618" y="252" width="787" height="463" />
     </editor-area>
-    <screen width="1920" height="1080"/>
+    <screen width="1440" height="900"/>
     <active-mode name="editor"/>
     <toolbar configuration="Standard" preferred-icon-size="16"/>
     <tc-list>
-  <tc-id id="welcomeTopComponent"/>
   <tc-id id="sideTools_TopComponent"/>
+  <tc-id id="welcomeTopComponent"/>
   <tc-id id="geometryViewerTopComponent"/>
   <tc-id id="MyViewerTopComponent"/>
     </tc-list>

@@ -1,5 +1,6 @@
 package it.vs30.myeditor;
 /** Localizable strings for {@link it.vs30.myeditor}. */
+@javax.annotation.Generated(value="org.netbeans.modules.openide.util.NbBundleProcessor")
 class Bundle {
     /**
      * @return <i>Export travel time...</i>

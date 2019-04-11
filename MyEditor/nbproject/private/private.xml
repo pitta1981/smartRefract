@@ -5,14 +5,22 @@
             <url>src/it/vs30/myeditor/FineTuning.java</url>
             <bookmark id="1">
                 <name/>
-                <line>1513</line>
+                <line>1534</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/pitta1981/Source/smartrefract-2015_0-navette/smartrefract-navette/MyEditor/src/it/vs30/myeditor/DocumentEditor.java</file>
+            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/JSezioneView.java</file>
+            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/sidebar/profileTools.java</file>
+            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/Jsezdlg.java</file>
+            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/DocumentEditor.java</file>
+            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/sidebar/trace_tools.java</file>
+            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/JPhantoming_view.java</file>
+            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/sidebar/sideTools_TopComponent.java</file>
+            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/FineTuning.java</file>
+            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/sidebar/tx_tool.java</file>
         </group>
     </open-files>
 </project-private>

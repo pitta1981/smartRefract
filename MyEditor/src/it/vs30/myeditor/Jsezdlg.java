@@ -497,7 +497,7 @@ public class Jsezdlg extends javax.swing.JDialog {
         FineTuning ft=new FineTuning(sV.obj.proj);
         ft.setProj(proj);
         this.setVisible(false);
-        ft.setParentDialog(this);
+        ft.setParentDialog(sV);
         ft.setModal(true);
         ft.setVisible(true);
         

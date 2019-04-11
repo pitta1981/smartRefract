@@ -126,6 +126,7 @@ public final class sideTools_TopComponent extends TopComponent  implements Looku
     
     public void setAPIObject(APIObject obj){
         txt.setAPIObject(obj);
+        prfDlg.setAPIObject(obj);
     }
     
     public void setTabSelected(int selectedIndex) {
@@ -164,9 +165,29 @@ public final class sideTools_TopComponent extends TopComponent  implements Looku
                 
             }
         }
+        if(selectedIndex==2){
+            //this.remove(jLabel1);
+            if(prfDlg!=null){
+                this.add(prfDlg);
+                //this.add(jtr_dlg);
+                //jtr_dlg.setSelectButtonStatus( jtr_dlg.getTraceView().getSelectionMode() );
+            }
+            
+            this.updateUI();
+        }
+        else{
+            try{
+               this.remove(prfDlg);
+               this.updateUI();
+            }
+            catch(Exception ex){
+                
+            }
+        }
         
     }
     public tx_tool txt=new tx_tool();
     public trace_tools jtr_dlg=new trace_tools();
+    public profileTools prfDlg=new profileTools();
     
 }

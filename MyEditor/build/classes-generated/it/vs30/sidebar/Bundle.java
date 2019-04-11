@@ -1,5 +1,6 @@
 package it.vs30.sidebar;
 /** Localizable strings for {@link it.vs30.sidebar}. */
+@javax.annotation.Generated(value="org.netbeans.modules.openide.util.NbBundleProcessor")
 class Bundle {
     /**
      * @return <i>sideTools_</i>
