@@ -88,6 +88,7 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
      */
     public DocumentEditor() {
 
+        System.setProperty("sun.java2d.opengl", "True");
         //    associateLookup(new AbstractLookup(content));
         obj = new APIObject();
         //associateLookup(new AbstractLookup(ic));
@@ -510,7 +511,7 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
                 //   drawAssi(g, this.getWidth(), this.getHeight());
                 dA.drawSezAssi(g, pageWidth, (int) (rap), x, y);
 
-                dA.drawSezione2(g, (int) (pageWidth), (int) (rap), x, y);
+                dA.drawSezione2(g,  (pageWidth), (int) (rap), x, y);
 
                 //drawSezione(g, this.getWidth(), this.getHeight());
                 //      PenetrometroGraph pg = new PenetrometroGraph(new int[]{4, 3, 6, 3, 6, 9, 12, 14, 11, 10, 16, 19, 40, 60}, 25, 0.5);

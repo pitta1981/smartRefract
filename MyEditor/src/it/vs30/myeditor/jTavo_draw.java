@@ -23,8 +23,8 @@ import java.awt.image.BufferedImage;
 public class jTavo_draw extends javax.swing.JPanel {
 
     /** Creates new form jTavo_draw */
-    BufferedImage[] im = new BufferedImage[3];
-    BufferedImage im_s;
+    public BufferedImage[] im = new BufferedImage[3];
+    public BufferedImage im_s;
     public boolean[][] cell;
     Color newFColor;
     Color newBColor;

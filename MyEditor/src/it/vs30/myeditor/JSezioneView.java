@@ -36,8 +36,8 @@ public class JSezioneView extends javax.swing.JPanel {
     private Indagine proj;
     private double margUp = 0.07;
     Jsezdlg sezDlg = new Jsezdlg(this);
-    BufferedImage bIm2, bIm1;
-    BufferedImage bIm3;
+    public BufferedImage bIm2, bIm1;
+    public BufferedImage bIm3;
     boolean isWhite,proporz;
     
     //get, set method
@@ -60,8 +60,8 @@ public class JSezioneView extends javax.swing.JPanel {
     
     
     private double maxv;
-    APIObject obj;
-    DrawingAPI dAPI;
+    public APIObject obj;
+    public DrawingAPI dAPI;
 
     /** Creates new form JSezioneView */
     public JSezioneView() {
@@ -185,7 +185,7 @@ public class JSezioneView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-
+/*
     sezDlg.V2 = proj.V2A;
     sezDlg.tV1 = proj.Tv1;
     sezDlg.tV2 = proj.Tv2;
@@ -211,7 +211,7 @@ private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_
         //AWTUtilities.setWindowOpacity(sezDlg, 0.5f);
     } catch (Exception ex) {
     }
-    sezDlg.setVisible(true);
+    sezDlg.setVisible(true);*/
     // TODO add your handling code here:
 }//GEN-LAST:event_formMouseClicked
 

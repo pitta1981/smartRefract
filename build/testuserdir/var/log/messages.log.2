@@ -1,14 +1,14 @@
 -------------------------------------------------------------------------------
->Log Session: Wednesday, April 10, 2019 5:06:41 PM CEST
+>Log Session: Monday, July 8, 2019 8:40:05 AM CEST
 >System Info: 
   Product Version         = NetBeans Platform 8.2 (Build 201609300101)
-  Operating System        = Mac OS X version 10.14.4 running on x86_64
+  Operating System        = Mac OS X version 10.14.5 running on x86_64
   Java; VM; Vendor        = 1.8.0_131; Java HotSpot(TM) 64-Bit Server VM 25.131-b11; Oracle Corporation
   Runtime                 = Java(TM) SE Runtime Environment 1.8.0_131-b11
   Java Home               = /Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre
   System Locale; Encoding = it_IT (smartrefract); UTF-8
   Home Directory          = /Users/simone
-  Current Directory       = /Users/simone/NetBeansProjects/smartRefract/MyAPI
+  Current Directory       = /Users/simone/NetBeansProjects/smartRefract/MyEditor
   User Directory          = /Users/simone/NetBeansProjects/smartRefract/build/testuserdir
   Cache Directory         = /Users/simone/NetBeansProjects/smartRefract/build/testuserdir/var/cache
   Installation            = /Users/simone/NetBeansProjects/smartRefract/build/cluster
@@ -30,7 +30,7 @@ INFO [org.netbeans.core.startup.NbEvents]: Turning on modules:
 	org.openide.util.ui [9.6.1 201609300101]
 	org.openide.modules [7.48.1 201609300101]
 	org.netbeans.api.annotations.common/1 [1.27.1 201609300101]
-	org.openide.filesystems [9.10.1 201609300101]
+	org.openide.filesystems [9.10.2 201705191307]
 	org.openide.awt [7.67.1 201609300101]
 	org.netbeans.api.progress/1 [1.47.1 201609300101]
 	org.netbeans.api.progress.nb [1.47.1 201609300101]
@@ -93,8 +93,8 @@ INFO [org.netbeans.core.startup.NbEvents]: Turning on modules:
 	org.netbeans.core.multitabs/1 [1.12.1.1 1 201609300101]
 	org.netbeans.core.io.ui/1 [1.30.1 201609300101]
 	org.myorg.myapi [2013.1.20150715 20150715 190410]
-	org.myorg.myviewer [2013.1.20141110 20141110 190222]
-	it.vs30.myeditor [2013.1.20161101 20161101 190401]
+	org.myorg.myviewer [2013.1.20141110 20141110 190411]
+	it.vs30.myeditor [2013.1.20161101 20161101 190708]
 INFO [org.netbeans.core.network.proxy.NetworkProxyReloader]: System network proxy resolver: Mac
 INFO [org.netbeans.core.network.proxy.NetworkProxyReloader]: System network proxy reloading failed! Trying fallback resolver.
 INFO [org.netbeans.core.network.proxy.fallback.FallbackNetworkProxy]: Fallback system proxy resolver: no http_proxy variable found
@@ -119,13 +119,13 @@ Input arguments:
 	-DaddExports:java.desktop/sun.awt.im=ALL-UNNAMED
 	-DaddExports:java.management/sun.management=ALL-UNNAMED
 	-XX:+HeapDumpOnOutOfMemoryError
-	-XX:HeapDumpPath=/Users/simone/NetBeansProjects/smartRefract/MyAPI/../build/testuserdir/var/log/heapdump.hprof
+	-XX:HeapDumpPath=/Users/simone/NetBeansProjects/smartRefract/MyEditor/../build/testuserdir/var/log/heapdump.hprof
 Compiler: HotSpot 64-Bit Tiered Compilers
 Heap memory usage: initial 256,0MB maximum 455,5MB
 Non heap memory usage: initial 2,4MB maximum -1b
 Garbage collector: PS Scavenge (Collections=3 Total time spent=0s)
 Garbage collector: PS MarkSweep (Collections=1 Total time spent=0s)
-Classes: loaded=4974 total loaded=4974 unloaded 0
+Classes: loaded=4967 total loaded=4967 unloaded 0
 INFO [org.netbeans.core.ui.warmup.DiagnosticTask]: Total memory 17.179.869.184
 INFO [null]: Total physical memory 17.179.869.184
 WARNING [org.openide.filesystems.Ordering]: Not all children in Menu/File/ marked with the position attribute: [MyEditorAction.shadow, MyEditorAction1.shadow], but some are: [org-myorg-myeditor-OpenPrj-separatorBefore.instance, org-myorg-myeditor-OpenPrj.shadow, org-myorg-myeditor-OpenPrj-separatorAfter.instance, Separator2.instance, org-myorg-myviewer-SaveProject.shadow, org-openide-actions-SaveAction.shadow, org-openide-actions-SaveAllAction.shadow, it-vs30-geometryView-ExportTravelTime-separatorBefore.instance, it-vs30-geometryView-ExportTravelTime.shadow, Separator3.instance, org-netbeans-modules-print-action-PageSetupAction.shadow, org-netbeans-modules-print-action-PrintAction.shadow, Separator4.instance]
@@ -133,10 +133,6 @@ WARNING [org.openide.filesystems.Ordering]: Not all children in Menu/Window/ mar
 INFO [org.netbeans.modules.autoupdate.updateprovider.DownloadListener]: Reading URL http://www.vs30.it/update_cn_Upega_2013_1/API/updates.xml failed (java.net.UnknownHostException: www.vs30.it)
 WARNING [org.netbeans.modules.autoupdate.ui.actions.AutoupdateCheckScheduler]: Plugin OperationInfo: Core Application Interface[org.myorg.myapi/2013.1.20170606] cannot be installed because some dependencies cannot be satisfied: [module org.netbeans.modules.autoupdate.services = 201306052037]
 WARNING [org.netbeans.modules.autoupdate.ui.actions.AutoupdateCheckScheduler]: Plugin Core Application Interface[org.myorg.myapi/2013.1.20170606] cannot be installed because some dependencies cannot be satisfied: [module org.netbeans.modules.autoupdate.services = 201306052037]
-null
-Errore in paintComponent: null
-null
-Errore in paintComponent: null
 WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
 WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
 WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
@@ -158,49 +154,42 @@ WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to Cl
 WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
 WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
 WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
-SEVERE [global]
-java.lang.NullPointerException
-	at it.vs30.myeditor.tVdlg.<init>(tVdlg.java:39)
-	at it.vs30.myeditor.Jsezdlg.button_bestXYActionPerformed(Jsezdlg.java:250)
-	at it.vs30.myeditor.Jsezdlg.access$200(Jsezdlg.java:46)
-	at it.vs30.myeditor.Jsezdlg$3.actionPerformed(Jsezdlg.java:134)
-	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
-	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
-	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
-	at java.awt.Component.processMouseEvent(Component.java:6533)
-	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
-	at java.awt.Component.processEvent(Component.java:6298)
-	at java.awt.Container.processEvent(Container.java:2236)
-	at java.awt.Component.dispatchEventImpl(Component.java:4889)
-	at java.awt.Container.dispatchEventImpl(Container.java:2294)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
-	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4525)
-	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
-	at java.awt.Container.dispatchEventImpl(Container.java:2280)
-	at java.awt.Window.dispatchEventImpl(Window.java:2746)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
-	at java.awt.EventQueue.access$500(EventQueue.java:97)
-	at java.awt.EventQueue$3.run(EventQueue.java:709)
-	at java.awt.EventQueue$3.run(EventQueue.java:703)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)
-	at java.awt.EventQueue$4.run(EventQueue.java:731)
-	at java.awt.EventQueue$4.run(EventQueue.java:729)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
-	at org.netbeans.core.TimableEventQueue.dispatchEvent(TimableEventQueue.java:159)
-[catch] at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
+WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
 WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
 WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
 WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush

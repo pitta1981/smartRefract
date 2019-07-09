@@ -337,7 +337,7 @@ public class Jsezdlg extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         // TODO add your handling code here:
-        tavo_dlg = new jTavolozzaDlg(this);
+        tavo_dlg = new jTavolozzaDlg(this.sV);
         this.setVisible(false);
         tavo_dlg.setModal(true);
         tavo_dlg.setVisible(true);

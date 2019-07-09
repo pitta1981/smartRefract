@@ -7,9 +7,19 @@ package it.vs30.sidebar;
 
 import it.vs30.myeditor.FineTuning;
 import it.vs30.myeditor.JSezioneView;
+import it.vs30.myeditor.Jsezdlg;
 import it.vs30.myeditor.jTavolozzaDlg;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 import org.myorg.myapi.APIObject;
+import org.myorg.myapi.DrawingAPI;
+import org.myorg.myapi.FirstBrakeList;
 import org.myorg.myapi.Indagine;
 import org.myorg.myviewer.MyViewerTopComponent;
 import org.openide.util.Lookup;
@@ -31,36 +41,32 @@ public class profileTools extends javax.swing.JPanel {
     public double[] V2;
     public double[] V3;
     Indagine proj;
-    
-    
+
     /**
      * Creates new form profileTools
      */
     public profileTools() {
         initComponents();
     }
-   
-    
+
     void setAPIObject(APIObject active) {
         this.obj = active;
         setProj(obj.proj);
     }
-    
-    public void setSezView(JSezioneView sv){
+
+    public void setSezView(JSezioneView sv) {
         sV = sv;
         if (sV.isProporz()) {
             jProportionalProfileButton.setText("Maximize profile");
         } else {
             jProportionalProfileButton.setText("Proportional profile");
         }
-        
+
     }
-    
+
     public void setProj(Indagine prj) {
         this.proj = prj;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -116,6 +122,11 @@ public class profileTools extends javax.swing.JPanel {
         add(jWhiteBkgButton);
 
         org.openide.awt.Mnemonics.setLocalizedText(jSetPalette, org.openide.util.NbBundle.getMessage(profileTools.class, "profileTools.jSetPalette.text")); // NOI18N
+        jSetPalette.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSetPaletteActionPerformed(evt);
+            }
+        });
         add(jSetPalette);
 
         org.openide.awt.Mnemonics.setLocalizedText(jExportImage, org.openide.util.NbBundle.getMessage(profileTools.class, "profileTools.jExportImage.text")); // NOI18N
@@ -129,33 +140,32 @@ public class profileTools extends javax.swing.JPanel {
 
     private void jProportionalProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProportionalProfileButtonActionPerformed
         // TODO add your handling code here:
-        sV.setProporz( !sV.isProporz() );
-        
+        sV.setProporz(!sV.isProporz());
+
         if (sV.isProporz()) {
             jProportionalProfileButton.setText("Maximize profile");
         } else {
             jProportionalProfileButton.setText("Proportional profile");
         }
-        
+
         sV.invalidate();
         sV.repaint();
-        
-        
+
+
     }//GEN-LAST:event_jProportionalProfileButtonActionPerformed
 
     private void jWhiteBkgButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWhiteBkgButtonActionPerformed
-        sV.setBgWhite ( !sV.isBgWhite() );
 
         if (sV.isBgWhite()) {
-            sV.setBackground(Color.WHITE);
-        } else {
             sV.setBackground(Color.BLACK);
+        } else {
+            sV.setBackground(Color.WHITE);
         }
+        sV.setBgWhite(!sV.isBgWhite());
 
-        this.setVisible(false);
-       // sV.obj.is_white = sV.isWhite;
-       sV.invalidate();
-       sV.repaint();
+        sV.obj.is_white = sV.isBgWhite();
+        sV.invalidate();
+        sV.repaint();
 
         TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
         Lookup tcLookup = tc.getLookup();
@@ -164,24 +174,136 @@ public class profileTools extends javax.swing.JPanel {
         ((MyViewerTopComponent) tc).gmview.invalidate();
         ((MyViewerTopComponent) tc).gmview.repaint();
 
-
 // TODO add your handling code here:
     }//GEN-LAST:event_jWhiteBkgButtonActionPerformed
 
     private void jExportImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jExportImageActionPerformed
         // TODO add your handling code here:
+        JFileChooser fc = new JFileChooser();
+
+        /*
+         * MyEditor editor = new MyEditor();
+         * editor.open();
+         * editor.requestActive();
+         */
+        fc.setFileFilter(new PNGFileFilter());
+        fc.setMultiSelectionEnabled(true);
+        //this.setVisible(false);
+
+        // proj.checkLic();
+        if (proj.licenza) {
+            int returnVal = fc.showSaveDialog(null);
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                BufferedImage im_s = new BufferedImage(1300, 700, BufferedImage.TYPE_INT_RGB);    // (BufferedImage) this.createImage(this.getWidth(), this.getHeight());
+                if (sV.dAPI.equals(null)) {
+                    sV.dAPI = new DrawingAPI(proj, sV.obj);
+                }
+
+                // sezione.draw();
+                // dAPI.drawSezAssi(g,this.getWidth(), this.getHeight());
+                double[] mxmn = sV.dAPI.maxmin();
+                FirstBrakeList ArrFB = proj.stesa.get(0);
+
+                // double[] mxmn=dAPI.maxmin();
+                // FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+                double ascismax = (ArrFB.ch - 1) * ArrFB.spaz;
+                double x_step = (im_s.getWidth() / ArrFB.fb.length);
+                double x = (im_s.getWidth() - (2 * sV.dAPI.margine_dx) - (2 * sV.dAPI.margine_sx)) / ascismax;
+                double y = x;
+                double profmx = mxmn[0] + mxmn[1];
+                double rap = (profmx * y) + 120;
+                double scala = 1;
+
+                // margup=0.07
+                // ystp = (ymax - (2.3 * margUp * ymax) - 30) / mxmn;
+                if (rap > im_s.getHeight()) {
+
+                    // scala=(this.getHeight()-120)/rap;
+                    x = (im_s.getHeight() - 120) / profmx;
+                    rap = (im_s.getHeight());
+                    y = x;
+                }
+
+                if (!sV.obj.proporz) {
+                    x = (im_s.getWidth() - (2 * sV.dAPI.margine_dx) - (2 * sV.dAPI.margine_sx)) / ascismax;
+                    y = (im_s.getHeight() - 120) / profmx;
+                    rap = (profmx * y) + 120;
+                }
+
+                im_s = new BufferedImage((int) (x * ascismax) + (2 * sV.dAPI.margine_dx) + (2 * sV.dAPI.margine_sx),
+                        (int) rap, BufferedImage.TYPE_INT_RGB);
+
+                Graphics offg = im_s.getGraphics();
+                Graphics2D g2 = (Graphics2D) offg.create();
+
+                if (sV.isBgWhite()) {
+                    g2.setBackground(Color.white);
+                    g2.clearRect(0, 0, 2000, 1450);
+                } else {
+                    g2.setBackground(Color.BLACK);
+                    g2.clearRect(0, 0, 2000, 1450);
+                }
+
+                sV.dAPI.drawSezAssi(offg, im_s.getWidth(), (int) (rap), x, y);
+                sV.dAPI.drawSezione2(offg, (im_s.getWidth()), (int) (rap), x, y);
+
+                // sV.drawAssi(offg, 2000, 1450);
+                // sV.drawSezione(offg, 2000, 1450);
+                try {
+
+                    // retrieve image
+                    File outputfile = fc.getSelectedFile();
+
+                    if (!outputfile.getPath().toLowerCase().endsWith(".png")) {
+                        outputfile = new File(outputfile.getPath() + ".png");
+                    }
+
+                    ImageIO.write(im_s, "png", outputfile);
+                } catch (IOException e) {
+                }
+            }
+        }
+
+        sV.repaint();
     }//GEN-LAST:event_jExportImageActionPerformed
 
     private void jPhantomingTvTgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPhantomingTvTgActionPerformed
         // TODO add your handling code here:
-        FineTuning ft=new FineTuning(obj.proj);
+        FineTuning ft = new FineTuning(obj.proj);
         ft.setProj(this.proj);
         //this.setVisible(false);
         ft.setParentDialog(this.sV);
         ft.setModal(true);
         ft.setVisible(true);
-        
+
     }//GEN-LAST:event_jPhantomingTvTgActionPerformed
+
+    private void jSetPaletteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSetPaletteActionPerformed
+        // TODO add your handling code here:
+        tavo_dlg = new jTavolozzaDlg(this.sV);
+
+        tavo_dlg.setModal(true);
+        tavo_dlg.setVisible(true);
+
+        if (tavo_dlg.tavDr.im[0] != null) {
+            sV.bIm1 = tavo_dlg.tavDr.im[0];
+            sV.dAPI.bIm1 = tavo_dlg.tavDr.im[0];
+        }
+
+        if (tavo_dlg.tavDr.im[1] != null) {
+            sV.bIm2 = tavo_dlg.tavDr.im[1];
+            sV.dAPI.bIm2 = tavo_dlg.tavDr.im[1];
+        }
+
+        if (tavo_dlg.tavDr.im[2] != null) {
+            sV.bIm3 = tavo_dlg.tavDr.im[2];
+            sV.dAPI.bIm3 = tavo_dlg.tavDr.im[2];
+        }
+
+        sV.repaint();
+
+    }//GEN-LAST:event_jSetPaletteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -192,4 +314,18 @@ public class profileTools extends javax.swing.JPanel {
     private javax.swing.JButton jSetPalette;
     private javax.swing.JButton jWhiteBkgButton;
     // End of variables declaration//GEN-END:variables
+
+    class PNGFileFilter extends javax.swing.filechooser.FileFilter {
+
+        @Override
+        public boolean accept(File f) {
+            return f.isDirectory() || f.getName().toLowerCase().endsWith(".png");
+        }
+
+        @Override
+        public String getDescription() {
+            return "PNG image file";
+        }
+    }
+
 }

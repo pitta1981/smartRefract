@@ -14,13 +14,15 @@
         <group>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/JSezioneView.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/sidebar/profileTools.java</file>
-            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/Jsezdlg.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/DocumentEditor.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/sidebar/trace_tools.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/JPhantoming_view.java</file>
+            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/jTavo_draw.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/sidebar/sideTools_TopComponent.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/FineTuning.java</file>
+            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/TraceView.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/sidebar/tx_tool.java</file>
+            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/jTavolozzaDlg.java</file>
         </group>
     </open-files>
 </project-private>

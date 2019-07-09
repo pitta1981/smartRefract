@@ -48,11 +48,13 @@ public class JTX_view extends javax.swing.JPanel {
      */
     public JTX_view() {
         initComponents();
+        System.setProperty("sun.java2d.opengl", "True");
     }
 
     public JTX_view(FirstBrakeList arr, Indagine prj) {
         initComponents();
         //jPanel.setBackground(Color.BLACK);
+        System.setProperty("sun.java2d.opengl", "True");
         proj = prj;
         ArrFB = arr;
         //fb=fiB;
@@ -82,7 +84,7 @@ public class JTX_view extends javax.swing.JPanel {
 
         xmax = this.getWidth();
         ArrFB = (FirstBrakeList) proj.stesa.get(0);
-        nchanel = xmax / (ArrFB.fb.length +1);
+        nchanel = xmax / (ArrFB.fb.length + 1);
 
         super.paintComponent(g);
         is_white = obj.is_white;
@@ -159,7 +161,7 @@ public class JTX_view extends javax.swing.JPanel {
         //     int xshf = nchanel;
         double max = 0.00001;
         for (int j = 0; j < proj.stesa.size(); j++) {
-            FirstBrakeList fbl =  proj.stesa.get(j);
+            FirstBrakeList fbl = proj.stesa.get(j);
             for (int i = 1; i < fbl.fb.length; i++) {
                 if (max < fbl.fb[i].time) {
                     max = (int) fbl.fb[i].time;
@@ -218,7 +220,7 @@ public class JTX_view extends javax.swing.JPanel {
         // TODO add your handling code here:
         int ymax = this.getHeight();
         //    int xmax = this.getWidth();
-        ArrFB =  proj.stesa.get(0);
+        ArrFB = proj.stesa.get(0);
 
         int xshf = nchanel;
         double max = 0.00001;
@@ -237,7 +239,7 @@ public class JTX_view extends javax.swing.JPanel {
         int fi = indi;
         int j = indj;
         int in = indi;
-        FirstBrakeList fbl =  proj.stesa.get(j);
+        FirstBrakeList fbl = proj.stesa.get(j);
         for (int i = 0; i < fbl.fb.length; i++) {
             int xx = (i * nchanel) + xshf;
             int yy = ymax - (int) (fbl.fb[i].time * ystp);
@@ -297,7 +299,7 @@ public class JTX_view extends javax.swing.JPanel {
          */
         double max = 0.00001;
         for (int j = 0; j < proj.stesa.size(); j++) {
-            FirstBrakeList fbl =  proj.stesa.get(j);
+            FirstBrakeList fbl = proj.stesa.get(j);
             for (int i = 0; i < fbl.fb.length; i++) {
                 if (max < fbl.fb[i].time) {
                     max = (int) fbl.fb[i].time;
@@ -313,7 +315,7 @@ public class JTX_view extends javax.swing.JPanel {
             int fi = indi;
             int j = indj;
             int in = indi;
-            FirstBrakeList fbl =  proj.stesa.get(j);
+            FirstBrakeList fbl = proj.stesa.get(j);
             double scoppio = ((fbl.scoppio - fbl.spaz_in) / fbl.spaz);
             for (int i = 0; i < fbl.fb.length; i++) {
                 int xx = (i * nchanel) + xshf;
@@ -389,7 +391,7 @@ public class JTX_view extends javax.swing.JPanel {
     private void drawSl(Graphics g, int x, int y) {
         int ymax = this.getHeight();
 //        int xmax = this.getWidth();
-        ArrFB =  proj.stesa.get(0);
+        ArrFB = proj.stesa.get(0);
 
         int xshf = nchanel;
 
@@ -401,7 +403,7 @@ public class JTX_view extends javax.swing.JPanel {
         //g.setColor(Color.yellow);
         double max = 0.00001;
         for (int j = 0; j < proj.stesa.size(); j++) {
-            FirstBrakeList fbl =  proj.stesa.get(j);
+            FirstBrakeList fbl = proj.stesa.get(j);
             for (int i = 0; i < fbl.fb.length; i++) {
                 if (max < fbl.fb[i].time) {
                     max = (int) fbl.fb[i].time;
@@ -415,7 +417,7 @@ public class JTX_view extends javax.swing.JPanel {
         double ystp = ((ymax - (2 * margUp * ymax)) / max);
         int yshf = (int) (margUp * ymax);
         for (int j = 0; j < proj.stesa.size(); j++) {
-            FirstBrakeList fbl =  proj.stesa.get(j);
+            FirstBrakeList fbl = proj.stesa.get(j);
             for (int i = 0; i < fbl.fb.length; i++) {
                 if (fbl.fb[i].time > -0.1 && fbl.fb[i].enabled) {
                     int xx = (i * nchanel) + xshf;
@@ -517,7 +519,7 @@ public class JTX_view extends javax.swing.JPanel {
 
     private void drawDr(Graphics g, int w, int h, boolean b) {
 
-        ArrFB =  proj.stesa.get(indj);
+        ArrFB = proj.stesa.get(indj);
         int ymax = h;//this.getHeight();
         //   int xmax = w;
 
@@ -560,7 +562,7 @@ public class JTX_view extends javax.swing.JPanel {
     public void drawdr(Graphics g, double max, int w, int h) {
         int ymax = h;
         // int l_xmax = w;
-        ArrFB =  proj.stesa.get(indj);
+        ArrFB = proj.stesa.get(indj);
         //   int nchanel = xmax / (ArrFB.fb.length + 1);
         //    int ychn = (ymax - (5 * nchanel)) / nchanel;
         int xshf = nchanel;
@@ -690,7 +692,7 @@ public class JTX_view extends javax.swing.JPanel {
             }
 
 //*/
-            FirstBrakeList fbl =proj.stesa.get(j);
+            FirstBrakeList fbl = proj.stesa.get(j);
 
             for (int i = 0; i < fbl.fb.length; i++) {
                 if (ArrFB.fb[i].time > -0.1 && ArrFB.fb[i].enabled) {
@@ -863,7 +865,7 @@ public class JTX_view extends javax.swing.JPanel {
 
         int ymax = h;
         //   int xmax = w;
-        ArrFB =  proj.stesa.get(indj);
+        ArrFB = proj.stesa.get(indj);
         int xshf = nchanel;
         int in0 = 0, fi0 = 0, in1 = 0, fi1 = 0;
         int yshf = (int) (margUp * ymax);
@@ -1064,7 +1066,7 @@ public class JTX_view extends javax.swing.JPanel {
 
     private void computeDromo(int index_dromo) {
         //for (int j = 0; j < proj.stesa.size(); j++) {
-        FirstBrakeList fbl =  proj.stesa.get(index_dromo);
+        FirstBrakeList fbl = proj.stesa.get(index_dromo);
         //FirstBrakeList.getList(fbl.fb, 1, 1);
         for (int i = 1; i <= 3; i++) {
 
