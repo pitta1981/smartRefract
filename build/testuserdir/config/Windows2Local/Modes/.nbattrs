@@ -8,7 +8,7 @@
         <attr name="WinSys-TCRef-Order" stringvalue="sideTools_TopComponent/favorites/smartGeometryTopComponent"/>
     </fileobject>
     <fileobject name="output">
-        <attr name="WinSys-TCRef-Order" stringvalue="MyViewerTopComponent/geometryViewerTopComponent/output"/>
+        <attr name="WinSys-TCRef-Order" stringvalue="geometryViewerTopComponent/output"/>
     </fileobject>
     <fileobject name="properties">
         <attr name="WinSys-TCRef-Order" stringvalue="properties"/>

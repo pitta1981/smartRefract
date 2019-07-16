@@ -33,15 +33,15 @@ public final class SaveProject implements ActionListener {
         fc.setFileFilter(new Seg2FileFilter());
         fc.setMultiSelectionEnabled(true);
 
-        TopComponent tc = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
+        TopComponent tc = WindowManager.getDefault().findTopComponent("DocumentEditor");
         
         
        // TopComponent tc = WindowManager.getDefault().findTopComponent("DocumentEditor");
         //Lookup tcLookup = tc.getLookup();
         //   ((MyViewerTopComponent) tc).jLabel1.setText("APIObject # save");
-        //DocumentEditor de=(DocumentEditor)tc;
-        //APIObject obj=de.obj;
-        APIObject obj = ((geometryViewerTopComponent) tc).active;
+        DocumentEditor de=(DocumentEditor)tc;
+        APIObject obj=de.obj;
+        //APIObject obj = ((geometryViewerTopComponent) tc).active;
         //   ((MyViewerTopComponent) tc).jLabel2.setText("APIObject # trace " + obj.tr.length);
         try{
         fc.setCurrentDirectory((obj.proj_file));

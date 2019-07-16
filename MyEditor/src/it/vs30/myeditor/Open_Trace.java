@@ -10,9 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JFileChooser;
+import org.openide.awt.ActionID;
+import org.openide.awt.ActionRegistration;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
 
+@ActionID(id = "it.vs30.myeditor.MyEditorAction1", category = "File")
+@ActionRegistration(displayName = "New - Open traces")
 public final class Open_Trace implements ActionListener {
 
     @Override

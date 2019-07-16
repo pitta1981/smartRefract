@@ -40,7 +40,7 @@ import javax.swing.event.DocumentListener;
 import org.myorg.myapi.APIObject;
 import org.myorg.myapi.DrawingAPI;
 import org.myorg.myapi.FirstBrakeList;
-import org.myorg.myviewer.MyViewerTopComponent;
+//import org.myorg.myviewer.MyViewerTopComponent;
 import org.myorg.myapi.Trace;
 import org.netbeans.api.print.PrintManager;
 import org.netbeans.spi.actions.AbstractSavable;
@@ -97,9 +97,7 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
         content.set(Collections.singleton(obj), null);
         //   Lookup lu=getLookup();
 
-        //jButton1ActionPerformed(null);
-        //jTextField1.setText("APIObject #" + obj.getIndex());
-        //jTextField2.setText("Created: " + obj.getDate());
+   
         tv = new TraceView(obj);
 //        dv = new JDromoView(obj);
         txV = new JTX_view(obj);
@@ -111,9 +109,9 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
         sideTool.txt.setTXView(txV.dromoSelected);
         sideTool.jtr_dlg = new trace_tools(tv);
 
-        tc1 = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
-        geomTC = (geometryViewerTopComponent) tc1;
-        geomTC.gmview.setStesa(obj.proj.stesa);
+//        tc1 = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
+//        geomTC = (geometryViewerTopComponent) tc1;
+//        geomTC.gmview.setStesa(obj.proj.stesa);
 
         initComponents();
         sv.setBackground(Color.BLACK);
@@ -287,12 +285,13 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
     public void componentShowing() {
         System.out.println("-- Editor showing --");
 
-        TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
-        Lookup tcLookup = tc.getLookup();
+        TopComponent tc;// = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
+//        Lookup tcLookup = tc.getLookup();
         //((MyViewerTopComponent) tc).active=obj;
-        ((MyViewerTopComponent) tc).gmview.vis = jTabbedPane1.getSelectedIndex();
+/*        ((MyViewerTopComponent) tc).gmview.vis = jTabbedPane1.getSelectedIndex();
         ((MyViewerTopComponent) tc).gmview.invalidate();
         ((MyViewerTopComponent) tc).gmview.repaint();
+*/
         tc = WindowManager.getDefault().findTopComponent("sideTools_TopComponent");
         ((sideTools_TopComponent) tc).jtr_dlg.setTraceView(tv);
         ((sideTools_TopComponent) tc).txt.setTTview(this.txV);
@@ -310,17 +309,17 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         obj.prevTr();
-        TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
-        Lookup tcLookup = tc.getLookup();
+        TopComponent tc;/* = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
+        Lookup tcLookup = tc.getLookup();/*
         /*  if (tv.is_white) {
          ((MyViewerTopComponent) tc).gmview.setBackground(Color.white);
 
          } else {
          ((MyViewerTopComponent) tc).gmview.setBackground(Color.black);
          }*/
-        ((MyViewerTopComponent) tc).gmview.setGeom(obj.fb.scoppio, obj.fb.spaz, obj.fb.spaz_in, obj.tr.length);
+/*        ((MyViewerTopComponent) tc).gmview.setGeom(obj.fb.scoppio, obj.fb.spaz, obj.fb.spaz_in, obj.tr.length);
         ((MyViewerTopComponent) tc).gmview.repaint();
-        ((MyViewerTopComponent) tc).gmview.invalidate();
+        ((MyViewerTopComponent) tc).gmview.invalidate();*/
 
         tc = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
         geomTC = (geometryViewerTopComponent) tc;
@@ -337,12 +336,12 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
         // TODO add your handling code here:
         obj.nextTr();
         jLabel1.setText(obj.fb.fbp);
-        TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
+        TopComponent tc;/* = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
         Lookup tcLookup = tc.getLookup();
         ((MyViewerTopComponent) tc).gmview.setBackground(Color.black);
         ((MyViewerTopComponent) tc).gmview.setGeom(obj.fb.scoppio, obj.fb.spaz, obj.fb.spaz_in, obj.tr.length);
         ((MyViewerTopComponent) tc).gmview.repaint();
-        ((MyViewerTopComponent) tc).gmview.invalidate();
+        ((MyViewerTopComponent) tc).gmview.invalidate();*/
 
         tc = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
         geomTC = (geometryViewerTopComponent) tc;
@@ -402,13 +401,13 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
 
         }
 
-        TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
-        Lookup tcLookup = tc.getLookup();
+        TopComponent tc;// = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
+       // Lookup tcLookup = tc.getLookup();
 
-        ((MyViewerTopComponent) tc).gmview.vis = jTabbedPane1.getSelectedIndex();
+/*        ((MyViewerTopComponent) tc).gmview.vis = jTabbedPane1.getSelectedIndex();
         //((MyViewerTopComponent) tc).active=obj;
         ((MyViewerTopComponent) tc).gmview.invalidate();
-        ((MyViewerTopComponent) tc).gmview.repaint();
+        ((MyViewerTopComponent) tc).gmview.repaint();*/
 
         tc = WindowManager.getDefault().findTopComponent("sideTools_TopComponent");
         ((sideTools_TopComponent) tc).setTabSelected(jTabbedPane1.getSelectedIndex());
@@ -440,13 +439,19 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
 
         TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
         Lookup tcLookup = tc.getLookup();
-
+         tc = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
+            geomTC = (geometryViewerTopComponent) tc;
+            geomTC.gmview.setGeom(this.obj.fb.scoppio, this.obj.fb.spaz, this.obj.fb.spaz_in, this.obj.tr.length);
+            geomTC.gmview.repaint();
+            geomTC.gmview.invalidate();
+        
+/*
         ((MyViewerTopComponent) tc).setActive(obj);
         ((MyViewerTopComponent) tc).gmview.setBackground(Color.black);
         ((MyViewerTopComponent) tc).gmview.setStesa(obj.proj.stesa);
         ((MyViewerTopComponent) tc).gmview.setGeom(obj.fb.scoppio, obj.fb.spaz, obj.fb.spaz_in, obj.tr.length);
         ((MyViewerTopComponent) tc).gmview.repaint();
-        ((MyViewerTopComponent) tc).gmview.invalidate();
+        ((MyViewerTopComponent) tc).gmview.invalidate();*/
 
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

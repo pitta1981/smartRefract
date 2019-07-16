@@ -19,7 +19,7 @@ import org.myorg.myapi.APIObject;
 import org.myorg.myapi.DrawingAPI;
 import org.myorg.myapi.FirstBrakeList;
 import org.myorg.myapi.Indagine;
-import org.myorg.myviewer.MyViewerTopComponent;
+//import org.myorg.myviewer.MyViewerTopComponent;
 import org.openide.util.Lookup;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
@@ -450,14 +450,14 @@ public class JTX_view extends javax.swing.JPanel {
 
         FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(indj);
         dAPI.indj = indj;
-        TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
+        TopComponent tc ;/*= WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
         Lookup tcLookup = tc.getLookup();
         // ((MyViewerTopComponent) tc).gmview.setBackground(Color.black);
         ((MyViewerTopComponent) tc).gmview.setGeom(fbl.scoppio, fbl.spaz, fbl.spaz_in, fbl.fb.length);
         ((MyViewerTopComponent) tc).gmview.setIndSel(indj);
         ((MyViewerTopComponent) tc).gmview.repaint();
         ((MyViewerTopComponent) tc).gmview.invalidate();
-
+*/
         tc = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
         geomTC = (geometryViewerTopComponent) tc;
         geomTC.gmview.setGeom(fbl.scoppio, fbl.spaz, fbl.spaz_in, fbl.fb.length);

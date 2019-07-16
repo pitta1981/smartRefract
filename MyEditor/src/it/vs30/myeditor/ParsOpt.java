@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.Set;
 import org.myorg.myapi.APIObject;
 import org.myorg.myapi.FirstBrakeList;
-import org.myorg.myviewer.MyViewerTopComponent;
+//import org.myorg.myviewer.MyViewerTopComponent;
 import org.netbeans.api.sendopts.CommandException;
 import org.netbeans.spi.sendopts.Env;
 import org.netbeans.spi.sendopts.Option;
@@ -116,11 +116,11 @@ public class ParsOpt extends OptionProcessor {
             TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
             Lookup tcLookup = tc.getLookup();
 
-            ((MyViewerTopComponent) tc).setActive(editor.obj);
+       /*     ((MyViewerTopComponent) tc).setActive(editor.obj);
             ((MyViewerTopComponent) tc).gmview.setBackground(Color.black);
             ((MyViewerTopComponent) tc).gmview.setGeom(editor.obj.fb.scoppio, editor.obj.fb.spaz, editor.obj.fb.spaz_in, editor.obj.tr.length);
             ((MyViewerTopComponent) tc).gmview.repaint();
-            ((MyViewerTopComponent) tc).gmview.invalidate();
+            ((MyViewerTopComponent) tc).gmview.invalidate();*/
 
             tc = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
             geomTC = (geometryViewerTopComponent) tc;

@@ -7,7 +7,7 @@ package it.vs30.sidebar;
 
 import it.vs30.myeditor.FineTuning;
 import it.vs30.myeditor.JSezioneView;
-import it.vs30.myeditor.Jsezdlg;
+//import it.vs30.myeditor.Jsezdlg;
 import it.vs30.myeditor.jTavolozzaDlg;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -21,7 +21,7 @@ import org.myorg.myapi.APIObject;
 import org.myorg.myapi.DrawingAPI;
 import org.myorg.myapi.FirstBrakeList;
 import org.myorg.myapi.Indagine;
-import org.myorg.myviewer.MyViewerTopComponent;
+//import org.myorg.myviewer.MyViewerTopComponent;
 import org.openide.util.Lookup;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
@@ -167,12 +167,12 @@ public class profileTools extends javax.swing.JPanel {
         sV.invalidate();
         sV.repaint();
 
-        TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
-        Lookup tcLookup = tc.getLookup();
+        TopComponent tc; //= WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
+       /* Lookup tcLookup = tc.getLookup();
 
         ((MyViewerTopComponent) tc).gmview.is_white = sV.isBgWhite();
         ((MyViewerTopComponent) tc).gmview.invalidate();
-        ((MyViewerTopComponent) tc).gmview.repaint();
+        ((MyViewerTopComponent) tc).gmview.repaint();*/
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jWhiteBkgButtonActionPerformed

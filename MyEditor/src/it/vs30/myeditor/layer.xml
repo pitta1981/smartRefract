@@ -10,12 +10,7 @@
                 <attr name="delegate" newvalue="it.vs30.myeditor.OpenEditorAction"/>
                 <attr name="displayName" stringvalue="New"/>
             </file>
-            <file name="it-vs30-myeditor-MyEditorAction1.instance">
-                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
-                <attr name="delegate" newvalue="it.vs30.myeditor.Open_Trace"/>
-                <attr name="displayName" stringvalue="New - Open traces"/>
-            </file>
-            <file name="org-myorg-myviewer-SaveProject.instance">
+            <file name="it-vs30-myeditor-SaveProject.instance">
                 <attr name="delegate" newvalue="it.vs30.myeditor.SaveProject"/>
                 <attr name="displayName" bundlevalue="org.myorg.myviewer.Bundle#CTL_SaveProject"/>
                 <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>

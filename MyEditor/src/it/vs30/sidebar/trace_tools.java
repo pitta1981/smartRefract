@@ -9,7 +9,7 @@ import it.vs30.myeditor.TraceView;
 import it.vs30.smartRefract.utils.ZoomTraceUtil;
 import javax.swing.SwingConstants;
 import org.myorg.myapi.FirstBrakeList;
-import org.myorg.myviewer.MyViewerTopComponent;
+//import org.myorg.myviewer.MyViewerTopComponent;
 import org.openide.util.Lookup;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
@@ -242,11 +242,11 @@ public class trace_tools extends javax.swing.JPanel {
             // jButton8.setText("Sfondo bianco");
         }
 
-        TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
-        Lookup tcLookup = tc.getLookup();
-        ((MyViewerTopComponent) tc).gmview.is_white = Tv.is_white;
+        TopComponent tc ;//= WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
+       // Lookup tcLookup = tc.getLookup();
+/*        ((MyViewerTopComponent) tc).gmview.is_white = Tv.is_white;
         ((MyViewerTopComponent) tc).gmview.invalidate();
-        ((MyViewerTopComponent) tc).gmview.repaint();
+        ((MyViewerTopComponent) tc).gmview.repaint();*/
 
         // this.setVisible(false);
         Tv.undo();

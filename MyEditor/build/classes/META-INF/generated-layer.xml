@@ -2,18 +2,79 @@
 <!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN"
                             "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
 <filesystem>
-    <folder name="Actions">
-        <folder name="File">
-            <file name="it-vs30-geometryView-ExportTravelTime.instance">
-                <!--it.vs30.myeditor.ExportTravelTime-->
-                <attr
-                    bundlevalue="it.vs30.myeditor.Bundle#CTL_ExportTravelTime" name="displayName"/>
-                <attr
-                    methodvalue="org.openide.awt.Actions.alwaysEnabled" name="instanceCreate"/>
-                <attr name="delegate" newvalue="it.vs30.myeditor.ExportTravelTime"/>
-                <attr boolvalue="false" name="noIconInMenu"/>
-            </file>
+    <folder name="Windows2">
+        <folder name="Components">
+            <file name="geometryViewerTopComponent.settings">
+                <!--it.vs30.geometryView.geometryViewerTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE settings PUBLIC "-//NetBeans//DTD Session settings 1.0//EN" "http://www.netbeans.org/dtds/sessionsettings-1_0.dtd">
+<settings version="1.0">
+  <instance class="it.vs30.geometryView.geometryViewerTopComponent"/>
+</settings>
+]]></file>
+            <file name="sideTools_TopComponent.settings">
+                <!--it.vs30.sidebar.sideTools_TopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE settings PUBLIC "-//NetBeans//DTD Session settings 1.0//EN" "http://www.netbeans.org/dtds/sessionsettings-1_0.dtd">
+<settings version="1.0">
+  <instance class="it.vs30.sidebar.sideTools_TopComponent"/>
+</settings>
+]]></file>
+            <file name="smartGeometryTopComponent.settings">
+                <!--it.vs30.smartUI.smartGeometryTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE settings PUBLIC "-//NetBeans//DTD Session settings 1.0//EN" "http://www.netbeans.org/dtds/sessionsettings-1_0.dtd">
+<settings version="1.0">
+  <instance class="it.vs30.smartUI.smartGeometryTopComponent"/>
+</settings>
+]]></file>
+            <file name="welcomeTopComponent.settings">
+                <!--it.vs30.welcome.welcomeTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE settings PUBLIC "-//NetBeans//DTD Session settings 1.0//EN" "http://www.netbeans.org/dtds/sessionsettings-1_0.dtd">
+<settings version="1.0">
+  <instance class="it.vs30.welcome.welcomeTopComponent"/>
+</settings>
+]]></file>
         </folder>
+        <folder name="Modes">
+            <folder name="output">
+                <file name="geometryViewerTopComponent.wstcref">
+                    <!--it.vs30.geometryView.geometryViewerTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tc-ref PUBLIC "-//NetBeans//DTD Top Component in Mode Properties 2.0//EN" "http://www.netbeans.org/dtds/tc-ref2_0.dtd">
+<tc-ref version="2.0">
+  <tc-id id="geometryViewerTopComponent"/>
+  <state opened="true"/>
+</tc-ref>
+]]></file>
+            </folder>
+            <folder name="explorer">
+                <file name="sideTools_TopComponent.wstcref">
+                    <!--it.vs30.sidebar.sideTools_TopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tc-ref PUBLIC "-//NetBeans//DTD Top Component in Mode Properties 2.0//EN" "http://www.netbeans.org/dtds/tc-ref2_0.dtd">
+<tc-ref version="2.0">
+  <tc-id id="sideTools_TopComponent"/>
+  <state opened="true"/>
+</tc-ref>
+]]></file>
+                <file name="smartGeometryTopComponent.wstcref">
+                    <!--it.vs30.smartUI.smartGeometryTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tc-ref PUBLIC "-//NetBeans//DTD Top Component in Mode Properties 2.0//EN" "http://www.netbeans.org/dtds/tc-ref2_0.dtd">
+<tc-ref version="2.0">
+  <tc-id id="smartGeometryTopComponent"/>
+  <state opened="false"/>
+</tc-ref>
+]]></file>
+            </folder>
+            <folder name="editor">
+                <file name="welcomeTopComponent.wstcref">
+                    <!--it.vs30.welcome.welcomeTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tc-ref PUBLIC "-//NetBeans//DTD Top Component in Mode Properties 2.0//EN" "http://www.netbeans.org/dtds/tc-ref2_0.dtd">
+<tc-ref version="2.0">
+  <tc-id id="welcomeTopComponent"/>
+  <state opened="true"/>
+</tc-ref>
+]]></file>
+            </folder>
+        </folder>
+    </folder>
+    <folder name="Actions">
         <folder name="Window">
             <file name="it-vs30-geometryView-geometryViewerTopComponent.instance">
                 <!--it.vs30.geometryView.geometryViewerTopComponent-->
@@ -52,6 +113,34 @@
                     bundlevalue="it.vs30.welcome.Bundle#CTL_welcomeAction" name="displayName"/>
             </file>
         </folder>
+        <folder name="File">
+            <file name="it-vs30-geometryView-ExportTravelTime.instance">
+                <!--it.vs30.myeditor.ExportTravelTime-->
+                <attr
+                    bundlevalue="it.vs30.myeditor.Bundle#CTL_ExportTravelTime" name="displayName"/>
+                <attr
+                    methodvalue="org.openide.awt.Actions.alwaysEnabled" name="instanceCreate"/>
+                <attr name="delegate" newvalue="it.vs30.myeditor.ExportTravelTime"/>
+                <attr boolvalue="false" name="noIconInMenu"/>
+            </file>
+            <file name="it-vs30-myeditor-MyEditorAction1.instance">
+                <!--it.vs30.myeditor.Open_Trace-->
+                <attr name="displayName" stringvalue="New - Open traces"/>
+                <attr
+                    methodvalue="org.openide.awt.Actions.alwaysEnabled" name="instanceCreate"/>
+                <attr name="delegate" newvalue="it.vs30.myeditor.Open_Trace"/>
+                <attr boolvalue="false" name="noIconInMenu"/>
+            </file>
+            <file name="it-vs30-myeditor-saveProjectAs.instance">
+                <!--it.vs30.myeditor.saveProjectAs-->
+                <attr
+                    bundlevalue="it.vs30.myeditor.Bundle#CTL_saveProjectAs" name="displayName"/>
+                <attr
+                    methodvalue="org.openide.awt.Actions.alwaysEnabled" name="instanceCreate"/>
+                <attr name="delegate" newvalue="it.vs30.myeditor.saveProjectAs"/>
+                <attr boolvalue="false" name="noIconInMenu"/>
+            </file>
+        </folder>
     </folder>
     <folder name="Menu">
         <folder name="File">
@@ -64,6 +153,21 @@
                 <!--it.vs30.myeditor.ExportTravelTime-->
                 <attr name="instanceCreate" newvalue="javax.swing.JSeparator"/>
                 <attr intvalue="1725" name="position"/>
+            </file>
+            <file name="it-vs30-myeditor-saveProjectAs.shadow">
+                <!--it.vs30.myeditor.saveProjectAs-->
+                <attr name="originalFile" stringvalue="Actions/File/it-vs30-myeditor-saveProjectAs.instance"/>
+                <attr intvalue="1475" name="position"/>
+            </file>
+            <file name="it-vs30-myeditor-saveProjectAs-separatorAfter.instance">
+                <!--it.vs30.myeditor.saveProjectAs-->
+                <attr name="instanceCreate" newvalue="javax.swing.JSeparator"/>
+                <attr intvalue="1487" name="position"/>
+            </file>
+            <file name="it-vs30-myeditor-saveProjectAs-separatorBefore.instance">
+                <!--it.vs30.myeditor.saveProjectAs-->
+                <attr name="instanceCreate" newvalue="javax.swing.JSeparator"/>
+                <attr intvalue="1462" name="position"/>
             </file>
         </folder>
         <folder name="Window">
@@ -190,78 +294,6 @@
                     <attr name="settings.instanceOf" stringvalue="it.vs30.welcome.welcomeTopComponent"/>
                     <attr boolvalue="true" name="xmlproperties.preventStoring"/>
                 </file>
-            </folder>
-        </folder>
-    </folder>
-    <folder name="Windows2">
-        <folder name="Components">
-            <file name="geometryViewerTopComponent.settings">
-                <!--it.vs30.geometryView.geometryViewerTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE settings PUBLIC "-//NetBeans//DTD Session settings 1.0//EN" "http://www.netbeans.org/dtds/sessionsettings-1_0.dtd">
-<settings version="1.0">
-  <instance class="it.vs30.geometryView.geometryViewerTopComponent"/>
-</settings>
-]]></file>
-            <file name="sideTools_TopComponent.settings">
-                <!--it.vs30.sidebar.sideTools_TopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE settings PUBLIC "-//NetBeans//DTD Session settings 1.0//EN" "http://www.netbeans.org/dtds/sessionsettings-1_0.dtd">
-<settings version="1.0">
-  <instance class="it.vs30.sidebar.sideTools_TopComponent"/>
-</settings>
-]]></file>
-            <file name="smartGeometryTopComponent.settings">
-                <!--it.vs30.smartUI.smartGeometryTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE settings PUBLIC "-//NetBeans//DTD Session settings 1.0//EN" "http://www.netbeans.org/dtds/sessionsettings-1_0.dtd">
-<settings version="1.0">
-  <instance class="it.vs30.smartUI.smartGeometryTopComponent"/>
-</settings>
-]]></file>
-            <file name="welcomeTopComponent.settings">
-                <!--it.vs30.welcome.welcomeTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE settings PUBLIC "-//NetBeans//DTD Session settings 1.0//EN" "http://www.netbeans.org/dtds/sessionsettings-1_0.dtd">
-<settings version="1.0">
-  <instance class="it.vs30.welcome.welcomeTopComponent"/>
-</settings>
-]]></file>
-        </folder>
-        <folder name="Modes">
-            <folder name="output">
-                <file name="geometryViewerTopComponent.wstcref">
-                    <!--it.vs30.geometryView.geometryViewerTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE tc-ref PUBLIC "-//NetBeans//DTD Top Component in Mode Properties 2.0//EN" "http://www.netbeans.org/dtds/tc-ref2_0.dtd">
-<tc-ref version="2.0">
-  <tc-id id="geometryViewerTopComponent"/>
-  <state opened="true"/>
-</tc-ref>
-]]></file>
-            </folder>
-            <folder name="explorer">
-                <file name="sideTools_TopComponent.wstcref">
-                    <!--it.vs30.sidebar.sideTools_TopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE tc-ref PUBLIC "-//NetBeans//DTD Top Component in Mode Properties 2.0//EN" "http://www.netbeans.org/dtds/tc-ref2_0.dtd">
-<tc-ref version="2.0">
-  <tc-id id="sideTools_TopComponent"/>
-  <state opened="true"/>
-</tc-ref>
-]]></file>
-                <file name="smartGeometryTopComponent.wstcref">
-                    <!--it.vs30.smartUI.smartGeometryTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE tc-ref PUBLIC "-//NetBeans//DTD Top Component in Mode Properties 2.0//EN" "http://www.netbeans.org/dtds/tc-ref2_0.dtd">
-<tc-ref version="2.0">
-  <tc-id id="smartGeometryTopComponent"/>
-  <state opened="false"/>
-</tc-ref>
-]]></file>
-            </folder>
-            <folder name="editor">
-                <file name="welcomeTopComponent.wstcref">
-                    <!--it.vs30.welcome.welcomeTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE tc-ref PUBLIC "-//NetBeans//DTD Top Component in Mode Properties 2.0//EN" "http://www.netbeans.org/dtds/tc-ref2_0.dtd">
-<tc-ref version="2.0">
-  <tc-id id="welcomeTopComponent"/>
-  <state opened="true"/>
-</tc-ref>
-]]></file>
             </folder>
         </folder>
     </folder>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <registry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="registry.xsd">
     <components>
-        <product uid="easypick" version="1.0.0.0.0" platforms="generic" status="not-installed" offset="20000" expand="false" built="1551129224090" visible="true" features="">
+        <product uid="easypick" version="1.0.0.0.0" platforms="generic" status="not-installed" offset="20000" expand="false" built="1563263050590" visible="true" features="">
             <display-name>
                 <default><![CDATA[smartRefract - Navette]]></default>
             </display-name>
@@ -17,17 +17,17 @@
                 <property name="installation.location.macosx"><![CDATA[$N{install}/smartrefract.app]]></property>
             </properties>
             <configuration-logic>
-                <file size="44180" md5="ddd0250edb3a4a188a4ac434aeb61abc">
+                <file size="44180" md5="f6403b8f14b1c655908154b55430007b">
                     <default-uri>resource:products/easypick/1.0.0.0.0/generic/logic/logic,1.jar</default-uri>
                 </file>
             </configuration-logic>
             <installation-data>
-                <file size="10552569" md5="4c57a434d54f7ee6afbbc6c99e745bcb">
+                <file size="11151479" md5="48a3dca92b75e137d59f9b0c695bffa3">
                     <default-uri>resource:products/easypick/1.0.0.0.0/generic/data/data,1.jar</default-uri>
                 </file>
             </installation-data>
             <system-requirements>
-                <disk-space>43270235</disk-space>
+                <disk-space>43882266</disk-space>
             </system-requirements>
         </product>
     </components>

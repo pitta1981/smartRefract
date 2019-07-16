@@ -9,5 +9,12 @@ class Bundle {
     static String CTL_ExportTravelTime() {
         return org.openide.util.NbBundle.getMessage(Bundle.class, "CTL_ExportTravelTime");
     }
+    /**
+     * @return <i>Save project</i>
+     * @see saveProjectAs
+     */
+    static String CTL_saveProjectAs() {
+        return org.openide.util.NbBundle.getMessage(Bundle.class, "CTL_saveProjectAs");
+    }
     private Bundle() {}
 }

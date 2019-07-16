@@ -6,10 +6,10 @@
   <kind type="view" />
   <state type="joined"  />
   <constraints>
-    <path orientation="horizontal" number="20" weight="0.17154811715481172"/>
+    <path orientation="horizontal" number="20" weight="0.15503875968992248"/>
     <path orientation="vertical" number="20" weight="0.5"/>
   </constraints>
-  <bounds x="187" y="231" width="600" height="526" />
+  <bounds x="144" y="182" width="460" height="414" />
   <frame state="0"/>
     <active-tc  id="sideTools_TopComponent" />
     <empty-behavior permanent="true"/>

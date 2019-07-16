@@ -38,7 +38,8 @@ import org.openide.util.lookup.InstanceContent;
     "CTL_sideTools_TopComponent=sideTools_ Window",
     "HINT_sideTools_TopComponent=This is a sideTools_ window"
 })
-public final class sideTools_TopComponent extends TopComponent  implements LookupListener  {
+public final class sideTools_TopComponent extends TopComponent implements LookupListener {
+
     private APIObject active;
     private final InstanceContent content = new InstanceContent();
     private Lookup.Result<APIObject> result;
@@ -50,7 +51,7 @@ public final class sideTools_TopComponent extends TopComponent  implements Looku
         putClientProperty(TopComponent.PROP_CLOSING_DISABLED, Boolean.TRUE);
         putClientProperty(TopComponent.PROP_MAXIMIZATION_DISABLED, Boolean.TRUE);
         putClientProperty(TopComponent.PROP_KEEP_PREFERRED_SIZE_WHEN_SLIDED_IN, Boolean.TRUE);
-        
+
         if (getLookup().lookup(sideTools_TopComponent.class) == null) {
             content.add(this);
         }
@@ -65,21 +66,13 @@ public final class sideTools_TopComponent extends TopComponent  implements Looku
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-
         setMinimumSize(new java.awt.Dimension(200, 130));
         setPreferredSize(new java.awt.Dimension(300, 200));
         setLayout(new java.awt.BorderLayout());
-
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(sideTools_TopComponent.class, "sideTools_TopComponent.jLabel1.text")); // NOI18N
-        add(jLabel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
-  
-
     void writeProperties(java.util.Properties p) {
         // better to version settings since initial version as advocated at
         // http://wiki.apidesign.org/wiki/PropertyFiles
@@ -91,103 +84,99 @@ public final class sideTools_TopComponent extends TopComponent  implements Looku
         String version = p.getProperty("version");
         // TODO read your settings according to their version
     }
-    
+
     @Override
     public void componentOpened() {
         result = Utilities.actionsGlobalContext().lookupResult(APIObject.class);
-        result.addLookupListener (this);
-      //  txt.setAPIObject();
+        result.addLookupListener(this);
+        //  txt.setAPIObject();
     }
-    
+
     @Override
     public void componentClosed() {
-        result.removeLookupListener (this);
+        result.removeLookupListener(this);
         result = null;
     }
-    
+
     @Override
     public void resultChanged(LookupEvent lookupEvent) {
         Lookup.Result r = (Lookup.Result) lookupEvent.getSource();
         Collection c = r.allInstances();
         if (!c.isEmpty()) {
-           
-                APIObject o = (APIObject) c.iterator().next();
-                active=o;
-                jLabel1.setText (" "+o.selected_Tab);
-//                setTabSelected(o.selected_Tab);
-                //txt.setAPIObject(active);
-               // jLabel2.setText (o.getDate().toString());
-           
+
+            APIObject o = (APIObject) c.iterator().next();
+            active = o;
+
         } else {
-           // jLabel1.setText("[no selection]");
-           // jLabel2.setText ("");
+            // jLabel1.setText("[no selection]");
+            // jLabel2.setText ("");
         }
     }
-    
-    public void setAPIObject(APIObject obj){
+
+    public void setAPIObject(APIObject obj) {
         txt.setAPIObject(obj);
         prfDlg.setAPIObject(obj);
     }
-    
+
     public void setTabSelected(int selectedIndex) {
-        jLabel1.setText(""+selectedIndex);//To change body of generated methods, choose Tools | Templates.
         this.removeAll();
-        this.add(jLabel1);
-        if(selectedIndex==1){
+        if (selectedIndex == 1) {
             //this.remove(jLabel1);
             this.add(txt);
+
             this.updateUI();
-        }
-        else{
-            try{
-               this.remove(txt);
-               this.updateUI();
+            this.repaint();
+            this.revalidate();
+        } else {
+            try {
+                this.remove(txt);
+                this.updateUI();
+            } catch (Exception ex) {
+
             }
-            catch(Exception ex){
-                
-            }
         }
-        if(selectedIndex==0){
+        if (selectedIndex == 0) {
             //this.remove(jLabel1);
-            if(jtr_dlg!=null){
+            if (jtr_dlg != null) {
                 this.add(jtr_dlg);
-            jtr_dlg.setSelectButtonStatus( jtr_dlg.getTraceView().getSelectionMode() );
+                jtr_dlg.setSelectButtonStatus(jtr_dlg.getTraceView().getSelectionMode());
             }
-            
+
             this.updateUI();
-        }
-        else{
-            try{
-               this.remove(jtr_dlg);
-               this.updateUI();
+            this.repaint();
+            this.revalidate();
+        } else {
+            try {
+                this.remove(jtr_dlg);
+                this.updateUI();
+            } catch (Exception ex) {
+
             }
-            catch(Exception ex){
-                
-            }
         }
-        if(selectedIndex==2){
+        if (selectedIndex == 2) {
             //this.remove(jLabel1);
-            if(prfDlg!=null){
+            if (prfDlg != null) {
                 this.add(prfDlg);
+                this.updateUI();
                 //this.add(jtr_dlg);
                 //jtr_dlg.setSelectButtonStatus( jtr_dlg.getTraceView().getSelectionMode() );
             }
-            
+
             this.updateUI();
-        }
-        else{
-            try{
-               this.remove(prfDlg);
-               this.updateUI();
+            this.repaint();
+            this.revalidate();
+        } else {
+            try {
+                this.remove(prfDlg);
+                this.updateUI();
+            } catch (Exception ex) {
+
             }
-            catch(Exception ex){
-                
-            }
         }
-        
+
     }
-    public tx_tool txt=new tx_tool();
-    public trace_tools jtr_dlg=new trace_tools();
-    public profileTools prfDlg=new profileTools();
-    
+    public tx_tool txt = new tx_tool();
+    public trace_tools jtr_dlg = new trace_tools();
+    public profileTools prfDlg = new profileTools();
+
 }

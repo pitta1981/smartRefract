@@ -23,7 +23,7 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.myorg.myapi.APIObject;
 import org.myorg.myapi.FirstBrakeList;
-import org.myorg.myviewer.MyViewerTopComponent;
+//import org.myorg.myviewer.MyViewerTopComponent;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.windows.TopComponent;

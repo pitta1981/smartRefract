@@ -12,7 +12,7 @@ package it.vs30.myeditor;
 
 import com.sun.awt.AWTUtilities;
 import java.awt.Color;
-import org.myorg.myviewer.MyViewerTopComponent;
+//import org.myorg.myviewer.MyViewerTopComponent;
 import org.openide.util.Lookup;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
@@ -290,11 +290,11 @@ private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             // jButton8.setText("Sfondo bianco");
         }
 
-        TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
+        TopComponent tc;/* = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
         Lookup tcLookup = tc.getLookup();
         ((MyViewerTopComponent) tc).gmview.is_white = Tv.is_white;
         ((MyViewerTopComponent) tc).gmview.invalidate();
-        ((MyViewerTopComponent) tc).gmview.repaint();
+        ((MyViewerTopComponent) tc).gmview.repaint();*/
 
         this.setVisible(false);
         Tv.undo();

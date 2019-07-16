@@ -29,13 +29,14 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+ /*
  * TraceView.java
  *
  * Created on 28-mar-2011, 17.03.51
  */
 package it.vs30.myeditor;
 
+import it.vs30.geometryView.geometryViewerTopComponent;
 import it.vs30.smartRefract.utils.ZoomTraceUtil;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -52,7 +53,7 @@ import java.awt.image.BufferedImage;
 import org.myorg.myapi.APIObject;
 import org.myorg.myapi.FirstBrakeList;
 import org.myorg.myapi.Indagine;
-import org.myorg.myviewer.MyViewerTopComponent;
+//import org.myorg.myviewer.MyViewerTopComponent;
 import org.openide.util.Lookup;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
@@ -131,14 +132,24 @@ public class TraceView extends javax.swing.JPanel {
         //disegnaPrimoA(g);
         g.drawImage(im, 0, 0, this);
 
-        //TODO fix open project issue. The following code is a workarounf
+        //TODO fix open project issue. The following code is a workaround
         TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
         //Lookup tcLookup = tc.getLookup();
-        try {
+        /* try {
             ((MyViewerTopComponent) tc).gmview.setGeom(obj.fb.scoppio, obj.fb.spaz, obj.fb.spaz_in, obj.tr.length);
             ((MyViewerTopComponent) tc).active = obj;
             ((MyViewerTopComponent) tc).gmview.invalidate();
             ((MyViewerTopComponent) tc).gmview.repaint();
+        } catch (Exception ex) {
+            System.err.println("Errore in paintComponent: " + ex.getMessage());
+        }*/
+        geometryViewerTopComponent geomTC;
+        tc = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
+        try {
+            geomTC = (geometryViewerTopComponent) tc;
+            geomTC.gmview.setGeom(this.obj.fb.scoppio, this.obj.fb.spaz, this.obj.fb.spaz_in, this.obj.tr.length);
+            geomTC.gmview.repaint();
+            geomTC.gmview.invalidate();
         } catch (Exception ex) {
             System.err.println("Errore in paintComponent: " + ex.getMessage());
         }
@@ -279,10 +290,10 @@ public class TraceView extends javax.swing.JPanel {
             if (dt < 500) {
 
                 double screenH = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-              //  int delta = (int) ((screenH - evt.getYOnScreen()) - dlg_Trc.getHeight()) / 3;
+                //  int delta = (int) ((screenH - evt.getYOnScreen()) - dlg_Trc.getHeight()) / 3;
                 //    dlg_Trc.setLocation(evt.getXOnScreen() - (dlg_Trc.getWidth() / 2), evt.getYOnScreen() + delta);
                 //dlg_Trc.setOpacity(0.5f);
-              /*  try {
+                /*  try {
                  AWTUtilities.setWindowOpacity(dlg_Trc, 0.5f);
                  } catch (Exception ex) {
                  }*/
@@ -345,11 +356,11 @@ public class TraceView extends javax.swing.JPanel {
         //int delta = (int) ((screenH - evt.getYOnScreen()) - dlg_Trc.getHeight()) / 3;
         //dlg_Trc.setLocation(evt.getXOnScreen() - (dlg_Trc.getWidth() / 2), evt.getYOnScreen() + delta);
         //dlg_Trc.setOpacity(0.5f);
-       /* try {
+        /* try {
          AWTUtilities.setWindowOpacity(dlg_Trc, 0.5f);
          } catch (Exception ex) {
          }*/
-      //  dlg_Trc.setVisible(true);
+        //  dlg_Trc.setVisible(true);
 
 
     }//GEN-LAST:event_formMouseReleased
@@ -389,7 +400,7 @@ public class TraceView extends javax.swing.JPanel {
         this.repaint();
         this.invalidate();
         double screenH = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-  //      int delta = (int) ((screenH - evt.getYOnScreen()) - dlg_Trc.getHeight()) / 3;
+        //      int delta = (int) ((screenH - evt.getYOnScreen()) - dlg_Trc.getHeight()) / 3;
         /*    dlg_Trc.setLocation(evt.getXOnScreen() - (dlg_Trc.getWidth() / 2), evt.getYOnScreen() + delta);
          //dlg_Trc.setOpacity(0.5f);
          try {
@@ -624,9 +635,8 @@ public class TraceView extends javax.swing.JPanel {
                             int s = (int) (Math.abs(obj.tr[j].value[i]) / obj.tr[j].value[i]);
 
                             x2 = (int) ((((j) * stepCh) + stepCh / 2) + s * this.scaleX * stepV * (maxV - obj.tr[j].media));
-                            
-                            //System.out.println("Via 2  "+x2+" "+(((j) * stepCh) + stepCh / 2)+" "+s * this.scaleX * stepV * (maxV - obj.tr[j].media)+" "+j+" "+obj.tr[j].value[i + 1]+" "+i); 
 
+                            //System.out.println("Via 2  "+x2+" "+(((j) * stepCh) + stepCh / 2)+" "+s * this.scaleX * stepV * (maxV - obj.tr[j].media)+" "+j+" "+obj.tr[j].value[i + 1]+" "+i); 
                         }
 
                         //  x2 = (int) ((((j) * stepCh) + stepCh / 2) + this.scaleX * stepV * (obj.tr[j].value[i + 1] - obj.tr[j].media));
@@ -638,7 +648,7 @@ public class TraceView extends javax.swing.JPanel {
                             g2.setColor(Color.black);
                         }
 
-                    //    System.out.println(x2);
+                        //    System.out.println(x2);
                         g2.drawLine(x1 + margine_X, y1, x2 + margine_X, y2);
 
                         if (obj.tr[j].value[i + 1] - obj.tr[j].media > 0) {

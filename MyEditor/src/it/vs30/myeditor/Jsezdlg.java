@@ -15,7 +15,7 @@ package it.vs30.myeditor;
 import org.myorg.myapi.DrawingAPI;
 import org.myorg.myapi.FirstBrakeList;
 import org.myorg.myapi.Indagine;
-import org.myorg.myviewer.MyViewerTopComponent;
+//import org.myorg.myviewer.MyViewerTopComponent;
 
 import org.openide.util.Lookup;
 import org.openide.windows.TopComponent;
@@ -377,12 +377,12 @@ public class Jsezdlg extends javax.swing.JDialog {
         sV.obj.is_white = sV.isWhite;
         sV.repaint();
 
-        TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
+        TopComponent tc; /*= WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
         Lookup tcLookup = tc.getLookup();
 
         ((MyViewerTopComponent) tc).gmview.is_white = sV.isWhite;
         ((MyViewerTopComponent) tc).gmview.invalidate();
-        ((MyViewerTopComponent) tc).gmview.repaint();
+        ((MyViewerTopComponent) tc).gmview.repaint();*/
 
         // sV.invalidate();
     }//GEN-LAST:event_jButton5ActionPerformed
