@@ -36,7 +36,7 @@ import org.myorg.myapi.Indagine;
  *
  * @author simone.pittaluga
  */
-public class JGeometry extends javax.swing.JDialog {
+public class JGeometryDlg extends javax.swing.JDialog {
 
     String[] module = new String[20];
     String selezionato = "";
@@ -48,7 +48,7 @@ public class JGeometry extends javax.swing.JDialog {
     /**
      * Creates new form JGeometry
      */
-    public JGeometry() {
+    public JGeometryDlg() {
         //super(parent, modal);
         initComponents();
         d_geo = new draw_geometria();
@@ -202,7 +202,7 @@ public class JGeometry extends javax.swing.JDialog {
         JComboBox jComboBox3;
         String geom = "";
         int ch;
-        private JGeometry jGeom_dlg;
+        private JGeometryDlg jGeom_dlg;
 
         private String getGeom(double spaz_in, double spaz, double scoppio, int ch) {
 
@@ -284,7 +284,7 @@ public class JGeometry extends javax.swing.JDialog {
             module = mod;
         }
 
-        private void setGeom(String geom, String[] module, JComboBox jComboBox3, JGeometry jGeometry_dlg) {
+        private void setGeom(String geom, String[] module, JComboBox jComboBox3, JGeometryDlg jGeometry_dlg) {
              //To change body of generated methods, choose Tools | Templates.
             setGeom(geom, module, jComboBox3);
             this.jGeom_dlg=jGeometry_dlg;
@@ -383,7 +383,7 @@ public class JGeometry extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButton1.setBackground(new java.awt.Color(102, 255, 102));
-        jButton1.setText(org.openide.util.NbBundle.getMessage(JGeometry.class, "JGeometry.jButton1.text")); // NOI18N
+        jButton1.setText(org.openide.util.NbBundle.getMessage(JGeometryDlg.class, "JGeometryDlg.jButton1.text")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -391,7 +391,7 @@ public class JGeometry extends javax.swing.JDialog {
         });
 
         jButton2.setBackground(new java.awt.Color(255, 51, 51));
-        jButton2.setText(org.openide.util.NbBundle.getMessage(JGeometry.class, "JGeometry.jButton2.text")); // NOI18N
+        jButton2.setText(org.openide.util.NbBundle.getMessage(JGeometryDlg.class, "JGeometryDlg.jButton2.text")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -401,7 +401,7 @@ public class JGeometry extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 204));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText(org.openide.util.NbBundle.getMessage(JGeometry.class, "JGeometry.jLabel4.text")); // NOI18N
+        jLabel4.setText(org.openide.util.NbBundle.getMessage(JGeometryDlg.class, "JGeometryDlg.jLabel4.text")); // NOI18N
         jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -410,7 +410,7 @@ public class JGeometry extends javax.swing.JDialog {
         });
 
         jButton3.setBackground(new java.awt.Color(153, 153, 255));
-        jButton3.setText(org.openide.util.NbBundle.getMessage(JGeometry.class, "JGeometry.jButton3.text")); // NOI18N
+        jButton3.setText(org.openide.util.NbBundle.getMessage(JGeometryDlg.class, "JGeometryDlg.jButton3.text")); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -448,7 +448,7 @@ public class JGeometry extends javax.swing.JDialog {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(JGeometry.class, "JGeometry.jPanel2.border.title"))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(JGeometryDlg.class, "JGeometryDlg.jPanel2.border.title"))); // NOI18N
 
         jComboBox3.setEditable(true);
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 2", "Item 3", "Item 4" }));
@@ -495,7 +495,7 @@ public class JGeometry extends javax.swing.JDialog {
         jPanel3.setLayout(new java.awt.BorderLayout());
 
         jButton4.setBackground(new java.awt.Color(255, 255, 102));
-        jButton4.setText(org.openide.util.NbBundle.getMessage(JGeometry.class, "JGeometry.jButton4.text")); // NOI18N
+        jButton4.setText(org.openide.util.NbBundle.getMessage(JGeometryDlg.class, "JGeometryDlg.jButton4.text")); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -511,16 +511,16 @@ public class JGeometry extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText(org.openide.util.NbBundle.getMessage(JGeometry.class, "JGeometry.jLabel1.text")); // NOI18N
+        jLabel1.setText(org.openide.util.NbBundle.getMessage(JGeometryDlg.class, "JGeometryDlg.jLabel1.text")); // NOI18N
 
-        jTextField1.setText(org.openide.util.NbBundle.getMessage(JGeometry.class, "JGeometry.jTextField1.text")); // NOI18N
+        jTextField1.setText(org.openide.util.NbBundle.getMessage(JGeometryDlg.class, "JGeometryDlg.jTextField1.text")); // NOI18N
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
 
-        jLabel3.setText(org.openide.util.NbBundle.getMessage(JGeometry.class, "JGeometry.jLabel3.text")); // NOI18N
+        jLabel3.setText(org.openide.util.NbBundle.getMessage(JGeometryDlg.class, "JGeometryDlg.jLabel3.text")); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -591,7 +591,7 @@ public class JGeometry extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel2.getAccessibleContext().setAccessibleName(org.openide.util.NbBundle.getMessage(JGeometry.class, "JGeometry.jPanel2.AccessibleContext.accessibleName")); // NOI18N
+        jPanel2.getAccessibleContext().setAccessibleName(org.openide.util.NbBundle.getMessage(JGeometryDlg.class, "JGeometryDlg.jPanel2.AccessibleContext.accessibleName")); // NOI18N
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

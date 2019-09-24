@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="it.vs30.myeditor">
-    <module_version install_time="1563283059266" last="true" origin="installer" specification_version="2017.0.20171101">
+    <module_version install_time="1568110007859" last="true" origin="installer" specification_version="2017.0.20171101">
         <file crc="2176199896" name="config/Modules/it-vs30-myeditor.xml"/>
-        <file crc="4190577264" name="modules/it-vs30-myeditor.jar"/>
+        <file crc="2068574634" name="modules/it-vs30-myeditor.jar"/>
     </module_version>
 </module>
