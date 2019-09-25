@@ -1,6 +1,5 @@
 package it.vs30.geometryView;
 /** Localizable strings for {@link it.vs30.geometryView}. */
-@javax.annotation.Generated(value="org.netbeans.modules.openide.util.NbBundleProcessor")
 class Bundle {
     /**
      * @return <i>geometryViewer</i>

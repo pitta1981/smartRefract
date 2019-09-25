@@ -1,6 +1,5 @@
 package it.vs30.welcome;
 /** Localizable strings for {@link it.vs30.welcome}. */
-@javax.annotation.Generated(value="org.netbeans.modules.openide.util.NbBundleProcessor")
 class Bundle {
     /**
      * @return <i>welcome</i>

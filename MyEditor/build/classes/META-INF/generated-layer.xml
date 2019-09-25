@@ -1,76 +1,90 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN"
-                            "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
 <filesystem>
     <folder name="Windows2">
         <folder name="Components">
             <file name="geometryViewerTopComponent.settings">
-                <!--it.vs30.geometryView.geometryViewerTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+                <!--it.vs30.geometryView.geometryViewerTopComponent-->
+                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE settings PUBLIC "-//NetBeans//DTD Session settings 1.0//EN" "http://www.netbeans.org/dtds/sessionsettings-1_0.dtd">
 <settings version="1.0">
   <instance class="it.vs30.geometryView.geometryViewerTopComponent"/>
 </settings>
-]]></file>
+]]>
+            </file>
             <file name="sideTools_TopComponent.settings">
-                <!--it.vs30.sidebar.sideTools_TopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+                <!--it.vs30.sidebar.sideTools_TopComponent-->
+                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE settings PUBLIC "-//NetBeans//DTD Session settings 1.0//EN" "http://www.netbeans.org/dtds/sessionsettings-1_0.dtd">
 <settings version="1.0">
   <instance class="it.vs30.sidebar.sideTools_TopComponent"/>
 </settings>
-]]></file>
+]]>
+            </file>
             <file name="smartGeometryTopComponent.settings">
-                <!--it.vs30.smartUI.smartGeometryTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+                <!--it.vs30.smartUI.smartGeometryTopComponent-->
+                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE settings PUBLIC "-//NetBeans//DTD Session settings 1.0//EN" "http://www.netbeans.org/dtds/sessionsettings-1_0.dtd">
 <settings version="1.0">
   <instance class="it.vs30.smartUI.smartGeometryTopComponent"/>
 </settings>
-]]></file>
+]]>
+            </file>
             <file name="welcomeTopComponent.settings">
-                <!--it.vs30.welcome.welcomeTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+                <!--it.vs30.welcome.welcomeTopComponent-->
+                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE settings PUBLIC "-//NetBeans//DTD Session settings 1.0//EN" "http://www.netbeans.org/dtds/sessionsettings-1_0.dtd">
 <settings version="1.0">
   <instance class="it.vs30.welcome.welcomeTopComponent"/>
 </settings>
-]]></file>
+]]>
+            </file>
         </folder>
         <folder name="Modes">
             <folder name="output">
                 <file name="geometryViewerTopComponent.wstcref">
-                    <!--it.vs30.geometryView.geometryViewerTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+                    <!--it.vs30.geometryView.geometryViewerTopComponent-->
+                    <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tc-ref PUBLIC "-//NetBeans//DTD Top Component in Mode Properties 2.0//EN" "http://www.netbeans.org/dtds/tc-ref2_0.dtd">
 <tc-ref version="2.0">
   <tc-id id="geometryViewerTopComponent"/>
   <state opened="true"/>
 </tc-ref>
-]]></file>
+]]>
+                </file>
             </folder>
             <folder name="explorer">
                 <file name="sideTools_TopComponent.wstcref">
-                    <!--it.vs30.sidebar.sideTools_TopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+                    <!--it.vs30.sidebar.sideTools_TopComponent-->
+                    <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tc-ref PUBLIC "-//NetBeans//DTD Top Component in Mode Properties 2.0//EN" "http://www.netbeans.org/dtds/tc-ref2_0.dtd">
 <tc-ref version="2.0">
   <tc-id id="sideTools_TopComponent"/>
   <state opened="true"/>
 </tc-ref>
-]]></file>
+]]>
+                </file>
                 <file name="smartGeometryTopComponent.wstcref">
-                    <!--it.vs30.smartUI.smartGeometryTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+                    <!--it.vs30.smartUI.smartGeometryTopComponent-->
+                    <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tc-ref PUBLIC "-//NetBeans//DTD Top Component in Mode Properties 2.0//EN" "http://www.netbeans.org/dtds/tc-ref2_0.dtd">
 <tc-ref version="2.0">
   <tc-id id="smartGeometryTopComponent"/>
   <state opened="false"/>
 </tc-ref>
-]]></file>
+]]>
+                </file>
             </folder>
             <folder name="editor">
                 <file name="welcomeTopComponent.wstcref">
-                    <!--it.vs30.welcome.welcomeTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+                    <!--it.vs30.welcome.welcomeTopComponent-->
+                    <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tc-ref PUBLIC "-//NetBeans//DTD Top Component in Mode Properties 2.0//EN" "http://www.netbeans.org/dtds/tc-ref2_0.dtd">
 <tc-ref version="2.0">
   <tc-id id="welcomeTopComponent"/>
   <state opened="true"/>
 </tc-ref>
-]]></file>
+]]>
+                </file>
             </folder>
         </folder>
     </folder>
@@ -78,65 +92,52 @@
         <folder name="Window">
             <file name="it-vs30-geometryView-geometryViewerTopComponent.instance">
                 <!--it.vs30.geometryView.geometryViewerTopComponent-->
-                <attr
-                    methodvalue="org.openide.windows.TopComponent.openAction" name="instanceCreate"/>
+                <attr methodvalue="org.openide.windows.TopComponent.openAction" name="instanceCreate"/>
                 <attr name="component" newvalue="it.vs30.geometryView.geometryViewerTopComponent"/>
                 <attr name="preferredID" stringvalue="geometryViewerTopComponent"/>
-                <attr
-                    bundlevalue="it.vs30.geometryView.Bundle#CTL_geometryViewerAction" name="displayName"/>
+                <attr bundlevalue="it.vs30.geometryView.Bundle#CTL_geometryViewerAction" name="displayName"/>
             </file>
             <file name="it-vs30-sidebar-sideTools_TopComponent.instance">
                 <!--it.vs30.sidebar.sideTools_TopComponent-->
-                <attr
-                    methodvalue="org.openide.windows.TopComponent.openAction" name="instanceCreate"/>
+                <attr methodvalue="org.openide.windows.TopComponent.openAction" name="instanceCreate"/>
                 <attr name="component" newvalue="it.vs30.sidebar.sideTools_TopComponent"/>
                 <attr name="preferredID" stringvalue="sideTools_TopComponent"/>
-                <attr
-                    bundlevalue="it.vs30.sidebar.Bundle#CTL_sideTools_Action" name="displayName"/>
+                <attr bundlevalue="it.vs30.sidebar.Bundle#CTL_sideTools_Action" name="displayName"/>
             </file>
             <file name="it-vs30-smartUI-smartGeometryTopComponent.instance">
                 <!--it.vs30.smartUI.smartGeometryTopComponent-->
-                <attr
-                    methodvalue="org.openide.windows.TopComponent.openAction" name="instanceCreate"/>
+                <attr methodvalue="org.openide.windows.TopComponent.openAction" name="instanceCreate"/>
                 <attr name="component" newvalue="it.vs30.smartUI.smartGeometryTopComponent"/>
                 <attr name="preferredID" stringvalue="smartGeometryTopComponent"/>
-                <attr
-                    bundlevalue="it.vs30.smartUI.Bundle#CTL_smartGeometryAction" name="displayName"/>
+                <attr bundlevalue="it.vs30.smartUI.Bundle#CTL_smartGeometryAction" name="displayName"/>
             </file>
             <file name="it-vs30-welcome-welcomeTopComponent.instance">
                 <!--it.vs30.welcome.welcomeTopComponent-->
-                <attr
-                    methodvalue="org.openide.windows.TopComponent.openAction" name="instanceCreate"/>
+                <attr methodvalue="org.openide.windows.TopComponent.openAction" name="instanceCreate"/>
                 <attr name="component" newvalue="it.vs30.welcome.welcomeTopComponent"/>
                 <attr name="preferredID" stringvalue="welcomeTopComponent"/>
-                <attr
-                    bundlevalue="it.vs30.welcome.Bundle#CTL_welcomeAction" name="displayName"/>
+                <attr bundlevalue="it.vs30.welcome.Bundle#CTL_welcomeAction" name="displayName"/>
             </file>
         </folder>
         <folder name="File">
             <file name="it-vs30-geometryView-ExportTravelTime.instance">
                 <!--it.vs30.myeditor.ExportTravelTime-->
-                <attr
-                    bundlevalue="it.vs30.myeditor.Bundle#CTL_ExportTravelTime" name="displayName"/>
-                <attr
-                    methodvalue="org.openide.awt.Actions.alwaysEnabled" name="instanceCreate"/>
+                <attr bundlevalue="it.vs30.myeditor.Bundle#CTL_ExportTravelTime" name="displayName"/>
+                <attr methodvalue="org.openide.awt.Actions.alwaysEnabled" name="instanceCreate"/>
                 <attr name="delegate" newvalue="it.vs30.myeditor.ExportTravelTime"/>
                 <attr boolvalue="false" name="noIconInMenu"/>
             </file>
             <file name="it-vs30-myeditor-MyEditorAction1.instance">
                 <!--it.vs30.myeditor.Open_Trace-->
                 <attr name="displayName" stringvalue="New - Open traces"/>
-                <attr
-                    methodvalue="org.openide.awt.Actions.alwaysEnabled" name="instanceCreate"/>
+                <attr methodvalue="org.openide.awt.Actions.alwaysEnabled" name="instanceCreate"/>
                 <attr name="delegate" newvalue="it.vs30.myeditor.Open_Trace"/>
                 <attr boolvalue="false" name="noIconInMenu"/>
             </file>
             <file name="it-vs30-myeditor-saveProjectAs.instance">
                 <!--it.vs30.myeditor.saveProjectAs-->
-                <attr
-                    bundlevalue="it.vs30.myeditor.Bundle#CTL_saveProjectAs" name="displayName"/>
-                <attr
-                    methodvalue="org.openide.awt.Actions.alwaysEnabled" name="instanceCreate"/>
+                <attr bundlevalue="it.vs30.myeditor.Bundle#CTL_saveProjectAs" name="displayName"/>
+                <attr methodvalue="org.openide.awt.Actions.alwaysEnabled" name="instanceCreate"/>
                 <attr name="delegate" newvalue="it.vs30.myeditor.saveProjectAs"/>
                 <attr boolvalue="false" name="noIconInMenu"/>
             </file>
@@ -250,10 +251,8 @@
             <folder name="it_vs30_geometryView">
                 <file name="geometryViewer.instance">
                     <!--it.vs30.geometryView.geometryViewerTopComponent-->
-                    <attr
-                        methodvalue="org.netbeans.api.settings.Factory.create" name="instanceCreate"/>
-                    <attr
-                        methodvalue="org.netbeans.api.settings.Factory.properties" name="settings.convertor"/>
+                    <attr methodvalue="org.netbeans.api.settings.Factory.create" name="instanceCreate"/>
+                    <attr methodvalue="org.netbeans.api.settings.Factory.properties" name="settings.convertor"/>
                     <attr name="settings.instanceClass" stringvalue="it.vs30.geometryView.geometryViewerTopComponent"/>
                     <attr name="settings.instanceOf" stringvalue="it.vs30.geometryView.geometryViewerTopComponent"/>
                     <attr boolvalue="true" name="xmlproperties.preventStoring"/>
@@ -262,10 +261,8 @@
             <folder name="it_vs30_sidebar">
                 <file name="sideTools_.instance">
                     <!--it.vs30.sidebar.sideTools_TopComponent-->
-                    <attr
-                        methodvalue="org.netbeans.api.settings.Factory.create" name="instanceCreate"/>
-                    <attr
-                        methodvalue="org.netbeans.api.settings.Factory.properties" name="settings.convertor"/>
+                    <attr methodvalue="org.netbeans.api.settings.Factory.create" name="instanceCreate"/>
+                    <attr methodvalue="org.netbeans.api.settings.Factory.properties" name="settings.convertor"/>
                     <attr name="settings.instanceClass" stringvalue="it.vs30.sidebar.sideTools_TopComponent"/>
                     <attr name="settings.instanceOf" stringvalue="it.vs30.sidebar.sideTools_TopComponent"/>
                     <attr boolvalue="true" name="xmlproperties.preventStoring"/>
@@ -274,10 +271,8 @@
             <folder name="it_vs30_smartUI">
                 <file name="smartGeometry.instance">
                     <!--it.vs30.smartUI.smartGeometryTopComponent-->
-                    <attr
-                        methodvalue="org.netbeans.api.settings.Factory.create" name="instanceCreate"/>
-                    <attr
-                        methodvalue="org.netbeans.api.settings.Factory.properties" name="settings.convertor"/>
+                    <attr methodvalue="org.netbeans.api.settings.Factory.create" name="instanceCreate"/>
+                    <attr methodvalue="org.netbeans.api.settings.Factory.properties" name="settings.convertor"/>
                     <attr name="settings.instanceClass" stringvalue="it.vs30.smartUI.smartGeometryTopComponent"/>
                     <attr name="settings.instanceOf" stringvalue="it.vs30.smartUI.smartGeometryTopComponent"/>
                     <attr boolvalue="true" name="xmlproperties.preventStoring"/>
@@ -286,10 +281,8 @@
             <folder name="it_vs30_welcome">
                 <file name="welcome.instance">
                     <!--it.vs30.welcome.welcomeTopComponent-->
-                    <attr
-                        methodvalue="org.netbeans.api.settings.Factory.create" name="instanceCreate"/>
-                    <attr
-                        methodvalue="org.netbeans.api.settings.Factory.properties" name="settings.convertor"/>
+                    <attr methodvalue="org.netbeans.api.settings.Factory.create" name="instanceCreate"/>
+                    <attr methodvalue="org.netbeans.api.settings.Factory.properties" name="settings.convertor"/>
                     <attr name="settings.instanceClass" stringvalue="it.vs30.welcome.welcomeTopComponent"/>
                     <attr name="settings.instanceOf" stringvalue="it.vs30.welcome.welcomeTopComponent"/>
                     <attr boolvalue="true" name="xmlproperties.preventStoring"/>
