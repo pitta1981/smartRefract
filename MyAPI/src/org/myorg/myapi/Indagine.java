@@ -288,10 +288,16 @@ public class Indagine {
                 }
 
                 double[] regr = FirstBrakeList.getOLSRegression(data);
-                (stesa.get(i)).dromoR[1].b = regr[1];
-                (stesa.get(i)).dromoR[1].a = regr[0];
+                try{
+                    (stesa.get(i)).dromoR[1].b = regr[1];
+                    (stesa.get(i)).dromoR[1].a = regr[0];
+                }catch(Exception e){
+                    
+                }
                 (stesa.get(i)).setLayer(in, fi, 2);
-                // fiB.strato1=strato1.getText();
+                
+                
+// fiB.strato1=strato1.getText();
 
             } else {
                 (stesa.get(i)).dromoR[1] = new JRetta();

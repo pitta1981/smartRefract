@@ -647,6 +647,7 @@ public class FirstBrakeList implements Externalizable {
         int n = data.length;
         if (n < 2) {
             throw new IllegalArgumentException("Not enough data.");
+            
         }
 
         double sumX = 0;
