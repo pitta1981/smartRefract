@@ -40,12 +40,12 @@
   </constraints>
   <bounds x="475" y="198" width="604" height="364" />
     </editor-area>
-    <screen width="1680" height="1050"/>
+    <screen width="1440" height="900"/>
     <active-mode name="editor"/>
     <toolbar configuration="Standard" preferred-icon-size="24"/>
     <tc-list>
-  <tc-id id="welcomeTopComponent"/>
   <tc-id id="sideTools_TopComponent"/>
+  <tc-id id="welcomeTopComponent"/>
   <tc-id id="geometryViewerTopComponent"/>
     </tc-list>
 </windowmanager>

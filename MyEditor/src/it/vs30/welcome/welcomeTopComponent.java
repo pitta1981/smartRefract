@@ -323,7 +323,7 @@ public final class welcomeTopComponent extends TopComponent {
         ((MyViewerTopComponent) tc).gmview.setGeom(editor.obj.fb.scoppio, editor.obj.fb.spaz, editor.obj.fb.spaz_in, editor.obj.tr.length);
         ((MyViewerTopComponent) tc).gmview.repaint();
         ((MyViewerTopComponent) tc).gmview.invalidate();*/
-        editor.jLabel1.setText(editor.obj.fb.fbp);
+        editor.jTracePath.setText(editor.obj.fb.fbp);
 
         TopComponent tc = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
         geomTC = (geometryViewerTopComponent) tc;
@@ -333,7 +333,7 @@ public final class welcomeTopComponent extends TopComponent {
         geomTC.gmview.invalidate();
 
         moveRecentFirst(lista[1]);
-        editor.jLabel1.setText(editor.obj.fb.fbp);
+        editor.jTracePath.setText(editor.obj.fb.fbp);
 
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -361,8 +361,8 @@ public final class welcomeTopComponent extends TopComponent {
             editor.obj.newFb();
             //editor.obj.loadSism(0);
             editor.obj.tr = editor.obj.getTraces();
-            editor.obj.fb = editor.obj.TraceGroup.get(0);
-            editor.jLabel1.setText(editor.obj.fb.fbp);
+            editor.obj.fb = editor.obj.TraceGroup.get(editor.obj.trace_index);
+            editor.jTracePath.setText(editor.obj.fb.fbp);
             editor.tv.repaint();
             editor.invalidate();
 
@@ -418,7 +418,7 @@ public final class welcomeTopComponent extends TopComponent {
                 editor.obj.tr = editor.obj.getTraces();
     
         }
-        editor.obj.fb = (FirstBrakeList) editor.obj.TraceGroup.get(0);
+        editor.obj.fb = (FirstBrakeList) editor.obj.TraceGroup.get( editor.obj.trace_index );
         editor.obj.sync();
         editor.tv.repaint();
         editor.txV.setProj(editor.obj.proj);
@@ -432,7 +432,7 @@ public final class welcomeTopComponent extends TopComponent {
         ((MyViewerTopComponent) tc).gmview.setGeom(editor.obj.fb.scoppio, editor.obj.fb.spaz, editor.obj.fb.spaz_in, editor.obj.tr.length);
         ((MyViewerTopComponent) tc).gmview.repaint();
         ((MyViewerTopComponent) tc).gmview.invalidate();*/
-        editor.jLabel1.setText(editor.obj.fb.fbp);
+        editor.jTracePath.setText(editor.obj.fb.fbp);
 
         TopComponent tc = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
         geomTC = (geometryViewerTopComponent) tc;
@@ -514,7 +514,7 @@ public final class welcomeTopComponent extends TopComponent {
         ((MyViewerTopComponent) tc).gmview.setGeom(editor.obj.fb.scoppio, editor.obj.fb.spaz, editor.obj.fb.spaz_in, editor.obj.tr.length);
         ((MyViewerTopComponent) tc).gmview.repaint();
         ((MyViewerTopComponent) tc).gmview.invalidate();*/
-        editor.jLabel1.setText(editor.obj.fb.fbp);
+        editor.jTracePath.setText(editor.obj.fb.fbp);
         //This is where a real application would open the file.
         //System.out.println("Opening: " + file.getName() + "." );
 

@@ -5,8 +5,7 @@
         <group>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyAPI/src/org/myorg/myapi/APIObject.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyAPI/src/org/myorg/myapi/FirstBrakeList.java</file>
-            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyAPI/src/org/myorg/myapi/InputFileSg2.java</file>
-            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyAPI/src/org/myorg/myapi/InputFileSgy.java</file>
+            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyAPI/src/org/myorg/myapi/NIOInputFile.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyAPI/src/org/myorg/myapi/Indagine.java</file>
         </group>
     </open-files>

@@ -100,6 +100,7 @@ public final class APIObject implements java.io.Externalizable {
             TraceGroup.set(i, fb);
         }
         fb = new FirstBrakeList();
+        fb=TraceGroup.get(trace_index);
         proj.stesa = TraceGroup;
     }
 
@@ -128,6 +129,7 @@ public final class APIObject implements java.io.Externalizable {
             TraceGroup.add(fb);
         }
         fb = new FirstBrakeList();
+        fb=TraceGroup.get(trace_index);
         proj.stesa = TraceGroup;
     }
 

@@ -219,7 +219,7 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
-        jLabel1 = new javax.swing.JLabel();
+        jTracePath = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
 
@@ -257,8 +257,8 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
 
         jToolBar1.setRollover(true);
 
-        jLabel1.setText(org.openide.util.NbBundle.getMessage(DocumentEditor.class, "DocumentEditor.jLabel1.text")); // NOI18N
-        jToolBar1.add(jLabel1);
+        jTracePath.setText(org.openide.util.NbBundle.getMessage(DocumentEditor.class, "DocumentEditor.jTracePath.text")); // NOI18N
+        jToolBar1.add(jTracePath);
 
         jPanel3.add(jToolBar1, java.awt.BorderLayout.PAGE_START);
 
@@ -327,7 +327,7 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
         geomTC.gmview.repaint();
         geomTC.gmview.invalidate();
 
-        jLabel1.setText(obj.fb.fbp);
+        jTracePath.setText(obj.fb.fbp);
         tv.repaint();
         tv.invalidate();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -335,7 +335,7 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         obj.nextTr();
-        jLabel1.setText(obj.fb.fbp);
+        jTracePath.setText(obj.fb.fbp);
         TopComponent tc;/* = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
         Lookup tcLookup = tc.getLookup();
         ((MyViewerTopComponent) tc).gmview.setBackground(Color.black);
@@ -741,13 +741,13 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    public javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
+    public javax.swing.JLabel jTracePath;
     // End of variables declaration//GEN-END:variables
     InstanceContent ic = new InstanceContent();
 

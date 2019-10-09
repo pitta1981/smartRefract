@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
->Log Session: Tuesday, September 10, 2019 11:56:28 AM CEST
+>Log Session: Wednesday, October 9, 2019 9:53:30 PM CEST
 >System Info: 
   Product Version         = NetBeans Platform 8.2 (Build 201609300101)
   Operating System        = Mac OS X version 10.14.5 running on x86_64
@@ -8,7 +8,7 @@
   Java Home               = /Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre
   System Locale; Encoding = it_IT (smartrefract); UTF-8
   Home Directory          = /Users/simone
-  Current Directory       = /Users/simone/NetBeansProjects/smartRefract/MyAPI
+  Current Directory       = /Users/simone/NetBeansProjects/smartRefract/MyEditor
   User Directory          = /Users/simone/NetBeansProjects/smartRefract/build/testuserdir
   Cache Directory         = /Users/simone/NetBeansProjects/smartRefract/build/testuserdir/var/cache
   Installation            = /Users/simone/NetBeansProjects/smartRefract/build/cluster
@@ -92,7 +92,7 @@ INFO [org.netbeans.core.startup.NbEvents]: Turning on modules:
 	org.netbeans.core.multitabs/1 [1.12.1.1 1 201609300101]
 	org.netbeans.core.io.ui/1 [1.30.1 201609300101]
 	org.myorg.myapi [2017.0.20171110 20171110 190910]
-	it.vs30.myeditor [2017.0.20171101 20171101 190910]
+	it.vs30.myeditor [2017.0.20171101 20171101 191009]
 INFO [org.netbeans.core.network.proxy.NetworkProxyReloader]: System network proxy resolver: Mac
 INFO [org.netbeans.core.network.proxy.NetworkProxyReloader]: System network proxy reloading failed! Trying fallback resolver.
 INFO [org.netbeans.core.network.proxy.fallback.FallbackNetworkProxy]: Fallback system proxy resolver: no http_proxy variable found
@@ -117,16 +117,23 @@ Input arguments:
 	-DaddExports:java.desktop/sun.awt.im=ALL-UNNAMED
 	-DaddExports:java.management/sun.management=ALL-UNNAMED
 	-XX:+HeapDumpOnOutOfMemoryError
-	-XX:HeapDumpPath=/Users/simone/NetBeansProjects/smartRefract/MyAPI/../build/testuserdir/var/log/heapdump.hprof
+	-XX:HeapDumpPath=/Users/simone/NetBeansProjects/smartRefract/MyEditor/../build/testuserdir/var/log/heapdump.hprof
 Compiler: HotSpot 64-Bit Tiered Compilers
 Heap memory usage: initial 256,0MB maximum 455,5MB
 Non heap memory usage: initial 2,4MB maximum -1b
 Garbage collector: PS Scavenge (Collections=2 Total time spent=0s)
 Garbage collector: PS MarkSweep (Collections=1 Total time spent=0s)
-Classes: loaded=4954 total loaded=4954 unloaded 0
+Classes: loaded=4958 total loaded=4959 unloaded 1
 INFO [org.netbeans.core.ui.warmup.DiagnosticTask]: Total memory 17.179.869.184
 INFO [null]: Total physical memory 17.179.869.184
 WARNING [org.openide.filesystems.Ordering]: Not all children in Menu/Window/ marked with the position attribute: [it-vs30-geometryView-geometryViewerTopComponent.shadow, it-vs30-sidebar-sideTools_TopComponent.shadow, it-vs30-smartUI-smartGeometryTopComponent.shadow, it-vs30-welcome-welcomeTopComponent.shadow], but some are: [org-netbeans-modules-favorites-View.shadow, org-netbeans-core-io-ui-IOWindowAction.shadow, SwitchToRecentDocumentAction.shadow, Web, Tools, Separator3.instance, ConfigureWindow, org-netbeans-core-windows-actions-ResetWindowsAction.shadow, Separator4.instance, CloseWindowAction.shadow, CloseAllDocumentsAction.shadow, CloseAllButThisAction.shadow, GroupsMenuAction.shadow, DocumentsAction.shadow]
+INFO [org.netbeans.core.windows.persistence]: [PersistenceManager.getTopComponentForID] Problem when deserializing TopComponent for tcID:'MyViewerTopComponent'. Reason: Top component MyViewerTopComponent could not be located or loaded from Components folder.
+LOG - No seismic data loaded Index: 0, Size: 0
+null
+Errore in paintComponent: null
+LOG - No seismic data loaded Index: 0, Size: 0
+null
+Errore in paintComponent: null
 INFO [org.netbeans.modules.autoupdate.updateprovider.DownloadListener]: Reading URL http://www.vs30.it/update_cn_navette_2017_0/API/updates.xml failed (java.io.FileNotFoundException: http://www.vs30.it/update_cn_navette_2017_0/API/updates.xml)
 INFO [org.netbeans.modules.autoupdate.ui.actions.AutoupdateCheckScheduler]
 java.io.FileNotFoundException: http://www.vs30.it/update_cn_navette_2017_0/API/updates.xml
@@ -175,421 +182,12 @@ Caused: java.io.IOException: http://www.vs30.it/update_cn_navette_2017_0/API/upd
 	at org.netbeans.modules.openide.util.GlobalLookup.execute(GlobalLookup.java:68)
 	at org.openide.util.lookup.Lookups.executeWith(Lookups.java:303)
 	at org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2058)
-SEVERE [org.openide.util.Exceptions]
-java.io.EOFException
-	at java.io.DataInputStream.readFully(DataInputStream.java:197)
-	at java.io.DataInputStream.readLong(DataInputStream.java:416)
-	at java.io.DataInputStream.readDouble(DataInputStream.java:468)
-	at java.io.ObjectInputStream$BlockDataInputStream.readDouble(ObjectInputStream.java:3175)
-	at java.io.ObjectInputStream.readDouble(ObjectInputStream.java:1056)
-	at org.myorg.myapi.APIObject.readExternal(APIObject.java:323)
-	at java.io.ObjectInputStream.readExternalData(ObjectInputStream.java:2076)
-	at java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2025)
-	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1535)
-	at java.io.ObjectInputStream.readObject(ObjectInputStream.java:422)
-[catch] at it.vs30.myeditor.OpenPrj.loadPrjSmartRefract(OpenPrj.java:348)
-	at it.vs30.welcome.welcomeTopComponent.jButton3ActionPerformed(welcomeTopComponent.java:296)
-	at it.vs30.welcome.welcomeTopComponent.access$200(welcomeTopComponent.java:53)
-	at it.vs30.welcome.welcomeTopComponent$3.actionPerformed(welcomeTopComponent.java:184)
-	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
-	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
-	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
-	at java.awt.Component.processMouseEvent(Component.java:6533)
-	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
-	at java.awt.Component.processEvent(Component.java:6298)
-	at java.awt.Container.processEvent(Container.java:2236)
-	at java.awt.Component.dispatchEventImpl(Component.java:4889)
-	at java.awt.Container.dispatchEventImpl(Container.java:2294)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
-	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4525)
-	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
-	at java.awt.Container.dispatchEventImpl(Container.java:2280)
-	at java.awt.Window.dispatchEventImpl(Window.java:2746)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
-	at java.awt.EventQueue.access$500(EventQueue.java:97)
-	at java.awt.EventQueue$3.run(EventQueue.java:709)
-	at java.awt.EventQueue$3.run(EventQueue.java:703)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)
-	at java.awt.EventQueue$4.run(EventQueue.java:731)
-	at java.awt.EventQueue$4.run(EventQueue.java:729)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
-	at org.netbeans.core.TimableEventQueue.dispatchEvent(TimableEventQueue.java:159)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
-SEVERE [global]
-java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
-	at java.util.ArrayList.rangeCheck(ArrayList.java:653)
-	at java.util.ArrayList.get(ArrayList.java:429)
-	at it.vs30.welcome.welcomeTopComponent.jButton3ActionPerformed(welcomeTopComponent.java:311)
-	at it.vs30.welcome.welcomeTopComponent.access$200(welcomeTopComponent.java:53)
-	at it.vs30.welcome.welcomeTopComponent$3.actionPerformed(welcomeTopComponent.java:184)
-	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
-	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
-	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
-	at java.awt.Component.processMouseEvent(Component.java:6533)
-	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
-	at java.awt.Component.processEvent(Component.java:6298)
-	at java.awt.Container.processEvent(Container.java:2236)
-	at java.awt.Component.dispatchEventImpl(Component.java:4889)
-	at java.awt.Container.dispatchEventImpl(Container.java:2294)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
-	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4525)
-	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
-	at java.awt.Container.dispatchEventImpl(Container.java:2280)
-	at java.awt.Window.dispatchEventImpl(Window.java:2746)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
-	at java.awt.EventQueue.access$500(EventQueue.java:97)
-	at java.awt.EventQueue$3.run(EventQueue.java:709)
-	at java.awt.EventQueue$3.run(EventQueue.java:703)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)
-	at java.awt.EventQueue$4.run(EventQueue.java:731)
-	at java.awt.EventQueue$4.run(EventQueue.java:729)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
-	at org.netbeans.core.TimableEventQueue.dispatchEvent(TimableEventQueue.java:159)
-[catch] at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
-null
-INFO [org.netbeans.core.windows.persistence]: [PersistenceManager.getTopComponentForID] Problem when deserializing TopComponent for tcID:'MyViewerTopComponent'. Reason: Top component MyViewerTopComponent could not be located or loaded from Components folder.
-Errore in paintComponent: null
+LOG - No seismic data loaded Index: 0, Size: 0
 null
 Errore in paintComponent: null
+LOG - No seismic data loaded Index: 0, Size: 0
 null
 Errore in paintComponent: null
-SEVERE [global]
-java.lang.IllegalArgumentException: Not enough data.
-	at org.myorg.myapi.FirstBrakeList.getOLSRegression(FirstBrakeList.java:649)
-	at org.myorg.myapi.Indagine.setdromo(Indagine.java:290)
-	at org.myorg.myapi.APIObject.sync(APIObject.java:61)
-	at it.vs30.welcome.welcomeTopComponent.jButton4ActionPerformed(welcomeTopComponent.java:422)
-	at it.vs30.welcome.welcomeTopComponent.access$300(welcomeTopComponent.java:53)
-	at it.vs30.welcome.welcomeTopComponent$4.actionPerformed(welcomeTopComponent.java:192)
-	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
-	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
-	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
-	at java.awt.Component.processMouseEvent(Component.java:6533)
-	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
-	at java.awt.Component.processEvent(Component.java:6298)
-	at java.awt.Container.processEvent(Container.java:2236)
-	at java.awt.Component.dispatchEventImpl(Component.java:4889)
-	at java.awt.Container.dispatchEventImpl(Container.java:2294)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
-	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4525)
-	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
-	at java.awt.Container.dispatchEventImpl(Container.java:2280)
-	at java.awt.Window.dispatchEventImpl(Window.java:2746)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
-	at java.awt.EventQueue.access$500(EventQueue.java:97)
-	at java.awt.EventQueue$3.run(EventQueue.java:709)
-	at java.awt.EventQueue$3.run(EventQueue.java:703)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)
-	at java.awt.EventQueue$4.run(EventQueue.java:731)
-	at java.awt.EventQueue$4.run(EventQueue.java:729)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
-	at org.netbeans.core.TimableEventQueue.dispatchEvent(TimableEventQueue.java:159)
-[catch] at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
-SEVERE [global]
-java.lang.NullPointerException
-	at it.vs30.smartUI.JTX_view.drawSl(JTX_view.java:479)
-	at it.vs30.smartUI.JTX_view.formMouseMoved(JTX_view.java:147)
-	at it.vs30.smartUI.JTX_view.access$300(JTX_view.java:31)
-	at it.vs30.smartUI.JTX_view$2.mouseMoved(JTX_view.java:120)
-	at java.awt.Component.processMouseMotionEvent(Component.java:6578)
-	at javax.swing.JComponent.processMouseMotionEvent(JComponent.java:3342)
-	at java.awt.Component.processEvent(Component.java:6302)
-	at java.awt.Container.processEvent(Container.java:2236)
-	at java.awt.Component.dispatchEventImpl(Component.java:4889)
-	at java.awt.Container.dispatchEventImpl(Container.java:2294)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
-	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4538)
-	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
-	at java.awt.Container.dispatchEventImpl(Container.java:2280)
-	at java.awt.Window.dispatchEventImpl(Window.java:2746)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
-	at java.awt.EventQueue.access$500(EventQueue.java:97)
-	at java.awt.EventQueue$3.run(EventQueue.java:709)
-	at java.awt.EventQueue$3.run(EventQueue.java:703)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)
-	at java.awt.EventQueue$4.run(EventQueue.java:731)
-	at java.awt.EventQueue$4.run(EventQueue.java:729)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
-	at org.netbeans.core.TimableEventQueue.dispatchEvent(TimableEventQueue.java:159)
-[catch] at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
-SEVERE [null]: Last record repeated 2 more times.
-SEVERE [global]
-java.lang.NullPointerException
-	at it.vs30.smartUI.JTX_view.drawSl(JTX_view.java:509)
-	at it.vs30.smartUI.JTX_view.formMouseMoved(JTX_view.java:147)
-	at it.vs30.smartUI.JTX_view.access$300(JTX_view.java:31)
-	at it.vs30.smartUI.JTX_view$2.mouseMoved(JTX_view.java:120)
-	at java.awt.Component.processMouseMotionEvent(Component.java:6578)
-	at javax.swing.JComponent.processMouseMotionEvent(JComponent.java:3342)
-	at java.awt.Component.processEvent(Component.java:6302)
-	at java.awt.Container.processEvent(Container.java:2236)
-	at java.awt.Component.dispatchEventImpl(Component.java:4889)
-	at java.awt.Container.dispatchEventImpl(Container.java:2294)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
-	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4538)
-	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
-	at java.awt.Container.dispatchEventImpl(Container.java:2280)
-	at java.awt.Window.dispatchEventImpl(Window.java:2746)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
-	at java.awt.EventQueue.access$500(EventQueue.java:97)
-	at java.awt.EventQueue$3.run(EventQueue.java:709)
-	at java.awt.EventQueue$3.run(EventQueue.java:703)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)
-	at java.awt.EventQueue$4.run(EventQueue.java:731)
-	at java.awt.EventQueue$4.run(EventQueue.java:729)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
-	at org.netbeans.core.TimableEventQueue.dispatchEvent(TimableEventQueue.java:159)
-[catch] at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
-SEVERE [global]
-java.lang.NullPointerException
-	at it.vs30.smartUI.JTX_view.drawSl(JTX_view.java:498)
-	at it.vs30.smartUI.JTX_view.formMouseMoved(JTX_view.java:147)
-	at it.vs30.smartUI.JTX_view.access$300(JTX_view.java:31)
-	at it.vs30.smartUI.JTX_view$2.mouseMoved(JTX_view.java:120)
-	at java.awt.Component.processMouseMotionEvent(Component.java:6578)
-	at javax.swing.JComponent.processMouseMotionEvent(JComponent.java:3342)
-	at java.awt.Component.processEvent(Component.java:6302)
-	at java.awt.Container.processEvent(Container.java:2236)
-	at java.awt.Component.dispatchEventImpl(Component.java:4889)
-	at java.awt.Container.dispatchEventImpl(Container.java:2294)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
-	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4538)
-	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
-	at java.awt.Container.dispatchEventImpl(Container.java:2280)
-	at java.awt.Window.dispatchEventImpl(Window.java:2746)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
-	at java.awt.EventQueue.access$500(EventQueue.java:97)
-	at java.awt.EventQueue$3.run(EventQueue.java:709)
-	at java.awt.EventQueue$3.run(EventQueue.java:703)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)
-	at java.awt.EventQueue$4.run(EventQueue.java:731)
-	at java.awt.EventQueue$4.run(EventQueue.java:729)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
-	at org.netbeans.core.TimableEventQueue.dispatchEvent(TimableEventQueue.java:159)
-[catch] at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
-SEVERE [null]: Last record repeated 2 more times.
-SEVERE [global]
-java.lang.NullPointerException
-	at it.vs30.smartRefract.refraction.GRM.compute_V0(GRM.java:42)
-	at org.myorg.myapi.Indagine.sezDT_ver2016(Indagine.java:711)
-	at it.vs30.myeditor.DocumentEditor.jTabbedPane1StateChanged(DocumentEditor.java:396)
-	at it.vs30.myeditor.DocumentEditor.access$400(DocumentEditor.java:68)
-	at it.vs30.myeditor.DocumentEditor$3.stateChanged(DocumentEditor.java:247)
-	at javax.swing.JTabbedPane.fireStateChanged(JTabbedPane.java:416)
-	at javax.swing.JTabbedPane$ModelListener.stateChanged(JTabbedPane.java:270)
-	at javax.swing.DefaultSingleSelectionModel.fireStateChanged(DefaultSingleSelectionModel.java:132)
-	at javax.swing.DefaultSingleSelectionModel.setSelectedIndex(DefaultSingleSelectionModel.java:67)
-	at javax.swing.JTabbedPane.setSelectedIndexImpl(JTabbedPane.java:616)
-	at javax.swing.JTabbedPane.setSelectedIndex(JTabbedPane.java:591)
-	at com.apple.laf.AquaTabbedPaneUI$MouseHandler.mouseReleased(AquaTabbedPaneUI.java:905)
-	at java.awt.Component.processMouseEvent(Component.java:6533)
-	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
-	at java.awt.Component.processEvent(Component.java:6298)
-	at java.awt.Container.processEvent(Container.java:2236)
-	at java.awt.Component.dispatchEventImpl(Component.java:4889)
-	at java.awt.Container.dispatchEventImpl(Container.java:2294)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
-	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4525)
-	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
-	at java.awt.Container.dispatchEventImpl(Container.java:2280)
-	at java.awt.Window.dispatchEventImpl(Window.java:2746)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
-	at java.awt.EventQueue.access$500(EventQueue.java:97)
-	at java.awt.EventQueue$3.run(EventQueue.java:709)
-	at java.awt.EventQueue$3.run(EventQueue.java:703)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)
-	at java.awt.EventQueue$4.run(EventQueue.java:731)
-	at java.awt.EventQueue$4.run(EventQueue.java:729)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
-	at org.netbeans.core.TimableEventQueue.dispatchEvent(TimableEventQueue.java:159)
-[catch] at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
 WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
 WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
 WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
-WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
-WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
-WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
-WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
-WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
-WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush
-null
-Errore in paintComponent: null
-null
-Errore in paintComponent: null
-SEVERE [global]
-java.lang.IllegalArgumentException: Not enough data.
-	at org.myorg.myapi.FirstBrakeList.getOLSRegression(FirstBrakeList.java:649)
-	at org.myorg.myapi.Indagine.setdromo(Indagine.java:290)
-	at org.myorg.myapi.APIObject.sync(APIObject.java:61)
-	at it.vs30.myeditor.OpenPrj.loadPrj(OpenPrj.java:318)
-	at it.vs30.myeditor.OpenPrj.actionPerformed(OpenPrj.java:71)
-	at org.openide.awt.AlwaysEnabledAction$1.run(AlwaysEnabledAction.java:199)
-	at org.openide.util.actions.ActionInvoker$1.run(ActionInvoker.java:95)
-	at org.openide.util.actions.ActionInvoker.doPerformAction(ActionInvoker.java:116)
-	at org.openide.util.actions.ActionInvoker.invokeAction(ActionInvoker.java:99)
-	at org.openide.awt.AlwaysEnabledAction.actionPerformed(AlwaysEnabledAction.java:202)
-	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
-	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
-	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
-	at javax.swing.AbstractButton.doClick(AbstractButton.java:376)
-	at com.apple.laf.ScreenMenuItem.actionPerformed(ScreenMenuItem.java:125)
-	at java.awt.MenuItem.processActionEvent(MenuItem.java:669)
-	at java.awt.MenuItem.processEvent(MenuItem.java:628)
-	at java.awt.MenuComponent.dispatchEventImpl(MenuComponent.java:357)
-	at java.awt.MenuComponent.dispatchEvent(MenuComponent.java:345)
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:761)
-	at java.awt.EventQueue.access$500(EventQueue.java:97)
-	at java.awt.EventQueue$3.run(EventQueue.java:709)
-	at java.awt.EventQueue$3.run(EventQueue.java:703)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)
-	at java.awt.EventQueue$4.run(EventQueue.java:731)
-	at java.awt.EventQueue$4.run(EventQueue.java:729)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
-	at org.netbeans.core.TimableEventQueue.dispatchEvent(TimableEventQueue.java:159)
-[catch] at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
-null
-Errore in paintComponent: null
-null
-Errore in paintComponent: null
-null
-Errore in paintComponent: null
-SEVERE [global]
-java.lang.NullPointerException
-	at org.myorg.myapi.APIObject.nextTr(APIObject.java:203)
-	at it.vs30.myeditor.DocumentEditor.jButton3ActionPerformed(DocumentEditor.java:337)
-	at it.vs30.myeditor.DocumentEditor.access$300(DocumentEditor.java:68)
-	at it.vs30.myeditor.DocumentEditor$2.actionPerformed(DocumentEditor.java:240)
-	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
-	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
-	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
-	at java.awt.Component.processMouseEvent(Component.java:6533)
-	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
-	at java.awt.Component.processEvent(Component.java:6298)
-	at java.awt.Container.processEvent(Container.java:2236)
-	at java.awt.Component.dispatchEventImpl(Component.java:4889)
-	at java.awt.Container.dispatchEventImpl(Container.java:2294)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
-	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4525)
-	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
-	at java.awt.Container.dispatchEventImpl(Container.java:2280)
-	at java.awt.Window.dispatchEventImpl(Window.java:2746)
-	at java.awt.Component.dispatchEvent(Component.java:4711)
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
-	at java.awt.EventQueue.access$500(EventQueue.java:97)
-	at java.awt.EventQueue$3.run(EventQueue.java:709)
-	at java.awt.EventQueue$3.run(EventQueue.java:703)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)
-	at java.awt.EventQueue$4.run(EventQueue.java:731)
-	at java.awt.EventQueue$4.run(EventQueue.java:729)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
-	at org.netbeans.core.TimableEventQueue.dispatchEvent(TimableEventQueue.java:159)
-[catch] at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
-null
-Errore in paintComponent: null
-null
-Errore in paintComponent: null
