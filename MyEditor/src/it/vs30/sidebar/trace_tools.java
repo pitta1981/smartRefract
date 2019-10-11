@@ -60,6 +60,8 @@ public class trace_tools extends javax.swing.JPanel {
         jToggleButton2 = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
 
+        setMaximumSize(new java.awt.Dimension(250, 32767));
+
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/it/vs30/sidebar/lock26.png"))); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(jToggleButton1, org.openide.util.NbBundle.getMessage(trace_tools.class, "trace_tools.jToggleButton1.text")); // NOI18N
         jToggleButton1.setMaximumSize(new java.awt.Dimension(65, 65));
