@@ -10,9 +10,9 @@ import it.vs30.smartRefract.utils.ZoomTraceUtil;
 import javax.swing.SwingConstants;
 import org.myorg.myapi.FirstBrakeList;
 //import org.myorg.myviewer.MyViewerTopComponent;
-import org.openide.util.Lookup;
+
 import org.openide.windows.TopComponent;
-import org.openide.windows.WindowManager;
+
 
 /**
  *

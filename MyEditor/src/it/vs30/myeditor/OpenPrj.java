@@ -178,8 +178,15 @@ public final class OpenPrj implements ActionListener {
             editor.invalidate();
 
             TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
-          
-            editor.jLabel1.setText(editor.obj.fb.fbp);
+            /*  Lookup tcLookup = tc.getLookup();
+
+            ((MyViewerTopComponent) tc).setActive(editor.obj);
+            ((MyViewerTopComponent) tc).gmview.setStesa(editor.obj.proj.stesa);
+            ((MyViewerTopComponent) tc).gmview.setBackground(Color.black);
+            ((MyViewerTopComponent) tc).gmview.setGeom(editor.obj.fb.scoppio, editor.obj.fb.spaz, editor.obj.fb.spaz_in, editor.obj.tr.length);
+            ((MyViewerTopComponent) tc).gmview.repaint();
+            ((MyViewerTopComponent) tc).gmview.invalidate();*/
+            editor.jTracePath.setText(editor.obj.fb.fbp);
 
             tc = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
             geomTC = (geometryViewerTopComponent) tc;
@@ -207,7 +214,12 @@ public final class OpenPrj implements ActionListener {
             BufferedReader br = new BufferedReader(isr);
 
             String linea = br.readLine();
-            
+            //int n=Integer.parseInt(linea);
+
+            //  jpWave.setStatus(statusMessageLabel);
+            //jpWave.newSignal(16);
+            //jpWave.sample[1]=new ArrayList();
+            //linea = br.readLine();
             int chanel = Integer.parseInt(linea);
 
             linea = br.readLine();
