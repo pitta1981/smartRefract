@@ -100,9 +100,15 @@ public class TraceView extends javax.swing.JPanel {
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-
+        
         BufferedImage im = (BufferedImage) this.createImage(this.getWidth(), this.getHeight());
-
+        try{
+        obj.fb=obj.TraceGroup.get(obj.trace_index);
+        }
+        catch(Exception ex)
+        {
+            System.err.println("LOG - No seismic data loaded "+ ex.getMessage());
+        }
         Graphics offg = im.getGraphics();
         this.is_white = obj.is_white;
         if (obj.is_white) {
@@ -120,7 +126,7 @@ public class TraceView extends javax.swing.JPanel {
             this.drawMousePosition(offg, selected_trace);
             this.drawSelected(offg);
         }
-
+        
         //   drawSelection(offg);
         drawSeism(offg);
         drawPick(offg, this.getWidth(), this.getHeight());

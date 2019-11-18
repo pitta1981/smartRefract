@@ -43,10 +43,10 @@ public final class Open_Trace implements ActionListener {
             editor.obj.tr=editor.obj.getTraces();
             //System.out.println("EUREKA - Shot location: "+editor.obj.tr[0].getShotLocation());
             
-            editor.obj.fb=editor.obj.TraceGroup.get(0);
+            editor.obj.fb=editor.obj.TraceGroup.get(editor.obj.trace_index);
             
             
-            editor.jLabel1.setText(editor.obj.fb.fbp);
+            editor.jTracePath.setText(editor.obj.fb.fbp);
             editor.tv.repaint();
             editor.invalidate();
             

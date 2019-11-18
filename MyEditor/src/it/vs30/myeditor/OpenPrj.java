@@ -186,7 +186,7 @@ public final class OpenPrj implements ActionListener {
             ((MyViewerTopComponent) tc).gmview.setGeom(editor.obj.fb.scoppio, editor.obj.fb.spaz, editor.obj.fb.spaz_in, editor.obj.tr.length);
             ((MyViewerTopComponent) tc).gmview.repaint();
             ((MyViewerTopComponent) tc).gmview.invalidate();*/
-            editor.jLabel1.setText(editor.obj.fb.fbp);
+            editor.jTracePath.setText(editor.obj.fb.fbp);
 
             tc = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
             geomTC = (geometryViewerTopComponent) tc;

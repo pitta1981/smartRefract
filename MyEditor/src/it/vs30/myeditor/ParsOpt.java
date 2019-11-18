@@ -89,7 +89,7 @@ public class ParsOpt extends OptionProcessor {
             editor.obj.loadSism(0);
             editor.obj.tr = editor.obj.getTraces();
             editor.obj.fb = editor.obj.TraceGroup.get(0);
-            editor.jLabel1.setText(editor.obj.fb.fbp);
+            editor.jTracePath.setText(editor.obj.fb.fbp);
             editor.tv.repaint();
             editor.invalidate();
 
@@ -128,7 +128,7 @@ public class ParsOpt extends OptionProcessor {
             geomTC.gmview.repaint();
             geomTC.gmview.invalidate();
 
-            editor.jLabel1.setText(editor.obj.fb.fbp);
+            editor.jTracePath.setText(editor.obj.fb.fbp);
 
             //System.err.println("Eureka");
         }
