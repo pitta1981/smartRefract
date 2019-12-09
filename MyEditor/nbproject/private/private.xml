@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/pitta1981/Source/smartRefract/smartrefract/MyEditor/src/it/vs30/myeditor/JTraceDlg.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/JSezioneView.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/sidebar/trace_tools.java</file>
-            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/JtV_draw.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/jTavo_draw.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/sidebar/sideTools_TopComponent.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/TraceView.java</file>
@@ -18,6 +17,7 @@
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/ParsOpt.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/welcome/welcomeTopComponent.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/DocumentEditor.java</file>
+            <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/JPhantoming_view.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/FineTuning.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/Open_Trace.java</file>
             <file>file:/Users/simone/NetBeansProjects/smartRefract/MyEditor/src/it/vs30/myeditor/JGeometryDlg.java</file>

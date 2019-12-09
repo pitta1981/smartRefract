@@ -66,6 +66,7 @@ public final class sideTools_TopComponent extends TopComponent implements Lookup
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setMaximumSize(new java.awt.Dimension(250, 2147483647));
         setMinimumSize(new java.awt.Dimension(200, 130));
         setPreferredSize(new java.awt.Dimension(300, 200));
         setLayout(new java.awt.BorderLayout());
