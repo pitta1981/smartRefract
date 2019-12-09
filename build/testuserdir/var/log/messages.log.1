@@ -1,14 +1,14 @@
 -------------------------------------------------------------------------------
->Log Session: Wednesday, October 9, 2019 9:53:30 PM CEST
+>Log Session: Thursday, November 28, 2019 4:32:22 PM CET
 >System Info: 
   Product Version         = NetBeans Platform 8.2 (Build 201609300101)
-  Operating System        = Mac OS X version 10.14.5 running on x86_64
+  Operating System        = Mac OS X version 10.15.1 running on x86_64
   Java; VM; Vendor        = 1.8.0_131; Java HotSpot(TM) 64-Bit Server VM 25.131-b11; Oracle Corporation
   Runtime                 = Java(TM) SE Runtime Environment 1.8.0_131-b11
   Java Home               = /Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre
   System Locale; Encoding = it_IT (smartrefract); UTF-8
   Home Directory          = /Users/simone
-  Current Directory       = /Users/simone/NetBeansProjects/smartRefract/MyEditor
+  Current Directory       = /Users/simone/NetBeansProjects/smartRefract
   User Directory          = /Users/simone/NetBeansProjects/smartRefract/build/testuserdir
   Cache Directory         = /Users/simone/NetBeansProjects/smartRefract/build/testuserdir/var/cache
   Installation            = /Users/simone/NetBeansProjects/smartRefract/build/cluster
@@ -91,8 +91,8 @@ INFO [org.netbeans.core.startup.NbEvents]: Turning on modules:
 	org.netbeans.core.nativeaccess/1 [1.31.1 201609300101]
 	org.netbeans.core.multitabs/1 [1.12.1.1 1 201609300101]
 	org.netbeans.core.io.ui/1 [1.30.1 201609300101]
-	org.myorg.myapi [2017.0.20171110 20171110 190910]
-	it.vs30.myeditor [2017.0.20171101 20171101 191009]
+	org.myorg.myapi [2017.0.20171110 20171110 191010]
+	it.vs30.myeditor [2017.0.20171101 20171101 191010]
 INFO [org.netbeans.core.network.proxy.NetworkProxyReloader]: System network proxy resolver: Mac
 INFO [org.netbeans.core.network.proxy.NetworkProxyReloader]: System network proxy reloading failed! Trying fallback resolver.
 INFO [org.netbeans.core.network.proxy.fallback.FallbackNetworkProxy]: Fallback system proxy resolver: no http_proxy variable found
@@ -117,13 +117,13 @@ Input arguments:
 	-DaddExports:java.desktop/sun.awt.im=ALL-UNNAMED
 	-DaddExports:java.management/sun.management=ALL-UNNAMED
 	-XX:+HeapDumpOnOutOfMemoryError
-	-XX:HeapDumpPath=/Users/simone/NetBeansProjects/smartRefract/MyEditor/../build/testuserdir/var/log/heapdump.hprof
+	-XX:HeapDumpPath=/Users/simone/NetBeansProjects/smartRefract/build/testuserdir/var/log/heapdump.hprof
 Compiler: HotSpot 64-Bit Tiered Compilers
 Heap memory usage: initial 256,0MB maximum 455,5MB
 Non heap memory usage: initial 2,4MB maximum -1b
 Garbage collector: PS Scavenge (Collections=2 Total time spent=0s)
 Garbage collector: PS MarkSweep (Collections=1 Total time spent=0s)
-Classes: loaded=4958 total loaded=4959 unloaded 1
+Classes: loaded=4953 total loaded=4953 unloaded 0
 INFO [org.netbeans.core.ui.warmup.DiagnosticTask]: Total memory 17.179.869.184
 INFO [null]: Total physical memory 17.179.869.184
 WARNING [org.openide.filesystems.Ordering]: Not all children in Menu/Window/ marked with the position attribute: [it-vs30-geometryView-geometryViewerTopComponent.shadow, it-vs30-sidebar-sideTools_TopComponent.shadow, it-vs30-smartUI-smartGeometryTopComponent.shadow, it-vs30-welcome-welcomeTopComponent.shadow], but some are: [org-netbeans-modules-favorites-View.shadow, org-netbeans-core-io-ui-IOWindowAction.shadow, SwitchToRecentDocumentAction.shadow, Web, Tools, Separator3.instance, ConfigureWindow, org-netbeans-core-windows-actions-ResetWindowsAction.shadow, Separator4.instance, CloseWindowAction.shadow, CloseAllDocumentsAction.shadow, CloseAllButThisAction.shadow, GroupsMenuAction.shadow, DocumentsAction.shadow]
@@ -134,60 +134,6 @@ Errore in paintComponent: null
 LOG - No seismic data loaded Index: 0, Size: 0
 null
 Errore in paintComponent: null
-INFO [org.netbeans.modules.autoupdate.updateprovider.DownloadListener]: Reading URL http://www.vs30.it/update_cn_navette_2017_0/API/updates.xml failed (java.io.FileNotFoundException: http://www.vs30.it/update_cn_navette_2017_0/API/updates.xml)
-INFO [org.netbeans.modules.autoupdate.ui.actions.AutoupdateCheckScheduler]
-java.io.FileNotFoundException: http://www.vs30.it/update_cn_navette_2017_0/API/updates.xml
-	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1872)
-	at sun.net.www.protocol.http.HttpURLConnection.access$200(HttpURLConnection.java:91)
-	at sun.net.www.protocol.http.HttpURLConnection$9.run(HttpURLConnection.java:1466)
-	at sun.net.www.protocol.http.HttpURLConnection$9.run(HttpURLConnection.java:1464)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.AccessController.doPrivilegedWithCombiner(AccessController.java:782)
-	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1463)
-	at java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:480)
-	at org.netbeans.modules.autoupdate.updateprovider.NetworkAccess.checkRedirect(NetworkAccess.java:253)
-	at org.netbeans.modules.autoupdate.updateprovider.NetworkAccess.access$700(NetworkAccess.java:69)
-	at org.netbeans.modules.autoupdate.updateprovider.NetworkAccess$Task$2.call(NetworkAccess.java:172)
-Caused: java.io.FileNotFoundException: http://www.vs30.it/update_cn_navette_2017_0/API/updates.xml
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
-	at sun.net.www.protocol.http.HttpURLConnection$10.run(HttpURLConnection.java:1926)
-	at sun.net.www.protocol.http.HttpURLConnection$10.run(HttpURLConnection.java:1921)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at sun.net.www.protocol.http.HttpURLConnection.getChainedException(HttpURLConnection.java:1920)
-	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1490)
-	at sun.net.www.protocol.http.HttpURLConnection.access$200(HttpURLConnection.java:91)
-	at sun.net.www.protocol.http.HttpURLConnection$9.run(HttpURLConnection.java:1466)
-	at sun.net.www.protocol.http.HttpURLConnection$9.run(HttpURLConnection.java:1464)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.AccessController.doPrivilegedWithCombiner(AccessController.java:782)
-	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1463)
-	at org.netbeans.modules.autoupdate.updateprovider.NetworkAccess$Task$2.call(NetworkAccess.java:180)
-	at org.netbeans.modules.autoupdate.updateprovider.NetworkAccess$Task$2.call(NetworkAccess.java:150)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:748)
-Caused: java.io.IOException: http://www.vs30.it/update_cn_navette_2017_0/API/updates.xml
-	at org.netbeans.modules.autoupdate.updateprovider.DownloadListener.notifyException(DownloadListener.java:103)
-	at org.netbeans.modules.autoupdate.updateprovider.AutoupdateCatalogCache.copy(AutoupdateCatalogCache.java:246)
-	at org.netbeans.modules.autoupdate.updateprovider.AutoupdateCatalogCache.writeCatalogToCache(AutoupdateCatalogCache.java:99)
-	at org.netbeans.modules.autoupdate.updateprovider.AutoupdateCatalogProvider.refresh(AutoupdateCatalogProvider.java:154)
-	at org.netbeans.modules.autoupdate.services.UpdateUnitProviderImpl.refresh(UpdateUnitProviderImpl.java:180)
-	at org.netbeans.api.autoupdate.UpdateUnitProvider.refresh(UpdateUnitProvider.java:196)
-[catch] at org.netbeans.modules.autoupdate.ui.actions.AutoupdateCheckScheduler$4.run(AutoupdateCheckScheduler.java:155)
-	at org.openide.util.RequestProcessor$Task.run(RequestProcessor.java:1443)
-	at org.netbeans.modules.openide.util.GlobalLookup.execute(GlobalLookup.java:68)
-	at org.openide.util.lookup.Lookups.executeWith(Lookups.java:303)
-	at org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2058)
 LOG - No seismic data loaded Index: 0, Size: 0
 null
 Errore in paintComponent: null
-LOG - No seismic data loaded Index: 0, Size: 0
-null
-Errore in paintComponent: null
-WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/topsoil.brush
-WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/weathered.brush
-WARNING [org.netbeans.ProxyClassLoader]: Should not use initial / in calls to ClassLoader.getResource(s): /org/myorg/myapi/Resources/bedrock.brush

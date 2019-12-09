@@ -4,9 +4,9 @@
     <main-window>
   <joined-properties
    x="2"
-   y="24"
-   width="1663"
-   height="968"
+   y="23"
+   width="1661"
+   height="828"
    relative-x="0.0"
    relative-y="0.0"
    relative-width="0.0"
@@ -33,7 +33,7 @@
   </main-window>
     <editor-area state="joined" frame-state="0">
   <constraints>
-  <path orientation="horizontal" number="60" weight="0.8426356589147287" />
+  <path orientation="horizontal" number="60" weight="0.8186889818688982" />
   <path orientation="vertical" number="40" weight="0.7" />
   <path orientation="horizontal" number="40" weight="0.7" />
   <path orientation="vertical" number="40" weight="0.5" />
@@ -44,8 +44,8 @@
     <active-mode name="editor"/>
     <toolbar configuration="Standard" preferred-icon-size="24"/>
     <tc-list>
-  <tc-id id="sideTools_TopComponent"/>
   <tc-id id="welcomeTopComponent"/>
+  <tc-id id="sideTools_TopComponent"/>
   <tc-id id="geometryViewerTopComponent"/>
     </tc-list>
 </windowmanager>
