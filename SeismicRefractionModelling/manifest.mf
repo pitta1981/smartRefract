@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-OpenIDE-Module: it.vs30.smartrefract.forward.modelling
-OpenIDE-Module-Localizing-Bundle: it/vs30/smartrefract/forward/modelling/Bundle.properties
-OpenIDE-Module-Specification-Version: 1.0
-

@@ -103,7 +103,7 @@ public class JSezioneView extends javax.swing.JPanel {
         //sezione.draw();
        // dAPI.drawSezAssi(g,this.getWidth(), this.getHeight());
         double[] mxmn=dAPI.maxmin();
-        FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList ArrFB = proj.stesa.get(0);
       //  double[] mxmn=dAPI.maxmin();
       //  FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
         double ascismax=(ArrFB.ch-1)*ArrFB.spaz;
@@ -136,7 +136,7 @@ public class JSezioneView extends javax.swing.JPanel {
      //   drawAssi(g, this.getWidth(), this.getHeight());
         dAPI.drawSezAssi(g,this.getWidth(), (int)(rap),x,y);
         
-        dAPI.drawSezione2(g, (int)(this.getWidth()), (int)(rap),x,y);
+        dAPI.drawSezione2(g, (this.getWidth()), (int)(rap),x,y);
         
         //drawSezione(g, this.getWidth(), this.getHeight());
        
@@ -230,7 +230,7 @@ private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_
         int ymax = h;//this.getHeight();
         int xmax = w;//this.getWidth();
         int nchanel = xmax / ArrFB.fb.length;
-        int ychn = (int) (ymax - (0 * nchanel)) / nchanel;
+        int ychn = (ymax - (0 * nchanel)) / nchanel;
         xshf = nchanel;
         if (!isWhite) {
             g.setColor(Color.white);
@@ -631,7 +631,7 @@ private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_
 
         for (int i = 0; i < ArrFB.fb.length - 1; i++) {
 
-            g2.drawLine((int) (xshf + (nchanel * i)), (int) ((margUp * ymax)), (int) (xshf + (nchanel * i)), (int) ((margUp * ymax) * 0.85));
+            g2.drawLine( (xshf + (nchanel * i)), (int) ((margUp * ymax)), (int) (xshf + (nchanel * i)), (int) ((margUp * ymax) * 0.85));
             int width = fontMetrics.stringWidth("" + String.format("%.2g%n", (i * ArrFB.spaz + ArrFB.spaz_in)));
 
             g2.drawString("" + String.format("%.2g%n", (i * ArrFB.spaz + ArrFB.spaz_in)), (int) (xshf + (nchanel * i) - (width / 2)), (int) ((margUp * ymax) * 0.83));

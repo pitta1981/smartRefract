@@ -104,7 +104,7 @@ public final class APIObject implements java.io.Externalizable {
     }
 
     public void newFb() {
-        TraceGroup = new ArrayList();
+        TraceGroup = new ArrayList<FirstBrakeList>();
         for (int i = 0; i < in_file_l.length; i++) {
             fb = new FirstBrakeList();
             loadSism(i);

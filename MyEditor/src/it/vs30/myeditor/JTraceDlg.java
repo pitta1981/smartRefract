@@ -10,7 +10,7 @@
  */
 package it.vs30.myeditor;
 
-import com.sun.awt.AWTUtilities;
+//import com.sun.awt.AWTUtilities;
 import java.awt.Color;
 //import org.myorg.myviewer.MyViewerTopComponent;
 import org.openide.util.Lookup;

@@ -1,9 +1,0 @@
-||:it.vs30.smartrefract.forward.modelling.ModelTopComponent
-org.openide.windows.TopComponent
-it.vs30.smartrefract.forward.modelling.ModelTopComponent
-it.vs30.smartrefract.forward.modelling.Bundle
-org.openide.windows.TopComponent$Description
-||:it.vs30.smartrefract.forward.modelling.Bundle
-java.lang.Object
-org.openide.util.NbBundle
-it.vs30.smartrefract.forward.modelling.Bundle
