@@ -16,9 +16,9 @@ import org.openide.windows.WindowManager;
 public final class Set_geometry implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
-        JGeometry geomDLG = new JGeometry();
+        JGeometryDlg geomDLG = new JGeometryDlg();
         geomDLG.setModal(true);
-        TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
+        TopComponent tc;// = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
         //Lookup tcLookup = tc.getLookup();
         //     ((MyViewerTopComponent) tc).jLabel1.setText("APIObject # save");
         tc = WindowManager.getDefault().findTopComponent("DocumentEditor");

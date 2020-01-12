@@ -29,7 +29,7 @@ import org.openide.windows.WindowManager;
  * @author PC
  */
 public class JTX_view extends javax.swing.JPanel {
-
+    
     private Indagine proj = null;
     private FirstBrakeList ArrFB = null;
     private DrawingAPI dAPI = null;
@@ -50,7 +50,7 @@ public class JTX_view extends javax.swing.JPanel {
         initComponents();
         System.setProperty("sun.java2d.opengl", "True");
     }
-
+    
     public JTX_view(FirstBrakeList arr, Indagine prj) {
         initComponents();
         //jPanel.setBackground(Color.BLACK);
@@ -59,7 +59,7 @@ public class JTX_view extends javax.swing.JPanel {
         ArrFB = arr;
         //fb=fiB;
     }
-
+    
     public JTX_view(APIObject obj) {
         initComponents();
         dAPI = new DrawingAPI(obj.proj, obj);
@@ -67,25 +67,25 @@ public class JTX_view extends javax.swing.JPanel {
         this.proj = obj.proj;
         ArrFB = obj.fb;
     }
-
+    
     public void setProj(Indagine project) {
         this.proj = project;
-
+        
     }
-
+    
     public void setObj(APIObject p_obj) {
         this.obj = p_obj;
         this.proj = this.obj.proj;
-
+        
     }
-
+    
     @Override
     public void paintComponent(Graphics g) {
-
+        
         xmax = this.getWidth();
         ArrFB = (FirstBrakeList) proj.stesa.get(0);
         nchanel = xmax / (ArrFB.fb.length + 1);
-
+        
         super.paintComponent(g);
         is_white = obj.is_white;
         drawDr(g, this.getWidth(), this.getHeight(), false);
@@ -137,7 +137,7 @@ public class JTX_view extends javax.swing.JPanel {
         // TODO add your handling code here:
         Graphics g = this.getGraphics();
         BufferedImage im = (BufferedImage) this.createImage(this.getWidth(), this.getHeight());
-
+        
         Graphics offg = im.getGraphics();
         super.paintComponent(offg);
         // offg.setColor(Color.red);
@@ -145,9 +145,9 @@ public class JTX_view extends javax.swing.JPanel {
 
         drawDr(offg, this.getWidth(), this.getHeight(), false);
         drawSl(offg, evt.getX(), evt.getY());
-
+        
         g.drawImage(im, 0, 0, this);
-
+        
 
     }//GEN-LAST:event_formMouseMoved
 
@@ -185,7 +185,7 @@ public class JTX_view extends javax.swing.JPanel {
                 dist = dst;
                 fi = i;
                 indj = j;
-
+                
             }
         }
 
@@ -204,15 +204,15 @@ public class JTX_view extends javax.swing.JPanel {
 
         Graphics g = this.getGraphics();
         BufferedImage im = (BufferedImage) this.createImage(this.getWidth(), this.getHeight());
-
+        
         Graphics offg = im.getGraphics();
         super.paintComponent(offg);
         offg.setColor(Color.GREEN);
         //      offg.drawString(evt.getX() + " " + evt.getY(), 50, 40);
         drawDrag(offg, evt.getX(), evt.getY());
-
+        
         g.drawImage(im, 0, 0, this);
-
+        
 
     }//GEN-LAST:event_formMouseDragged
 
@@ -221,7 +221,7 @@ public class JTX_view extends javax.swing.JPanel {
         int ymax = this.getHeight();
         //    int xmax = this.getWidth();
         ArrFB = proj.stesa.get(0);
-
+        
         int xshf = nchanel;
         double max = 0.00001;
         for (int j = 0; j < proj.stesa.size(); j++) {
@@ -249,7 +249,7 @@ public class JTX_view extends javax.swing.JPanel {
                 dist = dst;
                 fi = i;
                 indj = j;
-
+                
             }
         }
         if (in > fi) {
@@ -265,9 +265,9 @@ public class JTX_view extends javax.swing.JPanel {
         //      fbl.setLayer(in, fi, dromoSelected.selected);
 
         fbl.updateLayer(in, fi, dromoSelected.selected);
-
+        
         computeDromo(indj);
-
+        
         proj.writeDromo();
 
         /*   if (assStr == 1) {
@@ -282,7 +282,7 @@ public class JTX_view extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_formMouseReleased
-
+    
     private void drawDrag(Graphics g, int x, int y) {
         int ymax = this.getHeight();
         //  int xmax = this.getWidth();
@@ -307,7 +307,7 @@ public class JTX_view extends javax.swing.JPanel {
             }
         }
         max = 1.05 * max;
-
+        
         double dist = 99999.9;
         try {
             double ystp = ((ymax - (2 * margUp * ymax)) / max);
@@ -321,7 +321,7 @@ public class JTX_view extends javax.swing.JPanel {
                 int xx = (i * nchanel) + xshf;
                 int yy = ymax - (int) (fbl.fb[i].time * ystp) - yshf;
                 if (ArrFB.scoppio < ((i) * ArrFB.spaz) + ArrFB.spaz_in) {
-
+                    
                     this.drawTriang(g, (i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
                 } else {
                     this.drawCircle(g, (i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
@@ -335,12 +335,12 @@ public class JTX_view extends javax.swing.JPanel {
                         fi = i;
                     }
                     indj = j;
-
+                    
                 }
             }
             double[][] data = FirstBrakeList.getList(fbl.fb, in, fi, ((fbl.scoppio - fbl.spaz_in) / fbl.spaz), fbl.scoppio);
             double[] result = FirstBrakeList.getOLSRegression(data);
-
+            
             double b = result[1];  //1 / (fbl.varianza(in, fi) / fbl.covarianza(in, fi));
             double a = result[0]; //fbl.media(in, fi) - b * fbl.mediax(in, fi);
             /*       dlg_Sel.inizio = in;
@@ -354,7 +354,7 @@ public class JTX_view extends javax.swing.JPanel {
             int xx = (fi * nchanel);
             g.setFont(new Font("Dialog", Font.PLAIN, (int) (14)));
             DecimalFormat df = new DecimalFormat("#.###");
-
+            
             g.drawString("Velocità : " + df.format(1 / b) + " km/s", 30, 50);
 
             //    System.out.println("=Dragged "+fbl.fb[in].time+" "+(b * ((in) * fbl.spaz + fbl.spaz_in) + a)+" "+(ymax - (int) (fbl.fb[in].time * ystp))+" "+(ymax - (int) (b * ((in) * fbl.spaz + fbl.spaz_in) + a) * ystp));
@@ -383,7 +383,7 @@ public class JTX_view extends javax.swing.JPanel {
              }*/
         } catch (Exception e1) {
         }
-
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -392,9 +392,9 @@ public class JTX_view extends javax.swing.JPanel {
         int ymax = this.getHeight();
 //        int xmax = this.getWidth();
         ArrFB = proj.stesa.get(0);
-
+        
         int xshf = nchanel;
-
+        
         if (is_white) {
             g.setColor(Color.magenta);
         } else {
@@ -411,7 +411,7 @@ public class JTX_view extends javax.swing.JPanel {
             }
         }
         max = 1.05 * max;
-
+        
         double dist = 99999.9;
         int ar = 0;
         double ystp = ((ymax - (2 * margUp * ymax)) / max);
@@ -423,7 +423,7 @@ public class JTX_view extends javax.swing.JPanel {
                     int xx = (i * nchanel) + xshf;
                     int yy = ymax - (int) (fbl.fb[i].time * ystp) - yshf;
                     double dst = Math.sqrt((Math.pow(xx - x, 2)) + Math.pow(yy - y, 2));
-
+                    
                     if ((fbl.scoppio < (i * fbl.spaz) + fbl.spaz_in)) {
                         if (andata) {
                             if (dist > dst) {
@@ -431,11 +431,11 @@ public class JTX_view extends javax.swing.JPanel {
                                 indi = i;
                                 indj = j;
                                 ar = 1;
-
+                                
                             }
-
+                            
                         }
-
+                        
                     } else if (ritorno) {
                         if (dist > dst) {
                             dist = dst;
@@ -447,78 +447,81 @@ public class JTX_view extends javax.swing.JPanel {
                 }
             }
         }
-
+        
         FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(indj);
         dAPI.indj = indj;
-        TopComponent tc ;/*= WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
+        TopComponent tc;/*= WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
         Lookup tcLookup = tc.getLookup();
         // ((MyViewerTopComponent) tc).gmview.setBackground(Color.black);
         ((MyViewerTopComponent) tc).gmview.setGeom(fbl.scoppio, fbl.spaz, fbl.spaz_in, fbl.fb.length);
         ((MyViewerTopComponent) tc).gmview.setIndSel(indj);
         ((MyViewerTopComponent) tc).gmview.repaint();
         ((MyViewerTopComponent) tc).gmview.invalidate();
-*/
+         */
         tc = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
         geomTC = (geometryViewerTopComponent) tc;
         geomTC.gmview.setGeom(fbl.scoppio, fbl.spaz, fbl.spaz_in, fbl.fb.length);
         geomTC.gmview.setIndSel(indj);
         geomTC.gmview.repaint();
         geomTC.gmview.invalidate();
-
+        
         int yy = (ymax - (int) (fbl.fb[indi].time * ystp) - yshf);
         int xx = (indi * nchanel);
         // g.drawString(dist + " " + xx + " " + yy, 30, 50);
         g.drawOval(xx - 15 + xshf, yy - 15, 30, 30);
         proj.setFb(indj);
         ArrFB = proj.getFb();
-
+        
         FontMetrics fontMetrics = g.getFontMetrics();
         int fontw = 0;
+        try{
+            if (ar == 1) {
+                if (fbl.dromo[0].b != -999) {
+                    g.setColor(new Color(0.2f, 0.9f, 0.2f));
+                    g.drawString("" + (int) (1 / fbl.dromo[0].b * 1000) + " m/s ", xshf, ymax - (int) (0.45 * margUp * ymax));
+                    fontw += fontMetrics.stringWidth((int) (1 / fbl.dromo[0].b * 1000) + " km/s ") + 5;
 
-        if (ar == 1) {
-            if (fbl.dromo[0].b != -999) {
-                g.setColor(new Color(0.2f, 0.9f, 0.2f));
-                g.drawString("" + (int) (1 / fbl.dromo[0].b * 1000) + " m/s ", xshf, ymax - (int) (0.45 * margUp * ymax));
-                fontw += fontMetrics.stringWidth((int) (1 / fbl.dromo[0].b * 1000) + " km/s ") + 5;
+                }
+                if (fbl.dromo[1].b != -999) {
+                    g.setColor(new Color(0.6f, 0.9f, 0.9f));
+                    g.drawString("" + (int) (1 / fbl.dromo[1].b * 1000) + " m/s ", xshf + fontw, ymax - (int) (0.45 * margUp * ymax));
+                    fontw += fontMetrics.stringWidth((int) (1 / fbl.dromo[1].b * 1000) + " km/s ") + 5;
+                }
+                if (fbl.dromo[2].b != -999) {
+                    g.setColor(new Color(0.9f, 0.8f, 0.5f));
+                    g.drawString("" + (int) (1 / fbl.dromo[2].b * 1000) + " m/s ", xshf + fontw, ymax - (int) (0.45 * margUp * ymax));
+                }
 
             }
-            if (fbl.dromo[1].b != -999) {
-                g.setColor(new Color(0.6f, 0.9f, 0.9f));
-                g.drawString("" + (int) (1 / fbl.dromo[1].b * 1000) + " m/s ", xshf + fontw, ymax - (int) (0.45 * margUp * ymax));
-                fontw += fontMetrics.stringWidth((int) (1 / fbl.dromo[1].b * 1000) + " km/s ") + 5;
-            }
-            if (fbl.dromo[2].b != -999) {
-                g.setColor(new Color(0.9f, 0.8f, 0.5f));
-                g.drawString("" + (int) (1 / fbl.dromo[2].b * 1000) + " m/s ", xshf + fontw, ymax - (int) (0.45 * margUp * ymax));
-            }
 
+            if (ar == 2) {
+                if (fbl.dromoR[0].b != -999) {
+                    g.setColor(new Color(0.2f, 0.9f, 0.2f));
+                    g.drawString("" + (int) (1 / fbl.dromoR[0].b * 1000) + " m/s ", xshf, ymax - (int) (0.45 * margUp * ymax));
+                    fontw += fontMetrics.stringWidth((int) (1 / fbl.dromoR[0].b * 1000) + " km/s ") + 5;
+
+                }
+                if (fbl.dromoR[1].b != -999) {
+                    g.setColor(new Color(0.6f, 0.9f, 0.9f));
+                    g.drawString("" + (int) (1 / fbl.dromoR[1].b * 1000) + " m/s ", xshf + fontw, ymax - (int) (0.45 * margUp * ymax));
+                    fontw += fontMetrics.stringWidth((int) (1 / fbl.dromoR[1].b * 1000) + " km/s ") + 5;
+                }
+                if (fbl.dromoR[2].b != -999) {
+                    g.setColor(new Color(0.9f, 0.8f, 0.5f));
+                    g.drawString("" + (int) (1 / fbl.dromoR[2].b * 1000) + " m/s ", xshf + fontw, ymax - (int) (0.45 * margUp * ymax));
+                }
+
+            }
         }
-
-        if (ar == 2) {
-            if (fbl.dromoR[0].b != -999) {
-                g.setColor(new Color(0.2f, 0.9f, 0.2f));
-                g.drawString("" + (int) (1 / fbl.dromoR[0].b * 1000) + " m/s ", xshf, ymax - (int) (0.45 * margUp * ymax));
-                fontw += fontMetrics.stringWidth((int) (1 / fbl.dromoR[0].b * 1000) + " km/s ") + 5;
-
-            }
-            if (fbl.dromoR[1].b != -999) {
-                g.setColor(new Color(0.6f, 0.9f, 0.9f));
-                g.drawString("" + (int) (1 / fbl.dromoR[1].b * 1000) + " m/s ", xshf + fontw, ymax - (int) (0.45 * margUp * ymax));
-                fontw += fontMetrics.stringWidth((int) (1 / fbl.dromoR[1].b * 1000) + " km/s ") + 5;
-            }
-            if (fbl.dromoR[2].b != -999) {
-                g.setColor(new Color(0.9f, 0.8f, 0.5f));
-                g.drawString("" + (int) (1 / fbl.dromoR[2].b * 1000) + " m/s ", xshf + fontw, ymax - (int) (0.45 * margUp * ymax));
-            }
-
+        catch(Exception e){
+            System.out.println("LOG - EXCEPITON 517 jtx_view");
         }
-
         drawDr(g, this.getWidth(), this.getHeight(), false);
-
+        
     }
-
+    
     private void drawDr(Graphics g, int w, int h, boolean b) {
-
+        
         ArrFB = proj.stesa.get(indj);
         int ymax = h;//this.getHeight();
         //   int xmax = w;
@@ -531,10 +534,10 @@ public class JTX_view extends javax.swing.JPanel {
             g.setColor(Color.black);
         } else {
             this.setBackground(Color.black);
-
+            
             g.setColor(Color.white);
         }
-
+        
         g.drawLine((int) (xshf * 0.75), (int) ((margUp * ymax)), (int) (xshf * 0.75), (int) (ymax - (margUp * ymax)));
         g.drawLine(xmax - (int) (xshf * 0.75), (int) ((margUp * ymax)), xmax - (int) (xshf * 0.75), (int) (ymax - (margUp * ymax)));
         g.drawLine((int) (xshf * 0.75), (int) (ymax - (margUp * ymax)), xmax - (int) (xshf * 0.75), (int) (ymax - (margUp * ymax)));
@@ -558,7 +561,7 @@ public class JTX_view extends javax.swing.JPanel {
 
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     public void drawdr(Graphics g, double max, int w, int h) {
         int ymax = h;
         // int l_xmax = w;
@@ -569,9 +572,9 @@ public class JTX_view extends javax.swing.JPanel {
         //    int in0 = 0, fi0 = 0, in1 = 0, fi1 = 0;
         int yshf = (int) (margUp * ymax);
         double ystp = ((ymax - ((2 * margUp) * ymax)) / max);
-
+        
         for (int j = 0; j < proj.stesa.size(); j++) {
-
+            
             ArrFB = (FirstBrakeList) proj.stesa.get(j);
 
 //  /*
@@ -596,12 +599,12 @@ public class JTX_view extends javax.swing.JPanel {
                             case 1:
                                 g2.setColor(Color.GREEN);
                                 break;
-
+                            
                             default:
                                 g2.setColor(Color.ORANGE);
                             //g2.setColor(Color.YELLOW);
                             }
-
+                        
                         if (andata) {
                             if (first) {
                                 p.moveTo((i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
@@ -618,17 +621,17 @@ public class JTX_view extends javax.swing.JPanel {
                                 g2.draw(p);
                                 p = new Path2D.Double();
                                 p.moveTo((i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
-
+                                
                             }
-
+                            
                         }
-
+                        
                     } else {
                         //System.out.println("@ C"+i+" spaz "+(((i-1)*ArrFB.spaz)+ArrFB.spaz_in)+" in "+ArrFB.spaz_in+" scop "+ArrFB.scoppio);
                         //setForeground(Color.CYAN);
 
                         if (ritorno) {
-
+                            
                             if (first) {
                                 p.moveTo((i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
                                 first = false;
@@ -644,26 +647,26 @@ public class JTX_view extends javax.swing.JPanel {
                                 g2.draw(p);
                                 p = new Path2D.Double();
                                 p.moveTo((i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
-
+                                
                             }
-
+                            
                             this.drawCircle(g, (i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
                         }
                     }
-
+                    
                     double is = (ArrFB.scoppio - ArrFB.spaz_in) / ArrFB.spaz;
                     try {
-
+                        
                         if (i < ArrFB.fb.length - 2) {
                             if (ArrFB.scoppio > (ArrFB.fb[i].posx) && ArrFB.scoppio < (ArrFB.fb[i + 1].posx)) {
                                 p.moveTo((i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
                                 p.lineTo((is * nchanel) + xshf, ymax - (int) (0 * ystp) - yshf);
                                 p.lineTo(((i + 1) * nchanel) + xshf, ymax - (int) (ArrFB.fb[i + 1].time * ystp) - yshf);
-
+                                
                             }
                         } else {
                         }
-
+                        
                     } catch (Exception ex) {
                         System.err.println(ex.getMessage());
                     }
@@ -682,29 +685,29 @@ public class JTX_view extends javax.swing.JPanel {
                     case 1:
                         g2.setColor(Color.GREEN);
                         break;
-
+                    
                     default:
                     //g2.setColor(Color.YELLOW);
                 }
-
+                
                 g2.draw(p);
-
+                
             }
 
 //*/
             FirstBrakeList fbl = proj.stesa.get(j);
-
+            
             for (int i = 0; i < fbl.fb.length; i++) {
                 if (ArrFB.fb[i].time > -0.1 && ArrFB.fb[i].enabled) {
                     if (fbl.scoppio < ((i) * fbl.spaz) + fbl.spaz_in) {
-
+                        
                         g.setColor(Color.DARK_GRAY);
                         if (andata) {
                             this.drawTriang(g, (i * nchanel) + xshf, ymax - (int) (fbl.fb[i].time * ystp) - yshf);
                         }
-
+                        
                     } else {
-
+                        
                         g.setColor(Color.LIGHT_GRAY);
                         if (ritorno) {
                             this.drawCircle(g, (i * nchanel) + xshf, ymax - (int) (fbl.fb[i].time * ystp) - yshf);
@@ -772,12 +775,12 @@ public class JTX_view extends javax.swing.JPanel {
             }
         }
     }
-
+    
     private void drawCircle(Graphics g, int x, int y) {
-
+        
         g.drawOval(x - 4, y - 4, 8, 8);
     }
-
+    
     private void drawtick(Graphics g, double max, int w, int h) {
         double ystp = 0.0;
         FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
@@ -788,13 +791,13 @@ public class JTX_view extends javax.swing.JPanel {
         int xshf = nchanel;
         int majTic = 0, minTic = 0;
         Graphics2D g2 = (Graphics2D) g.create();
-
+        
         ystp = (ymax - (2 * margUp * ymax)) / max;
-
+        
         if (max / 10.0 < 1) {
             majTic = 2;
             minTic = 1;
-
+            
         } else if (max / 10.0 < 2) {
             majTic = 3;
             minTic = 1;
@@ -822,9 +825,9 @@ public class JTX_view extends javax.swing.JPanel {
 
         g2.setFont(new Font("Dialog", Font.PLAIN, (int) (12 * (w / 1000.0))));
         new Font("Dialog", Font.PLAIN, 12);
-
+        
         FontMetrics fontMetrics = g2.getFontMetrics();
-
+        
         int height = fontMetrics.getHeight();
 
         //FontMetrics fontMetrics = g2.getFontMetrics();
@@ -833,36 +836,36 @@ public class JTX_view extends javax.swing.JPanel {
             if (i % majTic == 0) {
                 g2.drawLine((int) (xshf * 0.75), ymax - (int) (i * ystp + (margUp * ymax)), (int) (xshf * 0.6), ymax - (int) (i * ystp + (margUp * ymax)));
                 int width = fontMetrics.stringWidth("" + (i));
-
+                
                 g2.drawString("" + (i), (int) (xshf * 0.55) - width, ymax - (int) (i * ystp + (margUp * ymax) - (height / 3)));
                 g2.drawLine((int) (xmax - xshf * 0.75), ymax - (int) (i * ystp + (margUp * ymax)), (int) (xmax - xshf * 0.6), ymax - (int) (i * ystp + (margUp * ymax)));
-
+                
             } else {
                 g2.drawLine((int) (xshf * 0.75), ymax - (int) (i * ystp + (margUp * ymax)), (int) (xshf * 0.65), ymax - (int) (i * ystp + (margUp * ymax)));
                 g2.drawLine((int) (xmax - xshf * 0.75), ymax - (int) (i * ystp + (margUp * ymax)), (int) (xmax - xshf * 0.65), ymax - (int) (i * ystp + (margUp * ymax)));
             }
         }
-
+        
         for (int i = 0; i < ArrFB.fb.length; i++) {
-
+            
             g2.drawLine((int) (xshf + (nchanel * i)), (int) ((margUp * ymax)), (int) (xshf + (nchanel * i)), (int) ((margUp * ymax) * 0.85));
             int width = fontMetrics.stringWidth("" + String.format("%.2f", (i * ArrFB.spaz + ArrFB.spaz_in)));
-
+            
             g2.drawString("" + String.format("%.2f", i * ArrFB.spaz + ArrFB.spaz_in), (xshf + (nchanel * i) - (width / 2)), (int) ((margUp * ymax) * 0.83));
         }
-
+        
     }
-
+    
     private void drawTriang(Graphics g, int x, int y) {
-
+        
         g.drawLine(x - 4, y - 4, x + 4, y - 4);
         g.drawLine(x - 4, y - 4, x, y + 4);
         g.drawLine(x + 4, y - 4, x, y + 4);
-
+        
     }
-
+    
     private void drawSelected(Graphics g, double max, int w, int h) {
-
+        
         int ymax = h;
         //   int xmax = w;
         ArrFB = proj.stesa.get(indj);
@@ -870,7 +873,7 @@ public class JTX_view extends javax.swing.JPanel {
         int in0 = 0, fi0 = 0, in1 = 0, fi1 = 0;
         int yshf = (int) (margUp * ymax);
         double ystp = ((ymax - ((2 * margUp) * ymax)) / max);
-
+        
         ArrFB = (FirstBrakeList) proj.stesa.get(indj);
         //int ystp = (int) ((ymax - (2 * margUp * ymax)) / max);
         Graphics2D g2 = (Graphics2D) g;
@@ -883,9 +886,9 @@ public class JTX_view extends javax.swing.JPanel {
         if (!print) {
             for (int i = 0; i < ArrFB.fb.length; i++) {
                 if (ArrFB.fb[i].time > -0.1 && ArrFB.fb[i].enabled) {
-
+                    
                     if (andata && (ArrFB.scoppio < ((i) * ArrFB.spaz) + ArrFB.spaz_in)) {
-
+                        
                         if (first) {
                             p.moveTo((i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
                             first = false;
@@ -901,7 +904,7 @@ public class JTX_view extends javax.swing.JPanel {
                                 case 1:
                                     g2.setColor(Color.GREEN);
                                     break;
-
+                                
                                 default:
                                 //g2.setColor(Color.YELLOW);
                             }
@@ -909,7 +912,7 @@ public class JTX_view extends javax.swing.JPanel {
                             g2.draw(p);
                             p = new Path2D.Double();
                             p.moveTo((i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
-
+                            
                         } else {
                             g2.setColor(Color.GRAY);
                             p.lineTo((i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
@@ -917,11 +920,11 @@ public class JTX_view extends javax.swing.JPanel {
                             g2.draw(p);
                             p = new Path2D.Double();
                             p.moveTo((i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
-
+                            
                         }
                     }
                     if (ritorno && !(ArrFB.scoppio < ((i) * ArrFB.spaz) + ArrFB.spaz_in)) {
-
+                        
                         if (first) {
                             p.moveTo((i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
                             first = false;
@@ -937,7 +940,7 @@ public class JTX_view extends javax.swing.JPanel {
                                 case 1:
                                     g2.setColor(Color.GREEN);
                                     break;
-
+                                
                                 default:
                                 //g2.setColor(Color.YELLOW);
                             }
@@ -945,7 +948,7 @@ public class JTX_view extends javax.swing.JPanel {
                             g2.draw(p);
                             p = new Path2D.Double();
                             p.moveTo((i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
-
+                            
                         } else {
                             g2.setColor(Color.GRAY);
                             p.lineTo((i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
@@ -953,27 +956,27 @@ public class JTX_view extends javax.swing.JPanel {
                             g2.draw(p);
                             p = new Path2D.Double();
                             p.moveTo((i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
-
+                            
                         }
                     }
-
+                    
                     double is = (ArrFB.scoppio - ArrFB.spaz_in) / ArrFB.spaz;
                     try {
-
+                        
                         if (i < ArrFB.fb.length - 2) {
                             if (ArrFB.scoppio > (ArrFB.fb[i].posx) && ArrFB.scoppio < (ArrFB.fb[i + 1].posx)) {
                                 p.moveTo((i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf);
                                 p.lineTo((is * nchanel) + xshf, ymax - (int) (0 * ystp) - yshf);
                                 p.lineTo(((i + 1) * nchanel) + xshf, ymax - (int) (ArrFB.fb[i + 1].time * ystp) - yshf);
-
+                                
                             }
                         } else {
                         }
-
+                        
                     } catch (Exception ex) {
                         System.err.println(ex.getMessage());
                     }
-
+                    
                     switch (layer) {
                         case 3:
                             g2.setColor(Color.RED);
@@ -984,19 +987,19 @@ public class JTX_view extends javax.swing.JPanel {
                         case 1:
                             g2.setColor(Color.GREEN);
                             break;
-
+                        
                         default:
                         //g2.setColor(Color.YELLOW);
                     }
-
+                    
                     g2.draw(p);
                     //          in0 = 0;
                     //          fi0 = 0;
                     g2 = (Graphics2D) g;
                     g2.setStroke(new BasicStroke(3));
-
+                    
                     try {
-
+                        
                         if (andata) {
                             if (!ArrFB.strato1.equals("0-0")) {
                                 String[] split = ArrFB.strato1.split("-");
@@ -1013,7 +1016,7 @@ public class JTX_view extends javax.swing.JPanel {
 
                                 //                  g2.drawLine((in0 * nchanel) + xshf, ymax - (int) ((ArrFB.dromo[1].b * ((in0) * ArrFB.spaz + ArrFB.spaz_in) + ArrFB.dromo[1].a) * ystp) - yshf, (fi0 * nchanel) + xshf, ymax - (int) ((ArrFB.dromo[1].b * ((fi0) * ArrFB.spaz + ArrFB.spaz_in) + ArrFB.dromo[1].a) * ystp) - yshf);
                             }
-
+                            
                             if (!ArrFB.strato3.equals("0-0")) {
                                 String[] split = ArrFB.strato3.split("-");
                                 in0 = Integer.parseInt(split[0]);
@@ -1025,10 +1028,10 @@ public class JTX_view extends javax.swing.JPanel {
                         }
                     } catch (Exception e1) {
                     }
-
+                    
                     try {
                         if (ritorno) {
-
+                            
                             if (!ArrFB.strato1R.equals("0-0")) {
                                 String[] split = ArrFB.strato1R.split("-");
                                 in0 = Integer.parseInt(split[0]);
@@ -1043,7 +1046,7 @@ public class JTX_view extends javax.swing.JPanel {
                                 g2.setColor(new Color(0.6f, 0.9f, 0.9f));
                                 //                 g2.drawLine((in0 * nchanel) + xshf, ymax - (int) ((ArrFB.dromoR[1].b * ((in0) * ArrFB.spaz + ArrFB.spaz_in) + ArrFB.dromoR[1].a) * ystp) - yshf, (fi0 * nchanel) + xshf, ymax - (int) ((ArrFB.dromoR[1].b * ((fi0) * ArrFB.spaz + ArrFB.spaz_in) + ArrFB.dromoR[1].a) * ystp) - yshf);
                             }
-
+                            
                             if (!ArrFB.strato3R.equals("0-0")) {
                                 String[] split = ArrFB.strato3R.split("-");
                                 in0 = Integer.parseInt(split[0]);
@@ -1053,7 +1056,7 @@ public class JTX_view extends javax.swing.JPanel {
                                 //System.out.println("Line "+(in0*nchanel)+" " +(ymax-(int)(ArrFB.dromo[2].b*((in0-1)*ArrFB.spaz+ArrFB.spaz_in)+ArrFB.dromo[2].a)*ystp)+" "+(fi0*nchanel)+" "+(ymax-(int) (ArrFB.dromo[2].b*((fi0-1)*ArrFB.spaz+ArrFB.spaz_in)+ArrFB.dromo[2].a)*ystp)+" "+ArrFB.strato3+" "+ArrFB.dromo[2].b+" "+ArrFB.dromo[2].a);
                             }
                         }
-
+                        
                     } catch (Exception e1) {
                     }
                 }
@@ -1063,13 +1066,13 @@ public class JTX_view extends javax.swing.JPanel {
 
         //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     private void computeDromo(int index_dromo) {
         //for (int j = 0; j < proj.stesa.size(); j++) {
         FirstBrakeList fbl = proj.stesa.get(index_dromo);
         //FirstBrakeList.getList(fbl.fb, 1, 1);
         for (int i = 1; i <= 3; i++) {
-
+            
             double[][] data = FirstBrakeList.getList(fbl, i, true, fbl.scoppio, fbl.spaz_in);
             if (data.length > 0) {
                 double[] dromo = FirstBrakeList.getOLSRegression(data);
@@ -1088,7 +1091,7 @@ public class JTX_view extends javax.swing.JPanel {
                 fbl.dromoR[i - 1].a = -999;
                 fbl.dromoR[i - 1].b = -999;
             }
-
+            
         }
         //}
     }
@@ -1104,148 +1107,152 @@ public class JTX_view extends javax.swing.JPanel {
         int in0 = 0, fi0 = 0, in1 = 0, fi1 = 0;
         int yshf = (int) (margUp * ymax);
         double ystp = ((ymax - ((2 * margUp) * ymax)) / max);
-
+        
         ArrFB = proj.stesa.get(indj);
         //int ystp = (int) ((ymax - (2 * margUp * ymax)) / max);
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(2));
         Path2D p = new Path2D.Double();
-
-        if (andata) {
-            if (ArrFB.dromo[0].b != -999) {
-                double x = 0;
-                if (ArrFB.dromo[1].b != -999) {
-                    x = (ArrFB.dromo[0].intersection(ArrFB.dromo[1])[0]);
-                } else {
-                    x = obj.find_last_X(ArrFB, 1, andata);
-                }
-
-                double y = ArrFB.dromo[0].time(x);
-                x = (x - ArrFB.spaz_in) / ArrFB.spaz;
-                // (i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf
-
-                double x0 = (ArrFB.scoppio - ArrFB.spaz_in) / ArrFB.spaz;
-                g2.setColor(Color.GREEN);
-                g2.drawOval((int) ((x * nchanel) + xshf) - 2, ymax - (int) (y * ystp) - yshf - 2, 4, 4);
-                g2.drawLine((int) ((x0 * nchanel) + xshf), ymax - (int) (0.0 * ystp) - yshf, (int) ((x * nchanel) + xshf), ymax - (int) (y * ystp) - yshf);
-            }
-            if (ArrFB.dromo[1].b != -999) {
-                int layer = 2;
-                double x0 = 0;
+        try {
+            if (andata) {
                 if (ArrFB.dromo[0].b != -999) {
-                    x0 = (ArrFB.dromo[1].intersection(ArrFB.dromo[0])[0]);
-                } else {
-                    x0 = this.obj.find_first_X(ArrFB, layer, true);
+                    double x = 0;
+                    if (ArrFB.dromo[1].b != -999) {
+                        x = (ArrFB.dromo[0].intersection(ArrFB.dromo[1])[0]);
+                    } else {
+                        x = obj.find_last_X(ArrFB, 1, andata);
+                    }
+                    
+                    double y = ArrFB.dromo[0].time(x);
+                    x = (x - ArrFB.spaz_in) / ArrFB.spaz;
+                    // (i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf
+
+                    double x0 = (ArrFB.scoppio - ArrFB.spaz_in) / ArrFB.spaz;
+                    g2.setColor(Color.GREEN);
+                    g2.drawOval((int) ((x * nchanel) + xshf) - 2, ymax - (int) (y * ystp) - yshf - 2, 4, 4);
+                    g2.drawLine((int) ((x0 * nchanel) + xshf), ymax - (int) (0.0 * ystp) - yshf, (int) ((x * nchanel) + xshf), ymax - (int) (y * ystp) - yshf);
                 }
-                double y0 = ArrFB.dromo[1].time(x0);
-                double x1 = 0;
+                if (ArrFB.dromo[1].b != -999) {
+                    int layer = 2;
+                    double x0 = 0;
+                    if (ArrFB.dromo[0].b != -999) {
+                        x0 = (ArrFB.dromo[1].intersection(ArrFB.dromo[0])[0]);
+                    } else {
+                        x0 = this.obj.find_first_X(ArrFB, layer, true);
+                    }
+                    double y0 = ArrFB.dromo[1].time(x0);
+                    double x1 = 0;
+                    if (ArrFB.dromo[2].b != -999) {
+                        x1 = (ArrFB.dromo[1].intersection(ArrFB.dromo[2])[0]);
+                    } else {
+                        x1 = this.obj.find_last_X(ArrFB, layer, true);
+                        
+                    }
+                    double y1 = ArrFB.dromo[1].time(x1);
+                    x0 = (x0 - ArrFB.spaz_in) / ArrFB.spaz;
+                    x1 = (x1 - ArrFB.spaz_in) / ArrFB.spaz;
+                    // (i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf
+                    //double x0=(ArrFB.scoppio-ArrFB.spaz_in)/ArrFB.spaz;
+                    g2.setColor(Color.CYAN);
+                    g2.drawOval((int) ((x1 * nchanel) + xshf) - 2, ymax - (int) (y1 * ystp) - yshf - 2, 4, 4);
+                    g2.drawLine((int) ((x0 * nchanel) + xshf), ymax - (int) (y0 * ystp) - yshf, (int) ((x1 * nchanel) + xshf), ymax - (int) (y1 * ystp) - yshf);
+                }
                 if (ArrFB.dromo[2].b != -999) {
-                    x1 = (ArrFB.dromo[1].intersection(ArrFB.dromo[2])[0]);
-                } else {
+                    int layer = 3;
+                    double x0 = 0;
+                    if (ArrFB.dromo[2].b != -999 && ArrFB.dromo[1].b != -999) {
+                        
+                        x0 = (ArrFB.dromo[2].intersection(ArrFB.dromo[1])[0]);
+                    } else {
+                        x0 = this.obj.find_first_X(ArrFB, layer, true);
+                    }
+                    double y0 = ArrFB.dromo[2].time(x0);
+                    double x1 = 0;
+                    
                     x1 = this.obj.find_last_X(ArrFB, layer, true);
-
+                    
+                    double y1 = ArrFB.dromo[2].time(x1);
+                    x0 = (x0 - ArrFB.spaz_in) / ArrFB.spaz;
+                    x1 = (x1 - ArrFB.spaz_in) / ArrFB.spaz;
+                    // (i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf
+                    //double x0=(ArrFB.scoppio-ArrFB.spaz_in)/ArrFB.spaz;
+                    g2.setColor(Color.ORANGE);
+                    g2.drawOval((int) ((x1 * nchanel) + xshf) - 2, ymax - (int) (y1 * ystp) - yshf - 2, 4, 4);
+                    g2.drawLine((int) ((x0 * nchanel) + xshf), ymax - (int) (y0 * ystp) - yshf, (int) ((x1 * nchanel) + xshf), ymax - (int) (y1 * ystp) - yshf);
                 }
-                double y1 = ArrFB.dromo[1].time(x1);
-                x0 = (x0 - ArrFB.spaz_in) / ArrFB.spaz;
-                x1 = (x1 - ArrFB.spaz_in) / ArrFB.spaz;
-                // (i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf
-                //double x0=(ArrFB.scoppio-ArrFB.spaz_in)/ArrFB.spaz;
-                g2.setColor(Color.CYAN);
-                g2.drawOval((int) ((x1 * nchanel) + xshf) - 2, ymax - (int) (y1 * ystp) - yshf - 2, 4, 4);
-                g2.drawLine((int) ((x0 * nchanel) + xshf), ymax - (int) (y0 * ystp) - yshf, (int) ((x1 * nchanel) + xshf), ymax - (int) (y1 * ystp) - yshf);
+                
             }
-            if (ArrFB.dromo[2].b != -999) {
-                int layer = 3;
-                double x0 = 0;
-                if (ArrFB.dromo[2].b != -999 && ArrFB.dromo[1].b != -999) {
-
-                    x0 = (ArrFB.dromo[2].intersection(ArrFB.dromo[1])[0]);
-                } else {
-                    x0 = this.obj.find_first_X(ArrFB, layer, true);
-                }
-                double y0 = ArrFB.dromo[2].time(x0);
-                double x1 = 0;
-
-                x1 = this.obj.find_last_X(ArrFB, layer, true);
-
-                double y1 = ArrFB.dromo[2].time(x1);
-                x0 = (x0 - ArrFB.spaz_in) / ArrFB.spaz;
-                x1 = (x1 - ArrFB.spaz_in) / ArrFB.spaz;
-                // (i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf
-                //double x0=(ArrFB.scoppio-ArrFB.spaz_in)/ArrFB.spaz;
-                g2.setColor(Color.ORANGE);
-                g2.drawOval((int) ((x1 * nchanel) + xshf) - 2, ymax - (int) (y1 * ystp) - yshf - 2, 4, 4);
-                g2.drawLine((int) ((x0 * nchanel) + xshf), ymax - (int) (y0 * ystp) - yshf, (int) ((x1 * nchanel) + xshf), ymax - (int) (y1 * ystp) - yshf);
-            }
-
-        }
-        if (ritorno) {
-            if (ArrFB.dromoR[0].b != -999) {
-                double x = 0;
-                if (ArrFB.dromoR[1].b != -999) {
-                    x = (ArrFB.dromoR[0].intersection(ArrFB.dromoR[1])[0]);
-                } else {
-                    x = obj.find_last_X(ArrFB, 1, false);
-                }
-
-                double y = ArrFB.dromoR[0].time(x);
-                x = (x - ArrFB.spaz_in) / ArrFB.spaz;
-                // (i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf
-                double x0 = (ArrFB.scoppio - ArrFB.spaz_in) / ArrFB.spaz;
-                g2.setColor(Color.GREEN);
-                g2.drawOval((int) ((x * nchanel) + xshf) - 2, ymax - (int) (y * ystp) - yshf - 2, 4, 4);
-                g2.drawLine((int) ((x0 * nchanel) + xshf), ymax - (int) (0.0 * ystp) - yshf, (int) ((x * nchanel) + xshf), ymax - (int) (y * ystp) - yshf);
-            }
-            if (ArrFB.dromoR[1].b != -999) {
-                int layer = 2;
-                double x0 = 0;
+            if (ritorno) {
                 if (ArrFB.dromoR[0].b != -999) {
-                    x0 = (ArrFB.dromoR[1].intersection(ArrFB.dromoR[0])[0]);
-                } else {
-                    x0 = this.obj.find_first_X(ArrFB, layer, false);
+                    double x = 0;
+                    if (ArrFB.dromoR[1].b != -999) {
+                        x = (ArrFB.dromoR[0].intersection(ArrFB.dromoR[1])[0]);
+                    } else {
+                        x = obj.find_last_X(ArrFB, 1, false);
+                    }
+                    
+                    double y = ArrFB.dromoR[0].time(x);
+                    x = (x - ArrFB.spaz_in) / ArrFB.spaz;
+                    // (i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf
+                    double x0 = (ArrFB.scoppio - ArrFB.spaz_in) / ArrFB.spaz;
+                    g2.setColor(Color.GREEN);
+                    g2.drawOval((int) ((x * nchanel) + xshf) - 2, ymax - (int) (y * ystp) - yshf - 2, 4, 4);
+                    g2.drawLine((int) ((x0 * nchanel) + xshf), ymax - (int) (0.0 * ystp) - yshf, (int) ((x * nchanel) + xshf), ymax - (int) (y * ystp) - yshf);
                 }
-                double y0 = ArrFB.dromoR[1].time(x0);
-                double x1 = 0;
-                if (ArrFB.dromoR[2].b != -999) {
-                    x1 = (ArrFB.dromoR[1].intersection(ArrFB.dromoR[2])[0]);
-                } else {
-                    x1 = this.obj.find_last_X(ArrFB, layer, false);
-
-                }
-                double y1 = ArrFB.dromoR[1].time(x1);
-                x0 = (x0 - ArrFB.spaz_in) / ArrFB.spaz;
-                x1 = (x1 - ArrFB.spaz_in) / ArrFB.spaz;
-                // (i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf
-                //double x0=(ArrFB.scoppio-ArrFB.spaz_in)/ArrFB.spaz;
-                g2.setColor(Color.CYAN);
-                g2.drawOval((int) ((x1 * nchanel) + xshf) - 2, ymax - (int) (y1 * ystp) - yshf - 2, 4, 4);
-                g2.drawLine((int) ((x0 * nchanel) + xshf), ymax - (int) (y0 * ystp) - yshf, (int) ((x1 * nchanel) + xshf), ymax - (int) (y1 * ystp) - yshf);
-            }
-            if (ArrFB.dromoR[2].b != -999) {
-                int layer = 3;
-                double x0 = 0;
                 if (ArrFB.dromoR[1].b != -999) {
-                    x0 = (ArrFB.dromoR[2].intersection(ArrFB.dromoR[1])[0]);
-                } else {
-                    x0 = this.obj.find_first_X(ArrFB, layer, false);
+                    int layer = 2;
+                    double x0 = 0;
+                    if (ArrFB.dromoR[0].b != -999) {
+                        x0 = (ArrFB.dromoR[1].intersection(ArrFB.dromoR[0])[0]);
+                    } else {
+                        x0 = this.obj.find_first_X(ArrFB, layer, false);
+                    }
+                    double y0 = ArrFB.dromoR[1].time(x0);
+                    double x1 = 0;
+                    if (ArrFB.dromoR[2].b != -999) {
+                        x1 = (ArrFB.dromoR[1].intersection(ArrFB.dromoR[2])[0]);
+                    } else {
+                        x1 = this.obj.find_last_X(ArrFB, layer, false);
+                        
+                    }
+                    double y1 = ArrFB.dromoR[1].time(x1);
+                    x0 = (x0 - ArrFB.spaz_in) / ArrFB.spaz;
+                    x1 = (x1 - ArrFB.spaz_in) / ArrFB.spaz;
+                    // (i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf
+                    //double x0=(ArrFB.scoppio-ArrFB.spaz_in)/ArrFB.spaz;
+                    g2.setColor(Color.CYAN);
+                    g2.drawOval((int) ((x1 * nchanel) + xshf) - 2, ymax - (int) (y1 * ystp) - yshf - 2, 4, 4);
+                    g2.drawLine((int) ((x0 * nchanel) + xshf), ymax - (int) (y0 * ystp) - yshf, (int) ((x1 * nchanel) + xshf), ymax - (int) (y1 * ystp) - yshf);
                 }
-                double y0 = ArrFB.dromoR[2].time(x0);
-                double x1 = 0;
-
-                x1 = this.obj.find_last_X(ArrFB, layer, false);
-
-                double y1 = ArrFB.dromoR[2].time(x1);
-                x0 = (x0 - ArrFB.spaz_in) / ArrFB.spaz;
-                x1 = (x1 - ArrFB.spaz_in) / ArrFB.spaz;
-                // (i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf
-                //double x0=(ArrFB.scoppio-ArrFB.spaz_in)/ArrFB.spaz;
-                g2.setColor(Color.ORANGE);
-                g2.drawOval((int) ((x1 * nchanel) + xshf) - 2, ymax - (int) (y1 * ystp) - yshf - 2, 4, 4);
-                g2.drawLine((int) ((x0 * nchanel) + xshf), ymax - (int) (y0 * ystp) - yshf, (int) ((x1 * nchanel) + xshf), ymax - (int) (y1 * ystp) - yshf);
+                if (ArrFB.dromoR[2].b != -999) {
+                    int layer = 3;
+                    double x0 = 0;
+                    if (ArrFB.dromoR[1].b != -999) {
+                        x0 = (ArrFB.dromoR[2].intersection(ArrFB.dromoR[1])[0]);
+                    } else {
+                        x0 = this.obj.find_first_X(ArrFB, layer, false);
+                    }
+                    double y0 = ArrFB.dromoR[2].time(x0);
+                    double x1 = 0;
+                    
+                    x1 = this.obj.find_last_X(ArrFB, layer, false);
+                    
+                    double y1 = ArrFB.dromoR[2].time(x1);
+                    x0 = (x0 - ArrFB.spaz_in) / ArrFB.spaz;
+                    x1 = (x1 - ArrFB.spaz_in) / ArrFB.spaz;
+                    // (i * nchanel) + xshf, ymax - (int) (ArrFB.fb[i].time * ystp) - yshf
+                    //double x0=(ArrFB.scoppio-ArrFB.spaz_in)/ArrFB.spaz;
+                    g2.setColor(Color.ORANGE);
+                    g2.drawOval((int) ((x1 * nchanel) + xshf) - 2, ymax - (int) (y1 * ystp) - yshf - 2, 4, 4);
+                    g2.drawLine((int) ((x0 * nchanel) + xshf), ymax - (int) (y0 * ystp) - yshf, (int) ((x1 * nchanel) + xshf), ymax - (int) (y1 * ystp) - yshf);
+                }
+                
             }
 
+            //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        } catch (Exception e) {
+            System.out.println("LOG - Exception in drawline");
         }
-
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

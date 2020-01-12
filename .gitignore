@@ -22,4 +22,20 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /dist/
+<<<<<<< HEAD
 /MyViewer/build/
+=======
+
+
+
+# NetBeans specific #
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+
+>>>>>>> 5349cea0d5732db76cc089e0d96a20d40fba5946
