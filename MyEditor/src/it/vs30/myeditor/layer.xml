@@ -108,5 +108,6 @@
     <folder name="Toolbars">
         <file name="File_hidden"/>
         <file name="UndoRedo_hidden"/>
+        <file name="Performance_hidden"/>
     </folder>
 </filesystem>
