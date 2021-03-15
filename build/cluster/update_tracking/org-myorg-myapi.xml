@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="org.myorg.myapi">
-    <module_version install_time="1574955169329" last="true" origin="installer" specification_version="2017.0.20171110">
+    <module_version install_time="1578864846282" last="true" origin="installer" specification_version="2017.0.20171110">
         <file crc="2762548956" name="config/Modules/org-myorg-myapi.xml"/>
-        <file crc="2376454575" name="modules/org-myorg-myapi.jar"/>
+        <file crc="3771434798" name="modules/org-myorg-myapi.jar"/>
     </module_version>
 </module>

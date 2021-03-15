@@ -1,9 +1,9 @@
-/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/platform=1558530119000
-cluster./Users/simone/NetBeansProjects/smartRefract/build/cluster=1574955170000
-cluster./Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/platform=1558530119000
-user=1574955170000
+netbeans/platform=1553029890000
+cluster.smartrefract/build/cluster=1578907122294
+cluster.netbeans/platform=1553029890000
+user=1578907122294
 crc=7
 locale=it_IT
 branding=smartrefract
-java.version=1.8.0_131
-java.vm.version=25.131-b11
+java.version=11.0.5
+java.vm.version=11.0.5+10-post-Ubuntu-0ubuntu1.1
