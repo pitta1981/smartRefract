@@ -33,14 +33,22 @@
   </main-window>
     <editor-area state="joined" frame-state="0">
   <constraints>
+<<<<<<< HEAD
   <path orientation="horizontal" number="60" weight="0.8902045209903121" />
+=======
+  <path orientation="horizontal" number="60" weight="0.8787335722819594" />
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
   <path orientation="vertical" number="40" weight="0.7" />
   <path orientation="horizontal" number="40" weight="0.7" />
   <path orientation="vertical" number="40" weight="0.5" />
   </constraints>
   <bounds x="475" y="198" width="604" height="364" />
     </editor-area>
+<<<<<<< HEAD
     <screen width="1920" height="1080"/>
+=======
+    <screen width="1680" height="1050"/>
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
     <active-mode name="editor"/>
     <toolbar configuration="Standard" preferred-icon-size="24"/>
     <tc-list>

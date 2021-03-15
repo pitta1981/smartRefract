@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="it.vs30.myeditor">
+<<<<<<< HEAD
     <module_version install_time="1578907121574" last="true" origin="installer" specification_version="2017.0.20171101">
         <file crc="2176199896" name="config/Modules/it-vs30-myeditor.xml"/>
         <file crc="2932949852" name="modules/it-vs30-myeditor.jar"/>
+=======
+    <module_version install_time="1614970837269" last="true" origin="installer" specification_version="2017.0.20171101">
+        <file crc="2176199896" name="config/Modules/it-vs30-myeditor.xml"/>
+        <file crc="3175740822" name="modules/it-vs30-myeditor.jar"/>
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
     </module_version>
 </module>

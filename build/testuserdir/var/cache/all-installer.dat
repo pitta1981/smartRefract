@@ -1,12 +1,26 @@
+<<<<<<< HEAD
 #Mon Jan 13 10:19:08 CET 2020
+=======
+#Fri Mar 05 20:01:16 CET 2021
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.core.windows.OpenIDE-Module-Description=\u0000
 org.netbeans.modules.queries.OpenIDE-Module-Description=\u0000
 org.netbeans.core.network.AutoUpdate-Show-In-Client=false
 org.netbeans.core.netigso.OpenIDE-Module-Layer=\u0000
+<<<<<<< HEAD
 org.netbeans.core.startup.base.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.modules.sampler.OpenIDE-Module-Install=\u0000
 org.netbeans.api.progress.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.modules.masterfs.nio2.OpenIDE-Module-Deprecated=\u0000
+=======
+org.openide.util.ui.svg.OpenIDE-Module-Install=\u0000
+org.netbeans.core.startup.base.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+org.netbeans.modules.sampler.OpenIDE-Module-Install=\u0000
+org.netbeans.libs.batik.read.OpenIDE-Module-Deprecated=\u0000
+org.netbeans.api.progress.OpenIDE-Module-Deprecated=\u0000
+org.netbeans.modules.masterfs.nio2.OpenIDE-Module-Deprecated=\u0000
+org.netbeans.swing.laf.flatlaf.OpenIDE-Module-Install=org/netbeans/swing/laf/flatlaf/Installer.class
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.libs.testng.AutoUpdate-Show-In-Client=true
 org.netbeans.core.output2.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.core.netigso.OpenIDE-Module-Deprecated=\u0000
@@ -18,6 +32,10 @@ org.openide.util.ui.OpenIDE-Module-Install=\u0000
 org.netbeans.modules.keyring.impl.AutoUpdate-Show-In-Client=false
 org.netbeans.swing.plaf.OpenIDE-Module-Install=\u0000
 org.openide.util.ui.OpenIDE-Module-Deprecated=\u0000
+<<<<<<< HEAD
+=======
+org.apache.commons.io.AutoUpdate-Show-In-Client=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.modules.masterfs.ui.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.modules.options.api.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.api.scripting.OpenIDE-Module-Hide-Classpath-Packages=\u0000
@@ -26,20 +44,35 @@ org.netbeans.modules.core.kit.OpenIDE-Module-Install=\u0000
 org.netbeans.api.progress.nb.OpenIDE-Module-Description=\u0000
 org.netbeans.api.io.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.openide.windows.OpenIDE-Module-Deprecated=\u0000
+<<<<<<< HEAD
+=======
+org.netbeans.libs.batik.read.OpenIDE-Module-Layer=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.modules.autoupdate.services.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.openide.text.OpenIDE-Module-Description=\u0000
 org.netbeans.modules.masterfs.nio2.OpenIDE-Module-Description=\u0000
 org.netbeans.core.nativeaccess.OpenIDE-Module-Layer=\u0000
 org.openide.loaders.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+<<<<<<< HEAD
+=======
+org.netbeans.swing.laf.dark.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.modules.sampler.OpenIDE-Module-Deprecated=\u0000
 org.myorg.myapi.OpenIDE-Module-Layer=org/myorg/myapi/layer.xml
 org.netbeans.modules.options.api.OpenIDE-Module-Install=\u0000
 org.netbeans.libs.osgi.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.modules.core.kit.OpenIDE-Module-Layer=\u0000
+<<<<<<< HEAD
 org.netbeans.modules.masterfs.linux.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.bootstrap.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.libs.jna.platform.AutoUpdate-Show-In-Client=false
 org.netbeans.modules.keyring.impl.OpenIDE-Module-Layer=\u0000
+=======
+org.netbeans.bootstrap.OpenIDE-Module-Deprecated=\u0000
+org.netbeans.libs.jna.platform.AutoUpdate-Show-In-Client=false
+org.netbeans.modules.keyring.impl.OpenIDE-Module-Layer=\u0000
+org.netbeans.libs.flatlaf.OpenIDE-Module-Layer=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.libs.osgi.OpenIDE-Module-Layer=\u0000
 org.netbeans.modules.sampler.OpenIDE-Module-Description=\u0000
 org.netbeans.core.io.ui.OpenIDE-Module-Deprecated=\u0000
@@ -63,6 +96,10 @@ org.netbeans.api.progress.compat8.AutoUpdate-Show-In-Client=false
 org.netbeans.api.search.AutoUpdate-Show-In-Client=false
 org.netbeans.modules.progress.ui.OpenIDE-Module-Description=\u0000
 org.openide.loaders.OpenIDE-Module-Description=\u0000
+<<<<<<< HEAD
+=======
+org.netbeans.libs.flatlaf.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.modules.sendopts.OpenIDE-Module-Install=\u0000
 org.myorg.myapi.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.core.windows.OpenIDE-Module-Layer=org/netbeans/core/windows/resources/layer.xml
@@ -87,15 +124,27 @@ org.netbeans.modules.keyring.OpenIDE-Module-Layer=org/netbeans/modules/keyring/l
 org.netbeans.libs.felix.OpenIDE-Module-Layer=\u0000
 org.openide.actions.OpenIDE-Module-Layer=\u0000
 org.netbeans.spi.quicksearch.OpenIDE-Module-Layer=org/netbeans/modules/quicksearch/resources/layer.xml
+<<<<<<< HEAD
+=======
+org.netbeans.modules.masterfs.macosx.OpenIDE-Module-Description=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.openide.filesystems.nb.AutoUpdate-Show-In-Client=false
 org.netbeans.api.io.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.modules.options.api.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.modules.queries.AutoUpdate-Show-In-Client=false
 org.netbeans.swing.plaf.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.openide.filesystems.compat8.OpenIDE-Module-Deprecated=\u0000
+<<<<<<< HEAD
 org.netbeans.modules.sendopts.OpenIDE-Module-Layer=\u0000
 org.openide.nodes.OpenIDE-Module-Description=\u0000
 org.netbeans.modules.keyring.fallback.OpenIDE-Module-Install=\u0000
+=======
+org.netbeans.libs.flatlaf.AutoUpdate-Show-In-Client=false
+org.netbeans.modules.sendopts.OpenIDE-Module-Layer=\u0000
+org.netbeans.modules.masterfs.macosx.OpenIDE-Module-Layer=\u0000
+org.netbeans.modules.keyring.fallback.OpenIDE-Module-Install=\u0000
+org.openide.nodes.OpenIDE-Module-Description=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.swing.plaf.AutoUpdate-Show-In-Client=false
 org.netbeans.modules.templates.OpenIDE-Module-Deprecated=\u0000
 it.vs30.myeditor.OpenIDE-Module-Description=\u0000
@@ -121,6 +170,11 @@ org.netbeans.libs.jna.platform.OpenIDE-Module-Description=\u0000
 org.netbeans.core.multiview.AutoUpdate-Show-In-Client=false
 org.openide.actions.AutoUpdate-Show-In-Client=false
 org.openide.nodes.OpenIDE-Module-Layer=\u0000
+<<<<<<< HEAD
+=======
+org.netbeans.libs.flatlaf.OpenIDE-Module-Install=\u0000
+org.netbeans.modules.masterfs.macosx.OpenIDE-Module-Install=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.openide.filesystems.AutoUpdate-Show-In-Client=false
 org.openide.filesystems.compat8.OpenIDE-Module-Layer=\u0000
 org.openide.explorer.OpenIDE-Module-Layer=\u0000
@@ -162,24 +216,42 @@ org.netbeans.modules.masterfs.ui.OpenIDE-Module-Description=\u0000
 org.netbeans.core.windows.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.libs.jna.AutoUpdate-Show-In-Client=false
 org.openide.dialogs.AutoUpdate-Show-In-Client=false
+<<<<<<< HEAD
 org.netbeans.modules.masterfs.AutoUpdate-Show-In-Client=false
 org.netbeans.api.annotations.common.OpenIDE-Module-Deprecated=\u0000
+=======
+org.netbeans.modules.applemenu.OpenIDE-Module-Layer=org/netbeans/modules/applemenu/layer.xml
+org.netbeans.modules.masterfs.AutoUpdate-Show-In-Client=false
+org.netbeans.api.annotations.common.OpenIDE-Module-Deprecated=\u0000
+org.netbeans.swing.laf.flatlaf.OpenIDE-Module-Description=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.libs.jna.platform.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.core.startup.AutoUpdate-Show-In-Client=false
 org.netbeans.core.nativeaccess.OpenIDE-Module-Description=\u0000
 org.netbeans.modules.editor.mimelookup.impl.OpenIDE-Module-Layer=\u0000
 net.java.html.sound.AutoUpdate-Show-In-Client=\u0000
 org.netbeans.modules.options.keymap.OpenIDE-Module-Layer=org/netbeans/modules/options/keymap/mf-layer.xml
+<<<<<<< HEAD
+=======
+org.openide.util.ui.svg.OpenIDE-Module-Layer=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.openide.awt.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.modules.sampler.OpenIDE-Module-Layer=\u0000
 org.netbeans.modules.options.keymap.OpenIDE-Module-Install=\u0000
 org.netbeans.core.AutoUpdate-Show-In-Client=false
 org.netbeans.api.annotations.common.AutoUpdate-Show-In-Client=false
 org.netbeans.core.netigso.AutoUpdate-Show-In-Client=false
+<<<<<<< HEAD
 org.netbeans.modules.masterfs.linux.OpenIDE-Module-Install=\u0000
 org.netbeans.libs.felix.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.core.ui.OpenIDE-Module-Description=\u0000
 org.netbeans.api.intent.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+=======
+org.netbeans.libs.felix.OpenIDE-Module-Deprecated=\u0000
+org.netbeans.core.ui.OpenIDE-Module-Description=\u0000
+org.netbeans.api.intent.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+org.netbeans.modules.janitor.OpenIDE-Module-Description=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.modules.applemenu.AutoUpdate-Show-In-Client=false
 org.openide.filesystems.nb.OpenIDE-Module-Description=\u0000
 org.openide.nodes.OpenIDE-Module-Deprecated=\u0000
@@ -187,7 +259,11 @@ org.openide.text.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.core.windows.AutoUpdate-Show-In-Client=false
 org.netbeans.libs.jna.OpenIDE-Module-Layer=\u0000
 org.netbeans.modules.keyring.impl.OpenIDE-Module-Deprecated=\u0000
+<<<<<<< HEAD
 org.netbeans.modules.masterfs.linux.OpenIDE-Module-Layer=\u0000
+=======
+org.netbeans.libs.flatlaf.OpenIDE-Module-Description=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.myorg.myapi.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.core.multitabs.OpenIDE-Module-Install=\u0000
 org.netbeans.core.OpenIDE-Module-Hide-Classpath-Packages=\u0000
@@ -212,6 +288,10 @@ org.netbeans.modules.masterfs.ui.AutoUpdate-Show-In-Client=false
 org.netbeans.swing.tabcontrol.OpenIDE-Module-Install=\u0000
 org.netbeans.core.output2.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.libs.asm.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+<<<<<<< HEAD
+=======
+org.netbeans.libs.batik.read.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.modules.autoupdate.ui.AutoUpdate-Show-In-Client=false
 org.netbeans.api.progress.nb.OpenIDE-Module-Layer=\u0000
 org.openide.awt.OpenIDE-Module-Install=\u0000
@@ -226,6 +306,10 @@ net.java.html.json.AutoUpdate-Show-In-Client=\u0000
 org.netbeans.modules.templates.OpenIDE-Module-Install=\u0000
 org.netbeans.core.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.api.progress.OpenIDE-Module-Description=\u0000
+<<<<<<< HEAD
+=======
+org.openide.util.ui.svg.OpenIDE-Module-Description=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.modules.queries.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.core.nativeaccess.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.modules.options.keymap.OpenIDE-Module-Hide-Classpath-Packages=\u0000
@@ -243,6 +327,10 @@ org.netbeans.api.scripting.OpenIDE-Module-Layer=\u0000
 org.netbeans.bootstrap.OpenIDE-Module-Description=\u0000
 org.openide.util.lookup.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 processSections=false
+<<<<<<< HEAD
+=======
+org.netbeans.modules.janitor.OpenIDE-Module-Deprecated=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.libs.felix.OpenIDE-Module-Install=\u0000
 org.netbeans.api.io.AutoUpdate-Show-In-Client=false
 org.openide.filesystems.compat8.AutoUpdate-Show-In-Client=false
@@ -251,6 +339,7 @@ org.netbeans.modules.editor.mimelookup.impl.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.modules.queries.OpenIDE-Module-Layer=\u0000
 org.netbeans.modules.templates.AutoUpdate-Show-In-Client=false
 org.netbeans.swing.plaf.OpenIDE-Module-Deprecated=\u0000
+<<<<<<< HEAD
 org.netbeans.bootstrap.OpenIDE-Module-Layer=\u0000
 org.openide.actions.OpenIDE-Module-Install=\u0000
 org.openide.nodes.AutoUpdate-Show-In-Client=false
@@ -258,13 +347,31 @@ org.netbeans.core.OpenIDE-Module-Layer=org/netbeans/core/resources/mf-layer.xml
 org.netbeans.api.progress.compat8.OpenIDE-Module-Install=\u0000
 net.java.html.boot.fx.AutoUpdate-Show-In-Client=\u0000
 org.netbeans.libs.jna.OpenIDE-Module-Deprecated=\u0000
+=======
+org.netbeans.swing.laf.flatlaf.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+org.netbeans.bootstrap.OpenIDE-Module-Layer=\u0000
+org.openide.actions.OpenIDE-Module-Install=\u0000
+org.openide.nodes.AutoUpdate-Show-In-Client=false
+org.netbeans.modules.janitor.OpenIDE-Module-Install=\u0000
+org.netbeans.core.OpenIDE-Module-Layer=org/netbeans/core/resources/mf-layer.xml
+org.netbeans.api.progress.compat8.OpenIDE-Module-Install=\u0000
+net.java.html.boot.fx.AutoUpdate-Show-In-Client=\u0000
+org.netbeans.libs.batik.read.OpenIDE-Module-Description=\u0000
+org.netbeans.libs.jna.OpenIDE-Module-Deprecated=\u0000
+org.netbeans.modules.applemenu.OpenIDE-Module-Deprecated=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.openide.dialogs.OpenIDE-Module-Install=\u0000
 net.java.html.AutoUpdate-Show-In-Client=\u0000
 org.netbeans.modules.sendopts.OpenIDE-Module-Description=\u0000
 org.netbeans.core.ui.AutoUpdate-Show-In-Client=false
 org.netbeans.core.ui.OpenIDE-Module-Install=\u0000
+<<<<<<< HEAD
 org.netbeans.api.progress.nb.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.modules.favorites.OpenIDE-Module-Description=\u0000
+=======
+org.netbeans.modules.favorites.OpenIDE-Module-Description=\u0000
+org.netbeans.api.progress.nb.OpenIDE-Module-Deprecated=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.openide.dialogs.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.openide.dialogs.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.libs.osgi.AutoUpdate-Show-In-Client=false
@@ -272,9 +379,18 @@ org.netbeans.modules.templates.OpenIDE-Module-Description=\u0000
 org.netbeans.modules.settings.OpenIDE-Module-Layer=org/netbeans/modules/settings/resources/mf-layer.xml
 org.openide.loaders.OpenIDE-Module-Install=\u0000
 org.netbeans.modules.options.keymap.OpenIDE-Module-Description=\u0000
+<<<<<<< HEAD
 org.netbeans.modules.options.api.OpenIDE-Module-Description=\u0000
 org.netbeans.modules.masterfs.linux.AutoUpdate-Show-In-Client=false
 org.netbeans.spi.quicksearch.OpenIDE-Module-Deprecated=\u0000
+=======
+org.netbeans.modules.janitor.OpenIDE-Module-Layer=\u0000
+org.netbeans.modules.options.api.OpenIDE-Module-Description=\u0000
+org.netbeans.modules.masterfs.linux.AutoUpdate-Show-In-Client=false
+org.netbeans.spi.quicksearch.OpenIDE-Module-Deprecated=\u0000
+org.netbeans.modules.applemenu.OpenIDE-Module-Description=\u0000
+org.apache.commons.logging.AutoUpdate-Show-In-Client=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.swing.tabcontrol.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.api.progress.nb.OpenIDE-Module-Install=\u0000
 org.netbeans.libs.jna.platform.OpenIDE-Module-Hide-Classpath-Packages=\u0000
@@ -289,9 +405,15 @@ org.netbeans.core.startup.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.core.osgi.AutoUpdate-Show-In-Client=false
 org.openide.io.OpenIDE-Module-Layer=\u0000
 org.netbeans.modules.masterfs.ui.OpenIDE-Module-Install=\u0000
+<<<<<<< HEAD
 org.netbeans.core.io.ui.AutoUpdate-Show-In-Client=false
 org.netbeans.api.progress.AutoUpdate-Show-In-Client=false
 org.netbeans.modules.masterfs.nio2.AutoUpdate-Show-In-Client=false
+=======
+org.netbeans.modules.masterfs.nio2.AutoUpdate-Show-In-Client=false
+org.netbeans.api.progress.AutoUpdate-Show-In-Client=false
+org.netbeans.core.io.ui.AutoUpdate-Show-In-Client=false
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.libs.junit5.AutoUpdate-Show-In-Client=false
 org.netbeans.libs.asm.OpenIDE-Module-Layer=\u0000
 org.openide.filesystems.compat8.OpenIDE-Module-Description=\u0000
@@ -299,21 +421,41 @@ org.netbeans.libs.felix.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.openide.io.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.openide.dialogs.OpenIDE-Module-Layer=\u0000
 org.netbeans.core.windows.OpenIDE-Module-Install=\u0000
+<<<<<<< HEAD
 org.netbeans.modules.keyring.fallback.AutoUpdate-Show-In-Client=false
 org.openide.filesystems.nb.OpenIDE-Module-Install=\u0000
+=======
+org.netbeans.swing.laf.dark.OpenIDE-Module-Layer=\u0000
+org.netbeans.modules.keyring.fallback.AutoUpdate-Show-In-Client=false
+org.openide.filesystems.nb.OpenIDE-Module-Install=\u0000
+org.netbeans.modules.applemenu.OpenIDE-Module-Install=org/netbeans/modules/applemenu/Install.class
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.core.output2.OpenIDE-Module-Description=\u0000
 org.openide.filesystems.OpenIDE-Module-Deprecated=\u0000
 org.openide.explorer.AutoUpdate-Show-In-Client=false
 org.openide.windows.OpenIDE-Module-Description=\u0000
 org.netbeans.swing.plaf.OpenIDE-Module-Description=\u0000
+<<<<<<< HEAD
 net.java.html.boot.AutoUpdate-Show-In-Client=\u0000
 org.netbeans.modules.templates.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.modules.favorites.OpenIDE-Module-Install=\u0000
+=======
+org.netbeans.swing.laf.flatlaf.OpenIDE-Module-Deprecated=\u0000
+net.java.html.boot.AutoUpdate-Show-In-Client=\u0000
+org.netbeans.swing.laf.flatlaf.AutoUpdate-Show-In-Client=false
+org.netbeans.modules.templates.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+org.netbeans.modules.favorites.OpenIDE-Module-Install=\u0000
+org.netbeans.libs.flatlaf.OpenIDE-Module-Deprecated=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.modules.editor.mimelookup.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.api.annotations.common.OpenIDE-Module-Layer=\u0000
 org.netbeans.html.xhr4j.AutoUpdate-Show-In-Client=\u0000
 org.netbeans.modules.masterfs.OpenIDE-Module-Install=\u0000
 org.netbeans.swing.outline.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+<<<<<<< HEAD
+=======
+org.netbeans.swing.laf.dark.OpenIDE-Module-Description=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 it.vs30.myeditor.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.modules.keyring.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.modules.autoupdate.cli.OpenIDE-Module-Hide-Classpath-Packages=\u0000
@@ -327,10 +469,18 @@ org.netbeans.libs.asm.OpenIDE-Module-Description=\u0000
 org.netbeans.api.progress.compat8.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.modules.masterfs.OpenIDE-Module-Layer=\u0000
 org.netbeans.api.templates.AutoUpdate-Show-In-Client=false
+<<<<<<< HEAD
+=======
+org.netbeans.libs.batik.read.AutoUpdate-Show-In-Client=false
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.api.annotations.common.OpenIDE-Module-Description=\u0000
 org.openide.modules.OpenIDE-Module-Layer=\u0000
 org.netbeans.libs.asm.OpenIDE-Module-Deprecated=\u0000
 org.openide.modules.OpenIDE-Module-Install=\u0000
+<<<<<<< HEAD
+=======
+org.openide.util.ui.svg.OpenIDE-Module-Deprecated=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.core.startup.base.OpenIDE-Module-Layer=\u0000
 org.netbeans.core.io.ui.OpenIDE-Module-Install=\u0000
 org.openide.windows.OpenIDE-Module-Install=\u0000
@@ -338,6 +488,12 @@ org.netbeans.modules.autoupdate.ui.OpenIDE-Module-Description=\u0000
 org.netbeans.modules.netbinox.AutoUpdate-Show-In-Client=false
 org.netbeans.swing.outline.OpenIDE-Module-Install=\u0000
 org.netbeans.modules.autoupdate.ui.OpenIDE-Module-Layer=\u0000
+<<<<<<< HEAD
+=======
+org.netbeans.modules.masterfs.macosx.OpenIDE-Module-Deprecated=\u0000
+org.netbeans.modules.janitor.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+org.netbeans.swing.laf.flatlaf.OpenIDE-Module-Layer=org/netbeans/swing/laf/flatlaf/layer.xml
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.core.io.ui.OpenIDE-Module-Description=\u0000
 org.openide.nodes.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.core.startup.base.OpenIDE-Module-Deprecated=\u0000
@@ -345,6 +501,10 @@ org.netbeans.api.intent.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.core.netigso.OpenIDE-Module-Install=\u0000
 org.netbeans.libs.jna.platform.OpenIDE-Module-Install=\u0000
 org.netbeans.api.visual.AutoUpdate-Show-In-Client=false
+<<<<<<< HEAD
+=======
+org.netbeans.libs.batik.read.OpenIDE-Module-Install=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.core.network.OpenIDE-Module-Install=\u0000
 org.openide.util.AutoUpdate-Show-In-Client=false
 org.netbeans.modules.options.api.AutoUpdate-Show-In-Client=false
@@ -366,6 +526,10 @@ org.netbeans.core.ui.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.swing.plaf.OpenIDE-Module-Layer=\u0000
 org.netbeans.modules.templatesui.AutoUpdate-Show-In-Client=false
 org.openide.util.ui.OpenIDE-Module-Layer=\u0000
+<<<<<<< HEAD
+=======
+org.apache.commons.codec.AutoUpdate-Show-In-Client=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.modules.settings.OpenIDE-Module-Install=\u0000
 org.netbeans.modules.autoupdate.ui.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.openide.util.OpenIDE-Module-Layer=\u0000
@@ -374,7 +538,10 @@ org.netbeans.bootstrap.AutoUpdate-Show-In-Client=false
 org.netbeans.core.execution.AutoUpdate-Show-In-Client=false
 org.openide.actions.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.libs.jna.OpenIDE-Module-Description=\u0000
+<<<<<<< HEAD
 org.netbeans.modules.masterfs.linux.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+=======
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.core.multitabs.OpenIDE-Module-Description=\u0000
 org.openide.util.ui.AutoUpdate-Show-In-Client=false
 org.netbeans.core.startup.base.OpenIDE-Module-Install=\u0000
@@ -388,6 +555,10 @@ org.openide.util.OpenIDE-Module-Description=\u0000
 org.netbeans.api.progress.nb.AutoUpdate-Show-In-Client=false
 org.netbeans.modules.masterfs.nio2.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.openide.util.lookup.OpenIDE-Module-Install=\u0000
+<<<<<<< HEAD
+=======
+org.openide.util.ui.svg.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.modules.progress.ui.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.modules.autoupdate.services.OpenIDE-Module-Install=\u0000
 org.netbeans.modules.settings.AutoUpdate-Show-In-Client=false
@@ -401,21 +572,37 @@ org.openide.explorer.OpenIDE-Module-Description=\u0000
 it.vs30.myeditor.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.libs.asm.AutoUpdate-Show-In-Client=false
 org.netbeans.core.network.OpenIDE-Module-Deprecated=\u0000
+<<<<<<< HEAD
+=======
+org.openide.util.ui.svg.AutoUpdate-Show-In-Client=false
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.modules.print.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.modules.autoupdate.ui.OpenIDE-Module-Install=org/netbeans/modules/autoupdate/ui/actions/Installer.class
 org.netbeans.api.intent.AutoUpdate-Show-In-Client=false
 org.openide.filesystems.nb.OpenIDE-Module-Layer=\u0000
 org.netbeans.core.network.OpenIDE-Module-Description=\u0000
+<<<<<<< HEAD
 org.openide.util.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.modules.editor.mimelookup.OpenIDE-Module-Install=\u0000
 org.netbeans.bootstrap.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.modules.masterfs.linux.OpenIDE-Module-Description=\u0000
+=======
+org.netbeans.modules.applemenu.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+org.openide.util.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+org.netbeans.swing.laf.dark.OpenIDE-Module-Install=org/netbeans/swing/laf/dark/Installer.class
+org.netbeans.modules.editor.mimelookup.OpenIDE-Module-Install=\u0000
+org.netbeans.bootstrap.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.openide.modules.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.modules.core.kit.OpenIDE-Module-Deprecated=\u0000
 org.openide.util.lookup.OpenIDE-Module-Description=\u0000
 org.netbeans.modules.keyring.fallback.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.swing.outline.AutoUpdate-Show-In-Client=false
 org.netbeans.api.io.OpenIDE-Module-Description=\u0000
+<<<<<<< HEAD
+=======
+org.netbeans.modules.janitor.AutoUpdate-Show-In-Client=false
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.core.netigso.OpenIDE-Module-Description=\u0000
 org.netbeans.core.netigso.OpenIDE-Module-Hide-Classpath-Packages=\u0000
 org.netbeans.modules.masterfs.OpenIDE-Module-Description=\u0000
@@ -425,8 +612,13 @@ org.openide.util.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.modules.core.kit.AutoUpdate-Show-In-Client=true
 org.netbeans.libs.osgi.OpenIDE-Module-Install=\u0000
 org.netbeans.core.OpenIDE-Module-Description=\u0000
+<<<<<<< HEAD
 org.netbeans.swing.outline.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.api.intent.OpenIDE-Module-Install=\u0000
+=======
+org.netbeans.api.intent.OpenIDE-Module-Install=\u0000
+org.netbeans.swing.outline.OpenIDE-Module-Deprecated=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.api.htmlui.AutoUpdate-Show-In-Client=false
 org.netbeans.libs.jna.OpenIDE-Module-Install=org/netbeans/libs/jna/Installer.class
 org.netbeans.core.nativeaccess.OpenIDE-Module-Deprecated=\u0000
@@ -439,6 +631,10 @@ org.openide.text.OpenIDE-Module-Layer=\u0000
 org.netbeans.modules.autoupdate.services.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.api.io.OpenIDE-Module-Layer=\u0000
 org.netbeans.modules.editor.mimelookup.AutoUpdate-Show-In-Client=false
+<<<<<<< HEAD
+=======
+org.netbeans.swing.laf.dark.AutoUpdate-Show-In-Client=false
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.api.scripting.OpenIDE-Module-Description=\u0000
 org.openide.text.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.api.intent.OpenIDE-Module-Layer=\u0000
@@ -447,7 +643,13 @@ org.netbeans.modules.editor.mimelookup.OpenIDE-Module-Deprecated=\u0000
 org.netbeans.modules.autoupdate.services.AutoUpdate-Show-In-Client=false
 net.java.html.geo.AutoUpdate-Show-In-Client=\u0000
 org.netbeans.modules.editor.mimelookup.impl.OpenIDE-Module-Install=\u0000
+<<<<<<< HEAD
 org.netbeans.swing.outline.OpenIDE-Module-Layer=\u0000
+=======
+org.netbeans.modules.masterfs.macosx.OpenIDE-Module-Hide-Classpath-Packages=\u0000
+org.netbeans.swing.outline.OpenIDE-Module-Layer=\u0000
+org.netbeans.swing.laf.dark.OpenIDE-Module-Deprecated=\u0000
+>>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
 org.netbeans.modules.core.kit.OpenIDE-Module-Description=\u0000
 org.openide.text.AutoUpdate-Show-In-Client=false
 it.vs30.myeditor.AutoUpdate-Show-In-Client=true

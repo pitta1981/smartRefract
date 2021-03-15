@@ -99,6 +99,8 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
 
    
         tv = new TraceView(obj);
+        tv.docEd = this;
+        
 //        dv = new JDromoView(obj);
         txV = new JTX_view(obj);
 
@@ -161,10 +163,11 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
         //  ((MyViewerTopComponent) tc).setActive(obj);
     }
 
-    private void modify() {
-        this.setDisplayName(this.getDisplayName() + " (*)");
+    public void modify() {
+        
         if (getLookup().lookup(MySavable.class) == null) {
             content.add(new MySavable());
+            this.setDisplayName(this.getDisplayName() + " (*)");
         }
     }
 
@@ -394,7 +397,7 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
                 obj.proj.max3 = obj.proj.count_element_layer(3, 0);
                 obj.proj.maxR3 = obj.proj.count_element_layer(3, 1);
                 obj.proj.sezDT_ver2016(true);
-               // modify();
+                modify();
 //      System.out.println(obj.proj.stesa);
 
             }
@@ -689,6 +692,7 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
             unregister();
             if (tc().obj.proj_file != null && tc().obj.proj_file.getName().endsWith("srefract")) {
                 System.out.println(tc().obj.proj_file.getName());
+                
                 SaveProject.saveSmartRefractProject(tc().obj.proj_file, tc().obj);
 
             } else {

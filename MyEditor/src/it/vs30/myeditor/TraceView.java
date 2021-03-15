@@ -78,6 +78,10 @@ public class TraceView extends javax.swing.JPanel {
     private int selected_trace = 0;
 
     /**
+     * Reference to the documentEditor object
+     */
+    public DocumentEditor docEd;
+    /**
      * Creates new form TraceView
      */
     public TraceView() {
@@ -323,6 +327,9 @@ public class TraceView extends javax.swing.JPanel {
                     //obj.TraceGroup.remove(obj.trace_index);
                     obj.TraceGroup.set(obj.trace_index, obj.fb);
                     obj.proj.stesa = obj.TraceGroup;
+                    
+                    docEd.modify();
+                    
                 } catch (Exception ex) {
                     System.out.println("" + ex);
                 }
@@ -391,6 +398,7 @@ public class TraceView extends javax.swing.JPanel {
                     undoCh = ch;
                     obj.tr[ch].setPick((evt.getY() * (1 / stepT)) * obj.tr[0].sampleInterval);
                     obj.fb.setFB(ch, (evt.getY() * (1 / stepT)) * obj.tr[0].sampleInterval * 1000);
+                    docEd.modify();
                 }
 
                 //obj.TraceGroup.remove(obj.trace_index);
