@@ -1,21 +1,9 @@
-<<<<<<< HEAD
-netbeans/platform=1553029890000
-cluster.smartrefract/build/cluster=1578907122294
-cluster.netbeans/platform=1553029890000
-user=1578907122294
+/snap/netbeans/45/netbeans/platform=1614614160000
+cluster./home/pitta1981/Develop/smartrefract/build/cluster=1615798768486
+cluster./snap/netbeans/45/netbeans/platform=1614614160000
+user=1615798768486
 crc=7
 locale=it_IT
 branding=smartrefract
-java.version=11.0.5
-java.vm.version=11.0.5+10-post-Ubuntu-0ubuntu1.1
-=======
-/Applications/NetBeans/Apache NetBeans 12.2.app/Contents/Resources/NetBeans/netbeans/platform=1605918564000
-cluster./Users/simone/Develop/smartrefract/build/cluster=1614970838281
-cluster./Applications/NetBeans/Apache NetBeans 12.2.app/Contents/Resources/NetBeans/netbeans/platform=1605918564000
-user=1614970838281
-crc=7
-locale=it_IT
-branding=smartrefract
-java.version=15.0.2
-java.vm.version=15.0.2+7-27
->>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
+java.version=11.0.10
+java.vm.version=11.0.10+9-Ubuntu-0ubuntu1.20.04

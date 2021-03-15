@@ -1,20 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/home/pitta1981/Develop/smartrefract/MyEditor/src/it/vs30/myeditor/JGeometryDlg.java</file>
-            <file>file:/home/pitta1981/Develop/smartrefract/MyEditor/src/it/vs30/myeditor/Set_geometry.java</file>
-            <file>file:/home/pitta1981/Develop/smartrefract/MyEditor/src/it/vs30/welcome/welcomeTopComponent.java</file>
-            <file>file:/home/pitta1981/Develop/smartrefract/MyEditor/src/it/vs30/myeditor/Jgeometria_av.java</file>
-=======
-            <file>file:/Users/simone/Develop/smartrefract/MyEditor/src/it/vs30/myeditor/DocumentEditor.java</file>
-            <file>file:/Users/simone/Develop/smartrefract/MyEditor/src/it/vs30/myeditor/TraceView.java</file>
-            <file>file:/Users/simone/Develop/smartrefract/MyEditor/src/it/vs30/sidebar/profileTools.java</file>
-            <file>file:/Users/simone/Develop/smartrefract/MyEditor/src/it/vs30/sidebar/sideTools_TopComponent.java</file>
-            <file>file:/Users/simone/Develop/smartrefract/MyEditor/src/it/vs30/myeditor/layer.xml</file>
->>>>>>> 757568d884aceacd6bf215ad4f79dce928d59d1c
+            <file>file:/home/pitta1981/Develop/smartrefract/MyEditor/src/it/vs30/sidebar/trace_tools.java</file>
         </group>
     </open-files>
 </project-private>
