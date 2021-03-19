@@ -1,9 +1,0 @@
-/Applications/NetBeans/Apache NetBeans 12.2.app/Contents/Resources/NetBeans/netbeans/platform=1605918564000
-cluster./Users/simone/Develop/smartrefract/build/cluster=1615311926011
-cluster./Applications/NetBeans/Apache NetBeans 12.2.app/Contents/Resources/NetBeans/netbeans/platform=1605918564000
-user=1615311926011
-crc=7
-locale=it_IT
-branding=smartrefract
-java.version=15.0.2
-java.vm.version=15.0.2+7-27

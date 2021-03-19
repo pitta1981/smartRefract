@@ -67,7 +67,7 @@ public class Jgeometria_av extends javax.swing.JDialog {
         Data dt=new Data(tm.ch);
         for (int i = 0; i < proj.stesa.size(); i++) {
             FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(i);
-            for(int j=0;j<fbl.fb.length-1;j++){
+            for(int j=0;j<fbl.fb.length;j++){
                 dt.x[j]=fbl.fb[j].posx;
                 
             }

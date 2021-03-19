@@ -60,7 +60,8 @@ public class trace_tools extends javax.swing.JPanel {
         jToggleButton2 = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
 
-        setMaximumSize(new java.awt.Dimension(250, 32767));
+        setMaximumSize(new java.awt.Dimension(200, 32767));
+        setMinimumSize(new java.awt.Dimension(160, 363));
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/it/vs30/sidebar/lock26.png"))); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(jToggleButton1, org.openide.util.NbBundle.getMessage(trace_tools.class, "trace_tools.jToggleButton1.text")); // NOI18N
@@ -223,7 +224,7 @@ public class trace_tools extends javax.swing.JPanel {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
