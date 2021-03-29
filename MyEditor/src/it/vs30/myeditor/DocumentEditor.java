@@ -674,12 +674,13 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
         protected String findDisplayName() {
             try {
                 //  final Document doc = jTextArea1.getDocument();
-                String s = "titolo\n";//doc.getText(0, doc.getLength());
+                
+                String s = tc().getDisplayName();
                 int indx = s.indexOf('\n');
                 if (indx >= 0) {
                     s = s.substring(0, indx);
                 }
-                return "First line '" + s + "'";
+                return "'" + s + "'";
             } catch (Exception ex) {
                 return ex.getLocalizedMessage();
             }
@@ -694,11 +695,12 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
                 System.out.println(tc().obj.proj_file.getName());
                 
                 SaveProject.saveSmartRefractProject(tc().obj.proj_file, tc().obj);
+                tc().setDisplayName(tc().obj.proj_file.getName());
 
             } else {
-
+                
             }
-            tc().setDisplayName(tc().obj.proj_file.getName());
+            
         }
 
         DocumentEditor tc() {

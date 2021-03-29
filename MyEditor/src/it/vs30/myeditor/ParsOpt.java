@@ -263,7 +263,7 @@ public class ParsOpt extends OptionProcessor {
 
             }
             // proj.setdromo();
-            obj.fb = (FirstBrakeList) obj.TraceGroup.get(0);
+            obj.fb =  obj.TraceGroup.get(0);
             //   jdromo.setProj(proj);
             //     jdromo.setFB(fiB);
         } catch (IOException e1) {
@@ -273,7 +273,7 @@ public class ParsOpt extends OptionProcessor {
         obj.sync();
         obj.fb = (FirstBrakeList) obj.TraceGroup.get(obj.TraceGroup.size() - 1);
         for (int i = 0; i < obj.proj.stesa.size(); i++) {
-            FirstBrakeList fbl = (FirstBrakeList) obj.proj.stesa.get(i);
+            FirstBrakeList fbl = obj.proj.stesa.get(i);
             for (int j = 0; j < fbl.fb.length - 1; j++) {
                 fbl.fb[j].z = (Double) obj.fb.fb[j].z;
 
