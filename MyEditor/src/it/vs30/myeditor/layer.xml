@@ -37,6 +37,7 @@
         <folder name="File">
             <file name="org-myorg-myeditor-OpenPrj.instance">
                 <attr name="delegate" newvalue="it.vs30.myeditor.OpenPrj"/>
+                <attr name="iconBase" stringvalue="org/openide/resources/actions/open.gif"/>
                 <attr name="displayName" bundlevalue="it.vs30.myeditor.Bundle#CTL_OpenPrj"/>
                 <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
                 <attr name="noIconInMenu" boolvalue="false"/>
@@ -106,8 +107,9 @@
         </folder>
     </folder>
     <folder name="Toolbars">
-        <file name="File_hidden"/>
+        <file name="File"/>
         <file name="UndoRedo_hidden"/>
         <file name="Performance_hidden"/>
+        <file name="Profile_hidden"/>
     </folder>
 </filesystem>
