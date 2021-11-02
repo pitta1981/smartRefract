@@ -29,7 +29,7 @@ public final class APIObject implements java.io.Externalizable {
     TraceSet ts = null;
     public Trace[] tr = null;
     public int trace_index = 0;
-    public ArrayList<FirstBrakeList> TraceGroup = new ArrayList();
+    public ArrayList<FirstBrakeList> TraceGroup = new ArrayList<FirstBrakeList>();
     public FirstBrakeList fb = new FirstBrakeList();
     public Indagine proj = new Indagine();
     public boolean is_white = false;
@@ -92,7 +92,7 @@ public final class APIObject implements java.io.Externalizable {
 
     public void LoadTrace_For_Open() {
         for (int i = 0; i < in_file_l.length; i++) {
-            fb = (FirstBrakeList) TraceGroup.get(i);
+            fb = TraceGroup.get(i);
             loadSism(i);
             this.tr = this.getTraces();
             fb.tr = this.tr;
