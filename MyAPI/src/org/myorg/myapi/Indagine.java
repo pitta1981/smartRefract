@@ -46,6 +46,9 @@ public class Indagine {
     OutputStreamWriter os;
     public boolean licenza = true;
     public Bool[] useManPhant = new Bool[2];
+    
+    public int max3 = 0, maxR3 = 0;
+
 
     public Indagine() {
 
@@ -91,8 +94,16 @@ public class Indagine {
         stesa.set(index, fbl);
         //System.out.println("2 - index upd :"+index);
     }
-    public int max3 = 0, maxR3 = 0;
-
+    
+    ///
+    // Trasla le dromocrone ricostruite per ridurre la differenza nel tempo reciproco
+    
+    public void applyDeltaTAB(double dTAB)
+    {
+        
+    }
+    
+    
     public void setdromo() {
         String[] split = null;
         max3 = 0;

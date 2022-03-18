@@ -138,7 +138,7 @@ public class FineTuning extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jRadioButton5 = new javax.swing.JRadioButton();
+        auto_phantom_layer1 = new javax.swing.JRadioButton();
         jCheckBox2 = new javax.swing.JCheckBox();
         jRadioButton6 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
@@ -146,7 +146,7 @@ public class FineTuning extends javax.swing.JDialog {
         jPanel8 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jCheckBox3 = new javax.swing.JCheckBox();
-        jRadioButton7 = new javax.swing.JRadioButton();
+        man_phantom_layer1 = new javax.swing.JRadioButton();
         jCheckBox4 = new javax.swing.JCheckBox();
         jRadioButton8 = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
@@ -158,7 +158,8 @@ public class FineTuning extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel7 = new javax.swing.JPanel();
         button_saveTx = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        reset_Tx = new javax.swing.JButton();
+        auto_fix_tx = new javax.swing.JButton();
         jSplitPane2 = new javax.swing.JSplitPane();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -231,9 +232,9 @@ public class FineTuning extends javax.swing.JDialog {
             }
         });
 
-        buttonGroup3.add(jRadioButton5);
-        jRadioButton5.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(jRadioButton5, org.openide.util.NbBundle.getMessage(FineTuning.class, "FineTuning.jRadioButton5.text")); // NOI18N
+        buttonGroup3.add(auto_phantom_layer1);
+        auto_phantom_layer1.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(auto_phantom_layer1, org.openide.util.NbBundle.getMessage(FineTuning.class, "FineTuning.auto_phantom_layer1.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBox2, org.openide.util.NbBundle.getMessage(FineTuning.class, "FineTuning.jCheckBox2.text")); // NOI18N
         jCheckBox2.addItemListener(new java.awt.event.ItemListener() {
@@ -267,14 +268,14 @@ public class FineTuning extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCheckBox1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton5)))
+                        .addComponent(auto_phantom_layer1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton5)
+                    .addComponent(auto_phantom_layer1)
                     .addComponent(jCheckBox1)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -296,8 +297,13 @@ public class FineTuning extends javax.swing.JDialog {
             }
         });
 
-        buttonGroup3.add(jRadioButton7);
-        org.openide.awt.Mnemonics.setLocalizedText(jRadioButton7, org.openide.util.NbBundle.getMessage(FineTuning.class, "FineTuning.jRadioButton7.text")); // NOI18N
+        buttonGroup3.add(man_phantom_layer1);
+        org.openide.awt.Mnemonics.setLocalizedText(man_phantom_layer1, org.openide.util.NbBundle.getMessage(FineTuning.class, "FineTuning.man_phantom_layer1.text")); // NOI18N
+        man_phantom_layer1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                man_phantom_layer1ActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBox4, org.openide.util.NbBundle.getMessage(FineTuning.class, "FineTuning.jCheckBox4.text")); // NOI18N
         jCheckBox4.addItemListener(new java.awt.event.ItemListener() {
@@ -344,7 +350,7 @@ public class FineTuning extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jRadioButton7)
+                        .addComponent(man_phantom_layer1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jRadioButton9))
                     .addGroup(jPanel8Layout.createSequentialGroup()
@@ -358,7 +364,7 @@ public class FineTuning extends javax.swing.JDialog {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton7)
+                    .addComponent(man_phantom_layer1)
                     .addComponent(jRadioButton9)
                     .addComponent(jCheckBox3)
                     .addComponent(jLabel4))
@@ -409,10 +415,17 @@ public class FineTuning extends javax.swing.JDialog {
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jButton1, org.openide.util.NbBundle.getMessage(FineTuning.class, "FineTuning.jButton1.text")); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(reset_Tx, org.openide.util.NbBundle.getMessage(FineTuning.class, "FineTuning.reset_Tx.text")); // NOI18N
+        reset_Tx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                reset_TxActionPerformed(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(auto_fix_tx, org.openide.util.NbBundle.getMessage(FineTuning.class, "FineTuning.auto_fix_tx.text")); // NOI18N
+        auto_fix_tx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                auto_fix_txActionPerformed(evt);
             }
         });
 
@@ -423,7 +436,7 @@ public class FineTuning extends javax.swing.JDialog {
             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(reset_Tx, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_saveTx)
                 .addGap(15, 15, 15))
@@ -434,6 +447,10 @@ public class FineTuning extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(auto_fix_tx, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,8 +466,10 @@ public class FineTuning extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_saveTx)
-                    .addComponent(jButton1))
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addComponent(reset_Tx))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(auto_fix_tx)
+                .addContainerGap())
         );
 
         jScrollPane1.setViewportView(jPanel2);
@@ -1017,7 +1036,7 @@ public class FineTuning extends javax.swing.JDialog {
         dati_sismici.xy = this.tv_Draw.sel1 * dati_sismici.stesa.get(0).spaz;
         dati_sismici.xy2 = this.tv_Draw.sel2 * dati_sismici.stesa.get(0).spaz;
 
-        if (jRadioButton5.isSelected()) {
+        if (auto_phantom_layer1.isSelected()) {
             try {
                 dati_sismici.phantom(1);
                 dati_sismici.useManPhant[0].setValue(false);
@@ -1346,18 +1365,50 @@ public class FineTuning extends javax.swing.JDialog {
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void reset_TxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_TxActionPerformed
         // TODO add your handling code here:
         int chanel = dati_sismici.stesa.get(0).ch;
         dati_sismici.init_man_phantoming(chanel, dati_sismici.stesa,true);
 
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_reset_TxActionPerformed
+
+    private void auto_fix_txActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_auto_fix_txActionPerformed
+        // TODO add your handling code here:
+        if (auto_phantom_layer1.isSelected()) {
+            try {
+                dati_sismici.phantom(1);
+                dati_sismici.useManPhant[0].setValue(false);
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+            }
+        } else {
+            dati_sismici.VfB_A[1] = dati_sismici.man_Phant_and[0];
+            dati_sismici.VfB_R[1] = dati_sismici.man_Phant_rit[0];
+
+            dati_sismici.VfB_R[1].tAB = dati_sismici.VfB_A[1].getT(dati_sismici.VfB_R[1].scoppio);
+            dati_sismici.VfB_A[1].tAB = dati_sismici.VfB_R[1].getT(dati_sismici.VfB_A[1].scoppio);
+
+
+            dati_sismici.useManPhant[0].setValue(true);
+        }
+        double deltaTAB = dati_sismici.VfB_R[1].tAB - dati_sismici.VfB_A[1].tAB;
+        
+        
+        
+        
+    }//GEN-LAST:event_auto_fix_txActionPerformed
+
+    private void man_phantom_layer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_man_phantom_layer1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_man_phantom_layer1ActionPerformed
 
     public void setParentDialog(JSezioneView argParent) {
         sV = argParent;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton auto_fix_tx;
+    private javax.swing.JRadioButton auto_phantom_layer1;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
@@ -1365,7 +1416,6 @@ public class FineTuning extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.JButton button_apply;
     private javax.swing.JButton button_saveTx;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1407,9 +1457,7 @@ public class FineTuning extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JRadioButton jRadioButton8;
     private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1422,6 +1470,8 @@ public class FineTuning extends javax.swing.JDialog {
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JSplitPane jSplitPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JRadioButton man_phantom_layer1;
+    private javax.swing.JButton reset_Tx;
     // End of variables declaration//GEN-END:variables
     Indagine dati_sismici;
 
@@ -1582,7 +1632,7 @@ public class FineTuning extends javax.swing.JDialog {
             jCheckBox4.setEnabled(false);
         }
 
-        jRadioButton5.setSelected(!dati_sismici.useManPhant[0].getValue());
+        auto_phantom_layer1.setSelected(!dati_sismici.useManPhant[0].getValue());
 
     }
 }
