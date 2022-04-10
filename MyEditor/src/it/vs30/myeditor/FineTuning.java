@@ -1393,6 +1393,9 @@ public class FineTuning extends javax.swing.JDialog {
             dati_sismici.useManPhant[0].setValue(true);
         }
         double deltaTAB = dati_sismici.VfB_R[1].tAB - dati_sismici.VfB_A[1].tAB;
+        dati_sismici.applyDeltaTAB(deltaTAB, 1);
+        phant_view.invalidate();
+        phant_view.repaint();
         
         
         

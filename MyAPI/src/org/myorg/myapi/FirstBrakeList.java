@@ -173,7 +173,7 @@ public class FirstBrakeList implements Externalizable {
             y1 = fb[index].time;
             y2 = fb[index + 1].time;
         } else if (x > ((ch - 2) * spaz) + spaz_in) {
-            index = (int) ch - 2;
+            index = ch - 2;
             x1 = ((ch - 3) * spaz) + spaz_in;
             x2 = ((ch - 2) * spaz) + spaz_in;
             y1 = fb[index - 1].time;
@@ -194,7 +194,7 @@ public class FirstBrakeList implements Externalizable {
         double sum = 0;
         if (in < fi) {
             for (int i = in; i <= fi; i++) {
-                FirstBrake fib = (FirstBrake) linea.get(i);
+                FirstBrake fib = linea.get(i);
                 if (fib.time > 0) {
                     sum = sum + (fib.time);
                     n++;

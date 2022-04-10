@@ -107,7 +107,7 @@ public class TraceView extends javax.swing.JPanel {
         
         BufferedImage im = (BufferedImage) this.createImage(this.getWidth(), this.getHeight());
         try{
-        obj.fb=obj.TraceGroup.get(obj.trace_index);
+            obj.fb=obj.TraceGroup.get(obj.trace_index);
         }
         catch(Exception ex)
         {

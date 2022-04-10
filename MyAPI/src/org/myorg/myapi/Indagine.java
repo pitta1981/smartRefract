@@ -98,9 +98,18 @@ public class Indagine {
     ///
     // Trasla le dromocrone ricostruite per ridurre la differenza nel tempo reciproco
     
-    public void applyDeltaTAB(double dTAB)
+    public void applyDeltaTAB(double dTAB, int layer)
     {
-        
+        if(dTAB >0)
+        {
+            for(int i= 0; i<this.VfB_A[layer].ch; i++)
+                this.VfB_A[layer].fb[i].time = this.VfB_A[layer].fb[i].time - dTAB;
+        }
+        else
+        {
+            for(int i= 0; i<this.VfB_A[layer].ch; i++)
+                this.VfB_R[layer].fb[i].time = this.VfB_R[layer].fb[i].time - dTAB;
+        }
     }
     
     
