@@ -1482,7 +1482,7 @@ public class FineTuning extends javax.swing.JDialog {
         dati_sismici = proj;
         dati_sismici.buildShots();
         this.phant_view.setProj(proj);
-        System.out.println(proj.VfB_A.length);
+        System.out.println(dati_sismici.VfB_A.length);
     }
 
     private int[] find_baseShot(Indagine proj) {

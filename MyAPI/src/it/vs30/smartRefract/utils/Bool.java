@@ -6,7 +6,7 @@ package it.vs30.smartRefract.utils;
 
 /**
  *
- * @author PC
+ * @author Simone Pittaluga
  */
 public class Bool {
     private boolean value;

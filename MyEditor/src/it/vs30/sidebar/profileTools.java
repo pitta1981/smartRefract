@@ -7,6 +7,7 @@ package it.vs30.sidebar;
 
 import it.vs30.myeditor.FineTuning;
 import it.vs30.myeditor.JSezioneView;
+import it.vs30.myeditor.adjust_rec_tTimes;
 //import it.vs30.myeditor.Jsezdlg;
 import it.vs30.myeditor.jTavolozzaDlg;
 import java.awt.Color;
@@ -79,6 +80,7 @@ public class profileTools extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jPhantomingTvTg = new javax.swing.JButton();
+        recTimeAdj = new javax.swing.JButton();
         jProportionalProfileButton = new javax.swing.JButton();
         jWhiteBkgButton = new javax.swing.JButton();
         jSetPalette = new javax.swing.JButton();
@@ -104,6 +106,15 @@ public class profileTools extends javax.swing.JPanel {
             }
         });
         add(jPhantomingTvTg);
+
+        org.openide.awt.Mnemonics.setLocalizedText(recTimeAdj, org.openide.util.NbBundle.getMessage(profileTools.class, "profileTools.recTimeAdj.text")); // NOI18N
+        recTimeAdj.setActionCommand(org.openide.util.NbBundle.getMessage(profileTools.class, "profileTools.recTimeAdj.actionCommand")); // NOI18N
+        recTimeAdj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recTimeAdjActionPerformed(evt);
+            }
+        });
+        add(recTimeAdj);
 
         org.openide.awt.Mnemonics.setLocalizedText(jProportionalProfileButton, org.openide.util.NbBundle.getMessage(profileTools.class, "profileTools.jProportionalProfileButton.text")); // NOI18N
         jProportionalProfileButton.addActionListener(new java.awt.event.ActionListener() {
@@ -305,6 +316,13 @@ public class profileTools extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jSetPaletteActionPerformed
 
+    private void recTimeAdjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recTimeAdjActionPerformed
+        // TODO add your handling code here:
+        adjust_rec_tTimes adj = new adjust_rec_tTimes(null ,true, obj.proj);
+        adj.setVisible(true);
+        
+    }//GEN-LAST:event_recTimeAdjActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jExportImage;
@@ -313,6 +331,7 @@ public class profileTools extends javax.swing.JPanel {
     private javax.swing.JButton jProportionalProfileButton;
     private javax.swing.JButton jSetPalette;
     private javax.swing.JButton jWhiteBkgButton;
+    private javax.swing.JButton recTimeAdj;
     // End of variables declaration//GEN-END:variables
 
     class PNGFileFilter extends javax.swing.filechooser.FileFilter {
