@@ -5,6 +5,8 @@
 
 package it.vs30.myeditor;
 
+import it.vs30.smartRefract.utils.Bool;
+import java.awt.Color;
 import org.myorg.myapi.Indagine;
 
 /**
@@ -14,17 +16,46 @@ import org.myorg.myapi.Indagine;
 public class adjust_rec_tTimes extends javax.swing.JDialog {
     private
         Indagine proj;
+    private JPhantoming_view phant_view;
+    private Bool[] man_phnt_visible;
+    private Bool[] is_visible;
     
     /** Creates new form adjust_rec_tTimes */
     public adjust_rec_tTimes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        phant_view = new JPhantoming_view();
+        jPanel1.add(phant_view);
     }
     
     public adjust_rec_tTimes(java.awt.Frame parent, boolean modal, Indagine prj) {
         super(parent, modal);
         initComponents();
         proj = prj;
+        Color[] color = new Color[255];
+        for (int i = 0; i < 255; i++) {
+            color[i] = new Color((int) (155 * Math.random()), (int) (185 * Math.random()), (int) (200 * Math.random()));
+        }
+        color[1] = new Color(50, 175, 165);
+        color[2] = new Color(220, 40, 40);
+        proj.buildShots();
+
+      //  Bool[] phnt_visible = new Bool[3];
+        man_phnt_visible = new Bool[3];
+        is_visible = new Bool[3];
+        for (int i = 0; i < 3; i++) {
+            man_phnt_visible[i] = new Bool();
+ //           phnt_visible[i] = new Bool();
+            is_visible[i] = new Bool();       
+        }
+//        phnt_visible[1].setValue( true );
+        is_visible[1].setValue( true );
+   //     proj.useManPhant
+        
+        phant_view = new JPhantoming_view(proj, color, is_visible, man_phnt_visible);
+        jPanel1.add(phant_view);
+        phant_view.invalidate();
+        phant_view.repaint();
     }
 
     /** This method is called from within the constructor to
@@ -36,18 +67,31 @@ public class adjust_rec_tTimes extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setMaximumSize(new java.awt.Dimension(240, 32767));
+        jPanel2.setPreferredSize(new java.awt.Dimension(240, 394));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 240, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 427, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel2);
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
+        getContentPane().add(jPanel1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -56,6 +100,8 @@ public class adjust_rec_tTimes extends javax.swing.JDialog {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 
 }
