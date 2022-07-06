@@ -58,6 +58,14 @@ public class JPhantoming_view extends javax.swing.JPanel {
         this.base_shot = base_shot;
     }
 
+    public JPhantoming_view(Indagine proj, Color[] color, Bool[] phnt_visible, Bool[] man_phnt_visible) {
+        initComponents();
+        dati_sismici = proj;
+        this.color = color;
+        this.phnt_visible = phnt_visible;
+        this.man_phant_visible = man_phnt_visible;
+    }
+    
     public JPhantoming_view(Indagine proj, Color[] color, Bool[] phnt_visible, Bool[] man_phnt_visible, int[] base_shot) {
         initComponents();
         dati_sismici = proj;
