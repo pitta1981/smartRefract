@@ -53,6 +53,9 @@ public class adjust_rec_tTimes extends javax.swing.JDialog {
    //     proj.useManPhant
         
         phant_view = new JPhantoming_view(proj, color, is_visible, man_phnt_visible);
+        System.out.println(proj.VfB_A[1].tAB);
+        System.out.println(proj.VfB_R[1].tAB);
+        
         jPanel1.add(phant_view);
         phant_view.invalidate();
         phant_view.repaint();

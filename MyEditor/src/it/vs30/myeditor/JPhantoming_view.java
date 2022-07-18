@@ -169,6 +169,7 @@ public class JPhantoming_view extends javax.swing.JPanel {
 
         this.draw_Punti(g, 0, max, dati_sismici.VfB_A, color);
         this.draw_Punti(g, 0, max, dati_sismici.VfB_R, color);
+        
 
         this.tryToDrawManPhantoming(g, max);
 
@@ -296,7 +297,7 @@ public class JPhantoming_view extends javax.swing.JPanel {
         int w = this.getWidth();
         int h = this.getHeight();
         int xshf = 30;
-        int xmax = w;
+        
         int ymax = h;
         double margUp = 30;
         int nch = fb.length;
