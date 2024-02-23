@@ -1524,7 +1524,7 @@ public class Indagine {
 
         for (int n = 0; n < linea.size(); n++) {
             FirstBrakeList i = (FirstBrakeList) linea.get(n);
-            if (i.scoppio < sx) {
+            if (i.scoppio <= sx) {
                 if (sx - i.scoppio < dist) {
                     dist = dist = sx - i.scoppio;
                     ind = n;
@@ -1545,11 +1545,11 @@ public class Indagine {
         double shot = 0;
         double sx = ((FirstBrakeList) linea.get(0)).spaz_in;
         double dx = ((FirstBrakeList) linea.get(0)).spaz_in + (((FirstBrakeList) linea.get(0)).spaz * (((FirstBrakeList) linea.get(0)).ch - 2));
-        double dist = 999;
+        double dist = 99999;
 
         for (int n = 0; n < linea.size(); n++) {
             FirstBrakeList i = (FirstBrakeList) linea.get(n);
-            if (i.scoppio > dx) {
+            if (i.scoppio >= dx) {
                 if (-dx + i.scoppio < dist) {
                     dist = -dx + i.scoppio;
                     ind = n;
@@ -1570,7 +1570,7 @@ public class Indagine {
             Logger.getLogger(Indagine.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        FirstBrakeList ph = new FirstBrakeList(((FirstBrakeList) list.get(ind)).ch);
+        FirstBrakeList ph;// = new FirstBrakeList(((FirstBrakeList) list.get(ind)).ch);
         ph = (FirstBrakeList) obj.copy(list.get(ind));
         ph.xsc = ph.scoppio;
         System.out.println("PH " + ph.fb.length);

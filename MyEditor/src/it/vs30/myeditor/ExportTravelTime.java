@@ -34,7 +34,7 @@ import org.openide.windows.WindowManager;
         displayName = "#CTL_ExportTravelTime"
 )
 @ActionReference(path = "Menu/File", position = 1750, separatorBefore = 1725)
-@Messages("CTL_ExportTravelTime=Export travel time...")
+@Messages("CTL_ExportTravelTime=Export travel time to smartTomo...")
 public final class ExportTravelTime implements ActionListener {
 
     @Override

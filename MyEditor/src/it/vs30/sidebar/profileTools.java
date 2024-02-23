@@ -109,6 +109,7 @@ public class profileTools extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(recTimeAdj, org.openide.util.NbBundle.getMessage(profileTools.class, "profileTools.recTimeAdj.text")); // NOI18N
         recTimeAdj.setActionCommand(org.openide.util.NbBundle.getMessage(profileTools.class, "profileTools.recTimeAdj.actionCommand")); // NOI18N
+        recTimeAdj.setEnabled(false);
         recTimeAdj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 recTimeAdjActionPerformed(evt);
