@@ -111,5 +111,6 @@
         <file name="UndoRedo_hidden"/>
         <file name="Performance_hidden"/>
         <file name="Profile_hidden"/>
+        <file name="Memory_hidden"/>
     </folder>
 </filesystem>

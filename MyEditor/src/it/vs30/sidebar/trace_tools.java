@@ -7,11 +7,13 @@ package it.vs30.sidebar;
 import java.awt.Color;
 import it.vs30.myeditor.TraceView;
 import it.vs30.smartRefract.utils.ZoomTraceUtil;
+import it.vs30.welcome.welcomeTopComponent;
 import javax.swing.SwingConstants;
 import org.myorg.myapi.FirstBrakeList;
 //import org.myorg.myviewer.MyViewerTopComponent;
 
 import org.openide.windows.TopComponent;
+import org.openide.windows.WindowManager;
 
 
 /**
@@ -331,7 +333,13 @@ public class trace_tools extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Tv.AutoPick();
+        
+        welcomeTopComponent welcomeTC = (welcomeTopComponent) WindowManager.getDefault()
+                .findTopComponent("welcomeTopComponent");
+        if (welcomeTC != null) 
+            Tv.autoPick_2(welcomeTC.ltasta_par.lra, welcomeTC.ltasta_par.sra, welcomeTC.ltasta_par.thrs);
+            
+        
         //this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 

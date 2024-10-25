@@ -54,10 +54,71 @@ public final class welcomeTopComponent extends TopComponent {
 
     private boolean licenza = false;
     String[] lista = new String[3];
+    
+    public int lra = 20;
+    
+    public class STALTAPAR {
+        public
+        int lra ,sra;
+        public
+        double thrs;
+        
+        public STALTAPAR(){}
+        
+        public void set_par(int LRA, int SRA, double THRS)
+        {
+            lra = LRA;
+            sra = SRA;
+            thrs = THRS;
+        }
+
+        public void saveParametersToFile(String filePath) {
+            try (FileOutputStream fos = new FileOutputStream(filePath);
+                 OutputStreamWriter os = new OutputStreamWriter(fos)) {
+                os.write("lra=" + lra + "\n");
+                os.write("sra=" + sra + "\n");
+                os.write("thrs=" + thrs + "\n");
+                os.flush();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        public void loadParametersFromFile(String filePath) {
+            try (FileInputStream fis = new FileInputStream(filePath);
+                 BufferedReader br = new BufferedReader(new InputStreamReader(fis))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String[] parts = line.split("=");
+                    if (parts.length == 2) {
+                        switch (parts[0].trim()) {
+                            case "lra":
+                                lra = Integer.parseInt(parts[1].trim());
+                                break;
+                            case "sra":
+                                sra = Integer.parseInt(parts[1].trim());
+                                break;
+                            case "thrs":
+                                thrs = Double.parseDouble(parts[1].trim());
+                                break;
+                        }
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        
+    };
 
     private final InstanceContent content = new InstanceContent();
     private Lookup.Result<APIObject> result;
     private geometryViewerTopComponent geomTC;
+    public STALTAPAR ltasta_par;
+
+    private String recent_files = "recenti.list";
+    private String autopick_par = "autopick.par";
+    private String tmpPath; 
 
     public welcomeTopComponent() {
         initComponents();
@@ -70,6 +131,18 @@ public final class welcomeTopComponent extends TopComponent {
             content.add(this);
         }
 
+
+        String userHome = "user.home";
+
+        // We get the path by getting the system property with the 
+        // defined key above. path+"/smartRefract-data/"
+        String path = System.getProperty(userHome);
+        tmpPath = path + "/smartRefract-data/";
+
+        ltasta_par = new STALTAPAR();
+
+        ltasta_par.loadParametersFromFile(tmpPath + autopick_par);
+        
         jButton1.setText("New...");
         jButton2.setText("Open...");
         boolean checkLic = true;
@@ -596,6 +669,12 @@ public final class welcomeTopComponent extends TopComponent {
         updateRecentProject();
 
 // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void set_lrasra_par(int lra, int sra, double thrs)
+    {
+        ltasta_par.set_par(lra, sra, thrs);
+        ltasta_par.saveParametersToFile(tmpPath+autopick_par);
     }
 
     class Seg2FileFilter extends javax.swing.filechooser.FileFilter {

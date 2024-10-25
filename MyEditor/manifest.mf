@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 AutoUpdate-Show-In-Client: true
 OpenIDE-Module: it.vs30.myeditor
-OpenIDE-Module-Implementation-Version: 202402221
+OpenIDE-Module-Implementation-Version: 202410251
 OpenIDE-Module-Layer: it/vs30/myeditor/layer.xml
 OpenIDE-Module-Localizing-Bundle: it/vs30/myeditor/Bundle.properties
 OpenIDE-Module-Requires: org.openide.windows.WindowManager

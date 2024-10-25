@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-/*
+ /*
  * JTraceDlg.java
  *
  * Created on 22-feb-2012, 22.55.04
@@ -11,6 +11,7 @@
 package it.vs30.myeditor;
 
 //import com.sun.awt.AWTUtilities;
+import it.vs30.welcome.welcomeTopComponent;
 import java.awt.Color;
 //import org.myorg.myviewer.MyViewerTopComponent;
 import org.openide.util.Lookup;
@@ -231,17 +232,21 @@ public class JTraceDlg extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Tv.AutoPick();
-        this.setVisible(false);
+        welcomeTopComponent welcomeTC = (welcomeTopComponent) WindowManager.getDefault()
+                .findTopComponent("welcomeTopComponent");
+        if (welcomeTC != null) {
+            Tv.autoPick_2(welcomeTC.ltasta_par.lra, welcomeTC.ltasta_par.sra, welcomeTC.ltasta_par.thrs);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
 private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 // TODO add your handling code here:
     if (Tv.avgMAX == false && Tv.scaleX == 1) {
-        Tv.avgMAX=true;
+        Tv.avgMAX = true;
     } else {
 
-        Tv.avgMAX=false;
+        Tv.avgMAX = false;
         Tv.scaleX = Tv.scaleX * 1.2;
     }
     this.setVisible(false);
@@ -256,7 +261,7 @@ private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     Tv.scaleX = 1;
     Tv.resized(Tv.getWidth(), Tv.getHeight());
 
-    Tv.avgMAX=false;
+    Tv.avgMAX = false;
     this.setVisible(false);
     Tv.undo();
     Tv.repaint();
