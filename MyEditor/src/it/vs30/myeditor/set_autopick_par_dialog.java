@@ -73,13 +73,14 @@ public class set_autopick_par_dialog extends javax.swing.JDialog {
         staTF = new javax.swing.JTextField();
         ltaTF = new javax.swing.JTextField();
         thresholdTF = new javax.swing.JTextField();
+        resetDevaultValues_button = new javax.swing.JButton();
 
         setTitle(org.openide.util.NbBundle.getMessage(set_autopick_par_dialog.class, "set_autopick_par_dialog.title")); // NOI18N
-        setMaximumSize(new java.awt.Dimension(240, 200));
-        setMinimumSize(new java.awt.Dimension(240, 200));
+        setMaximumSize(new java.awt.Dimension(240, 220));
+        setMinimumSize(new java.awt.Dimension(240, 220));
         setModal(true);
         setName("lta_sta_dialog"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(240, 180));
+        setPreferredSize(new java.awt.Dimension(240, 220));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -127,19 +128,28 @@ public class set_autopick_par_dialog extends javax.swing.JDialog {
             }
         });
 
+        org.openide.awt.Mnemonics.setLocalizedText(resetDevaultValues_button, org.openide.util.NbBundle.getMessage(set_autopick_par_dialog.class, "set_autopick_par_dialog.resetDevaultValues_button.text")); // NOI18N
+        resetDevaultValues_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetDevaultValues_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cancelButton)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(resetDevaultValues_button)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
@@ -148,9 +158,8 @@ public class set_autopick_par_dialog extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(staTF, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
                             .addComponent(ltaTF)
-                            .addComponent(thresholdTF))
-                        .addGap(31, 31, 31)))
-                .addContainerGap())
+                            .addComponent(thresholdTF))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cancelButton, okButton});
@@ -170,7 +179,9 @@ public class set_autopick_par_dialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(thresholdTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(resetDevaultValues_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
                     .addComponent(okButton))
@@ -212,6 +223,13 @@ public class set_autopick_par_dialog extends javax.swing.JDialog {
     private void thresholdTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thresholdTFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_thresholdTFActionPerformed
+
+    private void resetDevaultValues_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetDevaultValues_buttonActionPerformed
+        // TODO add your handling code here:
+        ltaTF.setText("50");
+        staTF.setText("5");
+        thresholdTF.setText("3.5");
+    }//GEN-LAST:event_resetDevaultValues_buttonActionPerformed
     
     private void doClose(int retStatus) {
         returnStatus = retStatus;
@@ -278,6 +296,7 @@ public class set_autopick_par_dialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField ltaTF;
     private javax.swing.JButton okButton;
+    private javax.swing.JButton resetDevaultValues_button;
     private javax.swing.JTextField staTF;
     private javax.swing.JTextField thresholdTF;
     // End of variables declaration//GEN-END:variables
