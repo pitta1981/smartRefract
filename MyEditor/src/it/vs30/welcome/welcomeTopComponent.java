@@ -105,6 +105,9 @@ public final class welcomeTopComponent extends TopComponent {
                     }
                 }
             } catch (Exception ex) {
+                lra = 50;
+                sra = 5;
+                thrs = 3.0;
                 ex.printStackTrace();
             }
         }

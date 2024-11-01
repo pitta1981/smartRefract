@@ -308,7 +308,7 @@ public final class OpenPrj implements ActionListener {
 
             }
             // proj.setdromo();
-            obj.fb = (FirstBrakeList) obj.TraceGroup.get(0);
+            obj.fb = obj.TraceGroup.get(0);
             //   jdromo.setProj(proj);
             //     jdromo.setFB(fiB);
         } catch (IOException e1) {
