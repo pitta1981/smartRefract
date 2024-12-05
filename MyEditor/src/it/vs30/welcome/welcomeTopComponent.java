@@ -385,6 +385,7 @@ public final class welcomeTopComponent extends TopComponent {
         }
 
         editor.obj.fb =  editor.obj.TraceGroup.get(0);
+        editor.obj.prevTr();
         editor.tv.obj = editor.obj;
         editor.obj.sync();
         editor.tv.repaint();
@@ -495,6 +496,7 @@ public final class welcomeTopComponent extends TopComponent {
     
         }
         editor.obj.fb = (FirstBrakeList) editor.obj.TraceGroup.get( editor.obj.trace_index );
+        editor.obj.prevTr();
         editor.obj.sync();
         editor.tv.repaint();
         editor.txV.setProj(editor.obj.proj);
@@ -575,6 +577,7 @@ public final class welcomeTopComponent extends TopComponent {
     
         }
         editor.obj.fb =  editor.obj.TraceGroup.get(0);
+        editor.obj.prevTr();
         editor.tv.obj = editor.obj;
 
         editor.obj.sync();

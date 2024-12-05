@@ -50,7 +50,7 @@ public final class OpenPrj implements ActionListener {
         fc.addChoosableFileFilter(fileFilter2);
         fc.setFileFilter(fileFilter2);
 
-//     fc.setMultiSelectionEnabled(true);
+
         fc.setAcceptAllFileFilterUsed(true);
 
         int returnVal = fc.showOpenDialog(editor);
@@ -170,9 +170,13 @@ public final class OpenPrj implements ActionListener {
             //  editor.obj.LoadTrace_For_Open();
             
             editor.obj.fb =  editor.obj.TraceGroup.get(0);
+            editor.obj.tr = editor.obj.fb.tr;
+            
             editor.tv.obj = editor.obj;
-
+            
             editor.obj.sync();
+            
+            
             editor.tv.repaint();
             //editor.dv.setProj(editor.obj.proj);
             editor.invalidate();

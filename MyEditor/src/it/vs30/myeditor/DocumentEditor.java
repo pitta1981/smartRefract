@@ -312,17 +312,7 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         obj.prevTr();
-        TopComponent tc;/* = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
-        Lookup tcLookup = tc.getLookup();/*
-        /*  if (tv.is_white) {
-         ((MyViewerTopComponent) tc).gmview.setBackground(Color.white);
-
-         } else {
-         ((MyViewerTopComponent) tc).gmview.setBackground(Color.black);
-         }*/
-/*        ((MyViewerTopComponent) tc).gmview.setGeom(obj.fb.scoppio, obj.fb.spaz, obj.fb.spaz_in, obj.tr.length);
-        ((MyViewerTopComponent) tc).gmview.repaint();
-        ((MyViewerTopComponent) tc).gmview.invalidate();*/
+        TopComponent tc;
 
         tc = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
         geomTC = (geometryViewerTopComponent) tc;
