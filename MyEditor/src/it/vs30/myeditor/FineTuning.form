@@ -217,7 +217,7 @@
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="l1_automatic_visible_CheckBox" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="auto_phantom_layer1" min="-2" max="-2" attributes="0"/>
                                       </Group>
@@ -231,7 +231,7 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="auto_phantom_layer1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="l1_automatic_visible_CheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -246,15 +246,15 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+                        <Component class="javax.swing.JCheckBox" name="l1_automatic_visible_CheckBox">
                           <Properties>
                             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                              <ResourceString bundle="it/vs30/myeditor/Bundle.properties" key="FineTuning.jCheckBox1.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                              <ResourceString bundle="it/vs30/myeditor/Bundle.properties" key="FineTuning.l1_automatic_visible_CheckBox.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                             </Property>
                           </Properties>
                           <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBox1ItemStateChanged"/>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1ActionPerformed"/>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="l1_automatic_visible_CheckBoxItemStateChanged"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="l1_automatic_visible_CheckBoxActionPerformed"/>
                           </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="auto_phantom_layer1">

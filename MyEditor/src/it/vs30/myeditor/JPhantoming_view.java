@@ -283,7 +283,10 @@ public class JPhantoming_view extends javax.swing.JPanel {
                     for (int j = 0; j < firstBrakeList[i].fb.length; j++) {
                         g.setColor(color[i]);
                         g.drawRect(xshf + (int) ((j + 1) * x_step) - 2, ymax - (int) (firstBrakeList[i].fb[j].time * ystp + (margUp)) - 2, 4, 4);
-
+                        g.setColor(Color.orange);
+                        g.drawLine(xshf + (int) ((j + 1) * x_step) - 3, ymax - (int) (firstBrakeList[i].fb[j].time * ystp + (margUp)) - 3, xshf + (int) ((j + 1) * x_step) + 3, ymax - (int) (firstBrakeList[i].fb[j].time * ystp + (margUp)) + 3);
+                        g.drawLine(xshf + (int) ((j + 1) * x_step) + 3, ymax - (int) (firstBrakeList[i].fb[j].time * ystp + (margUp)) - 3, xshf + (int) ((j + 1) * x_step) - 3, ymax - (int) (firstBrakeList[i].fb[j].time * ystp + (margUp)) + 3);
+                    
                     }
                 }
             }

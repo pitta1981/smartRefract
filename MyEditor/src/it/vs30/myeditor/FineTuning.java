@@ -1,7 +1,50 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * FineTuning is a JDialog that provides a user interface for fine-tuning seismic data.
+ * It allows users to adjust and visualize various parameters related to seismic refraction analysis.
+ * 
+ * <p>This class includes methods for initializing components, handling user interactions, and updating the UI based on the selected options.</p>
+ * 
+ * <p>Features:</p>
+ * <ul>
+ *   <li>Automatic and manual phantoming of layers</li>
+ *   <li>Visualization of seismic data</li>
+ *   <li>Adjustment of base shots and layers</li>
+ *   <li>Saving and applying fine-tuned parameters</li>
+ * </ul>
+ * 
+ * <p>Dependencies:</p>
+ * <ul>
+ *   <li>it.vs30.smartRefract.refraction.GRM</li>
+ *   <li>it.vs30.smartUI.JCustom_layer_chooser</li>
+ *   <li>it.vs30.smartRefract.utils.Bool</li>
+ *   <li>it.vs30.smartRefract.utils.FB_set</li>
+ *   <li>it.vs30.smartRefract.utils.JShot</li>
+ *   <li>it.vs30.smartUI.JShiftFB</li>
+ *   <li>org.myorg.myapi.FirstBrake</li>
+ *   <li>org.myorg.myapi.FirstBrakeList</li>
+ *   <li>org.myorg.myapi.Indagine</li>
+ *   <li>org.openide.util.Exceptions</li>
+ * </ul>
+ * 
+ * <p>Author: Simone Pittaluga</p>
  */
+/*
+ * Copyright (C) Simone Pittaluga
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+
 package it.vs30.myeditor;
 
 import it.vs30.smartRefract.refraction.GRM;
@@ -49,6 +92,11 @@ public class FineTuning extends javax.swing.JDialog {
         jPanel10.add(tv_Draw);
     }
 
+    /**
+     * Constructs a FineTuning object and initializes its components.
+     *
+     * @param proj the Indagine project object containing project data
+     */
     public FineTuning(Indagine proj) {
         initComponents();
 
@@ -60,11 +108,14 @@ public class FineTuning extends javax.swing.JDialog {
         tv_Draw.sel2 = (int) (proj.xy2 / proj.stesa.get(0).spaz);
 
         Color[] color = new Color[255];
+        
         for (int i = 0; i < 255; i++) {
-            color[i] = new Color((int) (155 * Math.random()), (int) (185 * Math.random()), (int) (200 * Math.random()));
+            int r = (int) (50 + 150 * Math.random());
+            int g = (int) (50 + 150 * Math.random());
+            int b = (int) (50 + 150 * Math.random());
+            color[i] = new Color(r, g, b);
         }
-        color[1] = new Color(50, 175, 165);
-        color[2] = new Color(220, 40, 40);
+        
         proj.buildShots();
 
         Bool[] phnt_visible = new Bool[3];
@@ -137,7 +188,7 @@ public class FineTuning extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        l1_automatic_visible_CheckBox = new javax.swing.JCheckBox();
         auto_phantom_layer1 = new javax.swing.JRadioButton();
         jCheckBox2 = new javax.swing.JCheckBox();
         jRadioButton6 = new javax.swing.JRadioButton();
@@ -220,15 +271,15 @@ public class FineTuning extends javax.swing.JDialog {
         jPanel6.setName("Automatic phantoming"); // NOI18N
         jPanel6.setPreferredSize(new java.awt.Dimension(240, 69));
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox1, org.openide.util.NbBundle.getMessage(FineTuning.class, "FineTuning.jCheckBox1.text")); // NOI18N
-        jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(l1_automatic_visible_CheckBox, org.openide.util.NbBundle.getMessage(FineTuning.class, "FineTuning.l1_automatic_visible_CheckBox.text")); // NOI18N
+        l1_automatic_visible_CheckBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jCheckBox1ItemStateChanged(evt);
+                l1_automatic_visible_CheckBoxItemStateChanged(evt);
             }
         });
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        l1_automatic_visible_CheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                l1_automatic_visible_CheckBoxActionPerformed(evt);
             }
         });
 
@@ -266,7 +317,7 @@ public class FineTuning extends javax.swing.JDialog {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox1)
+                        .addComponent(l1_automatic_visible_CheckBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(auto_phantom_layer1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -276,7 +327,7 @@ public class FineTuning extends javax.swing.JDialog {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(auto_phantom_layer1)
-                    .addComponent(jCheckBox1)
+                    .addComponent(l1_automatic_visible_CheckBox)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1104,18 +1155,18 @@ public class FineTuning extends javax.swing.JDialog {
 
     }//GEN-LAST:event_button_applyActionPerformed
 
-    private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
+    private void l1_automatic_visible_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_l1_automatic_visible_CheckBoxItemStateChanged
         // TODO add your handling code here:
-        this.is_visible[1].setValue(jCheckBox1.isSelected());
+        this.is_visible[1].setValue(l1_automatic_visible_CheckBox.isSelected());
 
 
         this.phant_view.invalidate();
         this.phant_view.repaint();
-    }//GEN-LAST:event_jCheckBox1ItemStateChanged
+    }//GEN-LAST:event_l1_automatic_visible_CheckBoxItemStateChanged
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void l1_automatic_visible_CheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_l1_automatic_visible_CheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_l1_automatic_visible_CheckBoxActionPerformed
 
     private void jCheckBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox2ItemStateChanged
         // TODO add your handling code here:
@@ -1422,7 +1473,6 @@ public class FineTuning extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
@@ -1473,6 +1523,7 @@ public class FineTuning extends javax.swing.JDialog {
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JSplitPane jSplitPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JCheckBox l1_automatic_visible_CheckBox;
     private javax.swing.JRadioButton man_phantom_layer1;
     private javax.swing.JButton reset_Tx;
     // End of variables declaration//GEN-END:variables

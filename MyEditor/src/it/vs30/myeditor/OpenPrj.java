@@ -28,6 +28,7 @@ import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
+import it.vs30.myeditor.folder_history;
 
 public final class OpenPrj implements ActionListener {
 
@@ -41,6 +42,8 @@ public final class OpenPrj implements ActionListener {
         mTxt = false;
         editor.open();
         editor.requestActive();
+
+        folder_history fh = new folder_history();
         JFileChooser fc = new JFileChooser();
 
         // fc.setFileFilter(new Seg2FileFilter());
@@ -49,8 +52,10 @@ public final class OpenPrj implements ActionListener {
         fc.addChoosableFileFilter(fileFilter1);
         fc.addChoosableFileFilter(fileFilter2);
         fc.setFileFilter(fileFilter2);
+        //set the default directory of the file chooser to the last opened folder   
+        fc.setCurrentDirectory(new File(fh.getLastOpenedFolder()));
 
-
+        
         fc.setAcceptAllFileFilterUsed(true);
 
         int returnVal = fc.showOpenDialog(editor);
@@ -71,6 +76,8 @@ public final class OpenPrj implements ActionListener {
                 loadPrj(fc.getSelectedFile(), editor.obj, base);
                 mTxt = true;
             }
+            //save opened folder to the history file
+            fh.saveLastOpenedFolder(file.getParent());
 
             String[] lista = new String[3];
             String userHome = "user.home";
