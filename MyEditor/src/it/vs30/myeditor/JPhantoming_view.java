@@ -19,24 +19,36 @@ import org.myorg.myapi.FirstBrakeList;
 import org.myorg.myapi.Indagine;
 
 /**
+ * Class representing a view for phantoming. Extends JPanel and contains various
+ * methods for drawing graphs.
  *
  * @author PC
  */
 public class JPhantoming_view extends javax.swing.JPanel {
 
+    // Seismic data
     protected Indagine dati_sismici = null;
+    // Array of colors
     protected Color[] color = null;
+    // Array of phantoming visibility
     protected Bool[] phnt_visible = null;
+    // Array of base shots
     protected int[] base_shot = null;
+    // Flags for drawing forward and reverse base shots
     public boolean drawForwardBS = false, drawReverseBS = false;
+    // Edit index
     private int edit_index;
+    // Edit flag
     private boolean edit;
+    // List of shots
     private ArrayList<Integer> shots = null;
+    // List of JShot
     private ArrayList<JShot> shs;
+    // Array of manual phantoming visibility
     protected Bool[] man_phant_visible = null;
 
     /**
-     * Creates new form JPhantoming_view
+     * Default constructor.
      */
     public JPhantoming_view() {
         initComponents();
@@ -65,7 +77,7 @@ public class JPhantoming_view extends javax.swing.JPanel {
         this.phnt_visible = phnt_visible;
         this.man_phant_visible = man_phnt_visible;
     }
-    
+
     public JPhantoming_view(Indagine proj, Color[] color, Bool[] phnt_visible, Bool[] man_phnt_visible, int[] base_shot) {
         initComponents();
         dati_sismici = proj;
@@ -100,6 +112,12 @@ public class JPhantoming_view extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Method to get the maximum value from an array of doubles.
+     *
+     * @param list Array of doubles
+     * @return Maximum value
+     */
     double get_MAX(double[] list) {
         double max = 0.0;
         get_MAX(list, max);
@@ -140,11 +158,17 @@ public class JPhantoming_view extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Method to draw the graphical components.
+     *
+     * @param g Graphics object
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.BLACK);
         double max = 0.0;
+        // Calculate the maximum value for the seismic data
         for (int i = 0; i < dati_sismici.VfB_A.length - 1; i++) {
             max = this.get_MAX(dati_sismici.VfB_A[i].fb, max);
 
@@ -154,11 +178,14 @@ public class JPhantoming_view extends javax.swing.JPanel {
 
         }
         max = 1.2 * max;
+        // Draw the axes and ticks
         this.drawAssi(g, 0, max);
         this.draw_Y_tick(g, 0, max);
+        // Draw the edit shots if necessary
         if (shots != null && this.edit) {
             draw_edit_shot(g, 0, max);
         }
+        // Draw the forward and reverse base shots if necessary
         if (this.drawForwardBS) {
             this.draw_Punti(g, 0, max, ((FirstBrakeList) dati_sismici.stesa.get(base_shot[0])).fb, new Color(150, 200, 200), true);
         }
@@ -166,16 +193,22 @@ public class JPhantoming_view extends javax.swing.JPanel {
             this.draw_Punti(g, 0, max, ((FirstBrakeList) dati_sismici.stesa.get(base_shot[1])).fb, new Color(150, 200, 200), true);
         }
 
-
+        // Draw the points for the seismic data
         this.draw_Punti(g, 0, max, dati_sismici.VfB_A, color);
         this.draw_Punti(g, 0, max, dati_sismici.VfB_R, color);
-        
 
+        // Try to draw the manual phantoming
         this.tryToDrawManPhantoming(g, max);
-
 
     }
 
+    /**
+     * Method to draw the axes.
+     *
+     * @param g Graphics object
+     * @param min Minimum value
+     * @param max Maximum value
+     */
     public void drawAssi(Graphics g, double min, double max) {
         int w = this.getWidth();
         int h = this.getHeight();
@@ -183,11 +216,29 @@ public class JPhantoming_view extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Method to set the project.
+     *
+     * @param proj Indagine object
+     */
     void setProj(Indagine proj) {
         dati_sismici = proj;
 
     }
 
+   
+    /**
+     * Draws Y-axis tick marks and labels on the given Graphics context.
+     *
+     * @param g    the Graphics context to draw on
+     * @param min  the minimum value for the Y-axis (currently unused)
+     * @param max  the maximum value for the Y-axis
+     *
+     * This method calculates the step size for the Y-axis ticks based on the height of the component
+     * and the maximum value. It then draws major and minor tick marks at appropriate intervals along
+     * the Y-axis, as well as labels for the major tick marks. The size and spacing of the tick marks
+     * and labels are adjusted based on the width of the component.
+     */
     private void draw_Y_tick(Graphics g, int min, double max) {
 
         int w = this.getWidth();
@@ -221,48 +272,37 @@ public class JPhantoming_view extends javax.swing.JPanel {
             minTic = 10;
         }
 
-
-        //g2.setColor(Color.white);
-       /* if (obj.is_white) {
-         g2.setColor(Color.black);
-         } else {
-         g2.setColor(Color.white);
-         }*/
-
-
         g2.setFont(new Font("Dialog", Font.PLAIN, (int) (12 * (w / 1000.0))));
-        new Font("Dialog", Font.PLAIN, 12);
-
         FontMetrics fontMetrics = g2.getFontMetrics();
-
 
         int height = fontMetrics.getHeight();
 
-
-
-
         //FontMetrics fontMetrics = g2.getFontMetrics();
-
-
-        //int height = fontMetrics.getHeight();
-
-
         for (int i = 0; i < max; i = i + minTic) {
             if (i % majTic == 0) {
-                g2.drawLine((int) (xshf * 0.75), ymax - (int) (i * ystp + (margUp)), (int) (xshf * 0.6), ymax - (int) (i * ystp + (margUp)));
+                g2.drawLine((int) (xshf ), ymax - (int) (i * ystp + (margUp)), (int) (xshf * 0.8), ymax - (int) (i * ystp + (margUp)));
                 int width = fontMetrics.stringWidth("" + (i));
 
-                g2.drawString("" + (i), (int) (xshf * 0.55) - width, ymax - (int) (i * ystp + (margUp) - (height / 3)));
-                g2.drawLine((int) (xmax - xshf * 0.75), ymax - (int) (i * ystp + (margUp)), (int) (xmax - xshf * 0.6), ymax - (int) (i * ystp + (margUp)));
+                g2.drawString("" + (i), (int) (xshf * 0.75) - width, ymax - (int) (i * ystp + (margUp) - (height / 3)));
+                g2.drawLine((int) (xmax - xshf ), ymax - (int) (i * ystp + (margUp)), (int) (xmax - xshf * 0.8), ymax - (int) (i * ystp + (margUp)));
 
             } else {
-                g2.drawLine((int) (xshf * 0.75), ymax - (int) (i * ystp + (margUp)), (int) (xshf * 0.65), ymax - (int) (i * ystp + (margUp)));
-                g2.drawLine((int) (xmax - xshf * 0.75), ymax - (int) (i * ystp + (margUp)), (int) (xmax - xshf * 0.65), ymax - (int) (i * ystp + (margUp)));
+                g2.drawLine((int) (xshf * 0.9), ymax - (int) (i * ystp + (margUp)), (int) (xshf ), ymax - (int) (i * ystp + (margUp)));
+                g2.drawLine((int) (xmax - xshf), ymax - (int) (i * ystp + (margUp)), (int) (xmax - xshf * 0.9), ymax - (int) (i * ystp + (margUp)));
             }
         }
 
     }
 
+    /**
+     * Method to draw the points for the seismic data.
+     *
+     * @param g Graphics object
+     * @param min Minimum value
+     * @param max Maximum value
+     * @param firstBrakeList Array of FirstBrakeList
+     * @param color Array of colors
+     */
     private void draw_Punti(Graphics g, int min, double max, FirstBrakeList[] firstBrakeList, Color[] color) {
         int w = this.getWidth();
         int h = this.getHeight();
@@ -276,37 +316,55 @@ public class JPhantoming_view extends javax.swing.JPanel {
         double ystp;
         ystp = (h - 60) / max;
 
-
         try {
             for (int i = 1; i < firstBrakeList.length; i++) {
                 if (this.phnt_visible[i].getValue()) {
                     for (int j = 0; j < firstBrakeList[i].fb.length; j++) {
                         g.setColor(color[i]);
                         g.drawRect(xshf + (int) ((j + 1) * x_step) - 2, ymax - (int) (firstBrakeList[i].fb[j].time * ystp + (margUp)) - 2, 4, 4);
+                        if (j > 0) {
+                            Graphics2D g2d = (Graphics2D) g.create();
+                            float[] dashPattern = {5, 5};
+                            g2d.setColor(color[i]);
+                            g2d.setStroke(new java.awt.BasicStroke(1, java.awt.BasicStroke.CAP_BUTT, java.awt.BasicStroke.JOIN_MITER, 10, dashPattern, 0));
+                            g2d.drawLine(
+                                    xshf + (int) ((j) * x_step), ymax - (int) (firstBrakeList[i].fb[j - 1].time * ystp + (margUp)),
+                                    xshf + (int) ((j + 1) * x_step), ymax - (int) (firstBrakeList[i].fb[j].time * ystp + (margUp))
+                            );
+                            g2d.dispose();
+                        }
+
                         g.setColor(Color.orange);
                         g.drawLine(xshf + (int) ((j + 1) * x_step) - 3, ymax - (int) (firstBrakeList[i].fb[j].time * ystp + (margUp)) - 3, xshf + (int) ((j + 1) * x_step) + 3, ymax - (int) (firstBrakeList[i].fb[j].time * ystp + (margUp)) + 3);
                         g.drawLine(xshf + (int) ((j + 1) * x_step) + 3, ymax - (int) (firstBrakeList[i].fb[j].time * ystp + (margUp)) - 3, xshf + (int) ((j + 1) * x_step) - 3, ymax - (int) (firstBrakeList[i].fb[j].time * ystp + (margUp)) + 3);
-                    
+
                     }
                 }
             }
         } catch (Exception ex) {
         }
 
-
     }
 
+    /**
+     * Method to draw the points for the seismic data.
+     *
+     * @param g Graphics object
+     * @param min Minimum value
+     * @param max Maximum value
+     * @param fb Array of FirstBrake
+     * @param color Color
+     */
     private void draw_Punti(Graphics g, int min, double max, FirstBrake[] fb, Color color) {
         int w = this.getWidth();
         int h = this.getHeight();
         int xshf = 30;
-        
+
         int ymax = h;
         double margUp = 30;
         int nch = fb.length;
         int x_step = (int) ((w - (2 * xshf)) / nch);
         double ystp = (h - 60) / max;
-
 
         try {
 
@@ -321,14 +379,22 @@ public class JPhantoming_view extends javax.swing.JPanel {
                 }
             }
 
-
-
         } catch (Exception ex) {
         }
 
-
     }
 
+    /**
+     * Method to draw the points for the seismic data.
+     *
+     * @param g Graphics object
+     * @param min Minimum value
+     * @param max Maximum value
+     * @param fb Array of FirstBrake
+     * @param shift Shift value
+     * @param color Color
+     * @param lungh_strum Length of the instrument
+     */
     private void draw_Punti(Graphics g, int min, double max, FirstBrake[] fb, double shift, Color color, double lungh_strum) {
         int w = this.getWidth();
         int h = this.getHeight();
@@ -350,6 +416,17 @@ public class JPhantoming_view extends javax.swing.JPanel {
                 if (this.edit) {
                     if (fb[j].layer == this.edit_index) {
                         g.drawRect(xshf + (int) ((fb[j].chan + 1) * x_step) - 3, ymax - (int) ((fb[j].time + shift) * ystp + (margUp)) - 3, 6, 6);
+                        if (j > 0) {
+                            Graphics2D g2d = (Graphics2D) g.create();
+                            float[] dashPattern = {5, 2};
+                            g2d.setColor(color);
+                            g2d.setStroke(new java.awt.BasicStroke(1, java.awt.BasicStroke.CAP_BUTT, java.awt.BasicStroke.JOIN_MITER, 10, dashPattern, 0));
+                            g2d.drawLine(
+                                    xshf + (int) ((fb[j-1].chan + 1) * x_step), ymax - (int) ((fb[j - 1].time + shift) * ystp + (margUp)),
+                                    xshf + (int) ((fb[j].chan + 1) * x_step), ymax - (int) ((fb[j].time +shift) * ystp + (margUp))
+                            );
+                            g2d.dispose();
+                        }
                         //g.drawRect(xshf + (int) ((j + 1) * x_step) - 3, ymax - (int) (fb[j].time * ystp + (margUp)) - 3, 6, 6);
                     }
                 } else {
@@ -357,14 +434,21 @@ public class JPhantoming_view extends javax.swing.JPanel {
                 }
             }
 
-
-
         } catch (Exception ex) {
         }
 
-
     }
 
+    /**
+     * Method to draw the points for the seismic data.
+     *
+     * @param g Graphics object
+     * @param min Minimum value
+     * @param max Maximum value
+     * @param fb Array of FirstBrake
+     * @param color Color
+     * @param filled Filled flag
+     */
     private void draw_Punti(Graphics g, int min, double max, FirstBrake[] fb, Color color, boolean filled) {
         if (!filled) {
             draw_Punti(g, min, max, fb, color);
@@ -391,14 +475,20 @@ public class JPhantoming_view extends javax.swing.JPanel {
                     }
                 }
 
-
-
             } catch (Exception ex) {
             }
         }
 
     }
 
+    /**
+     * Method to set the edit layer.
+     *
+     * @param self_index Layer index
+     * @param edit Edit flag
+     * @param shots List of shots
+     * @param shs List of JShot
+     */
     void setEditLayer(int self_index, boolean edit, ArrayList<Integer> shots, ArrayList<JShot> shs) {
         this.edit_index = self_index;
         this.edit = edit;
@@ -408,6 +498,13 @@ public class JPhantoming_view extends javax.swing.JPanel {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Method to draw the edit shots.
+     *
+     * @param g Graphics object
+     * @param min Minimum value
+     * @param max Maximum value
+     */
     private void draw_edit_shot(Graphics g, int min, double max) {
         int i = 0;
         for (JShot shot : dati_sismici.shots) {
@@ -428,18 +525,33 @@ public class JPhantoming_view extends javax.swing.JPanel {
          }*/
     }
 
+    /**
+     * Method to try to draw the manual phantoming.
+     *
+     * @param g Graphics object
+     * @param max Maximum value
+     */
     private void tryToDrawManPhantoming(Graphics g, double max) {
         for (int i = 1; i < this.man_phant_visible.length; i++) {
             if (man_phant_visible[i].getValue()) {
                 this.draw_Circle(g, 0, max, dati_sismici.man_Phant_and[i - 1].fb, Color.black);
                 this.draw_Circle(g, 0, max, dati_sismici.man_Phant_rit[i - 1].fb, Color.black);
-                
+
             }
         }
 
         //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Method to draw circles for the seismic data.
+     *
+     * @param g Graphics object
+     * @param min Minimum value
+     * @param max Maximum value
+     * @param fb Array of FirstBrake
+     * @param color Color
+     */
     private void draw_Circle(Graphics g, int min, double max, FirstBrake[] fb, Color color) {
         int w = this.getWidth();
         int h = this.getHeight();
@@ -450,7 +562,6 @@ public class JPhantoming_view extends javax.swing.JPanel {
         int nch = fb.length;
         int x_step = (int) ((w - (2 * xshf)) / nch);
         double ystp = (h - 60) / max;
-
 
         try {
 
@@ -465,10 +576,8 @@ public class JPhantoming_view extends javax.swing.JPanel {
                 }
             }
 
-
-
         } catch (Exception ex) {
         }
 
- }
+    }
 }
