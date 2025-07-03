@@ -247,5 +247,9 @@ public class Trace {
     public double getMediaAbs(){
         return this.mediaabs;
     }
+
+    public void setIsPicked(boolean picked) {
+        this.isPicked = picked;
+    }
 }
 
