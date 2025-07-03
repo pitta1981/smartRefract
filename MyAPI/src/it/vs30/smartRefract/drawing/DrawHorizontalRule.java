@@ -78,33 +78,13 @@ public class DrawHorizontalRule {
             } else if (lung_meter / 10.0 >= 100) {
                 majTic = 50;
                 minTic = 25;
-            }
-
-
             if (this.step_geofoni > 0) {
-                /*   for (int i=0;i<lung_meter;i=i+minTic){
-                 if(i%majTic==0){
-                 int x0=(int)(i*m_X_pixel+(this.step_geofoni/2));
-                 g2.drawLine((int) x0, 10, (int) x0, 20);
-                    
-                 }
-                 else{
-                 int x0=(int)(i*m_X_pixel+(this.step_geofoni/2));
-                 g2.drawLine((int) x0, 10, (int) x0, 15);
-                 }
-                    
-                 }*/
-
+                // ... codice commentato ...
                 g2.setFont(new Font("Lucida", Font.PLAIN, 11));
                 FontMetrics fontMetrics = g2.getFontMetrics();
-
-
                 int font_height = fontMetrics.getHeight();
-                
-                
                 for (int i = 0; i < this.lenght; i++) {
                     int x0 = (int) (this.step_geofoni / 2 + i * this.step_geofoni);
-
                     int font_width = fontMetrics.stringWidth("G"+(i+1));
                     if (this.step_geofoni < 40) {
                         if (i % 3 == 0) {
@@ -112,16 +92,10 @@ public class DrawHorizontalRule {
                         }
                     } else {
                         g2.drawString("G" + (i + 1), x0-(font_width/2), 15);
-
                     }
-
-
-
-                    dapi.drawGeo(g, (int) x0, 20);
+                    dapi.drawGeo(g, x0, 20);
                 }
             }
-        } catch (Exception ex) {
-        }
 
 
     }

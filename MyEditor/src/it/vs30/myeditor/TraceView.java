@@ -66,6 +66,28 @@ import org.openide.windows.WindowManager;
  */
 public class TraceView extends javax.swing.JPanel {
 
+    /**
+     * Funzione per la palette viridis (5 punti, interpolazione lineare)
+     */
+    private Color viridis(double t) {
+        float[][] viridis = {
+            {68/255f, 1/255f, 84/255f},
+            {59/255f, 82/255f, 139/255f},
+            {33/255f, 145/255f, 140/255f},
+            {94/255f, 201/255f, 98/255f},
+            {253/255f, 231/255f, 37/255f}
+        };
+        t = Math.max(0, Math.min(1, t));
+        int idx = (int)(t * (viridis.length-1));
+        float[] c1 = viridis[idx];
+        float[] c2 = viridis[Math.min(idx+1, viridis.length-1)];
+        float f = (float)(t * (viridis.length-1) - idx);
+        float r = c1[0] + f * (c2[0] - c1[0]);
+        float g = c1[1] + f * (c2[1] - c1[1]);
+        float b = c1[2] + f * (c2[2] - c1[2]);
+        return new Color(r, g, b);
+    }
+
     public APIObject obj = null;
     // public JTraceDlg dlg_Trc;
     public int scaleY = 1;
@@ -135,26 +157,24 @@ public class TraceView extends javax.swing.JPanel {
             offg.setColor(Color.white);
         } else {
             this.setBackground(Color.black);
-
             offg.setColor(Color.black);
         }
-        // offg.clearRect(0, 0, this.getWidth(), this.getHeight());
-
         offg.fillRect(0, 0, this.getWidth(), this.getHeight());
-        if (selectionMode) {
-            this.drawMousePosition(offg, selected_trace);
-            this.drawSelected(offg);
-        }
 
-        // drawSelection(offg);
+        // Prima disegna heatmap, tracce, pick, assi...
         drawSeism(offg);
         drawPick(offg, this.getWidth(), this.getHeight());
         if (this.drawDromo) {
             draw_all_Pick(offg);
         }
         drawAssi(offg);
-        // disegnaSegnale(g);
-        // disegnaPrimoA(g);
+
+        // Poi disegna la selezione sopra tutto
+        if (selectionMode) {
+            this.drawMousePosition(offg, selected_trace);
+            this.drawSelected(offg);
+        }
+
         g.drawImage(im, 0, 0, this);
 
         // TODO fix open project issue. The following code is a workaround
@@ -642,7 +662,7 @@ public class TraceView extends javax.swing.JPanel {
 
     private void drawSeism(Graphics g) {
         try {
-
+            // Disegna le tracce sismiche e la heatmap di sfondo
             Path2D p = new Path2D.Double();
             int x1i = 0, y1i = 0;
             boolean mag = false;
@@ -653,10 +673,9 @@ public class TraceView extends javax.swing.JPanel {
                     this.setForeground(Color.black);
                 }
 
-                // g.drawString(" "+obj.tr[0].getSampleInterval()+" "+stepV+" "+stepT, 50, 50);
                 Graphics2D g2 = (Graphics2D) g;
                 g2.setColor(Color.white);
-                draw_seism_heatmap(g);
+                draw_seism_heatmap(g); // Heatmap colorata di sfondo
                 for (int j = 0; j < obj.tr.length; j++) {
                     double maxV;
                     if (this.avgMAX) {
@@ -667,7 +686,7 @@ public class TraceView extends javax.swing.JPanel {
 
                     double stepT = (double) (this.getHeight()) / (double) (obj.tr[0].length);
                     double stepCh = (this.getWidth() - 2 * margine_X) / obj.tr.length;
-                    double stepV = 0.5 * (double) stepCh / (double) maxV;
+                    // stepV non usato
                     if (!is_white) {
                         g2.setColor(Color.lightGray);
                     } else {
@@ -676,75 +695,50 @@ public class TraceView extends javax.swing.JPanel {
                     g2.drawLine((int) ((((j) * stepCh) + stepCh / 2)) + margine_X, 0,
                             (int) ((((j) * stepCh) + stepCh / 2)) + margine_X, this.getHeight());
 
-                    int x2 = 0;
-                    int y2 = 0;
                     int x1 = 0;
                     if (!this.avgMAX) {
                         maxV = maxV / this.scaleX;
                     }
                     ZoomTraceUtil[] zu = obj.TraceGroup.get(obj.trace_index).zoomTr;
                     for (int i = 0; i < obj.tr[0].length - 1; i++) {
-                        // g2.drawRect((int) ((((j) * stepCh)+ stepCh / 2) + stepV *
-                        // obj.tr[j].value[i]), (int) (i * stepT), 1, 1);
-
                         if (Math.abs(obj.tr[j].value[i] * zu[j].zoom_factor) < maxV) {
                             x1 = (int) ((((j) * stepCh) + stepCh / 2)
-                                    + this.scaleX * stepV * (obj.tr[j].value[i] - obj.tr[j].media) * zu[j].zoom_factor);
+                                    + this.scaleX * 0.5 * (double) stepCh / (double) maxV * (obj.tr[j].value[i] - obj.tr[j].media) * zu[j].zoom_factor);
                         } else {
                             int s = (int) (Math.abs(obj.tr[j].value[i]) / obj.tr[j].value[i]);
                             x1 = (int) ((((j) * stepCh) + stepCh / 2)
-                                    + s * this.scaleX * stepV * (maxV - obj.tr[j].media));
+                                    + s * this.scaleX * 0.5 * (double) stepCh / (double) maxV * (maxV - obj.tr[j].media));
                         }
 
                         int y1 = (int) (i * stepT);
+                        int x2, y2;
                         if (Math.abs(obj.tr[j].value[i + 1] * zu[j].zoom_factor) < maxV) {
-                            x2 = (int) ((((j) * stepCh) + stepCh / 2) + this.scaleX * stepV
+                            x2 = (int) ((((j) * stepCh) + stepCh / 2) + this.scaleX * 0.5 * (double) stepCh / (double) maxV
                                     * (obj.tr[j].value[i + 1] - obj.tr[j].media) * zu[j].zoom_factor);
-                            // System.out.println(x2+" "+(((j) * stepCh) + stepCh / 2)+" "+this.scaleX *
-                            // stepV * (obj.tr[j].value[i + 1] - obj.tr[j].media) * zu[j].zoom_factor+"
-                            // "+j+" "+obj.tr[j].value[i + 1]+" "+i);
                         } else {
                             int s = (int) (Math.abs(obj.tr[j].value[i]) / obj.tr[j].value[i]);
-
                             x2 = (int) ((((j) * stepCh) + stepCh / 2)
-                                    + s * this.scaleX * stepV * (maxV - obj.tr[j].media));
-
-                            // System.out.println("Via 2 "+x2+" "+(((j) * stepCh) + stepCh / 2)+" "+s *
-                            // this.scaleX * stepV * (maxV - obj.tr[j].media)+" "+j+" "+obj.tr[j].value[i +
-                            // 1]+" "+i);
+                                    + s * this.scaleX * 0.5 * (double) stepCh / (double) maxV * (maxV - obj.tr[j].media));
                         }
-
-                        // x2 = (int) ((((j) * stepCh) + stepCh / 2) + this.scaleX * stepV *
-                        // (obj.tr[j].value[i + 1] - obj.tr[j].media));
                         y2 = (int) ((i + 1) * stepT);
+
                         if (!is_white) {
                             g2.setColor(Color.white);
-
                         } else {
                             g2.setColor(Color.black);
                         }
-
-                        // System.out.println(x2);
                         g2.drawLine(x1 + margine_X, y1, x2 + margine_X, y2);
 
+                        // Gestione riempimento poligono (area positiva)
                         if (obj.tr[j].value[i + 1] - obj.tr[j].media > 0) {
-
-                            if (mag == false) {
-                                // Graphics2D g2 = (Graphics2D) g.create();
-                                // Path2D p2 = new Path2D.Double();
+                            if (!mag) {
                                 p = new Path2D.Double();
-
                                 if (x2 != x1) {
                                     double m = (y2 * 1.0 - y1 * 1.0) / (x2 - x1);
                                     double q = ((x2 * y1) - (x1 * y2)) / (x2 - x1);
                                     double x = (((j) * stepCh) + stepCh / 2);
                                     int y = (int) (m * x + q);
-
-                                    // p = new Path2D.Double();
                                     p.moveTo(x + margine_X, y);
-                                    if (y < y1 && y < y2)
-                                        ;
-
                                     x1i = (int) x;
                                     y1i = y;
                                 } else {
@@ -752,107 +746,66 @@ public class TraceView extends javax.swing.JPanel {
                                     x1i = (int) x1;
                                     y1i = y1;
                                 }
-
                                 mag = true;
                             } else {
-                                p.lineTo(x1 + margine_X, y1); // curveTo(x1,y1, ystp * proj.Zg1[(proj.Zg1.length - 3)] +
-                                // (margUp * ymax) + 30, (xshf + (nchanel *
-                                // (proj.Zg1.length - 3))), ystp *
-                                // proj.Zg1[(proj.Zg1.length - 3)] + (margUp * ymax) +
-                                // 30);
-
+                                p.lineTo(x1 + margine_X, y1);
                             }
-
                             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-                            /*
-                             * if (i % 1.5 == 0) {
-                             *
-                             * g2.setColor(Color.GRAY); g2.drawLine((int) ((((j)
-                             * * stepCh) + stepCh / 2)), y2, x2, y2); }
-                             */
                         } else {
                             if (mag) {
-
                                 if (x2 != x1) {
                                     double m = (y2 * 1.0 - y1 * 1.0) / (x2 - x1);
                                     double q = ((x2 * y1) - (x1 * y2)) / (x2 - x1);
                                     double x = (((j) * stepCh) + stepCh / 2);
                                     int y = (int) (m * x + q);
-
-                                    // p = new Path2D.Double();
                                     p.lineTo(x + margine_X, y);
                                 }
-
                                 p.lineTo(x1i + margine_X, y1i);
-
-                                BufferedImage bi = new BufferedImage(5, 5,
-                                        BufferedImage.TYPE_INT_RGB);
+                                BufferedImage bi = new BufferedImage(5, 5, BufferedImage.TYPE_INT_RGB);
                                 Graphics2D big = bi.createGraphics();
-
                                 if (!is_white) {
                                     big.setColor(Color.LIGHT_GRAY);
                                 } else {
                                     big.setColor(Color.darkGray);
                                 }
-
                                 big.fillRect(0, 0, 5, 5);
-                                // big.setColor(Color.lightGray);
-                                // big.fillOval(0, 0, 5, 5);
                                 Rectangle r = new Rectangle(0, 0, 5, 5);
                                 g2.setPaint(new TexturePaint(bi, r));
-
                                 g2.draw(p);
                                 g2.fill(p);
-
-                                mag = !mag;
+                                mag = false;
                             }
                         }
-
                     }
-
+                    // Chiudi eventuale area positiva rimasta
                     if (mag) {
-
                         double x = (((j) * stepCh) + stepCh / 2);
-
-                        // p = new Path2D.Double();
-                        p.lineTo(x2 + margine_X, y2);
-                        p.lineTo(((j) * stepCh) + stepCh / 2
-                                + margine_X, y2);
-
+                        p.lineTo(x1 + margine_X, (int) ((obj.tr[0].length - 1) * stepT));
                         p.lineTo(x1i + margine_X, y1i);
-
-                        BufferedImage bi = new BufferedImage(5, 5,
-                                BufferedImage.TYPE_INT_RGB);
+                        BufferedImage bi = new BufferedImage(5, 5, BufferedImage.TYPE_INT_RGB);
                         Graphics2D big = bi.createGraphics();
-
                         if (!is_white) {
                             big.setColor(Color.LIGHT_GRAY);
                         } else {
                             big.setColor(Color.darkGray);
                         }
-
                         big.fillRect(0, 0, 5, 5);
-                        // big.setColor(Color.lightGray);
-                        // big.fillOval(0, 0, 5, 5);
                         Rectangle r = new Rectangle(0, 0, 5, 5);
                         g2.setPaint(new TexturePaint(bi, r));
-
                         g2.draw(p);
                         g2.fill(p);
-
-                        mag = !mag;
+                        mag = false;
                     }
-
                 }
             }
         } catch (Exception e) {
+            // Silenzia eventuali errori di disegno
         }
-
-        // throw new UnsupportedOperationException("Not yet implemented");
     }
 
     void draw_seism_heatmap(Graphics g) {
+        // Disegna la heatmap colorata delle tracce sismiche.
+        // La palette viridis viene adattata: su sfondo chiaro la mappa è più chiara e meno satura, su scuro più satura.
         if (obj.tr.length > 0) {
             if (!is_white) {
                 this.setForeground(Color.white);
@@ -860,10 +813,8 @@ public class TraceView extends javax.swing.JPanel {
                 this.setForeground(Color.black);
             }
 
-            // g.drawString(" "+obj.tr[0].getSampleInterval()+" "+stepV+" "+stepT, 50, 50);
             Graphics2D g2 = (Graphics2D) g;
             g2.setColor(Color.white);
-            // Interpolate heatmapPoints considering anisotropy and plot the heatmap
 
             List<List<double[]>> tracePoints = new ArrayList<>();
             int w = this.getWidth();
@@ -874,24 +825,9 @@ public class TraceView extends javax.swing.JPanel {
             double stepT = (double) (this.getHeight()) / (double) (obj.tr[0].length);
             double stepCh = (this.getWidth() - 2 * margine_X) / obj.tr.length;
 
+            // Prepara i punti delle tracce per l'interpolazione
             for (int j = 0; j < obj.tr.length; j++) {
-                double maxV;
-                if (this.avgMAX) {
-                    maxV = obj.tr[j].getMediaAbs();
-                } else {
-                    maxV = obj.tr[j].getMaxValue() - obj.tr[j].media;
-                }
-                
-                
-
-                double stepV = 0.5 * (double) stepCh / (double) maxV;
-                if (!is_white) {
-                    g2.setColor(Color.lightGray);
-                } else {
-                    g2.setColor(Color.DARK_GRAY);
-                }
-
-                // Creare liste separate di punti per ogni traccia
+                double maxV = this.avgMAX ? obj.tr[j].getMediaAbs() : obj.tr[j].getMaxValue() - obj.tr[j].media;
                 List<double[]> points = new ArrayList<>();
                 for (int i = 0; i < obj.tr[j].value.length; i++) {
                     double x = (stepCh/2.0)+(j * stepCh) + margine_X;
@@ -902,30 +838,21 @@ public class TraceView extends javax.swing.JPanel {
                 tracePoints.add(points);
             }
 
-            // Find min and max values
+            // Trova min e max per normalizzazione
             double minVal = Double.MAX_VALUE;
             double maxVal = Double.MIN_VALUE;
             for (List<double[]> pts : tracePoints) {
                 for (double[] point : pts) {
-                    if (point[2] < minVal) {
-                        minVal = point[2];
-                    }
-                    if (point[2] > maxVal) {
-                        maxVal = point[2];
-                    }
+                    if (point[2] < minVal) minVal = point[2];
+                    if (point[2] > maxVal) maxVal = point[2];
                 }
             }
 
-            // Iterate over each pixel to assign color based on interpolated value
+            // Interpola e colora ogni pixel
             for (int xPixel = 0; xPixel < w; xPixel++) {
                 for (int yPixel = 0; yPixel < h; yPixel++) {
-                    // Trovare le tracce adiacenti
                     int traceIndex = (int) ((xPixel - (stepCh/2.0) ) / stepCh);
-
-                    // Trovare l'indice nella traccia del valore alla stessa y del punto da interpolare
                     int yIndex = (int) (yPixel / stepT);
-
-                    // Aggiungere i 3 punti sopra e i 3 punti sotto
                     List<double[]> nearestNeighbors = new ArrayList<>();
                     for (int i = -15; i <= 15; i++) {
                         int index = yIndex + i;
@@ -936,78 +863,56 @@ public class TraceView extends javax.swing.JPanel {
                             nearestNeighbors.add(tracePoints.get(traceIndex + 1).get(index));
                         }
                     }
-
                     double interpValue = 0.0;
                     double weightSum = 0.0;
-                    double power = 2.0; // Inverse distance weighting power
-
+                    double power = 2.0;
                     for (double[] point : nearestNeighbors) {
                         double dx = xPixel - point[0];
                         double dy = yPixel - point[1];
-                        double distance = Math.sqrt(dx * dx + dy * dy) + 1e-6; // Avoid division by zero
+                        double distance = Math.sqrt(dx * dx + dy * dy) + 1e-6;
                         double weight = 1.0 / Math.pow(distance, power);
                         interpValue += point[2] * weight;
                         weightSum += weight;
                     }
-
                     interpValue /= weightSum;
-
-                    // Normalize the interpolated value
                     float normalized = (float) ((interpValue - minVal) / (maxVal - minVal));
                     normalized = Math.max(0f, Math.min(1f, normalized));
-
-                    // Map normalized value to color (e.g., blue to white to red)
-
-                    // Map normalized value to color (e.g., blue to white to red)
-int red, green, blue;
-if (interpValue < 0) {
-    red = (int) (255 * (1 + interpValue)); // From 0 to 255
-    green = (int) (255 * (1 + interpValue)); // From 0 to 255
-    blue = 255; // Always 255
-} else {
-    red = 255; // Always 255
-    green = (int) (255 * (1 - interpValue)); // From 255 to 0
-    blue = (int) (255 * (1 - interpValue)); // From 255 to 0
-}
-Color color = new Color(red, green, blue);
-
-
-// Apply a power function to make the variation steeper around 0
-float exponent = 2.0f; // Adjust this value to control the steepness
-float adjustedValue = (float) Math.signum(interpValue) * (float) Math.pow(Math.abs(interpValue), exponent);
-
-// Map adjusted value to color (e.g., blue to white to red)
-
-if (adjustedValue < 0) {
-    red = (int) (255 * (1 + adjustedValue)); // From 0 to 255
-    green = (int) (255 * (1 + adjustedValue)); // From 0 to 255
-    blue = 255; // Always 255
-} else {
-    red = 255; // Always 255
-    green = (int) (255 * (1 - adjustedValue)); // From 255 to 0
-    blue = (int) (255 * (1 - adjustedValue)); // From 255 to 0
-}
-color = new Color(red, green, blue);
-
-
-
-
-                    // Map normalized value to color (e.g., blue to red)
-                 //   Color color = Color.getHSBColor((1 - normalized) * 0.8f, 1.0f, 1.0f);
+                    Color color = viridis((double)normalized);
+                    // Adatta la saturazione/luminosità in base allo sfondo
+                    if (is_white) {
+                        color = brightenDesaturate(color, 0.6f); // più chiaro e meno saturo
+                    } else {
+                        color = saturate(color, 1.3f); // più saturo su sfondo scuro
+                    }
                     heatmapG2.setColor(color);
                     heatmapG2.fillRect(xPixel, yPixel, 1, 1);
                 }
             }
-
             heatmapG2.dispose();
-
-            // Draw the heatmap on the panel
             g.drawImage(heatmapImage, 0, 0, null);
-
-        
+        }
     }
 
-}
+    /**
+     * Rende un colore più chiaro e meno saturo (verso il bianco)
+     */
+    private Color brightenDesaturate(Color color, float amount) {
+    // Utility: schiarisce e desatura un colore (verso il bianco)
+    float[] hsb = Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), null);
+    hsb[1] = Math.max(0f, hsb[1] * (1f - amount)); // desatura
+    hsb[2] = Math.min(1f, hsb[2] + amount * (1f - hsb[2])); // schiarisce
+    return Color.getHSBColor(hsb[0], hsb[1], hsb[2]);
+    }
+
+    /**
+     * Aumenta la saturazione di un colore
+     */
+    private Color saturate(Color color, float factor) {
+    // Utility: aumenta la saturazione di un colore
+    float[] hsb = Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), null);
+    hsb[1] = Math.min(1f, hsb[1] * factor);
+    return Color.getHSBColor(hsb[0], hsb[1], hsb[2]);
+    }
 
 public void resized(int w, int h) {
 

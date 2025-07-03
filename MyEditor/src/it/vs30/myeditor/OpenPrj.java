@@ -31,7 +31,8 @@ import org.openide.windows.WindowManager;
 import it.vs30.myeditor.folder_history;
 
 public final class OpenPrj implements ActionListener {
-
+    // File progetto aperto più recente (per welcomeTopComponent)
+    public static File lastOpenedFile = null;
     private boolean mTxt = false;
     private geometryViewerTopComponent geomTC;
 
@@ -73,6 +74,8 @@ public final class OpenPrj implements ActionListener {
             //editor.obj.loadSism(0);
             //editor.obj.tr=editor.obj.getTraces();
             File file = fc.getSelectedFile();
+            // Aggiorna la variabile statica per i recenti
+            OpenPrj.lastOpenedFile = file;
             if (file.getPath().toLowerCase().endsWith(".txt")) {
                 loadPrj(fc.getSelectedFile(), editor.obj, base);
                 mTxt = true;

@@ -134,43 +134,34 @@ public class DrawVerticalRule {
 
 
             for (int i = 0; i < max; i = i + minTic) {
-                if (i % majTic == 0) {
-                    int x1 = (int) 35;
-
-                    int y1 = (int) (i * stepT / sampleInterval) / 1000;
-
-                    int x2 = (int) 35 - 8;
-                    int y2 = (int) (i * stepT / sampleInterval) / 1000;
-
-                    g2.drawLine(x1, y1, x2, y2);
-
-
-                    int width = fontMetrics.stringWidth("" + (i));
-
-                    g2.drawString("" + (i), (int) x2 - width, y2 + (height / 3));
-
-                } else {
-
-                    int x1 = (int) 35;
-
-                    int y1 = (int) (i * stepT / sampleInterval) / 1000;
-
-                    int x2 = (int) 35 - 5;
-                    int y2 = (int) (i * stepT / sampleInterval) / 1000;
-
-                    g2.drawLine(x1, y1, x2, y2);
-
-                    //   g2.drawLine((int) (xshf * 0.75), ymax - (int) (i * ystp + (margUp * ymax)), (int) (xshf * 0.65), ymax - (int) (i * ystp + (margUp * ymax)));
-                    //   g2.drawLine((int) (xmax - xshf * 0.75), ymax - (int) (i * ystp + (margUp * ymax)), (int) (xmax - xshf * 0.65), ymax - (int) (i * ystp + (margUp * ymax)));
+                Graphics2D g2 = (Graphics2D) g;
+                final BasicStroke asse = new BasicStroke(0.0f);
+                g2.setStroke(asse);
+                g2.setColor(Color.BLACK);
+                int j = 0;
+                double stepT = (double) (this.getHeight()) / (double) (this.lenght);
+                double max = sampleInterval * 1000 * this.lenght;
+                int majTic = 0, minTic = 0;
+                if (max / 10.0 < 1) {
+                    majTic = 2;
+                    minTic = 1;
+                } else if (max / 10.0 < 2) {
+                    majTic = 3;
+                    minTic = 1;
+                } else if (max / 10.0 < 4) {
+                    majTic = 5;
+                    minTic = 2;
+                } else if (max / 10.0 < 10) {
+                    majTic = 10;
+                    minTic = 2;
+                } else if (max / 10.0 < 30) {
+                    majTic = 20;
+                    minTic = 5;
+                } else if (max / 10.0 < 50) {
+                    majTic = 25;
+                    minTic = 5;
+                } else if (max / 10.0 >= 50) {
+                    majTic = 30;
+                    minTic = 10;
                 }
 
-
-            }
-        } catch (Exception ex) {
-        }
-
-    }
-
-
-
-}

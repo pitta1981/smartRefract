@@ -1,3 +1,4 @@
+// ...existing code...
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -5,6 +6,8 @@
 package it.vs30.sidebar;
 
 import java.awt.Color;
+import java.awt.Font;
+import javax.swing.border.LineBorder;
 import it.vs30.myeditor.TraceView;
 import it.vs30.smartRefract.utils.ZoomTraceUtil;
 import it.vs30.welcome.welcomeTopComponent;
@@ -20,7 +23,53 @@ import org.openide.windows.WindowManager;
  *
  * @author PC
  */
+
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.border.LineBorder;
+
 public class trace_tools extends javax.swing.JPanel {
+
+    // Evidenzia il tool attivo nella toolbar
+    private void highlightActiveTool(javax.swing.AbstractButton activeButton) {
+        javax.swing.JToggleButton[] toggleButtons = {
+            jToggleButton1, jToggleButton2
+        };
+        for (javax.swing.JToggleButton btn : toggleButtons) {
+            if (btn == null) continue;
+            // Se il toggle è selezionato, mantieni un colore di sfondo diverso
+            if (btn.isSelected()) {
+                if (btn == jToggleButton1) {
+                    // Lucchetto: nessun colore se chiuso, giallo chiaro se aperto
+                    if (btn.isSelected()) {
+                        // chiuso: nessun colore
+                        btn.setBackground(null);
+                    } else {
+                        btn.setBackground(new Color(255, 255, 180)); // giallo chiaro (unlock)
+                    }
+                } else {
+                    btn.setBackground(new Color(200, 255, 200)); // verde chiaro
+                }
+                btn.setForeground(Color.BLACK);
+                btn.setFont(btn.getFont().deriveFont(Font.BOLD));
+                btn.setBorder(new LineBorder(new Color(120, 180, 120), 2, true));
+                btn.setOpaque(true);
+            } else if (btn == activeButton) {
+                // Evidenziazione temporanea più leggera
+                btn.setBackground(new Color(220, 240, 220)); // verde molto tenue
+                btn.setForeground(Color.BLACK);
+                btn.setFont(btn.getFont().deriveFont(Font.BOLD));
+                btn.setBorder(new LineBorder(new Color(120, 180, 120), 2, true));
+                btn.setOpaque(true);
+            } else {
+                btn.setBackground(null);
+                btn.setForeground(Color.BLACK);
+                btn.setFont(btn.getFont().deriveFont(Font.PLAIN));
+                btn.setBorder(new LineBorder(new Color(200, 200, 200), 1, true));
+                btn.setOpaque(true);
+            }
+        }
+    }
 
     /**
      * Creates new form trace_tools
@@ -231,12 +280,14 @@ public class trace_tools extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
+        highlightActiveTool(jToggleButton1);
         Tv.setLock(this.jToggleButton1.isSelected());
+        // Aggiorna evidenziazione anche se perde il focus
+        highlightActiveTool(jToggleButton1);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+    highlightActiveTool(jButton8);
         Tv.is_white = !Tv.is_white;
         Tv.obj.is_white = !Tv.obj.is_white;
         if (Tv.is_white) {
@@ -260,6 +311,7 @@ public class trace_tools extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    highlightActiveTool(jButton7);
         if (Tv.getSelectionMode()) {
             FirstBrakeList fb_element = Tv.obj.TraceGroup.get(Tv.obj.trace_index);
             for (ZoomTraceUtil zu : fb_element.zoomTr) {
@@ -285,17 +337,20 @@ public class trace_tools extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    highlightActiveTool(jButton10);
         // TODO add your handling code here:
         Tv.drawDromo = !Tv.drawDromo;
         Tv.repaint();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    highlightActiveTool(jButton5);
         // TODO add your handling code here:
         Tv.undo();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    highlightActiveTool(jButton6);
         // TODO add your handling code here:
 
         if (Tv.getSelectionMode()) {
@@ -325,6 +380,7 @@ public class trace_tools extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void zoom_timein_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zoom_timein_ButtonActionPerformed
+    highlightActiveTool(zoom_timein_Button);
         // TODO add your handling code here:
         Tv.scaleY = (Tv.scaleY * 2);
         Tv.resized(Tv.getWidth(), Tv.getHeight());
@@ -333,6 +389,7 @@ public class trace_tools extends javax.swing.JPanel {
     }//GEN-LAST:event_zoom_timein_ButtonActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    highlightActiveTool(jButton4);
         
         welcomeTopComponent welcomeTC = (welcomeTopComponent) WindowManager.getDefault()
                 .findTopComponent("welcomeTopComponent");
@@ -344,6 +401,7 @@ public class trace_tools extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    highlightActiveTool(jButton3);
         // TODO add your handling code here:
         Tv.scaleY = (1);
         Tv.resized(Tv.getWidth(), Tv.getHeight());
@@ -356,13 +414,16 @@ public class trace_tools extends javax.swing.JPanel {
     }
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        // TODO add your handling code here:
+        highlightActiveTool(jToggleButton2);
         Tv.setSelectionMode(jToggleButton2.isSelected());
         Tv.repaint();
         Tv.invalidate();
+        // Aggiorna evidenziazione anche se perde il focus
+        highlightActiveTool(jToggleButton2);
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    highlightActiveTool(jButton1);
         // TODO add your handling code here:
         if (Tv.getSelectionMode()) {
             FirstBrakeList fb_element = Tv.obj.TraceGroup.get(Tv.obj.trace_index);

@@ -377,7 +377,12 @@ public final class welcomeTopComponent extends TopComponent {
         // Apri il progetto con OpenRefract
         OpenPrj opn = new OpenPrj();
         opn.actionPerformed(null);
-         updateRecentProject();
+        // Recupera il file appena aperto (assumendo che OpenPrj.lastOpenedFile sia stato impostato)
+        if (OpenPrj.lastOpenedFile != null) {
+            moveRecentFirst(OpenPrj.lastOpenedFile.getAbsolutePath());
+        } else {
+            updateRecentProject();
+        }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
