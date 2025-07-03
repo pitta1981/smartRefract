@@ -42,8 +42,9 @@ public final class saveProjectAs implements ActionListener {
          editor.open();
          editor.requestActive();*/
 
-        fc.setFileFilter(new Seg2FileFilter());
-        fc.setMultiSelectionEnabled(true);
+        fc.setFileFilter(new OpenRefractFileFilter());
+        fc.addChoosableFileFilter(new Seg2FileFilter());
+        fc.setMultiSelectionEnabled(false);
 
         TopComponent tc = WindowManager.getDefault().findTopComponent("DocumentEditor");
 
@@ -68,84 +69,29 @@ public final class saveProjectAs implements ActionListener {
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
                 try {
-
-                    if (!file.getPath().toLowerCase().endsWith(".txt")) {
-                        file = new File(file.getPath() + ".txt");
+                    // Check file extension to determine format
+                    boolean useOpenRefractFormat = false;
+                    if (file.getPath().toLowerCase().endsWith(".orefract")) {
+                        useOpenRefractFormat = true;
+                    } else if (!file.getPath().toLowerCase().endsWith(".txt") && 
+                              !file.getPath().toLowerCase().endsWith(".orefract")) {
+                        // Default to OpenRefract format if no extension specified
+                        file = new File(file.getPath() + ".orefract");
+                        useOpenRefractFormat = true;
                     }
-
-                    fos = new FileOutputStream(file);
-
-                    OutputStreamWriter os = new OutputStreamWriter(fos);
-
-                    FirstBrakeList fl = obj.TraceGroup.get(0);
-                    os.write(fl.ch + "\n");
-                    os.write(fl.spaz_in + "\n");
-                    os.write(fl.spaz + "\n");
-
-                    for (int i = 0; i < obj.TraceGroup.size(); i++) {
-                        fl = (FirstBrakeList) obj.TraceGroup.get(i);
-
-                        //os.write(fl.fbp + "\n");
-                        String path = fl.fbp;
-                        String base = fc.getSelectedFile().getParent();
-                        String relative = new File(base).toURI().relativize(new File(path).toURI()).getPath();
-                        relative = ResourceUtils.getRelativePath(path, base, File.separator);
-                        os.write(relative + "\n");
-                        os.write("" + fl.scoppio + "\n");
-                        for (int j = 0; j < fl.fb.length; j++) {
-                            System.out.println("saving... " + j);
-                            os.write(fl.fb[j].time + " ");
-
-                        }
-                        os.write("\n");
-                        os.write(fl.strato1 + "\n");
-                        os.write(fl.strato2 + "\n");
-                        os.write(fl.strato3 + "\n");
-                        os.write(fl.strato1R + "\n");
-                        os.write(fl.strato2R + "\n");
-                        os.write(fl.strato3R + "\n");
-
+                    
+                    if (useOpenRefractFormat) {
+                        // Save in new OpenRefract JSON format
+                        OpenRefractWriter.saveOpenRefractProject(file, obj);
+                        System.out.println("Project saved as in OpenRefract format: " + file.getAbsolutePath());
+                    } else {
+                        // Save in legacy text format
+                        saveLegacyFormat(file, obj);
                     }
-                    os.write("Elevation\n");
-                    for (int i = 0; i < fl.fb.length - 1; i++) {
-                        os.write(fl.fb[i].z + " ");
-
-                    }
-
-                    os.flush();
-                    os.close();
-                } catch (IOException ex) {
-                    //Logger.getLogger(JRefractionView.class.getName()).log(Level.SEVERE, null, ex);
+                    
                 } catch (Exception ex) {
-                    System.out.println("Error in saving project. Try again");
-
-                } finally {
-                    try {
-                        fos.close();
-                    } catch (IOException ex) {
-                        //  Logger.getLogger(JRefractionView.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                try {
-                    if (file.getPath().toLowerCase().endsWith(".txt")) {
-                        file = new File(file.getPath().replace(".txt", "") + ".srefract");
-                    }
-                    saveSmartRefractProject(file, obj);
-                    //fos = new FileOutputStream(file);
-                    //ObjectOutputStream oos = new ObjectOutputStream(fos);
-                    //oos.writeObject(obj);
-                    //oos.flush();
-                    //oos.close();
-                } catch (Exception ex) {
-
-                } finally {
-                    /*
-                    try {
-                        fos.close();
-                    } catch (IOException ex) {
-                        Exceptions.printStackTrace(ex);
-                    }
-                     */
+                    System.out.println("Error saving project as: " + ex.getMessage());
+                    ex.printStackTrace();
                 }
 
                 //This is where a real application would open the file.
@@ -177,17 +123,100 @@ public final class saveProjectAs implements ActionListener {
         }
 
     }
+    
+    /**
+     * Saves project in legacy text format for backward compatibility
+     */
+    private void saveLegacyFormat(File file, APIObject obj) throws IOException {
+        FileOutputStream fos = null;
+        try {
+            if (!file.getPath().toLowerCase().endsWith(".txt")) {
+                file = new File(file.getPath() + ".txt");
+            }
+
+            fos = new FileOutputStream(file);
+            OutputStreamWriter os = new OutputStreamWriter(fos);
+
+            FirstBrakeList fl = obj.TraceGroup.get(0);
+            os.write(fl.ch + "\n");
+            os.write(fl.spaz_in + "\n");
+            os.write(fl.spaz + "\n");
+
+            for (int i = 0; i < obj.TraceGroup.size(); i++) {
+                fl = (FirstBrakeList) obj.TraceGroup.get(i);
+
+                String path = fl.fbp;
+                String base = file.getParent();
+                String relative = path; // Simplified relative path handling
+                try {
+                    relative = ResourceUtils.getRelativePath(path, base, File.separator);
+                } catch (Exception e) {
+                    // Use absolute path if relative path calculation fails
+                }
+                
+                os.write(relative + "\n");
+                os.write("" + fl.scoppio + "\n");
+                for (int j = 0; j < fl.fb.length; j++) {
+                    System.out.println("saving... " + j);
+                    os.write(fl.fb[j].time + " ");
+                }
+                os.write("\n");
+                os.write(fl.strato1 + "\n");
+                os.write(fl.strato2 + "\n");
+                os.write(fl.strato3 + "\n");
+                os.write(fl.strato1R + "\n");
+                os.write(fl.strato2R + "\n");
+                os.write(fl.strato3R + "\n");
+            }
+            
+            os.write("Elevation\n");
+            for (int i = 0; i < fl.fb.length - 1; i++) {
+                os.write(fl.fb[i].z + " ");
+            }
+
+            os.flush();
+            os.close();
+            
+            // Also save binary format for compatibility
+            File binaryFile = new File(file.getPath().replace(".txt", "") + ".srefract");
+            saveSmartRefractProject(binaryFile, obj);
+            
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException ex) {
+                    // Handle exception
+                }
+            }
+        }
+    }
 
     class Seg2FileFilter extends javax.swing.filechooser.FileFilter {
 
         @Override
         public boolean accept(File f) {
-            return f.isDirectory() || f.getName().toLowerCase().endsWith(".txt");
+            return f.isDirectory() || 
+                   f.getName().toLowerCase().endsWith(".txt") ||
+                   f.getName().toLowerCase().endsWith(".orefract");
         }
 
         @Override
         public String getDescription() {
-            return "smartRefract project file";
+            return "smartRefract project files (*.txt, *.orefract)";
+        }
+    }
+    
+    class OpenRefractFileFilter extends javax.swing.filechooser.FileFilter {
+
+        @Override
+        public boolean accept(File f) {
+            return f.isDirectory() || f.getName().toLowerCase().endsWith(".orefract");
+        }
+
+        @Override
+        public String getDescription() {
+            return "OpenRefract format (*.orefract)";
         }
     }
 

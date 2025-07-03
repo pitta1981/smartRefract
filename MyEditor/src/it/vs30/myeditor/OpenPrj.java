@@ -38,10 +38,9 @@ public final class OpenPrj implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO implement action body
+        // Crea document editor per il progetto
         DocumentEditor editor = new DocumentEditor();
-        mTxt = false;
-        editor.open();
-        editor.requestActive();
+        mTxt = false;  // L'apertura avverrà dopo il caricamento
 
         folder_history fh = new folder_history();
         JFileChooser fc = new JFileChooser();
@@ -49,22 +48,24 @@ public final class OpenPrj implements ActionListener {
         // fc.setFileFilter(new Seg2FileFilter());
         FileNameExtensionFilter fileFilter1 = new FileNameExtensionFilter("smartRefract 2013", "txt");
         FileNameExtensionFilter fileFilter2 = new FileNameExtensionFilter("smartRefract 2016", "srefract");
+        FileNameExtensionFilter fileFilter3 = new FileNameExtensionFilter("OpenRefract format", "orefract");
         fc.addChoosableFileFilter(fileFilter1);
         fc.addChoosableFileFilter(fileFilter2);
-        fc.setFileFilter(fileFilter2);
-        //set the default directory of the file chooser to the last opened folder   
-        fc.setCurrentDirectory(new File(fh.getLastOpenedFolder()));
+        fc.addChoosableFileFilter(fileFilter3);
+        fc.setFileFilter(fileFilter3); // Default to OpenRefract format
+        //setthe default directory of the file chooser to the last opened folder   
+        fc.setCurrentDirectory(new File(folder_history.getLastOpenedFolder()));
 
         
         fc.setAcceptAllFileFilterUsed(true);
 
-        int returnVal = fc.showOpenDialog(editor);
+        int returnVal = fc.showOpenDialog(null);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             //File file = fc.getSelectedFile();
 
             //editor.obj.in_file=fc.getSelectedFile();
-            editor.obj.TraceGroup = new ArrayList();
+            editor.obj.TraceGroup = new ArrayList<FirstBrakeList>();
             String path = fc.getSelectedFile().getAbsolutePath();
             String base = (fc.getSelectedFile().getParent());
             //String relative = new File(base).toURI().relativize(new File(path).toURI()).getPath();
@@ -75,144 +76,71 @@ public final class OpenPrj implements ActionListener {
             if (file.getPath().toLowerCase().endsWith(".txt")) {
                 loadPrj(fc.getSelectedFile(), editor.obj, base);
                 mTxt = true;
-            }
-            //save opened folder to the history file
-            fh.saveLastOpenedFolder(file.getParent());
-
-            String[] lista = new String[3];
-            String userHome = "user.home";
-
-            // We get the path by getting the system property with the 
-            // defined key above. path+"/smartRefract-data/"
-            String path1 = System.getProperty(userHome);
-
-            FileInputStream fis = null;
-            try {
-                fis = new FileInputStream(path1 + "/smartRefract-data/" + "recenti.list");
-            } catch (FileNotFoundException ex) {
-                //   Exceptions.printStackTrace(ex);
-            }
-            try {
-                fis = new FileInputStream(path1 + "/smartRefract-data/" + "recenti.list");
-
-                InputStreamReader isr = new InputStreamReader(fis);
-                BufferedReader br = new BufferedReader(isr);
-                String linea = br.readLine();
-                int i = 0;
-                while (linea != null && i < 3) {
-                    lista[i] = linea;
-                    i++;
-                    linea = br.readLine();
-                }
-
-                isr.close();
-                fis.close();
-            } catch (Exception ex) {
-            } finally {
-                /*        try {
-                 // fis.close();
-                 } catch (IOException ex) {
-                 Exceptions.printStackTrace(ex);
-                 }*/
-            }
-            boolean pathPresent = false;
-            for (int i = 0; i < lista.length; i++) {
-                if (lista[i] == path) {
-                    lista[2] = lista[1];
-                    lista[1] = lista[0];
-                    lista[0] = lista[i];
-                    pathPresent = true;
-
-                }
-
-            }
-            if (!pathPresent) {
-                lista[2] = lista[1];
-                lista[1] = lista[0];
-                lista[0] = path;
-            }
-            FileOutputStream fos = null;
-            try {
-                fos = new FileOutputStream(path1 + "/smartRefract-data/" + "recenti.list");
-
-                OutputStreamWriter os = new OutputStreamWriter(fos);
-                int i = 0;
-                while (i < 3) {
-                    os.write(lista[i] + "\n");
-                    i++;
-                }
-
-                os.flush();
-                os.close();
-            } catch (Exception ex) {
-            } finally {
+                editor.open();
+                editor.requestActive();
+                editor.setDisplayName(fc.getSelectedFile().getName());
+                editor.invalidate();
+            } else if (file.getPath().toLowerCase().endsWith(".orefract")) {
+                // Caricamento progetto OpenRefract (.orefract)
                 try {
-                    fos.close();
+                    editor.obj = OpenRefractLoader.loadOpenRefractProject(file);
+                    // Sincronizza modelli e tracce
+                    editor.obj.sync();
                 } catch (IOException ex) {
-                    Exceptions.printStackTrace(ex);
+                    javax.swing.JOptionPane.showMessageDialog(null,
+                        "Errore caricamento OpenRefract: " + ex.getMessage(),
+                        "Errore", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
-            }
-
-            welcomeTopComponent wTopComponent = (welcomeTopComponent) WindowManager.getDefault().findTopComponent("welcomeTopComponent");
-            wTopComponent.updateRecentProject();
-            if (!mTxt) {
+                // Aggiorna le view con il nuovo modello
+                editor.txV.setObj(editor.obj);
+                editor.sv.setObj(editor.obj);
+                editor.tv.setObj(editor.obj);
+                // Forza repaint delle view
+                editor.txV.repaint();
+                editor.sv.repaint();
+                editor.tv.repaint();
+                editor.open();
+                editor.requestActive();
+                editor.setDisplayName(fc.getSelectedFile().getName());
+                editor.invalidate();
+            } else if (file.getPath().toLowerCase().endsWith(".srefract")) {
+                // Load binary format
                 loadPrjSmartRefract(file, editor);
+                editor.open();
+                editor.requestActive();
+                editor.setDisplayName(fc.getSelectedFile().getName());
+                editor.invalidate();
             }
+            folder_history.saveLastOpenedFolder(file.getParent());
+            // Dopo il caricamento, apri l'editor e aggiorna UI
+            // editor.open();
+            // editor.requestActive();
+            // editor.setDisplayName(fc.getSelectedFile().getName());
+            // editor.invalidate();
+            // Aggiorna lista recenti
             try {
-                fos.close();
-            } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
+                it.vs30.welcome.welcomeTopComponent wTopComponent =
+                    (it.vs30.welcome.welcomeTopComponent)
+                    org.openide.windows.WindowManager.getDefault().findTopComponent("welcomeTopComponent");
+                if (wTopComponent != null) {
+                    wTopComponent.updateRecentProject();
+                }
+            } catch (Exception ex) {
+                System.err.println("Impossibile aggiornare la lista recenti: " + ex.getMessage());
             }
 
-            editor.setDisplayName(fc.getSelectedFile().getName());
-            editor.obj.proj_file = fc.getSelectedFile();
+            editor.obj.proj_file = file;
             if (mTxt) {
-                base = "";
                 loadtrace(editor.obj, base);
                 editor.obj.loadSism(0);
                 editor.obj.LoadTrace_For_Open();
-                editor.obj.tr = editor.obj.getTraces();
             }
-            //  editor.obj.loadSism(0);
-            //  editor.obj.LoadTrace_For_Open();
-            
-            editor.obj.fb =  editor.obj.TraceGroup.get(0);
-            editor.obj.tr = editor.obj.fb.tr;
-            
-            editor.tv.obj = editor.obj;
-            
-            editor.obj.sync();
-            
-            
-            editor.tv.repaint();
-            //editor.dv.setProj(editor.obj.proj);
-            editor.invalidate();
+            // TODO: Altri aggiornamenti UI se necessari
 
-            TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
-            /*  Lookup tcLookup = tc.getLookup();
-
-            ((MyViewerTopComponent) tc).setActive(editor.obj);
-            ((MyViewerTopComponent) tc).gmview.setStesa(editor.obj.proj.stesa);
-            ((MyViewerTopComponent) tc).gmview.setBackground(Color.black);
-            ((MyViewerTopComponent) tc).gmview.setGeom(editor.obj.fb.scoppio, editor.obj.fb.spaz, editor.obj.fb.spaz_in, editor.obj.tr.length);
-            ((MyViewerTopComponent) tc).gmview.repaint();
-            ((MyViewerTopComponent) tc).gmview.invalidate();*/
-            editor.jTracePath.setText(editor.obj.fb.fbp);
-
-            tc = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
-            geomTC = (geometryViewerTopComponent) tc;
-            geomTC.setActive(editor.obj);
-            geomTC.gmview.setStesa(editor.obj.proj.stesa);
-            geomTC.gmview.setBackground(Color.black);
-            geomTC.gmview.setGeom(editor.obj.fb.scoppio, editor.obj.fb.spaz, editor.obj.fb.spaz_in, editor.obj.tr.length);
-            geomTC.gmview.repaint();
-            geomTC.gmview.invalidate();
-
-            //This is where a real application would open the file.
-            //System.out.println("Opening: " + file.getName() + "." );
-        } else {
-            //log.append("Open command cancelled by user." + newline);
-        }
+         } else {
+             // log.cancelled
+         }
 
         // TODO implement action body
     }
@@ -348,32 +276,48 @@ public final class OpenPrj implements ActionListener {
     }
 
     public void loadPrjSmartRefract(File file, DocumentEditor editor) {
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        boolean loadingSuccess = false;
+        
         try {
             if (file.getPath().toLowerCase().endsWith(".txt")) {
                 file = new File(file.getPath().replace(".txt", "") + ".srefract");
             }
 
-            FileInputStream fis = new FileInputStream(file);
-            ObjectInputStream ois = new ObjectInputStream(fis);
+            fis = new FileInputStream(file);
+            ois = new ObjectInputStream(fis);
 
             APIObject loadingObj = (APIObject) ois.readObject();
             editor.obj = loadingObj;
+            loadingSuccess = true;
 
-//ois.writeObject(obj);
-            //oos.flush();
-            //oos.close();
         } catch (IOException ex) {
+            System.err.println("Errore durante il caricamento del file: " + file.getAbsolutePath());
+            System.err.println("Dettagli errore: " + ex.getMessage());
             Exceptions.printStackTrace(ex);
         } catch (ClassNotFoundException ex) {
+            System.err.println("Classe non trovata durante la deserializzazione: " + ex.getMessage());
             Exceptions.printStackTrace(ex);
         } finally {
-            editor.obj.proj.stesa = editor.obj.TraceGroup;
-// TODO:         
-            editor.txV.setObj(editor.obj);
-            editor.sv.setObj(editor.obj);
-            editor.tv.obj = editor.obj;
-            editor.tv.proj = editor.obj.proj;
-
+            // Chiudi i flussi
+            try {
+                if (ois != null) ois.close();
+                if (fis != null) fis.close();
+            } catch (IOException ex) {
+                System.err.println("Errore durante la chiusura dei flussi: " + ex.getMessage());
+            }
+            
+            // Solo se il caricamento è riuscito, procedi con l'inizializzazione
+            if (loadingSuccess && editor.obj != null && editor.obj.TraceGroup != null && !editor.obj.TraceGroup.isEmpty()) {
+                editor.obj.proj.stesa = editor.obj.TraceGroup;
+                editor.txV.setObj(editor.obj);
+                editor.sv.setObj(editor.obj);
+                editor.tv.obj = editor.obj;
+                editor.tv.proj = editor.obj.proj;
+            } else {
+                System.err.println("Caricamento fallito o TraceGroup vuoto/null. Inizializzazione saltata.");
+            }
         }
 
         //     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

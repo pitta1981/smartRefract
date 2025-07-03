@@ -3,11 +3,13 @@
  * and open the template in the editor.
  */
 package it.vs30.welcome;
+import it.vs30.myeditor.OpenRefractLoader;
 
 import it.vs30.geometryView.geometryViewerTopComponent;
 import it.vs30.myeditor.DocumentEditor;
 import it.vs30.myeditor.OpenPrj;
 import it.vs30.myeditor.Set_geometry;
+import it.vs30.myeditor.folder_history;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,6 +27,7 @@ import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.util.Lookup;
 import org.openide.windows.TopComponent;
+import org.openide.util.NbBundle;
 import org.openide.util.NbBundle.Messages;
 import org.openide.util.lookup.InstanceContent;
 import org.openide.windows.WindowManager;
@@ -125,8 +128,8 @@ public final class welcomeTopComponent extends TopComponent {
 
     public welcomeTopComponent() {
         initComponents();
-        setName(Bundle.CTL_welcomeTopComponent());
-        setToolTipText(Bundle.HINT_welcomeTopComponent());
+        setName(org.openide.util.NbBundle.getMessage(welcomeTopComponent.class, "CTL_welcomeTopComponent"));
+        setToolTipText(org.openide.util.NbBundle.getMessage(welcomeTopComponent.class, "HINT_welcomeTopComponent"));
         putClientProperty(TopComponent.PROP_CLOSING_DISABLED, Boolean.TRUE);
         putClientProperty(TopComponent.PROP_UNDOCKING_DISABLED, Boolean.TRUE);
 
@@ -146,7 +149,7 @@ public final class welcomeTopComponent extends TopComponent {
 
         ltasta_par.loadParametersFromFile(tmpPath + autopick_par);
         
-        jButton1.setText("New...");
+        new_Button1.setText("New...");
         jButton2.setText("Open...");
         boolean checkLic = true;
 
@@ -169,47 +172,78 @@ public final class welcomeTopComponent extends TopComponent {
 
     }
 
+    private void moveRecentFirst(String elemento_lista) {
+        // Nuova logica: deduplica, ordina, aggiorna recenti
+        String newPath = (elemento_lista != null) ? elemento_lista.replace("\\", "/") : null;
+        ArrayList<String> recentList = new ArrayList<>();
+        if (newPath != null && !newPath.isEmpty()) {
+            recentList.add(newPath);
+        }
+        for (String s : lista) {
+            if (s != null && !s.isEmpty()) {
+                String normalized = s.replace("\\", "/");
+                if (!recentList.contains(normalized)) {
+                    recentList.add(normalized);
+                }
+            }
+        }
+        // Limita a 3 elementi
+        while (recentList.size() < 3) recentList.add("");
+        while (recentList.size() > 3) recentList.remove(recentList.size() - 1);
+        // Aggiorna lista[]
+        for (int i = 0; i < 3; i++) {
+            lista[i] = recentList.get(i);
+        }
+        String userHome = "user.home";
+        String path = System.getProperty(userHome);
+        try {
+            FileOutputStream fos = new FileOutputStream(path + "/smartRefract-data/" + "recenti.list");
+            OutputStreamWriter os = new OutputStreamWriter(fos);
+            for (int i = 0; i < 3; i++) {
+                os.write((lista[i] != null ? lista[i] : "") + "\n");
+            }
+            os.flush();
+            os.close();
+            fos.close();
+        } catch(Exception ex){
+            // Ignora errori di scrittura
+        }
+        updateRecentProject();
+    }
+
     public void updateRecentProject() {
         String userHome = "user.home";
-
-        // We get the path by getting the system property with the 
-        // defined key above. path+"/smartRefract-data/"
         String path = System.getProperty(userHome);
-
         try {
             FileInputStream fis = new FileInputStream(path + "/smartRefract-data/" + "recenti.list");
-
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
-            String linea = br.readLine();
-            int i = 0;
-            while (linea != null && i < 3) {
-                lista[i] = linea;
-                i++;
-                linea = br.readLine();
+            for (int i = 0; i < 3; i++) {
+                String linea = br.readLine();
+                lista[i] = (linea != null) ? linea : "";
             }
-            String linea1 = lista[0];
-            if (lista[0].length() > 45) {
-                linea1 = lista[0].substring(0, 10) + "..." + lista[0].substring(lista[0].length() - 32, lista[0].length());
-            }
-            String linea2 = lista[1];
-            if (lista[1].length() > 45) {
-                linea2 = lista[1].substring(0, 10) + "..." + lista[1].substring(lista[1].length() - 32, lista[1].length());
-            }
-            String linea3 = "";
-            if (lista[2].length() > 45) {
-                linea3 = lista[2].substring(0, 10) + "..." + lista[2].substring(lista[2].length() - 32, lista[2].length());
-            } else {
-                linea3 = lista[2];
-            }
-
-            jButton3.setText(linea1);
-            jButton4.setText(linea2);
-            jButton5.setText(linea3);
+            br.close();
+            isr.close();
+            fis.close();
         } catch (Exception ex) {
-
+            // Se il file non esiste o errore, azzera la lista
+            for (int i = 0; i < 3; i++) lista[i] = "";
         }
-
+        String linea1 = lista[0];
+        if (linea1 != null && linea1.length() > 45) {
+            linea1 = linea1.substring(0, 10) + "..." + linea1.substring(linea1.length() - 32);
+        }
+        String linea2 = lista[1];
+        if (linea2 != null && linea2.length() > 45) {
+            linea2 = linea2.substring(0, 10) + "..." + linea2.substring(linea2.length() - 32);
+        }
+        String linea3 = lista[2];
+        if (linea3 != null && linea3.length() > 45) {
+            linea3 = linea3.substring(0, 10) + "..." + linea3.substring(linea3.length() - 32);
+        }
+        jButton3.setText(linea1 != null ? linea1 : "");
+        jButton4.setText(linea2 != null ? linea2 : "");
+        jButton5.setText(linea3 != null ? linea3 : "");
     }
 
     /**
@@ -223,7 +257,7 @@ public final class welcomeTopComponent extends TopComponent {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        new_Button1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -235,12 +269,12 @@ public final class welcomeTopComponent extends TopComponent {
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
-        jButton1.setBackground(new java.awt.Color(153, 255, 153));
-        jButton1.setFont(jButton1.getFont().deriveFont(jButton1.getFont().getSize()+2f));
-        org.openide.awt.Mnemonics.setLocalizedText(jButton1, org.openide.util.NbBundle.getMessage(welcomeTopComponent.class, "welcomeTopComponent.jButton1.text")); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        new_Button1.setBackground(new java.awt.Color(153, 255, 153));
+        new_Button1.setFont(new_Button1.getFont().deriveFont(new_Button1.getFont().getSize()+2f));
+        org.openide.awt.Mnemonics.setLocalizedText(new_Button1, org.openide.util.NbBundle.getMessage(welcomeTopComponent.class, "welcomeTopComponent.new_Button1.text")); // NOI18N
+        new_Button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                new_Button1ActionPerformed(evt);
             }
         });
 
@@ -288,7 +322,7 @@ public final class welcomeTopComponent extends TopComponent {
                 .addGap(98, 98, 98)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(new_Button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(50, 50, 50)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -304,7 +338,7 @@ public final class welcomeTopComponent extends TopComponent {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(80, 80, 80)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(new_Button1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -340,10 +374,10 @@ public final class welcomeTopComponent extends TopComponent {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        // Apri il progetto con OpenRefract
         OpenPrj opn = new OpenPrj();
-        opn.actionPerformed(evt);
-        updateRecentProject();
+        opn.actionPerformed(null);
+         updateRecentProject();
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -365,11 +399,33 @@ public final class welcomeTopComponent extends TopComponent {
 
         File file = new File(lista[0]);
         boolean mTxt = false;
+        boolean mORefract = false;
         if (file.getPath().toLowerCase().endsWith(".txt")) {
             mTxt = true;
             opj.loadPrj(file, editor.obj, base);
         } else if (file.getPath().toLowerCase().endsWith(".srefract")) {
             opj.loadPrjSmartRefract(file, editor);
+            editor.open();
+            editor.requestActive();
+            editor.setDisplayName((new File(lista[0])).getName());
+            editor.invalidate();
+        } else if (file.getPath().toLowerCase().endsWith(".orefract")) {
+            mORefract = true;
+            try {
+                editor.obj = OpenRefractLoader.loadOpenRefractProject(file);
+                editor.obj.sync();
+            } catch (Exception ex) {
+                javax.swing.JOptionPane.showMessageDialog(null,
+                    "Errore caricamento OpenRefract: " + ex.getMessage(),
+                    "Errore", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            editor.txV.setObj(editor.obj);
+            editor.sv.setObj(editor.obj);
+            editor.tv.setObj(editor.obj);
+            editor.txV.repaint();
+            editor.sv.repaint();
+            editor.tv.repaint();
         }
 
         updateRecentProject();
@@ -377,20 +433,24 @@ public final class welcomeTopComponent extends TopComponent {
         editor.setDisplayName((new File(lista[0])).getName());
         editor.obj.proj_file = (new File(lista[0]));
         if (mTxt) {
-            //base = "";
             opj.loadtrace(editor.obj, base);
             editor.obj.loadSism(0);
             editor.obj.LoadTrace_For_Open();
             editor.obj.tr = editor.obj.getTraces();
         }
-
-        editor.obj.fb =  editor.obj.TraceGroup.get(0);
-        editor.obj.prevTr();
-        editor.tv.obj = editor.obj;
-        editor.obj.sync();
-        editor.tv.repaint();
-        editor.txV.setProj(editor.obj.proj);
-        editor.invalidate();
+        if (mTxt || mORefract) {
+            try {
+                editor.obj.fb =  editor.obj.TraceGroup.get(0);
+            } catch (Exception ex) {
+                // fallback: do nothing
+            }
+            editor.obj.prevTr();
+            editor.tv.obj = editor.obj;
+            editor.obj.sync();
+            editor.tv.repaint();
+            editor.txV.setProj(editor.obj.proj);
+            editor.invalidate();
+        }
 
         /*     tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
       //  Lookup tcLookup = tc.getLookup();
@@ -415,16 +475,18 @@ public final class welcomeTopComponent extends TopComponent {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void new_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_Button1ActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
         System.getProperty("os.arch");
         System.getProperty("os.name");
-
+        folder_history fh = new folder_history();
         DocumentEditor editor = new DocumentEditor();
         editor.open();
         editor.requestActive();
         JFileChooser fc = new JFileChooser();
+        //set the default directory of the file chooser to the last opened folder   
+        fc.setCurrentDirectory(new File(fh.getLastOpenedFolder()));
 
         fc.setFileFilter(new Seg2FileFilter());
         fc.setMultiSelectionEnabled(true);
@@ -433,6 +495,9 @@ public final class welcomeTopComponent extends TopComponent {
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             //File file = fc.getSelectedFile();
+
+            //save the last opened folder
+            fh.saveLastOpenedFolder(fc.getSelectedFile().getParent());
 
             editor.obj.in_file_l = fc.getSelectedFiles();
             editor.obj.newFb();
@@ -462,7 +527,7 @@ public final class welcomeTopComponent extends TopComponent {
         }
 
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_new_Button1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -478,29 +543,55 @@ public final class welcomeTopComponent extends TopComponent {
         
         File file = new File(lista[1]);
         boolean mTxt = false;
+        boolean mORefract = false;
         if (file.getPath().toLowerCase().endsWith(".txt")) {
             mTxt = true;
             opj.loadPrj(file, editor.obj, base);
         } else if (file.getPath().toLowerCase().endsWith(".srefract")) {
             opj.loadPrjSmartRefract(file, editor);
+            editor.open();
+            editor.requestActive();
+            editor.setDisplayName((new File(lista[1])).getName());
+            editor.invalidate();
+        } else if (file.getPath().toLowerCase().endsWith(".orefract")) {
+            mORefract = true;
+            try {
+                editor.obj = OpenRefractLoader.loadOpenRefractProject(file);
+                editor.obj.sync();
+            } catch (Exception ex) {
+                javax.swing.JOptionPane.showMessageDialog(null,
+                    "Errore caricamento OpenRefract: " + ex.getMessage(),
+                    "Errore", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            editor.txV.setObj(editor.obj);
+            editor.sv.setObj(editor.obj);
+            editor.tv.setObj(editor.obj);
+            editor.txV.repaint();
+            editor.sv.repaint();
+            editor.tv.repaint();
         }
 
         editor.setDisplayName((new File(lista[1])).getName());
         editor.obj.proj_file = (new File(lista[1]));
         if (mTxt) {
-            //base = "";
             opj.loadtrace(editor.obj, base);
-                editor.obj.loadSism(0);
-                editor.obj.LoadTrace_For_Open();
-                editor.obj.tr = editor.obj.getTraces();
-    
+            editor.obj.loadSism(0);
+            editor.obj.LoadTrace_For_Open();
+            editor.obj.tr = editor.obj.getTraces();
         }
-        editor.obj.fb = (FirstBrakeList) editor.obj.TraceGroup.get( editor.obj.trace_index );
-        editor.obj.prevTr();
-        editor.obj.sync();
-        editor.tv.repaint();
-        editor.txV.setProj(editor.obj.proj);
-        editor.invalidate();
+        if (mTxt || mORefract) {
+            try {
+                editor.obj.fb = (FirstBrakeList) editor.obj.TraceGroup.get(editor.obj.trace_index);
+            } catch (Exception ex) {
+                // fallback: do nothing
+            }
+            editor.obj.prevTr();
+            editor.obj.sync();
+            editor.tv.repaint();
+            editor.txV.setProj(editor.obj.proj);
+            editor.invalidate();
+        }
 
         //   tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
         //  Lookup tcLookup = tc.getLookup();
@@ -528,22 +619,42 @@ public final class welcomeTopComponent extends TopComponent {
         DocumentEditor editor = new DocumentEditor();
         OpenPrj open = new OpenPrj();
         boolean mTxt = false;
+        boolean mORefract = false;
         editor.open();
         editor.requestActive();
         String path = (new File(lista[2])).getAbsolutePath(); //fc.getSelectedFile().getAbsolutePath();
         String base = (new File(lista[2])).getParent();  // (fc.getSelectedFile().getParent());
         String relative = (new File(base)).toURI().relativize(new File(path).toURI()).getPath();// new File(base).toURI().relativize(new File(path).toURI()).getPath();
-        //editor.obj.newFb();
-        //editor.obj.loadSism(0);
-        //editor.obj.tr=editor.obj.getTraces();
 
         File file = new File(lista[2]);    //File file = fc.getSelectedFile();
 
-        //editor.obj.in_file=fc.getSelectedFile();
         editor.obj.TraceGroup = new ArrayList();
         if (file.getPath().toLowerCase().endsWith(".txt")) {
             open.loadPrj(file, editor.obj, base);
             mTxt = true;
+        } else if (file.getPath().toLowerCase().endsWith(".srefract")) {
+            open.loadPrjSmartRefract(file, editor);
+            editor.open();
+            editor.requestActive();
+            editor.setDisplayName(file.getName());
+            editor.invalidate();
+        } else if (file.getPath().toLowerCase().endsWith(".orefract")) {
+            mORefract = true;
+            try {
+                editor.obj = OpenRefractLoader.loadOpenRefractProject(file);
+                editor.obj.sync();
+            } catch (Exception ex) {
+                javax.swing.JOptionPane.showMessageDialog(null,
+                    "Errore caricamento OpenRefract: " + ex.getMessage(),
+                    "Errore", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            editor.txV.setObj(editor.obj);
+            editor.sv.setObj(editor.obj);
+            editor.tv.setObj(editor.obj);
+            editor.txV.repaint();
+            editor.sv.repaint();
+            editor.tv.repaint();
         }
 
         String userHome = "user.home";
@@ -571,19 +682,22 @@ public final class welcomeTopComponent extends TopComponent {
         if (mTxt) {
             base = "";
             open.loadtrace(editor.obj, base);
-                editor.obj.loadSism(0);
-        editor.obj.LoadTrace_For_Open();
-        editor.obj.tr = editor.obj.getTraces();
-    
+            editor.obj.loadSism(0);
+            editor.obj.LoadTrace_For_Open();
+            editor.obj.tr = editor.obj.getTraces();
         }
-        editor.obj.fb =  editor.obj.TraceGroup.get(0);
-        editor.obj.prevTr();
-        editor.tv.obj = editor.obj;
-
-        editor.obj.sync();
-        editor.tv.repaint();
-        //editor.dv.setProj(editor.obj.proj);
-        editor.invalidate();
+        if (mTxt || mORefract) {
+            try {
+                editor.obj.fb =  editor.obj.TraceGroup.get(0);
+            } catch (Exception ex) {
+                // fallback: do nothing
+            }
+            editor.obj.prevTr();
+            editor.tv.obj = editor.obj;
+            editor.obj.sync();
+            editor.tv.repaint();
+            editor.invalidate();
+        }
 
         /*  tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
         Lookup tcLookup = tc.getLookup();
@@ -609,7 +723,6 @@ public final class welcomeTopComponent extends TopComponent {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -619,6 +732,7 @@ public final class welcomeTopComponent extends TopComponent {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton new_Button1;
     // End of variables declaration//GEN-END:variables
     @Override
     public void componentOpened() {
@@ -643,40 +757,6 @@ public final class welcomeTopComponent extends TopComponent {
 
     }
 
-    private void moveRecentFirst(String elemento_lista) {
-        
-        
-        lista[2]=lista[1];
-        lista[1]=lista[0];
-        lista[0]=elemento_lista;
-        
-        String userHome = "user.home";
-
-        // We get the path by getting the system property with the 
-        // defined key above. path+"/smartRefract-data/"
-        String path = System.getProperty(userHome);
-
-        try {
-            
-            FileOutputStream fos=new FileOutputStream(path + "/smartRefract-data/" + "recenti.list");
-
-            OutputStreamWriter os = new OutputStreamWriter(fos);
-
-            os.write(lista[0] + "\n");
-            os.write(lista[1] + "\n");
-            os.write(lista[2] + "\n");
-            os.flush();
-            os.close();
-            fos.close();
-        }
-        catch(Exception ex){
-            
-        }
-        updateRecentProject();
-
-// throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     public void set_lrasra_par(int lra, int sra, double thrs)
     {
         ltasta_par.set_par(lra, sra, thrs);

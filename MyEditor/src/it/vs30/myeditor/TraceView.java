@@ -29,11 +29,11 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+ /*
 * TraceView.java
 *
 * Created on 28-mar-2011, 17.03.51
-*/
+ */
 package it.vs30.myeditor;
 
 import it.vs30.geometryView.geometryViewerTopComponent;
@@ -50,6 +50,8 @@ import java.awt.RenderingHints;
 import java.awt.TexturePaint;
 import java.awt.geom.Path2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 import org.myorg.myapi.APIObject;
 import org.myorg.myapi.FirstBrakeList;
 import org.myorg.myapi.Indagine;
@@ -99,6 +101,20 @@ public class TraceView extends javax.swing.JPanel {
         // dlg_Trc = new JTraceDlg(this);
         setBackground(Color.BLACK);
         setForeground(Color.WHITE);
+    }
+    
+    /**
+     * Aggiorna l'oggetto su cui disegnare e ridisegna la vista.
+     */
+    public void setObj(APIObject newObj) {
+        this.obj = newObj;
+        this.proj = newObj.proj;
+        // Assicurati che indice e tracce siano a posto
+        if (obj.TraceGroup != null && !obj.TraceGroup.isEmpty()) {
+            obj.fb = obj.TraceGroup.get(obj.trace_index);
+            obj.tr = obj.fb.tr;
+        }
+        repaint();
     }
 
     @Override
@@ -640,6 +656,7 @@ public class TraceView extends javax.swing.JPanel {
                 // g.drawString(" "+obj.tr[0].getSampleInterval()+" "+stepV+" "+stepT, 50, 50);
                 Graphics2D g2 = (Graphics2D) g;
                 g2.setColor(Color.white);
+                draw_seism_heatmap(g);
                 for (int j = 0; j < obj.tr.length; j++) {
                     double maxV;
                     if (this.avgMAX) {
@@ -739,10 +756,10 @@ public class TraceView extends javax.swing.JPanel {
                                 mag = true;
                             } else {
                                 p.lineTo(x1 + margine_X, y1); // curveTo(x1,y1, ystp * proj.Zg1[(proj.Zg1.length - 3)] +
-                                                              // (margUp * ymax) + 30, (xshf + (nchanel *
-                                                              // (proj.Zg1.length - 3))), ystp *
-                                                              // proj.Zg1[(proj.Zg1.length - 3)] + (margUp * ymax) +
-                                                              // 30);
+                                // (margUp * ymax) + 30, (xshf + (nchanel *
+                                // (proj.Zg1.length - 3))), ystp *
+                                // proj.Zg1[(proj.Zg1.length - 3)] + (margUp * ymax) +
+                                // 30);
 
                             }
 
@@ -835,7 +852,164 @@ public class TraceView extends javax.swing.JPanel {
         // throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public void resized(int w, int h) {
+    void draw_seism_heatmap(Graphics g) {
+        if (obj.tr.length > 0) {
+            if (!is_white) {
+                this.setForeground(Color.white);
+            } else {
+                this.setForeground(Color.black);
+            }
+
+            // g.drawString(" "+obj.tr[0].getSampleInterval()+" "+stepV+" "+stepT, 50, 50);
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setColor(Color.white);
+            // Interpolate heatmapPoints considering anisotropy and plot the heatmap
+
+            List<List<double[]>> tracePoints = new ArrayList<>();
+            int w = this.getWidth();
+            int h = this.getHeight();
+            BufferedImage heatmapImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D heatmapG2 = heatmapImage.createGraphics();
+            heatmapG2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            double stepT = (double) (this.getHeight()) / (double) (obj.tr[0].length);
+            double stepCh = (this.getWidth() - 2 * margine_X) / obj.tr.length;
+
+            for (int j = 0; j < obj.tr.length; j++) {
+                double maxV;
+                if (this.avgMAX) {
+                    maxV = obj.tr[j].getMediaAbs();
+                } else {
+                    maxV = obj.tr[j].getMaxValue() - obj.tr[j].media;
+                }
+                
+                
+
+                double stepV = 0.5 * (double) stepCh / (double) maxV;
+                if (!is_white) {
+                    g2.setColor(Color.lightGray);
+                } else {
+                    g2.setColor(Color.DARK_GRAY);
+                }
+
+                // Creare liste separate di punti per ogni traccia
+                List<double[]> points = new ArrayList<>();
+                for (int i = 0; i < obj.tr[j].value.length; i++) {
+                    double x = (stepCh/2.0)+(j * stepCh) + margine_X;
+                    double y = i * stepT;
+                    double value = obj.tr[j].value[i] / maxV;
+                    points.add(new double[]{x, y, value});
+                }
+                tracePoints.add(points);
+            }
+
+            // Find min and max values
+            double minVal = Double.MAX_VALUE;
+            double maxVal = Double.MIN_VALUE;
+            for (List<double[]> pts : tracePoints) {
+                for (double[] point : pts) {
+                    if (point[2] < minVal) {
+                        minVal = point[2];
+                    }
+                    if (point[2] > maxVal) {
+                        maxVal = point[2];
+                    }
+                }
+            }
+
+            // Iterate over each pixel to assign color based on interpolated value
+            for (int xPixel = 0; xPixel < w; xPixel++) {
+                for (int yPixel = 0; yPixel < h; yPixel++) {
+                    // Trovare le tracce adiacenti
+                    int traceIndex = (int) ((xPixel - (stepCh/2.0) ) / stepCh);
+
+                    // Trovare l'indice nella traccia del valore alla stessa y del punto da interpolare
+                    int yIndex = (int) (yPixel / stepT);
+
+                    // Aggiungere i 3 punti sopra e i 3 punti sotto
+                    List<double[]> nearestNeighbors = new ArrayList<>();
+                    for (int i = -15; i <= 15; i++) {
+                        int index = yIndex + i;
+                        if (traceIndex >= 0 && traceIndex < tracePoints.size() && index >= 0 && index < tracePoints.get(traceIndex).size()) {
+                            nearestNeighbors.add(tracePoints.get(traceIndex).get(index));
+                        }
+                        if (traceIndex + 1 >= 0 && traceIndex + 1 < tracePoints.size() && index >= 0 && index < tracePoints.get(traceIndex + 1).size()) {
+                            nearestNeighbors.add(tracePoints.get(traceIndex + 1).get(index));
+                        }
+                    }
+
+                    double interpValue = 0.0;
+                    double weightSum = 0.0;
+                    double power = 2.0; // Inverse distance weighting power
+
+                    for (double[] point : nearestNeighbors) {
+                        double dx = xPixel - point[0];
+                        double dy = yPixel - point[1];
+                        double distance = Math.sqrt(dx * dx + dy * dy) + 1e-6; // Avoid division by zero
+                        double weight = 1.0 / Math.pow(distance, power);
+                        interpValue += point[2] * weight;
+                        weightSum += weight;
+                    }
+
+                    interpValue /= weightSum;
+
+                    // Normalize the interpolated value
+                    float normalized = (float) ((interpValue - minVal) / (maxVal - minVal));
+                    normalized = Math.max(0f, Math.min(1f, normalized));
+
+                    // Map normalized value to color (e.g., blue to white to red)
+
+                    // Map normalized value to color (e.g., blue to white to red)
+int red, green, blue;
+if (interpValue < 0) {
+    red = (int) (255 * (1 + interpValue)); // From 0 to 255
+    green = (int) (255 * (1 + interpValue)); // From 0 to 255
+    blue = 255; // Always 255
+} else {
+    red = 255; // Always 255
+    green = (int) (255 * (1 - interpValue)); // From 255 to 0
+    blue = (int) (255 * (1 - interpValue)); // From 255 to 0
+}
+Color color = new Color(red, green, blue);
+
+
+// Apply a power function to make the variation steeper around 0
+float exponent = 2.0f; // Adjust this value to control the steepness
+float adjustedValue = (float) Math.signum(interpValue) * (float) Math.pow(Math.abs(interpValue), exponent);
+
+// Map adjusted value to color (e.g., blue to white to red)
+
+if (adjustedValue < 0) {
+    red = (int) (255 * (1 + adjustedValue)); // From 0 to 255
+    green = (int) (255 * (1 + adjustedValue)); // From 0 to 255
+    blue = 255; // Always 255
+} else {
+    red = 255; // Always 255
+    green = (int) (255 * (1 - adjustedValue)); // From 255 to 0
+    blue = (int) (255 * (1 - adjustedValue)); // From 255 to 0
+}
+color = new Color(red, green, blue);
+
+
+
+
+                    // Map normalized value to color (e.g., blue to red)
+                 //   Color color = Color.getHSBColor((1 - normalized) * 0.8f, 1.0f, 1.0f);
+                    heatmapG2.setColor(color);
+                    heatmapG2.fillRect(xPixel, yPixel, 1, 1);
+                }
+            }
+
+            heatmapG2.dispose();
+
+            // Draw the heatmap on the panel
+            g.drawImage(heatmapImage, 0, 0, null);
+
+        
+    }
+
+}
+
+public void resized(int w, int h) {
 
         w = this.getParent().getWidth();
         h = this.getParent().getHeight();
@@ -857,28 +1031,30 @@ public class TraceView extends javax.swing.JPanel {
 
     // exec autopicking of first break
     /**
-     * Automatically picks the first arrival in seismic trace data using the STA/LTA method.
+     * Automatically picks the first arrival in seismic trace data using the
+     * STA/LTA method.
      *
      * @param LTA the length of the long-term average window
      * @param STA the length of the short-term average window
      * @param thrs the threshold for the STA/LTA ratio to identify a pick
      *
-     * The method processes each trace in the `obj.tr` array. It calculates the short-term average (STA),
-     * long-term average (LTA), and their ratio (STA/LTA) for each data point in the trace. When the STA/LTA
-     * ratio exceeds the specified threshold, it identifies the index as the first arrival and sets the pick
-     * time accordingly.
+     * The method processes each trace in the `obj.tr` array. It calculates the
+     * short-term average (STA), long-term average (LTA), and their ratio
+     * (STA/LTA) for each data point in the trace. When the STA/LTA ratio
+     * exceeds the specified threshold, it identifies the index as the first
+     * arrival and sets the pick time accordingly.
      *
-     * The method performs the following steps:
-     * 1. Initializes the STA, LTA, and STA/LTA ratio arrays.
-     * 2. Calculates the STA for each data point.
-     * 3. Calculates the LTA for each data point.
-     * 4. Calculates the STA/LTA ratio for each data point.
-     * 5. Identifies the first arrival based on the STA/LTA ratio exceeding the threshold.
-     * 6. Sets the pick time and updates the relevant objects.
+     * The method performs the following steps: 1. Initializes the STA, LTA, and
+     * STA/LTA ratio arrays. 2. Calculates the STA for each data point. 3.
+     * Calculates the LTA for each data point. 4. Calculates the STA/LTA ratio
+     * for each data point. 5. Identifies the first arrival based on the STA/LTA
+     * ratio exceeding the threshold. 6. Sets the pick time and updates the
+     * relevant objects.
      *
-     * The method also repaints and invalidates the current view after processing all traces.
+     * The method also repaints and invalidates the current view after
+     * processing all traces.
      */
-    public void autoPick_2(int LTA,int STA, double thrs) {
+    public void autoPick_2(int LTA, int STA, double thrs) {
         int staWindow = STA; // finestra temporale breve
         int ltaWindow = LTA; // finestra temporale lunga
         double threshold = thrs; // soglia per il rapporto STA/LTA
@@ -919,8 +1095,7 @@ public class TraceView extends javax.swing.JPanel {
 
             // Identificare i primi arrivi
             for (int j = ltaWindow; j < len; j++) {
-                if (staLtaRatio[j] > threshold) 
-                {
+                if (staLtaRatio[j] > threshold) {
                     System.out.println("Primo arrivo rilevato a indice: " + j);
                     obj.tr[i].setPick(j * obj.tr[i].sampleInterval);
                     obj.fb.setFB(i, j * obj.tr[i].sampleInterval * 1000);
@@ -994,7 +1169,7 @@ public class TraceView extends javax.swing.JPanel {
 
     private void draw_all_Pick(Graphics g) {
         try {
-            float[] dash1 = { 5.0f };
+            float[] dash1 = {5.0f};
             final BasicStroke dashed = new BasicStroke(0.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1,
                     0.0f);
             if (obj.tr.length > 0) {

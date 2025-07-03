@@ -108,8 +108,14 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
         sv = new JSezioneView(obj);
         TopComponent tc1 = WindowManager.getDefault().findTopComponent("sideTools_TopComponent");
         sideTool = (sideTools_TopComponent) tc1;
-        sideTool.txt.setTXView(txV.dromoSelected);
-        sideTool.jtr_dlg = new trace_tools(tv);
+        
+        // Check if sideTools_TopComponent is available before using it
+        if (sideTool != null && sideTool.txt != null) {
+            sideTool.txt.setTXView(txV.dromoSelected);
+            sideTool.jtr_dlg = new trace_tools(tv);
+        } else {
+            System.err.println("Warning: sideTools_TopComponent not available or not fully initialized");
+        }
 
 //        tc1 = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
 //        geomTC = (geometryViewerTopComponent) tc1;
@@ -679,18 +685,22 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
         @Override
         protected void handleSave() throws IOException {
             tc().content.remove(this);
-
             unregister();
-            if (tc().obj.proj_file != null && tc().obj.proj_file.getName().endsWith("srefract")) {
-                System.out.println(tc().obj.proj_file.getName());
-                
-                SaveProject.saveSmartRefractProject(tc().obj.proj_file, tc().obj);
-                tc().setDisplayName(tc().obj.proj_file.getName());
-
-            } else {
-                
+            if (tc().obj.proj_file != null) {
+                String name = tc().obj.proj_file.getName().toLowerCase();
+                if (name.endsWith("srefract")) {
+                    System.out.println(tc().obj.proj_file.getName());
+                    SaveProject.saveSmartRefractProject(tc().obj.proj_file, tc().obj);
+                    tc().setDisplayName(tc().obj.proj_file.getName());
+                } else if (name.endsWith("orefract")) {
+                    OpenRefractWriter.saveOpenRefractProject(tc().obj.proj_file, tc().obj);
+                    tc().setDisplayName(tc().obj.proj_file.getName());
+                } else {
+                    // Default: salva in formato OpenRefract
+                    OpenRefractWriter.saveOpenRefractProject(tc().obj.proj_file, tc().obj);
+                    tc().setDisplayName(tc().obj.proj_file.getName());
+                }
             }
-            
         }
 
         DocumentEditor tc() {
