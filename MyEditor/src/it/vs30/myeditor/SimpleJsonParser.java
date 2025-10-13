@@ -337,7 +337,8 @@ public class SimpleJsonParser {
         tg.spacing = getDoubleValue(map, "spacing", 0.0);
         tg.spacingIn = getDoubleValue(map, "spacingIn", 0.0);
         tg.primo = getDoubleValue(map, "primo", 0.0);
-        tg.shotLocation = getDoubleValue(map, "shotLocation", 0.0);
+    tg.shotLocation = getDoubleValue(map, "shotLocation", 0.0);
+    tg.shotElevation = getDoubleValue(map, "shotElevation", 0.0);
         tg.AR = getIntValue(map, "AR", 0);
         tg.xsc = getDoubleValue(map, "xsc", 999.0);
         tg.tAB = getDoubleValue(map, "tAB", 999.0);
@@ -527,7 +528,8 @@ public class SimpleJsonParser {
         writeDoubleField(sb, "spacing", tg.spacing, indent + 1, true);
         writeDoubleField(sb, "spacingIn", tg.spacingIn, indent + 1, true);
         writeDoubleField(sb, "primo", tg.primo, indent + 1, true);
-        writeDoubleField(sb, "shotLocation", tg.shotLocation, indent + 1, true);
+    writeDoubleField(sb, "shotLocation", tg.shotLocation, indent + 1, true);
+    writeDoubleField(sb, "shotElevation", tg.shotElevation, indent + 1, true);
         writeIntField(sb, "AR", tg.AR, indent + 1, true);
         writeDoubleField(sb, "xsc", tg.xsc, indent + 1, true);
         writeDoubleField(sb, "tAB", tg.tAB, indent + 1, true);

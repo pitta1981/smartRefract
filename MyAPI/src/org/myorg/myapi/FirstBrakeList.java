@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.OutputStreamWriter;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +21,7 @@ import java.util.List;
  */
 public class FirstBrakeList implements Externalizable {
 
-    public ArrayList<FirstBrake> linea = new ArrayList();
+    public ArrayList<FirstBrake> linea = new ArrayList<FirstBrake>();
     public FirstBrake[] fb;
     public ZoomTraceUtil[] zoomTr;
     public Trace[] tr;
@@ -44,6 +43,8 @@ public class FirstBrakeList implements Externalizable {
     public String strato3R = "0-0";
     public JRetta[] dromoR;
     public int VERSION;
+    // Optional: shot elevation (not serialized in legacy format to preserve compatibility)
+    public double shotElevation = 0.0;
 
     public FirstBrakeList() {
         //System.out.println("Init FIB");
@@ -58,7 +59,7 @@ public class FirstBrakeList implements Externalizable {
         dromoR[0] = new JRetta();
         dromoR[1] = new JRetta();
 
-        linea = new ArrayList();
+    linea = new ArrayList<FirstBrake>();
         zoomTr[0] = new ZoomTraceUtil();
     }
 
@@ -80,7 +81,7 @@ public class FirstBrakeList implements Externalizable {
         dromoR[1] = new JRetta();
         dromoR[2] = new JRetta();
 
-        linea = new ArrayList();
+    linea = new ArrayList<FirstBrake>();
         for (int i = 0; i < nchannel; i++) {
             tr[i] = new Trace(1);
             zoomTr[i] = new ZoomTraceUtil();
@@ -96,7 +97,7 @@ public class FirstBrakeList implements Externalizable {
 
     public void setChanel(int n) {
         ch = n;
-        linea = new ArrayList(n);
+    linea = new ArrayList<FirstBrake>(n);
         //System.out.println("setChanel FIB");
         fb = new FirstBrake[n];
         zoomTr = new ZoomTraceUtil[n];
@@ -929,7 +930,7 @@ public class FirstBrakeList implements Externalizable {
             double shotLocation = oi.readDouble();
             double sampleInterval = oi.readDouble();
             double windowLenght = oi.readDouble();
-            int tmplen = oi.readInt();
+            /* int tmplen = */ oi.readInt();
             int vlen = oi.readInt();
             tr[i] = new Trace(len);
             tr[i].number = numnber;

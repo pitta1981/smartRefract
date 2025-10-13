@@ -101,7 +101,8 @@ public class OpenRefractWriter {
         traceGroup.spacing = fbl.spaz;
         traceGroup.spacingIn = fbl.spaz_in;
         traceGroup.primo = fbl.primo;
-        traceGroup.shotLocation = fbl.scoppio;
+    traceGroup.shotLocation = fbl.scoppio;
+    traceGroup.shotElevation = fbl.shotElevation;
         traceGroup.AR = fbl.AR;
         traceGroup.xsc = fbl.xsc;
         traceGroup.tAB = fbl.tAB;

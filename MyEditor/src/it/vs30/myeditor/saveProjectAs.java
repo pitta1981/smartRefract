@@ -170,7 +170,7 @@ public final class saveProjectAs implements ActionListener {
             }
             
             os.write("Elevation\n");
-            for (int i = 0; i < fl.fb.length - 1; i++) {
+            for (int i = 0; i < fl.fb.length; i++) {
                 os.write(fl.fb[i].z + " ");
             }
 

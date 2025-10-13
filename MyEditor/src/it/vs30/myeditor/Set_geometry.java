@@ -4,64 +4,76 @@
  */
 package it.vs30.myeditor;
 
+import it.vs30.myeditor.geometry.GeometryEditorDialog;
+import it.vs30.myeditor.geometry.ShotPosition;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import org.myorg.myapi.APIObject;
 import org.myorg.myapi.FirstBrakeList;
-//import org.myorg.myviewer.MyViewerTopComponent;
-import org.openide.util.Lookup;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
 
+/**
+ * Action per impostare la geometria dello stendimento.
+ * Utilizza il nuovo GeometryEditorDialog con supporto tabelle e CSV.
+ * 
+ * @author smartRefract Team
+ */
 public final class Set_geometry implements ActionListener {
 
+    @Override
     public void actionPerformed(ActionEvent e) {
-        JGeometryDlg geomDLG = new JGeometryDlg();
-        geomDLG.setModal(true);
-        TopComponent tc;// = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
-        //Lookup tcLookup = tc.getLookup();
-        //     ((MyViewerTopComponent) tc).jLabel1.setText("APIObject # save");
-        tc = WindowManager.getDefault().findTopComponent("DocumentEditor");
+        TopComponent tc = WindowManager.getDefault().findTopComponent("DocumentEditor");
         
-        APIObject obj = ((DocumentEditor) tc).obj;
-
-        geomDLG.setTable(obj.proj);
-
-        geomDLG.draw_Geom_Preview();
-        geomDLG.setVisible(true);
-
-        if (geomDLG.RETVALUE == 1) {
-            //       TopComponent tc = WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
-            //    Lookup tcLookup = tc.getLookup();
-            //     ((MyViewerTopComponent) tc).jLabel1.setText("APIObject # save");
-            //     APIObject obj = ((MyViewerTopComponent) tc).active;
-            //     ((MyViewerTopComponent) tc).jLabel2.setText("APIObject # trace " + obj.tr.length);
-            while (geomDLG.selezionato.startsWith(" ")) {
-                geomDLG.selezionato = geomDLG.selezionato.replaceFirst(" ", "");
-            }
-
-            if (obj.proj.stesa.size() == geomDLG.selezionato.split(" ").length) {
-                String[] geom = geomDLG.selezionato.split(" ");
-                for (int i = 0; i < obj.proj.stesa.size(); i++) {
-                    FirstBrakeList fbl = (FirstBrakeList) obj.proj.stesa.get(i);
-                    fbl.spaz = geomDLG.spaz;
-                    fbl.spaz_in = geomDLG.spaz_in;
-
-                    if (geom[i].contains("m") && !geom[i].contains("+")) {
-                        fbl.scoppio = Double.parseDouble(geom[i].replace('m', '\0')) + fbl.spaz_in;
-
-                    } else if (geom[i].contains("m") && geom[i].contains("+")) {
-                        fbl.scoppio = (fbl.ch - 1) * fbl.spaz + Double.parseDouble(geom[i].replace('m', '\0')) + fbl.spaz_in;
-
-                    } else if (!geom[i].contains("m")) {
-                        fbl.scoppio = (Double.parseDouble(geom[i].replace('m', '\0'))) * fbl.spaz + fbl.spaz_in;
-                    }
-                    fbl.setGeom();
-
-                }
-            }
-            obj.sync();
+        if (tc == null || !(tc instanceof DocumentEditor)) {
+            System.err.println("DocumentEditor non trovato");
+            return;
         }
-        // TODO implement action body
+        
+        DocumentEditor docEditor = (DocumentEditor) tc;
+        APIObject obj = docEditor.obj;
+        
+        if (obj == null || obj.proj == null) {
+            System.err.println("Progetto non inizializzato");
+            return;
+        }
+        
+        // Crea e mostra il nuovo dialog
+        GeometryEditorDialog dialog = new GeometryEditorDialog(null);
+        
+        // Carica la geometria esistente
+        dialog.loadFromProject(obj.proj);
+        
+        // Mostra il dialog
+        dialog.setVisible(true);
+        
+        // Se l'utente ha confermato, applica le modifiche
+        if (dialog.isApproved()) {
+            // Applica i parametri base
+            dialog.applyToProject(obj.proj);
+            
+            // Applica le posizioni degli shot
+            List<ShotPosition> shots = dialog.getShots();
+            for (int i = 0; i < Math.min(shots.size(), obj.proj.stesa.size()); i++) {
+                FirstBrakeList fbl = obj.proj.stesa.get(i);
+                fbl.scoppio = shots.get(i).getAbsolutePosition();
+                // Non rigenerare la geometria: manterremo le posizioni personalizzate dei geofoni
+            }
+            
+            // Sincronizza il progetto
+            obj.sync();
+            
+            // Aggiorna la vista geometrica se disponibile
+            TopComponent geomTC = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
+            if (geomTC != null) {
+                geomTC.repaint();
+            }
+            
+            // Aggiorna il DocumentEditor
+            docEditor.tv.repaint();
+            
+            System.out.println("Geometria aggiornata con successo");
+        }
     }
 }

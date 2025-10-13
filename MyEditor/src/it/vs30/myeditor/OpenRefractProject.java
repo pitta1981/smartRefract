@@ -50,6 +50,7 @@ class OpenRefractTraceGroup {
     public double spacingIn;
     public double primo;
     public double shotLocation;
+    public double shotElevation; // optional elevation of the shot location
     public int AR;
     public double xsc;
     public double tAB;

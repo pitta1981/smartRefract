@@ -222,10 +222,6 @@ public class TraceView extends javax.swing.JPanel {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 formMousePressed(evt);
             }
-
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                formMouseReleased(evt);
-            }
         });
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -523,7 +519,7 @@ public class TraceView extends javax.swing.JPanel {
                 this.rView.repaint();
                 // this.rView.invalidate();
                 double stepCh = (this.getWidth() - 2 * margine_X) / obj.tr.length;
-                double stepV = (double) stepCh / (double) maxV;
+                double stepV = stepCh / maxV;
 
                 ArrFB = (FirstBrakeList) obj.TraceGroup.get(0);
 
@@ -637,7 +633,7 @@ public class TraceView extends javax.swing.JPanel {
                     double maxV = obj.tr[j].getMaxValue();
                     double stepT = (double) (h) / (double) (obj.tr[0].length);
                     double stepCh = (w - 2 * margine_X) / obj.tr.length;
-                    double stepV = (double) stepCh / (double) maxV;
+                    double stepV = stepCh / maxV;
                     int x1 = (int) ((((j) * stepCh) + stepCh / 2) - stepCh / 3) + margine_X;
                     int y1 = (int) (obj.fb.fb[j].time * stepT / obj.tr[0].sampleInterval) / 1000;
 

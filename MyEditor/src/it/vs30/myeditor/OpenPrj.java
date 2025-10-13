@@ -238,7 +238,13 @@ public final class OpenPrj implements ActionListener {
                             obj.fb.fb[i].z = Double.parseDouble(split[i]);
                             System.out.println(obj.fb.fb[i].z);
                         }
+                        linea = br.readLine(); // Read next line after elevation
                     }
+                    
+                    // Popola le posizioni dei geofoni in base a spacing e start position
+                    // Questo assicura che la geometria sia sincronizzata con il dialog
+                    obj.fb.setGeom();
+                    
                     obj.TraceGroup.add(obj.fb);
 
                 } catch (Exception e1) {

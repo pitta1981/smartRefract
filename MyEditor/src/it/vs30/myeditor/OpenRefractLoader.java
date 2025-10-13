@@ -154,7 +154,8 @@ public class OpenRefractLoader {
         fbl.spaz = traceGroup.spacing;
         fbl.spaz_in = traceGroup.spacingIn;
         fbl.primo = traceGroup.primo;
-        fbl.scoppio = traceGroup.shotLocation;
+    fbl.scoppio = traceGroup.shotLocation;
+    fbl.shotElevation = Double.isNaN(traceGroup.shotElevation) ? 0.0 : traceGroup.shotElevation;
         fbl.AR = traceGroup.AR;
         fbl.xsc = traceGroup.xsc;
         fbl.tAB = traceGroup.tAB;

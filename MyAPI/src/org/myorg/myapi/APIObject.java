@@ -125,6 +125,15 @@ public final class APIObject implements java.io.Externalizable {
                 fb.spaz = geo_step;
                 fb.spaz_in = tr[0].getPhoneLocation();
             }
+            
+            // Popola le posizioni dei geofoni dai dati delle tracce sismiche
+            // Questo assicura che la geometria del dialog corrisponda ai file caricati
+            for (int j = 0; j < fb.fb.length && j < tr.length; j++) {
+                fb.fb[j].posx = tr[j].getPhoneLocation();
+                // L'elevazione rimane a 0 finché non viene caricata/impostata
+                fb.fb[j].z = 0.0;
+            }
+            
             fb.fbp = in_file_l[i].getPath();
             TraceGroup.add(fb);
         }

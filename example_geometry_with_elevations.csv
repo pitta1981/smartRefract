@@ -1,0 +1,36 @@
+# SmartRefract Geometry - Example File with Elevations
+# This is an example geometry file for a 24-channel seismic spread
+# Spacing: 2.0m
+# Start Position: 0.0m
+# Format: Type,Number/File,Position(m),Elevation(m),Info
+
+# Geophones - Standard 24-channel spread with 2m spacing and varying elevations
+0,0.000,100.0,GEOPHONE
+1,2.000,100.5,GEOPHONE
+2,4.000,101.2,GEOPHONE
+3,6.000,102.0,GEOPHONE
+4,8.000,102.5,GEOPHONE
+5,10.000,103.0,GEOPHONE
+6,12.000,103.2,GEOPHONE
+7,14.000,103.5,GEOPHONE
+8,16.000,103.8,GEOPHONE
+9,18.000,104.0,GEOPHONE
+10,20.000,104.2,GEOPHONE
+11,22.000,104.5,GEOPHONE
+12,24.000,104.8,GEOPHONE
+13,26.000,105.0,GEOPHONE
+14,28.000,105.2,GEOPHONE
+15,30.000,105.5,GEOPHONE
+16,32.000,105.8,GEOPHONE
+17,34.000,106.0,GEOPHONE
+18,36.000,106.2,GEOPHONE
+19,38.000,106.5,GEOPHONE
+20,40.000,106.8,GEOPHONE
+21,42.000,107.0,GEOPHONE
+22,44.000,107.5,GEOPHONE
+23,46.000,108.0,GEOPHONE
+
+# Shots - Three source positions with elevations
+0,shot01.dat,-5.000,99.5,Shot before spread,SHOT
+1,shot02.dat,23.000,104.5,Shot at center,SHOT
+2,shot03.dat,51.000,108.5,Shot after spread,SHOT
