@@ -101,6 +101,13 @@ public class TraceView extends javax.swing.JPanel {
     private boolean selectionMode;
     private int selected_trace = 0;
 
+    // Campi per il caching della heatmap
+    private BufferedImage cachedHeatmap = null;
+    private int cachedWidth = -1;
+    private int cachedHeight = -1;
+    private boolean heatmapDirty = true;
+    private boolean previousIsWhite = false;
+
     /**
      * Reference to the documentEditor object
      */
@@ -136,6 +143,7 @@ public class TraceView extends javax.swing.JPanel {
             obj.fb = obj.TraceGroup.get(obj.trace_index);
             obj.tr = obj.fb.tr;
         }
+        heatmapDirty = true;
         repaint();
     }
 
@@ -342,6 +350,36 @@ public class TraceView extends javax.swing.JPanel {
         // TODO add your handling code here:
         time = 0;
         time = System.currentTimeMillis();
+        
+        if (this.unlocked) {
+            try {
+                // System.currentTimeMillis();
+                double stepCh = (this.getWidth() - (2 * margine_X)) / obj.tr.length;
+                double stepT = (double) (this.getHeight()) / (double) (obj.tr[0].length);
+                this.setToolTipText(" " + (int) (evt.getX() / stepCh) + " "
+                        + (int) (evt.getY() * (1 / stepT)) * obj.tr[0].sampleInterval);
+
+                if (evt.getX() > margine_X && evt.getX() < (margine_X + (this.getWidth() - (2 * margine_X)))) {
+                    int ch = (int) ((evt.getX() - margine_X) / stepCh);
+
+                    this.setToolTipText(" " + ch + " " + (int) (evt.getY() * (1 / stepT)) * obj.tr[0].sampleInterval);
+
+                    undoFB = obj.fb.fb[ch].time / 1000;
+                    undoCh = ch;
+                    obj.tr[ch].setPick((evt.getY() * (1 / stepT)) * obj.tr[0].sampleInterval);
+                    obj.fb.setFB(ch, (evt.getY() * (1 / stepT)) * obj.tr[0].sampleInterval * 1000);
+                    docEd.modify();
+                }
+
+                // obj.TraceGroup.remove(obj.trace_index);
+                obj.TraceGroup.set(obj.trace_index, obj.fb);
+                obj.proj.stesa = obj.TraceGroup;
+                this.repaint();
+                this.invalidate();
+            } catch (Exception ex) {
+                System.out.println("" + ex);
+            }
+        }
     }// GEN-LAST:event_formMousePressed
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseReleased
@@ -407,6 +445,7 @@ public class TraceView extends javax.swing.JPanel {
                     undoCh = ch;
                     obj.tr[ch].setPick((evt.getY() * (1 / stepT)) * obj.tr[0].sampleInterval);
                     obj.fb.setFB(ch, (evt.getY() * (1 / stepT)) * obj.tr[0].sampleInterval * 1000);
+                    docEd.modify();
                 }
 
                 // obj.TraceGroup.remove(obj.trace_index);
@@ -803,89 +842,98 @@ public class TraceView extends javax.swing.JPanel {
         // Disegna la heatmap colorata delle tracce sismiche.
         // La palette viridis viene adattata: su sfondo chiaro la mappa è più chiara e meno satura, su scuro più satura.
         if (obj.tr.length > 0) {
-            if (!is_white) {
-                this.setForeground(Color.white);
-            } else {
-                this.setForeground(Color.black);
-            }
-
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setColor(Color.white);
-
-            List<List<double[]>> tracePoints = new ArrayList<>();
             int w = this.getWidth();
             int h = this.getHeight();
-            BufferedImage heatmapImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-            Graphics2D heatmapG2 = heatmapImage.createGraphics();
-            heatmapG2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-            double stepT = (double) (this.getHeight()) / (double) (obj.tr[0].length);
-            double stepCh = (this.getWidth() - 2 * margine_X) / obj.tr.length;
-
-            // Prepara i punti delle tracce per l'interpolazione
-            for (int j = 0; j < obj.tr.length; j++) {
-                double maxV = this.avgMAX ? obj.tr[j].getMediaAbs() : obj.tr[j].getMaxValue() - obj.tr[j].media;
-                List<double[]> points = new ArrayList<>();
-                for (int i = 0; i < obj.tr[j].value.length; i++) {
-                    double x = (stepCh/2.0)+(j * stepCh) + margine_X;
-                    double y = i * stepT;
-                    double value = obj.tr[j].value[i] / maxV;
-                    points.add(new double[]{x, y, value});
+            if (heatmapDirty || cachedHeatmap == null || cachedWidth != w || cachedHeight != h || is_white != previousIsWhite) {
+                previousIsWhite = is_white;
+                // Ricalcola la heatmap
+                if (!is_white) {
+                    this.setForeground(Color.white);
+                } else {
+                    this.setForeground(Color.black);
                 }
-                tracePoints.add(points);
-            }
 
-            // Trova min e max per normalizzazione
-            double minVal = Double.MAX_VALUE;
-            double maxVal = Double.MIN_VALUE;
-            for (List<double[]> pts : tracePoints) {
-                for (double[] point : pts) {
-                    if (point[2] < minVal) minVal = point[2];
-                    if (point[2] > maxVal) maxVal = point[2];
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setColor(Color.white);
+
+                List<List<double[]>> tracePoints = new ArrayList<>();
+                BufferedImage heatmapImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+                Graphics2D heatmapG2 = heatmapImage.createGraphics();
+                heatmapG2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                double stepT = (double) (this.getHeight()) / (double) (obj.tr[0].length);
+                double stepCh = (this.getWidth() - 2 * margine_X) / obj.tr.length;
+
+                // Prepara i punti delle tracce per l'interpolazione
+                for (int j = 0; j < obj.tr.length; j++) {
+                    double maxV = this.avgMAX ? obj.tr[j].getMediaAbs() : obj.tr[j].getMaxValue() - obj.tr[j].media;
+                    List<double[]> points = new ArrayList<>();
+                    for (int i = 0; i < obj.tr[j].value.length; i++) {
+                        double x = (stepCh/2.0)+(j * stepCh) + margine_X;
+                        double y = i * stepT;
+                        double value = obj.tr[j].value[i] / maxV;
+                        points.add(new double[]{x, y, value});
+                    }
+                    tracePoints.add(points);
                 }
-            }
 
-            // Interpola e colora ogni pixel
-            for (int xPixel = 0; xPixel < w; xPixel++) {
-                for (int yPixel = 0; yPixel < h; yPixel++) {
-                    int traceIndex = (int) ((xPixel - (stepCh/2.0) ) / stepCh);
-                    int yIndex = (int) (yPixel / stepT);
-                    List<double[]> nearestNeighbors = new ArrayList<>();
-                    for (int i = -15; i <= 15; i++) {
-                        int index = yIndex + i;
-                        if (traceIndex >= 0 && traceIndex < tracePoints.size() && index >= 0 && index < tracePoints.get(traceIndex).size()) {
-                            nearestNeighbors.add(tracePoints.get(traceIndex).get(index));
+                // Trova min e max per normalizzazione
+                double minVal = Double.MAX_VALUE;
+                double maxVal = Double.MIN_VALUE;
+                for (List<double[]> pts : tracePoints) {
+                    for (double[] point : pts) {
+                        if (point[2] < minVal) minVal = point[2];
+                        if (point[2] > maxVal) maxVal = point[2];
+                    }
+                }
+
+                // Interpola e colora ogni pixel
+                for (int xPixel = 0; xPixel < w; xPixel++) {
+                    for (int yPixel = 0; yPixel < h; yPixel++) {
+                        int traceIndex = (int) ((xPixel - (stepCh/2.0) ) / stepCh);
+                        int yIndex = (int) (yPixel / stepT);
+                        List<double[]> nearestNeighbors = new ArrayList<>();
+                        for (int i = -15; i <= 15; i++) {
+                            int index = yIndex + i;
+                            if (traceIndex >= 0 && traceIndex < tracePoints.size() && index >= 0 && index < tracePoints.get(traceIndex).size()) {
+                                nearestNeighbors.add(tracePoints.get(traceIndex).get(index));
+                            }
+                            if (traceIndex + 1 >= 0 && traceIndex + 1 < tracePoints.size() && index >= 0 && index < tracePoints.get(traceIndex + 1).size()) {
+                                nearestNeighbors.add(tracePoints.get(traceIndex + 1).get(index));
+                            }
                         }
-                        if (traceIndex + 1 >= 0 && traceIndex + 1 < tracePoints.size() && index >= 0 && index < tracePoints.get(traceIndex + 1).size()) {
-                            nearestNeighbors.add(tracePoints.get(traceIndex + 1).get(index));
+                        double interpValue = 0.0;
+                        double weightSum = 0.0;
+                        double power = 2.0;
+                        for (double[] point : nearestNeighbors) {
+                            double dx = xPixel - point[0];
+                            double dy = yPixel - point[1];
+                            double distance = Math.sqrt(dx * dx + dy * dy) + 1e-6;
+                            double weight = 1.0 / Math.pow(distance, power);
+                            interpValue += point[2] * weight;
+                            weightSum += weight;
                         }
+                        interpValue /= weightSum;
+                        float normalized = (float) ((interpValue - minVal) / (maxVal - minVal));
+                        normalized = Math.max(0f, Math.min(1f, normalized));
+                        Color color = viridis((double)normalized);
+                        // Adatta la saturazione/luminosità in base allo sfondo
+                        if (is_white) {
+                            color = brightenDesaturate(color, 0.6f); // più chiaro e meno saturo
+                        } else {
+                            color = saturate(color, 1.3f); // più saturo su sfondo scuro
+                        }
+                        heatmapG2.setColor(color);
+                        heatmapG2.fillRect(xPixel, yPixel, 1, 1);
                     }
-                    double interpValue = 0.0;
-                    double weightSum = 0.0;
-                    double power = 2.0;
-                    for (double[] point : nearestNeighbors) {
-                        double dx = xPixel - point[0];
-                        double dy = yPixel - point[1];
-                        double distance = Math.sqrt(dx * dx + dy * dy) + 1e-6;
-                        double weight = 1.0 / Math.pow(distance, power);
-                        interpValue += point[2] * weight;
-                        weightSum += weight;
-                    }
-                    interpValue /= weightSum;
-                    float normalized = (float) ((interpValue - minVal) / (maxVal - minVal));
-                    normalized = Math.max(0f, Math.min(1f, normalized));
-                    Color color = viridis((double)normalized);
-                    // Adatta la saturazione/luminosità in base allo sfondo
-                    if (is_white) {
-                        color = brightenDesaturate(color, 0.6f); // più chiaro e meno saturo
-                    } else {
-                        color = saturate(color, 1.3f); // più saturo su sfondo scuro
-                    }
-                    heatmapG2.setColor(color);
-                    heatmapG2.fillRect(xPixel, yPixel, 1, 1);
                 }
+                heatmapG2.dispose();
+                cachedHeatmap = heatmapImage;
+                cachedWidth = w;
+                cachedHeight = h;
+                heatmapDirty = false;
             }
-            heatmapG2.dispose();
-            g.drawImage(heatmapImage, 0, 0, null);
+            // Disegna la heatmap cached
+            g.drawImage(cachedHeatmap, 0, 0, null);
         }
     }
 
@@ -919,6 +967,7 @@ public void resized(int w, int h) {
         rView.setPreferredHeight(h * scaleY);
         cView.setPreferredWidth((int) (w * scaleX));
         this.setSize(new Dimension((int) (w * scaleX), h * scaleY));
+        heatmapDirty = true;
         this.invalidate();
     }
 
