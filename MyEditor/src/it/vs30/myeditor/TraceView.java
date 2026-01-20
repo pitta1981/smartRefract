@@ -920,7 +920,7 @@ public class TraceView extends javax.swing.JPanel {
                         if (is_white) {
                             color = brightenDesaturate(color, 0.6f); // più chiaro e meno saturo
                         } else {
-                            color = saturate(color, 1.3f); // più saturo su sfondo scuro
+                            color = new Color(color.getRed(), color.getGreen(), color.getBlue(), 130); // più trasparente su sfondo scuro
                         }
                         heatmapG2.setColor(color);
                         heatmapG2.fillRect(xPixel, yPixel, 1, 1);
