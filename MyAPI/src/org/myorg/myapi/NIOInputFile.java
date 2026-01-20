@@ -10,14 +10,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jfree.util.Log;
 
 /**
- *
- * @author user
+ * SEG2 input reader using NIO.
  */
 public class NIOInputFile {
 
@@ -36,8 +36,6 @@ public class NIOInputFile {
             fileInput = new RandomAccessFile(file, "r");
             fCH = fileInput.getChannel();
             try {
-                //check if really seg2
-                //fileInput.seek(0);
                 fCH.position(0);
             } catch (IOException ex) {
                 Logger.getLogger(InputFileSg2.class.getName()).log(Level.SEVERE, null, ex);
@@ -45,60 +43,47 @@ public class NIOInputFile {
             ByteBuffer bb = ByteBuffer.allocate(2);
             fCH.read(bb);
             bb.flip();
-            byte by = bb.get();
-            if (by == 85) {
-            }
-            int b1 = (int) (by);//
-            //int b11=fileInput.readUnsignedByte();
-
-            //fCH.read(bb);
-            //bb.flip();
-            int b2 = (int) bb.get();//fileInput.readUnsignedByte();
-
-            int b3 = 0;
-            int b4 = 0;
+            int b1 = bb.get() & 0xFF;
+            int b2 = bb.get() & 0xFF;
             if (((b2 << 8) + b1) != 0x3a55) {
                 throw new java.util.zip.DataFormatException();
             }
 
-            //find number of traces in file
-            // fileInput.seek(6);
+            // find number of traces in file
             fCH.position(6);
-            bb.flip();
+            bb.clear();
             fCH.read(bb);
             bb.flip();
-            b1 = bb.get();
-            b2 = bb.get();
-            //  b1 = fileInput.readUnsignedByte();
-            //  b2 = fileInput.readUnsignedByte();
+            b1 = bb.get() & 0xFF;
+            b2 = bb.get() & 0xFF;
             number = (b2 << 8) + b1;
             pointer = new int[number];
-            Log.warn("" + bb);
-            //fileInput.seek(12);
+            Log.warn("Number of traces: " + number);
+
+            // data format code (global)
             fCH.position(12);
-            bb.flip();
+            bb.clear();
             fCH.read(bb);
             bb.flip();
-            b1 = bb.get();//fileInput.readUnsignedByte();
+            b1 = bb.get() & 0xFF;
             type = b1;
+            Log.warn("Global data format type: " + type);
 
-
-            //find beginning of each trace
-            //fileInput.seek(32);
+            // find beginning of each trace
             bb = ByteBuffer.allocate(number * 4);
             fCH.position(32);
             fCH.read(bb);
             bb.flip();
+            System.out.println("Reading trace pointers starting at offset 32:");
             for (int i = 0; i < number; i++) {
-                b1 = this.byte2UnsignedInt(bb.get());//fileInput.readUnsignedByte();
-                b2 = this.byte2UnsignedInt(bb.get());//fileInput.readUnsignedByte();
-                b3 = this.byte2UnsignedInt(bb.get());//fileInput.readUnsignedByte();
-                b4 = this.byte2UnsignedInt(bb.get());//fileInput.readUnsignedByte();
-
-                int res = ((b3 << 16) | (b2 << 8) | (b4 << 24)) + b1;
+                int p1 = bb.get() & 0xFF;
+                int p2 = bb.get() & 0xFF;
+                int p3 = bb.get() & 0xFF;
+                int p4 = bb.get() & 0xFF;
+                int res = (p4 << 24) | (p3 << 16) | (p2 << 8) | p1;
                 pointer[i] = res;
+                System.out.println("  Trace " + i + ": pointer = 0x" + Integer.toHexString(pointer[i]) + " (" + pointer[i] + ")");
             }
-
 
         } catch (FileNotFoundException fnf) {
             System.err.println(fnf);
@@ -107,182 +92,131 @@ public class NIOInputFile {
         } catch (IOException e) {
             System.out.println("IO error: " + e);
         }
+        System.out.println("NIOInputFile constructor completed successfully with " + number + " traces");
     }
 
     public int byte2UnsignedInt(byte b) {
-        return 0x00 << 24 | b & 0xff;
+        return b & 0xFF;
     }
 
     Trace getTrace(int traceNum) {
         Trace p = new Trace(0);
         try {
+            System.out.println("=== Starting to read trace " + traceNum + " ===");
             long beginPos = pointer[traceNum];
+            System.out.println("Trace pointer: 0x" + Long.toHexString(beginPos) + " (" + beginPos + ")");
 
-            //read size of trace header
-            fileInput.seek(beginPos + 2);
+            // Trace layout observed:
+            // +0: 2 bytes trace ID/unused
+            // +2: 2 bytes header size
+            // +4: 4 bytes data size (bytes)
+            // +8: 4 bytes num samples
+            // +12:1 byte type (data format)
+            // +13..15: padding/reserved
+            // +16: header text (length = headerSize - 16)
+
+            fileInput.seek(beginPos);
             int b1 = fileInput.readUnsignedByte();
             int b2 = fileInput.readUnsignedByte();
-            int b3 = 0;
-            int b4 = 0;
+            int traceId = (b2 << 8) | b1;
+
+            fileInput.seek(beginPos + 2);
+            b1 = fileInput.readUnsignedByte();
+            b2 = fileInput.readUnsignedByte();
             int sizeHeader = (b2 << 8) + b1;
 
-            //read size of data block
+            fileInput.seek(beginPos + 4);
+            b1 = fileInput.readUnsignedByte();
+            b2 = fileInput.readUnsignedByte();
+            int b3 = fileInput.readUnsignedByte();
+            int b4 = fileInput.readUnsignedByte();
+            int sizeData = (b4 << 24) | (b3 << 16) | (b2 << 8) | b1;
+
             fileInput.seek(beginPos + 8);
             b1 = fileInput.readUnsignedByte();
             b2 = fileInput.readUnsignedByte();
-            int sizeData = (b2 << 8) + b1;
+            b3 = fileInput.readUnsignedByte();
+            b4 = fileInput.readUnsignedByte();
+            int numSamples = (b4 << 24) | (b3 << 16) | (b2 << 8) | b1;
 
-
-            p = new Trace(sizeData);
-            p.setNum(traceNum);
             fileInput.seek(beginPos + 12);
-            //b1 = fileInput.readUnsignedByte();
             type = fileInput.readUnsignedByte();
 
-            //read header into a string contained in the Trace object
-            fileInput.seek(beginPos + 32);
-            for (int i = 32; i < sizeHeader; i++) {
+            int sampleSize = (numSamples > 0) ? (sizeData / numSamples) : 0;
+            if (sampleSize == 0) {
+                sampleSize = 2; // fallback
+            }
+
+            p = new Trace(numSamples);
+            p.setNum(traceNum);
+
+            System.out.println("Trace " + traceNum + ": traceId=" + traceId + ", type=" + type +
+                             ", sizeHeader=" + sizeHeader + ", sizeData=" + sizeData +
+                             ", numSamples=" + numSamples + ", sampleSize=" + sampleSize);
+
+            int headerTextLen = Math.max(0, sizeHeader - 16);
+            long headerTextStart = beginPos + 16;
+            fileInput.seek(headerTextStart);
+            System.out.println("  Reading header from 0x" + Long.toHexString(headerTextStart) + " for " + headerTextLen + " bytes");
+            for (int i = 0; i < headerTextLen; i++) {
                 b1 = fileInput.readByte();
                 char c = (char) b1;
-                //System.out.println(c);
                 p.sb.append(c);
             }
 
-            //decode the header string
             p.buildMetadata();
             System.out.println(p.shotLocation);
             double somma = 0.0;
             sommaabs = 0.0;
-            //read in the data
-            //fileInput.seek(beginPos + sizeHeader);
 
-            ByteBuffer bb = ByteBuffer.allocate((sizeData - 1) * 4);
-            fCH.position(beginPos + sizeHeader);
-            fCH.read(bb);
-            bb.flip();
+            long dataStart = beginPos + sizeHeader;
+            System.out.println("  Reading data from 0x" + Long.toHexString(dataStart) + " for " + numSamples + " samples");
 
+            ByteBuffer dataBuf = ByteBuffer.allocate(sizeData);
+            dataBuf.order(ByteOrder.LITTLE_ENDIAN);
+            fCH.position(dataStart);
+            fCH.read(dataBuf);
+            dataBuf.flip();
 
-
-            for (int i = 0; i < sizeData - 1; i++) {
-                if (type == 4) {
-                    b1 = this.byte2UnsignedInt(bb.get());
-                    b2 = this.byte2UnsignedInt(bb.get());
-                    b3 = this.byte2UnsignedInt(bb.get());
-                    b4 = this.byte2UnsignedInt(bb.get());
-              
-                    
-                    
-                    /*
-                    b1 = fileInput.readUnsignedByte();
-                    b2 = fileInput.readUnsignedByte();
-                    b3 = fileInput.readUnsignedByte();
-                    b4 = fileInput.readUnsignedByte();*/
-                    int res = 0;
-                    //int res = ((b3 << 16) | (b2 << 8) ) + b1;
-                    res = ((b3 << 16) | (b2 << 8) | (b4 << 24)) + b1;
-                    //short res=(short)((b2 << 8)  |b1);
-                    double f = Float.intBitsToFloat(res);
-                    somma = somma + f;
-                    sommaabs = sommaabs + Math.abs(f);
-                    // int f=res;
-                    //keep track of largest value for normalization later
-                    if (f > p.getMaxValue()) {
-                        p.setMaxValue(f);
+            for (int i = 0; i < numSamples; i++) {
+                double val = 0;
+                if (type == 4) { // 32-bit float
+                    val = dataBuf.getFloat();
+                } else if (type == 1 || type == 10) { // 16-bit signed
+                    val = dataBuf.getShort();
+                } else if (type == 2) { // 32-bit signed
+                    val = dataBuf.getInt();
+                } else {
+                    // fallback: try sampleSize
+                    if (sampleSize == 2) {
+                        val = dataBuf.getShort();
+                    } else if (sampleSize == 4) {
+                        val = dataBuf.getInt();
+                    } else {
+                        val = dataBuf.get();
                     }
-                    p.set(i, f);
-                } else if (type == 1) {
-                    b1 = this.byte2UnsignedInt(bb.get());
-                    b2 = this.byte2UnsignedInt(bb.get());
-                    b3 =0;
-                    this.byte2UnsignedInt(bb.get());
-                    b4 =0;
-                            this.byte2UnsignedInt(bb.get());
-              /*
-                    b1 = fileInput.readUnsignedByte();
-                    b2 = fileInput.readUnsignedByte();
-                    b3 = 0;
-                    fileInput.readByte();
-                    b4 = 0;
-                    fileInput.readUnsignedByte();
-*/
-                    //b3 = fileInput.readUnsignedByte();
-                    //b4 = fileInput.readUnsignedByte();
-
-                    short res = (short) ((b2 << 8) | b1);
-                    //    double f = Float.intBitsToFloat(res);
-                    short f = res;
-                    //short f = res;
-                    //keep track of largest value for normalization later
-                    somma = somma + f;
-                    sommaabs = sommaabs + Math.abs(f);
-                    if (f > p.getMaxValue()) {
-                        p.setMaxValue(f);
-                    }
-                    p.set(i, f);
-                } else if (type == 10) {
-                    b1 = this.byte2UnsignedInt(bb.get());
-                    b2 = this.byte2UnsignedInt(bb.get());
-                    bb.get();
-                    bb.get();
-                    b3=0;
-                    b4=0;
-                    /*b1 = fileInput.readUnsignedByte();
-                    b2 = fileInput.readUnsignedByte();
-                    b3 = 0;
-                    fileInput.readByte();
-                    b4 = 0;
-                    fileInput.readUnsignedByte();
-*/
-                    //b3 = fileInput.readUnsignedByte();
-                    //b4 = fileInput.readUnsignedByte();
-
-                    short res = (short) ((b2 << 8) | b1);
-                    //    double f = Float.intBitsToFloat(res);
-                    short f = res;
-                    //short f = res;
-                    //keep track of largest value for normalization later
-                    somma = somma + f;
-                    sommaabs = sommaabs + Math.abs(f);
-                    if (f > p.getMaxValue()) {
-                        p.setMaxValue(f);
-                    }
-                    p.set(i, f);
-
-                } else if (type == 2) {
-                    
-                    b1 = this.byte2UnsignedInt(bb.get());
-                    b2 = this.byte2UnsignedInt(bb.get());
-                    b3 = this.byte2UnsignedInt(bb.get());
-                    b4 = this.byte2UnsignedInt(bb.get());
-                   
-                    //b3 = fileInput.readUnsignedByte();
-                    //b4 = fileInput.readUnsignedByte();
-
-                    //int res = ((b3 << 16) | (b2 << 8) ) + b1;
-                    // res = ((b3 << 16) | (b2 << 8)  |(b4 << 24)) + b1;
-
-                    int res = 0;
-                    //int res = ((b3 << 16) | (b2 << 8) ) + b1;
-                    res = ((b3 << 16) | (b2 << 8) | (b4 << 24)) + b1;
-                    //short res = (short) ((b2 << 8) | b1);
-                    int f = res;
-                    somma = somma + f;
-                    sommaabs = sommaabs + Math.abs(f);
-
-                    //keep track of largest value for normalization later
-                    if (f > p.getMaxValue()) {
-                        p.setMaxValue(f);
-                    }
-                    p.set(i, f);
                 }
-            }
-            p.setmedia(somma, p.value.length);
-            p.setMediaAbs(sommaabs, p.value.length);
 
+                somma += val;
+                sommaabs += Math.abs(val);
+                if (val > p.getMaxValue()) {
+                    p.setMaxValue(val);
+                }
+                p.set(i, val);
+            }
+
+            p.setmedia(somma, numSamples);
+            p.setMediaAbs(sommaabs, numSamples);
+
+        } catch (java.nio.BufferUnderflowException bue) {
+            System.err.println("BufferUnderflowException in trace " + traceNum + ": " + bue);
+            bue.printStackTrace();
+        } catch (EOFException eof) {
+            System.err.println("EOFException in trace " + traceNum + ": " + eof);
         } catch (Exception e) {
-            System.err.println(e);
+            System.err.println("Exception in trace " + traceNum + ": " + e);
+            e.printStackTrace();
         }
-        // System.out.println("done reading trace");
         return p;
     }
 
