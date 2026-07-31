@@ -560,7 +560,7 @@ public class TraceView extends javax.swing.JPanel {
                 double stepCh = (this.getWidth() - 2 * margine_X) / obj.tr.length;
                 double stepV = stepCh / maxV;
 
-                ArrFB = (FirstBrakeList) obj.TraceGroup.get(0);
+                ArrFB = obj.TraceGroup.get(0);
 
                 this.cView.setHorPar(stepCh, ArrFB.spaz_in, ArrFB.spaz, obj.tr.length);
                 this.cView.isWhite(is_white);
@@ -1136,7 +1136,7 @@ public void resized(int w, int h) {
 
                 for (int i = 0; i < proj.stesa.size(); i++) {
                     if (i != obj.trace_index) {
-                        FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(i);
+                        FirstBrakeList fbl = proj.stesa.get(i);
                         Path2D p = new Path2D.Double();
                         p.moveTo(0 * stepCh + stepCh / 2 + margine_X,
                                 (fbl.fb[0].time * stepT / obj.tr[0].sampleInterval) / 1000);

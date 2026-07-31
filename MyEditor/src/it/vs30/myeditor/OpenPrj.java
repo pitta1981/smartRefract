@@ -149,11 +149,9 @@ public final class OpenPrj implements ActionListener {
     }
 
     public void loadPrj(File f, APIObject obj, String base) {
-        try {
-            FileInputStream fis = new FileInputStream(f);
-
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
+        try (FileInputStream fis = new FileInputStream(f);
+             InputStreamReader isr = new InputStreamReader(fis);
+             BufferedReader br = new BufferedReader(isr)) {
 
             String linea = br.readLine();
             //int n=Integer.parseInt(linea);
@@ -264,9 +262,9 @@ public final class OpenPrj implements ActionListener {
         }
 
         obj.sync();
-        //obj.fb = (FirstBrakeList) obj.TraceGroup.get(obj.TraceGroup.size() - 1);
+        //obj.fb = obj.TraceGroup.get(obj.TraceGroup.size() - 1);
         for (int i = 0; i < obj.proj.stesa.size(); i++) {
-            FirstBrakeList fbl = (FirstBrakeList) obj.proj.stesa.get(i);
+            FirstBrakeList fbl = obj.proj.stesa.get(i);
             for (int j = 0; j < fbl.fb.length - 1; j++) {
                 fbl.fb[j].z = (Double) obj.fb.fb[j].z;
 
@@ -280,22 +278,19 @@ public final class OpenPrj implements ActionListener {
     public void loadtrace(APIObject obj, String base) {
         obj.in_file_l = new File[obj.TraceGroup.size()];
         for (int i = 0; i < obj.TraceGroup.size(); i++) {
-            obj.in_file_l[i] = new File(((FirstBrakeList) obj.TraceGroup.get(i)).fbp);
+            obj.in_file_l[i] = new File((obj.TraceGroup.get(i)).fbp);
         }
     }
 
     public void loadPrjSmartRefract(File file, DocumentEditor editor) {
-        FileInputStream fis = null;
-        ObjectInputStream ois = null;
         boolean loadingSuccess = false;
-        
-        try {
-            if (file.getPath().toLowerCase().endsWith(".txt")) {
-                file = new File(file.getPath().replace(".txt", "") + ".srefract");
-            }
 
-            fis = new FileInputStream(file);
-            ois = new ObjectInputStream(fis);
+        if (file.getPath().toLowerCase().endsWith(".txt")) {
+            file = new File(file.getPath().replace(".txt", "") + ".srefract");
+        }
+
+        try (FileInputStream fis = new FileInputStream(file);
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
 
             APIObject loadingObj = (APIObject) ois.readObject();
             editor.obj = loadingObj;
@@ -309,14 +304,6 @@ public final class OpenPrj implements ActionListener {
             System.err.println("Classe non trovata durante la deserializzazione: " + ex.getMessage());
             Exceptions.printStackTrace(ex);
         } finally {
-            // Chiudi i flussi
-            try {
-                if (ois != null) ois.close();
-                if (fis != null) fis.close();
-            } catch (IOException ex) {
-                System.err.println("Errore durante la chiusura dei flussi: " + ex.getMessage());
-            }
-            
             // Solo se il caricamento è riuscito, procedi con l'inizializzazione
             if (loadingSuccess && editor.obj != null && editor.obj.TraceGroup != null && !editor.obj.TraceGroup.isEmpty()) {
                 editor.obj.proj.stesa = editor.obj.TraceGroup;
@@ -326,6 +313,9 @@ public final class OpenPrj implements ActionListener {
                 editor.tv.proj = editor.obj.proj;
             } else {
                 System.err.println("Caricamento fallito o TraceGroup vuoto/null. Inizializzazione saltata.");
+                javax.swing.JOptionPane.showMessageDialog(null,
+                        "Impossibile caricare il progetto:\n" + file.getAbsolutePath(),
+                        "Errore di caricamento", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
         }
 

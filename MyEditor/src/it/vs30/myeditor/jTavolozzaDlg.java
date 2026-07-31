@@ -50,11 +50,9 @@ public class jTavolozzaDlg extends javax.swing.JDialog {
         // defined key above. 
         String path = System.getProperty(userHome);
 
-        try {
-            FileInputStream fis = new FileInputStream(path + "/smartRefract-data/" + "brush.config");
-
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
+        try (FileInputStream fis = new FileInputStream(path + "/smartRefract-data/" + "brush.config");
+             InputStreamReader isr = new InputStreamReader(fis);
+             BufferedReader br = new BufferedReader(isr)) {
             int i = 0;
             String linea = br.readLine();
             // String[] module = new String[20];

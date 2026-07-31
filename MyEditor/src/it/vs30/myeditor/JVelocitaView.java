@@ -49,7 +49,7 @@ public class JVelocitaView extends javax.swing.JPanel {
     }
     
     private void drawAssi(Graphics g) {
-        //      FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        //      FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = this.getHeight();
         int xmax = this.getWidth();
         int nchanel = xmax / (V1A.length - 1);
@@ -64,7 +64,7 @@ public class JVelocitaView extends javax.swing.JPanel {
     
     private void drawPunti(Graphics g) {
         double ystp = 0.0;
-        // FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        // FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = this.getHeight();
         //ymax=(int)(ymax- 2*(margUp * ymax));
         int xmax = this.getWidth();
@@ -121,7 +121,7 @@ public class JVelocitaView extends javax.swing.JPanel {
     
     public void drawtick(Graphics g, double max, int w, int h) {
         double ystp = 0.0;
-        //   FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        //   FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = h;//this.getHeight();
         int xmax = w;//this.getWidth();
         int nchanel = xmax / V1A.length;

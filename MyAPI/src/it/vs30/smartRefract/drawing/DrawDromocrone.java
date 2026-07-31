@@ -43,7 +43,7 @@ public class DrawDromocrone {
     public void drawdr_v1(Graphics g, double max, int w, int h) {
         int ymax = h;
         int xmax = w;
-        ArrFB = (FirstBrakeList) proj.stesa.get(indj);
+        ArrFB = proj.stesa.get(indj);
         int nchanel = xmax / (ArrFB.fb.length +1);
         int ychn = (ymax - (5 * nchanel)) / nchanel;
         int xshf = nchanel;
@@ -57,7 +57,7 @@ public class DrawDromocrone {
 
 
 
-            ArrFB = (FirstBrakeList) proj.stesa.get(j);
+            ArrFB = proj.stesa.get(j);
 
 //  /*
             Graphics2D g2 = (Graphics2D) g;
@@ -133,7 +133,7 @@ public class DrawDromocrone {
     public void drawdr(Graphics g, double max, int w, int h) {
         int ymax = h;
         int xmax = w;
-        ArrFB = (FirstBrakeList) proj.stesa.get(indj);
+        ArrFB = proj.stesa.get(indj);
         int nchanel = xmax / (ArrFB.fb.length +1);
         int ychn = (ymax - (5 * nchanel)) / nchanel;
         int xshf = nchanel;
@@ -149,7 +149,7 @@ public class DrawDromocrone {
 
 
 
-            ArrFB = (FirstBrakeList) proj.stesa.get(j);
+            ArrFB = proj.stesa.get(j);
 
 //  /*
             Graphics2D g2 = (Graphics2D) g;
@@ -414,7 +414,7 @@ public class DrawDromocrone {
 
 
 
-            FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(j);
+            FirstBrakeList fbl = proj.stesa.get(j);
 
             for (int i = 0; i < fbl.fb.length; i++) {
                 if (ArrFB.fb[i].time > -0.1) {
@@ -498,7 +498,7 @@ public class DrawDromocrone {
 
     private void drawtick(Graphics g, double max, int w, int h) {
         double ystp = 0.0;
-        FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = h;
         int xmax = w;
         int nchanel = xmax / (ArrFB.fb.length +1);
@@ -599,7 +599,7 @@ public class DrawDromocrone {
     public void drawDr(Graphics g, int w, int h, boolean print) {
         //g.drawLine(24, 0, 200, 200);
         this.m_print=print;
-        ArrFB = (FirstBrakeList) proj.stesa.get(indj);
+        ArrFB = proj.stesa.get(indj);
         int ymax = h;//this.getHeight();
         int xmax = w;
 
@@ -630,7 +630,7 @@ public class DrawDromocrone {
 
         double max = 0.00001;
         for (int j = 0; j < proj.stesa.size(); j++) {
-            FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(j);
+            FirstBrakeList fbl = proj.stesa.get(j);
             for (int i = 0; i < fbl.fb.length; i++) {
                 if (max < (fbl.fb[i].time)) {
                     max = (int) (fbl.fb[i].time);
@@ -642,7 +642,7 @@ public class DrawDromocrone {
         drawdr_v1(g, max, w, h);
 
         drawtick(g, max, w, h);
-        ArrFB = (FirstBrakeList) proj.stesa.get(indj);
+        ArrFB = proj.stesa.get(indj);
         int ystp = (int) ((ymax - (2 * margUp * ymax)) / max);
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(2));

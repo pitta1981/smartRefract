@@ -29,8 +29,8 @@ public class JVelocitaDlg extends javax.swing.JDialog {
     public JVelocitaDlg(Indagine proj) {
        
         initComponents();
-        double spaz=((FirstBrakeList) proj.stesa.get(0)).spaz;
-        double spaz_in=((FirstBrakeList) proj.stesa.get(0)).spaz_in;
+        double spaz=(proj.stesa.get(0)).spaz;
+        double spaz_in=(proj.stesa.get(0)).spaz_in;
         JVelocitaView velView=new JVelocitaView(proj.V1A,proj.V2A,proj.V3A,spaz,spaz_in); 
         velView.setBackground(Color.BLACK);
         jPanel2.add(velView);

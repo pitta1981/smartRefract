@@ -78,7 +78,7 @@ public class Trace {
         return plotRange;
     }
     public void setNormalized(int i, double val){
-        filtered[i]=(double)(val*maxValue);
+        filtered[i]=val*maxValue;
     }
     public double getNormalized(int i){
         return filtered[i]/maxValue;
@@ -196,7 +196,7 @@ public class Trace {
 
             for (int i = 0; i < length; i++){
 
-                r.add(((double)i)*sampleInterval*1000,(double)getFiltered(i));
+                r.add(i * sampleInterval * 1000, getFiltered(i));
 
             }
 
@@ -211,7 +211,7 @@ public class Trace {
 
             for (int i = 0; i < length; i+= 8){
 
-                r.add((double)i*sampleInterval*1000,(double)getNormalized(i)+o);
+                r.add(i * sampleInterval * 1000, getNormalized(i) + o);
 
             }
 
@@ -226,7 +226,7 @@ public class Trace {
 
             for (int i = 0; i < length; i++){
 
-                r.add((double)i*sampleInterval*1000,((double)getNormalized(i)+o)*s);
+                r.add(i * sampleInterval * 1000, (getNormalized(i) + o) * s);
 
             }
 

@@ -80,7 +80,7 @@ public class JtV_draw extends javax.swing.JPanel {
     }
 
     private void drawAssi(Graphics g) {
-        //      FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        //      FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = this.getHeight();
         int xmax = this.getWidth();
         int nchanel = 0;
@@ -102,7 +102,7 @@ public class JtV_draw extends javax.swing.JPanel {
 
     private void drawPunti(Graphics g) {
         double ystp = 0.0;
-        // FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        // FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = this.getHeight();
         int xmax = this.getWidth();
 
@@ -189,14 +189,22 @@ public class JtV_draw extends javax.swing.JPanel {
 
 
         }
+        // Regressione non calcolabile (meno di due punti, o punti allineati verticalmente):
+        // la retta va semplicemente omessa, non deve interrompere il disegno del pannello.
         if (tV1 != null) {
-            double[] result = FirstBrakeList.getOLSRegression(data);
+            try {
+                double[] result = FirstBrakeList.getOLSRegression(data);
 
-            g2.drawLine(xshf, (int) ((ymax - (result[1] * data[0][0] + result[0]) * ystp) - 30), xmax - xshf, (int) (ymax - ((result[1] * data[tV1.length - 3][0] + result[0]) * ystp) - 30));
+                g2.drawLine(xshf, (int) ((ymax - (result[1] * data[0][0] + result[0]) * ystp) - 30), xmax - xshf, (int) (ymax - ((result[1] * data[tV1.length - 3][0] + result[0]) * ystp) - 30));
+            } catch (IllegalArgumentException ex) {
+            }
         }
         if (tV2 != null) {
-            double[] result2 = FirstBrakeList.getOLSRegression(data2);
-            g2.drawLine(xshf, (int) ((ymax - (result2[1] * data2[0][0] + result2[0]) * ystp) - 30), xmax - xshf, (int) (ymax - ((result2[1] * data2[tV2.length - 3][0] + result2[0]) * ystp) - 30));
+            try {
+                double[] result2 = FirstBrakeList.getOLSRegression(data2);
+                g2.drawLine(xshf, (int) ((ymax - (result2[1] * data2[0][0] + result2[0]) * ystp) - 30), xmax - xshf, (int) (ymax - ((result2[1] * data2[tV2.length - 3][0] + result2[0]) * ystp) - 30));
+            } catch (IllegalArgumentException ex) {
+            }
         }
         g2.setColor(Color.yellow);
         for (int j = 1; j < bp.length; j++) {
@@ -281,7 +289,7 @@ private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_
 
 private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
     double ystp = 0.0;
-    // FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+    // FirstBrakeList ArrFB = proj.stesa.get(0);
     int ymax = this.getHeight();
     int xmax = this.getWidth();
     int nchanel = xmax / (tV1.length - 1);
@@ -299,7 +307,7 @@ private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event
     private void drawDrag(Graphics offg, int x, int y) {
 
         double ystp = 0.0;
-        // FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        // FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = this.getHeight();
         int xmax = this.getWidth();
         int nchanel = xmax / (tV1.length - 1);
@@ -354,7 +362,7 @@ private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event
     }
     /*  public void drawtick(Graphics g, double max, int w, int h) {
      double ystp = 0.0;
-     //   FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+     //   FirstBrakeList ArrFB = proj.stesa.get(0);
      int ymax = h;//this.getHeight();
      int xmax = w;//this.getWidth();
      int nchanel = xmax / V1A.length;

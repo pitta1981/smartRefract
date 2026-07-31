@@ -46,6 +46,17 @@ public class JGeometryDlg extends javax.swing.JDialog {
     draw_geometria d_geo = new draw_geometria();
 
     /**
+     * Percorso di shot.config. Il file era aperto come percorso relativo, quindi finiva
+     * nella directory di lavoro corrente: i moduli salvati non venivano più ritrovati
+     * al riavvio. Ora sta in ~/smartRefract-data come le altre configurazioni.
+     */
+    private static java.io.File shotConfigFile() {
+        java.io.File dir = new java.io.File(System.getProperty("user.home"), "smartRefract-data");
+        dir.mkdirs();
+        return new java.io.File(dir, "shot.config");
+    }
+
+    /**
      * Creates new form JGeometry
      */
     public JGeometryDlg() {
@@ -56,11 +67,9 @@ public class JGeometryDlg extends javax.swing.JDialog {
         this.setPreferredSize(new Dimension(600,500));
         
         jPanel3.add(d_geo);
-        try {
-            FileInputStream fis = new FileInputStream("shot.config");
-
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
+        try (FileInputStream fis = new FileInputStream(shotConfigFile());
+             InputStreamReader isr = new InputStreamReader(fis);
+             BufferedReader br = new BufferedReader(isr)) {
             int i = 1;
             String linea = br.readLine();
             // String[] module = new String[20];
@@ -101,7 +110,7 @@ public class JGeometryDlg extends javax.swing.JDialog {
         prj = proj;
 
         for (int i = 0; i < proj.stesa.size(); i++) {
-            FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(i);
+            FirstBrakeList fbl = proj.stesa.get(i);
             //fbl.scoppio=Double.parseDouble(geom[i].replace('m', '\0'));
             tm.addData(new Data("" + (new File(fbl.fbp)).getName(), "" + fbl.scoppio));
             tm.spaz = fbl.spaz;
@@ -146,7 +155,7 @@ public class JGeometryDlg extends javax.swing.JDialog {
         jComboBox1.setSelectedItem(String.valueOf(spaz));
         tm.dataList.clear();
         for (int i = 0; i < proj.stesa.size(); i++) {
-            FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(i);
+            FirstBrakeList fbl = proj.stesa.get(i);
             //fbl.scoppio=Double.parseDouble(geom[i].replace('m', '\0'));
             tm.addData(new Data("" + (new File(fbl.fbp)).getName(), "" + fbl.scoppio));
             fbl.spaz = tm.spaz;
@@ -246,7 +255,7 @@ public class JGeometryDlg extends javax.swing.JDialog {
             }
             geom = "";
             for (int i = 0; i < dataList.size(); i++) {
-                geom = geom + " " + this.getGeom(spaz_in, spaz, Double.parseDouble(((Data) dataList.get(i)).data2), ch);
+                geom = geom + " " + this.getGeom(spaz_in, spaz, Double.parseDouble(dataList.get(i).data2), ch);
             }
 
 
@@ -597,10 +606,8 @@ public class JGeometryDlg extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            FileOutputStream fos = new FileOutputStream("shot.config", true);
-
-            OutputStreamWriter os = new OutputStreamWriter(fos);
+        try (FileOutputStream fos = new FileOutputStream(shotConfigFile(), true);
+             OutputStreamWriter os = new OutputStreamWriter(fos)) {
             selezionato = (String) jComboBox3.getSelectedItem();
             boolean esiste = false;
             for (int i = 0; i < 20; i++) {
@@ -614,13 +621,12 @@ public class JGeometryDlg extends javax.swing.JDialog {
 
             //              os.write(fl.spaz + "\n");
             os.flush();
-            os.close();
 
         } catch (Exception e1) {
             System.out.println("Geometry shot config file " + e1.getMessage());
 
         }
-        this.spaz_in = Double.parseDouble((String) this.jTextField1.getText());
+        this.spaz_in = Double.parseDouble(this.jTextField1.getText());
         this.spaz = Double.parseDouble((String) this.jComboBox1.getSelectedItem());
         this.RETVALUE = 1;
         this.setVisible(false);
@@ -652,7 +658,7 @@ public class JGeometryDlg extends javax.swing.JDialog {
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-        String spazia = (String) this.jTextField1.getText();
+        String spazia = this.jTextField1.getText();
 
         tm.spaz_in = Double.parseDouble(spazia);
         this.setTable(prj, tm.spaz);
@@ -694,10 +700,10 @@ public class JGeometryDlg extends javax.swing.JDialog {
         this.draw_Geom_Preview();
         
         /*selezionato = (String) jComboBox3.getSelectedItem();
-        this.spaz_in = Double.parseDouble((String) this.jTextField1.getText());
+        this.spaz_in = Double.parseDouble(this.jTextField1.getText());
         this.spaz = Double.parseDouble((String) this.jComboBox1.getSelectedItem());
 
-        int ch = ((FirstBrakeList) prj.stesa.get(0)).ch;
+        int ch = prj.stesa.get(0).ch;
         while (selezionato.startsWith(" ")) {
             selezionato = selezionato.replaceFirst(" ", "");
         }
@@ -730,10 +736,10 @@ public class JGeometryDlg extends javax.swing.JDialog {
     public void draw_Geom_Preview(){
         try{
         selezionato = (String) jComboBox3.getSelectedItem();
-        this.spaz_in = Double.parseDouble((String) this.jTextField1.getText());
+        this.spaz_in = Double.parseDouble(this.jTextField1.getText());
         this.spaz = Double.parseDouble((String) this.jComboBox1.getSelectedItem());
 
-        int ch = ((FirstBrakeList) prj.stesa.get(0)).ch;
+        int ch = prj.stesa.get(0).ch;
         while (selezionato.startsWith(" ")) {
             selezionato = selezionato.replaceFirst(" ", "");
         }

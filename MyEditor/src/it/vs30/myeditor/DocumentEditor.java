@@ -486,7 +486,7 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
                 double[] mxmn = dA.maxmin();
                 FirstBrakeList ArrFB =  obj.proj.stesa.get(0);
                 //  double[] mxmn=dAPI.maxmin();
-                //  FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+                //  FirstBrakeList ArrFB = proj.stesa.get(0);
                 double ascismax = (ArrFB.ch - 1) * ArrFB.spaz;
                 double x_step = (pageWidth / ArrFB.fb.length);
                 double x = (pageWidth - (2 * dA.margine_dx) - (2 * dA.margine_sx)) / ascismax;
@@ -519,7 +519,7 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
 
                 //drawSezione(g, this.getWidth(), this.getHeight());
                 //      PenetrometroGraph pg = new PenetrometroGraph(new int[]{4, 3, 6, 3, 6, 9, 12, 14, 11, 10, 16, 19, 40, 60}, 25, 0.5);
-                //pg.draw(g, margUp,xshf, this.getWidth(), this.getHeight(), this.maxv,((FirstBrakeList) proj.stesa.get(0)).spaz_in,((FirstBrakeList) proj.stesa.get(0)).spaz*(((FirstBrakeList) proj.stesa.get(0)).ch-1));
+                //pg.draw(g, margUp,xshf, this.getWidth(), this.getHeight(), this.maxv,(proj.stesa.get(0)).spaz_in,(proj.stesa.get(0)).spaz*((proj.stesa.get(0)).ch-1));
                 // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         }
@@ -600,7 +600,7 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
                 g.drawImage(bi, 0, 30, null);
 
                 DrawHorizontalRule dhr = new DrawHorizontalRule();
-                FirstBrakeList ArrFB = (FirstBrakeList) obj.proj.stesa.get(shot_n);
+                FirstBrakeList ArrFB = obj.proj.stesa.get(shot_n);
                 bi = new BufferedImage(pageWidth - 30, 30, BufferedImage.TYPE_INT_RGB);
                 offg = bi.getGraphics();
                 dhr.setHorPar(stepCh, ArrFB.spaz_in, ArrFB.spaz, obj.tr.length);
@@ -684,8 +684,8 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
 
         @Override
         protected void handleSave() throws IOException {
-            tc().content.remove(this);
-            unregister();
+            // Il documento va marcato pulito solo a scrittura riuscita: deregistrarlo
+            // prima faceva perdere le modifiche se il salvataggio falliva.
             if (tc().obj.proj_file != null) {
                 String name = tc().obj.proj_file.getName().toLowerCase();
                 if (name.endsWith("srefract")) {
@@ -701,6 +701,8 @@ public class DocumentEditor extends TopComponent implements DocumentListener {
                     tc().setDisplayName(tc().obj.proj_file.getName());
                 }
             }
+            tc().content.remove(this);
+            unregister();
         }
 
         DocumentEditor tc() {

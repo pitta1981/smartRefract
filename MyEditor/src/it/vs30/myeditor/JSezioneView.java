@@ -105,7 +105,7 @@ public class JSezioneView extends javax.swing.JPanel {
         double[] mxmn=dAPI.maxmin();
         FirstBrakeList ArrFB = proj.stesa.get(0);
       //  double[] mxmn=dAPI.maxmin();
-      //  FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+      //  FirstBrakeList ArrFB = proj.stesa.get(0);
         double ascismax=(ArrFB.ch-1)*ArrFB.spaz;
         double x_step=(this.getWidth()/ArrFB.fb.length);
         double x=(this.getWidth()-(2*dAPI.margine_dx)-(2*dAPI.margine_sx))/ascismax;
@@ -141,7 +141,7 @@ public class JSezioneView extends javax.swing.JPanel {
         //drawSezione(g, this.getWidth(), this.getHeight());
        
   //      PenetrometroGraph pg = new PenetrometroGraph(new int[]{4, 3, 6, 3, 6, 9, 12, 14, 11, 10, 16, 19, 40, 60}, 25, 0.5);
-        //pg.draw(g, margUp,xshf, this.getWidth(), this.getHeight(), this.maxv,((FirstBrakeList) proj.stesa.get(0)).spaz_in,((FirstBrakeList) proj.stesa.get(0)).spaz*(((FirstBrakeList) proj.stesa.get(0)).ch-1));
+        //pg.draw(g, margUp,xshf, this.getWidth(), this.getHeight(), this.maxv,(proj.stesa.get(0)).spaz_in,(proj.stesa.get(0)).spaz*((proj.stesa.get(0)).ch-1));
 
 
         if (!proj.licenza) {
@@ -226,7 +226,7 @@ private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_
     public int xshf = 0;
 
     public void drawAssi(Graphics g, int w, int h) {
-        FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = h;//this.getHeight();
         int xmax = w;//this.getWidth();
         int nchanel = xmax / ArrFB.fb.length;
@@ -246,7 +246,7 @@ private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_
 
     public void drawSezione(Graphics g, int w, int h) {
         double ystp = 0.0;
-        FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = h;//this.getHeight();
         int xmax = w;//this.getWidth();
         int nchanel = xmax / ArrFB.fb.length;
@@ -267,7 +267,7 @@ private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_
         drawGeo(g, (int) (xshf + (nchanel * i)), (int) ((margUp * ymax) + 15));
         }*/
         double max = -999;
-        FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList fbl = proj.stesa.get(0);
 
 
         if (proj.Zg2.length > 1) {
@@ -571,7 +571,7 @@ private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_
     public void drawtick(Graphics g, double max, double min, int w, int h) {
 
         double ystp = 0.0;
-        FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = h;//this.getHeight();
         int xmax = w;//this.getWidth();
         int nchanel = xmax / ArrFB.fb.length;
@@ -646,7 +646,7 @@ private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_
 
     public void drawtick(Graphics g, double max, int w, int h) {
         double ystp = 0.0;
-        FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = h;//this.getHeight();
         int xmax = w;//this.getWidth();
         int nchanel = xmax / ArrFB.fb.length;
@@ -719,7 +719,7 @@ private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_
 
     private void drawLeg(Graphics2D g2, double V1, int i, int w, int h) {
         double ystp = 0.0;
-        FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = h;//this.getHeight();
         int xmax = w;//this.getWidth();
         int nchanel = xmax / ArrFB.fb.length;

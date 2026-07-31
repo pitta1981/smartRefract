@@ -36,7 +36,7 @@ public class tVdlg extends javax.swing.JDialog {
 
         for (int i = 0; i < 6; i++) {
 
-            tvdraw.tV1A[i] = prj.DTTv(1, ((FirstBrakeList) prj.stesa.get(0)).spaz * i);
+            tvdraw.tV1A[i] = prj.DTTv(1, (prj.stesa.get(0)).spaz * i);
             for (int j = 0; j < tvdraw.tV1A[i].length; j++) {
                 tvdraw.tV1A[i][j] = tvdraw.tV1A[i][j] + (i * 15);
 
@@ -55,7 +55,7 @@ public class tVdlg extends javax.swing.JDialog {
 
             for (int i = 0; i < 6; i++) {
 
-                tvdraw.tV2A[i] = prj.DTTv(2, ((FirstBrakeList) prj.stesa.get(0)).spaz * i);
+                tvdraw.tV2A[i] = prj.DTTv(2, (prj.stesa.get(0)).spaz * i);
                 for (int j = 0; j < tvdraw.tV2A[i].length; j++) {
                     tvdraw.tV2A[i][j] = tvdraw.tV2A[i][j] + (i * 15);
 
@@ -235,11 +235,11 @@ public class tVdlg extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (jComboBox1.getSelectedItem().equals("1")) {
-            proj.xy = ((Integer)jSpinner1.getValue())*((FirstBrakeList) proj.stesa.get(0)).spaz;
+            proj.xy = ((Integer)jSpinner1.getValue())*(proj.stesa.get(0)).spaz;
             proj.Tv1 = proj.DTTv(1, proj.xy);
             this.tvdraw.tV1 = proj.Tv1;
         } else if (jComboBox1.getSelectedItem().equals("2")) {
-            proj.xy2 = ((Integer)jSpinner1.getValue())*((FirstBrakeList) proj.stesa.get(0)).spaz;
+            proj.xy2 = ((Integer)jSpinner1.getValue())*(proj.stesa.get(0)).spaz;
             proj.Tv2 = proj.DTTv(2, proj.xy2);
             this.tvdraw.tV2 = proj.Tv2;
 
@@ -256,11 +256,11 @@ public class tVdlg extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         if (jComboBox1.getSelectedItem().equals("1")) {
-            proj.xy = ((Integer)jSpinner1.getValue())*((FirstBrakeList) proj.stesa.get(0)).spaz;
+            proj.xy = ((Integer)jSpinner1.getValue())*(proj.stesa.get(0)).spaz;
             proj.Tv1 = proj.DTTv(1, proj.xy);
             this.tvdraw.tV1 = proj.Tv1;
         } else if (jComboBox1.getSelectedItem().equals("2")) {
-            proj.xy2 = ((Integer)jSpinner1.getValue())*((FirstBrakeList) proj.stesa.get(0)).spaz;
+            proj.xy2 = ((Integer)jSpinner1.getValue())*(proj.stesa.get(0)).spaz;
             proj.Tv2 = proj.DTTv(2, proj.xy2);
             this.tvdraw.tV2 = proj.Tv2;
 

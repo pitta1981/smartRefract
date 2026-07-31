@@ -110,8 +110,8 @@ public class TestSeismicDataPreservation {
             return;
         }
         
-        FirstBrakeList originalFbl = (FirstBrakeList) original.TraceGroup.get(0);
-        FirstBrakeList loadedFbl = (FirstBrakeList) loaded.TraceGroup.get(0);
+        FirstBrakeList originalFbl = original.TraceGroup.get(0);
+        FirstBrakeList loadedFbl = loaded.TraceGroup.get(0);
         
         if (loadedFbl.tr == null) {
             System.err.println("✗ No traces loaded");

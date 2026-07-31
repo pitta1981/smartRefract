@@ -150,7 +150,7 @@ public class FirstBrakeList implements Externalizable {
         fb = new FirstBrake[n + 1];
         for (int i = 1; i < n + 1; i++) {
             fb[i] = new FirstBrake();
-            fb[i] = (FirstBrake) linea.get(i - 1);
+            fb[i] = linea.get(i - 1);
             fb[i].posx = spaz_in + spaz * (i - 1);
         }
 
@@ -159,7 +159,7 @@ public class FirstBrakeList implements Externalizable {
     public FirstBrake getFB(int ch) {
 
         //  System.out.println("Get FIB");
-        return (FirstBrake) linea.get(ch - 1);
+        return linea.get(ch - 1);
     }
 
     public double getXY(double x) {
@@ -203,7 +203,7 @@ public class FirstBrakeList implements Externalizable {
             }
         } else {
             for (int i = in; i >= fi; i--) {
-                FirstBrake fib = (FirstBrake) linea.get(i);
+                FirstBrake fib = linea.get(i);
 
                 if (fib.time > 0) {
                     sum = sum + (fib.time);
@@ -372,17 +372,14 @@ public class FirstBrakeList implements Externalizable {
 
     public void setLayer(int in, int fi, int l) {
 
-        FileOutputStream fos = null;
         System.out.println("saving... 0");
         String userHome = "user.home";
 
-        // We get the path by getting the system property with the 
-        // defined key above. 
+        // We get the path by getting the system property with the
+        // defined key above.
         String path = System.getProperty(userHome);
-        try {
-            fos = new FileOutputStream(path + "/smartRefract-data/" + "dromo.txt", true);
-
-            OutputStreamWriter os = new OutputStreamWriter(fos);
+        try (FileOutputStream fos = new FileOutputStream(path + "/smartRefract-data/" + "dromo.txt", true);
+             OutputStreamWriter os = new OutputStreamWriter(fos)) {
 
             os.write("layer " + l + "\n");
             os.write("" + spaz_in + " " + spaz + " " + scoppio + "\n");
@@ -396,7 +393,7 @@ public class FirstBrakeList implements Externalizable {
             } else {
                 for (int i = in; i >= fi; i--) {
                     if (in - fi == 0) {
-                        os.write(i + " " + (int) -5 + "\n");
+                        os.write(i + " " + -5 + "\n");
                     } else {
                         fb[i].setLayer(l);
                         fb[i].offset = Math.abs(fb[i].posx - this.scoppio);
@@ -409,16 +406,8 @@ public class FirstBrakeList implements Externalizable {
                 os.write("FineShot\n");
             }
             os.flush();
-            os.close();
         } catch (IOException ex) {
-            //       Logger.getLogger(JRefractionView.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException ex) {
-                System.out.println("SetLayer IOEx  " + ex.getMessage());
-                //          Logger.getLogger(JRefractionView.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            System.out.println("SetLayer IOEx  " + ex.getMessage());
         }
 
     }
@@ -428,7 +417,7 @@ public class FirstBrakeList implements Externalizable {
         double sum = 0;
         if (in < fi) {
             for (int i = in; i <= fi; i++) {
-                FirstBrake fib = (FirstBrake) linea.get(i);
+                FirstBrake fib = linea.get(i);
                 if (fib.time > 0) {
                     sum = sum + (fib.posx);
                     n++;
@@ -436,7 +425,7 @@ public class FirstBrakeList implements Externalizable {
             }
         } else {
             for (int i = in; i >= fi; i--) {
-                FirstBrake fib = (FirstBrake) linea.get(i);
+                FirstBrake fib = linea.get(i);
                 if (fib.time > 0) {
                     sum = sum + (fib.posx);
                     n++;
@@ -466,7 +455,7 @@ public class FirstBrakeList implements Externalizable {
         int n = 0;
         if (in < fi) {
             for (int i = in; i <= fi; i++) {
-                FirstBrake fib = (FirstBrake) linea.get(i);
+                FirstBrake fib = linea.get(i);
                 if (fib.time > 0) {
                     sum = sum + Math.pow((fib.posx) - mediax(in, fi), 2);
                     n++;
@@ -475,7 +464,7 @@ public class FirstBrakeList implements Externalizable {
             }
         } else {
             for (int i = in; i >= fi; i--) {
-                FirstBrake fib = (FirstBrake) linea.get(i - 1);
+                FirstBrake fib = linea.get(i - 1);
                 if (fib.time > 0) {
                     sum = sum + Math.pow((fib.posx) - mediax(in, fi), 2);
                     n++;
@@ -508,7 +497,7 @@ public class FirstBrakeList implements Externalizable {
         int n = 0;
         if (in < fi) {
             for (int i = in; i <= fi; i++) {
-                FirstBrake fib = (FirstBrake) linea.get(i);
+                FirstBrake fib = linea.get(i);
                 if (fib.time > 0) {
                     sum = sum + ((fib.time - media(in, fi)) * ((fib.posx) - mediax(in, fi)));
                     n = n + 1;
@@ -516,7 +505,7 @@ public class FirstBrakeList implements Externalizable {
             }
         } else {
             for (int i = in; i >= fi; i--) {
-                FirstBrake fib = (FirstBrake) linea.get(i);
+                FirstBrake fib = linea.get(i);
                 if (fib.time > 0) {
                     sum = sum + ((fib.time - media(in, fi)) * ((fib.posx) - mediax(in, fi)));
                     n++;
@@ -563,7 +552,7 @@ public class FirstBrakeList implements Externalizable {
         }
 
         double[][] returned = new double[lista.size()][2];
-        return (double[][]) lista.toArray(returned);
+        return lista.toArray(returned);
     }
 
     public static double[][] getList(FirstBrake[] list, int in, int fi, double sc, double scm) {
@@ -670,6 +659,12 @@ public class FirstBrakeList implements Externalizable {
         double xbar = sumX / n;
         double ybar = sumY / n;
 
+        // Con tutte le ascisse coincidenti la pendenza non è definita: senza questo
+        // controllo sxy/sxx restituiva NaN/Infinity che si propagava nelle velocità.
+        if (sxx == 0) {
+            throw new IllegalArgumentException("Ascisse coincidenti: regressione non definita.");
+        }
+
         double[] result = new double[2];
         result[1] = sxy / sxx;
         result[0] = ybar - result[1] * xbar;
@@ -703,7 +698,7 @@ public class FirstBrakeList implements Externalizable {
         int n = 0;
         if (in < fi) {
             for (int i = in; i <= fi; i++) {
-                FirstBrake fib = (FirstBrake) linea.get(i);
+                FirstBrake fib = linea.get(i);
                 if (fib.time > 0) {
                     sum = sum + ((fib.time - media(in, fi)) * ((fib.posx) - mediax(in, fi)));
                     n = n + 1;
@@ -711,7 +706,7 @@ public class FirstBrakeList implements Externalizable {
             }
         } else {
             for (int i = in; i >= fi; i--) {
-                FirstBrake fib = (FirstBrake) linea.get(i);
+                FirstBrake fib = linea.get(i);
                 if (fib.time > 0) {
                     sum = sum + ((fib.time - media(in, fi)) * ((fib.posx) - mediax(in, fi)));
                     n++;

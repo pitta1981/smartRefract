@@ -187,10 +187,10 @@ public class JPhantoming_view extends javax.swing.JPanel {
         }
         // Draw the forward and reverse base shots if necessary
         if (this.drawForwardBS) {
-            this.draw_Punti(g, 0, max, ((FirstBrakeList) dati_sismici.stesa.get(base_shot[0])).fb, new Color(150, 200, 200), true);
+            this.draw_Punti(g, 0, max, (dati_sismici.stesa.get(base_shot[0])).fb, new Color(150, 200, 200), true);
         }
         if (this.drawReverseBS) {
-            this.draw_Punti(g, 0, max, ((FirstBrakeList) dati_sismici.stesa.get(base_shot[1])).fb, new Color(150, 200, 200), true);
+            this.draw_Punti(g, 0, max, (dati_sismici.stesa.get(base_shot[1])).fb, new Color(150, 200, 200), true);
         }
 
         // Draw the points for the seismic data
@@ -521,7 +521,7 @@ public class JPhantoming_view extends javax.swing.JPanel {
         /*
          for (Integer i : shots) {
 
-         this.draw_Punti(g, min, max, ((FirstBrakeList) dati_sismici.stesa.get(i)).fb, color[254 - i]);
+         this.draw_Punti(g, min, max, (dati_sismici.stesa.get(i)).fb, color[254 - i]);
          }*/
     }
 

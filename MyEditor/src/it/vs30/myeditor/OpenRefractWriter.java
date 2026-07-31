@@ -69,7 +69,7 @@ public class OpenRefractWriter {
         if (apiObject.TraceGroup != null && !apiObject.TraceGroup.isEmpty()) {
             project.traceGroups = new OpenRefractTraceGroup[apiObject.TraceGroup.size()];
             for (int i = 0; i < apiObject.TraceGroup.size(); i++) {
-                project.traceGroups[i] = convertTraceGroup((FirstBrakeList) apiObject.TraceGroup.get(i));
+                project.traceGroups[i] = convertTraceGroup(apiObject.TraceGroup.get(i));
             }
         }
         

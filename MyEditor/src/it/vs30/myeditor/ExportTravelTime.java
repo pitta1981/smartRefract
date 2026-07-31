@@ -53,7 +53,6 @@ public final class ExportTravelTime implements ActionListener {
         }
         int returnVal = fc.showSaveDialog(null);
         //  int returnVal = fc.showSaveDialog(null);
-        FileOutputStream fos = null;
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             try {
                 File file = fc.getSelectedFile();
@@ -62,50 +61,47 @@ public final class ExportTravelTime implements ActionListener {
                 }
                 
                 
-                fos = new FileOutputStream(file);
+                try (FileOutputStream fos2 = new FileOutputStream(file);
+                     OutputStreamWriter os = new OutputStreamWriter(fos2)) {
+                    os.write("otte\n");
+                    os.write(""+1.0+"\n");
+                    os.write(2+"\n");
+                    os.write(1+"\n");
+                     FirstBrakeList fl =  obj.TraceGroup.get(0);
+                    String posx="";
+                    String posz="";
                 
-                OutputStreamWriter os = new OutputStreamWriter(fos);
-                os.write("otte\n");
-                os.write(""+1.0+"\n");
-                os.write(2+"\n");
-                os.write(1+"\n");
-                 FirstBrakeList fl =  obj.TraceGroup.get(0);
-                String posx="";
-                String posz="";
-                
-                for(FirstBrake fb:fl.fb){
-                   posx=posx+fb.posx+";";
-                   posz=posz+fb.z+";";
-                }
-                os.write(posx+"\n");
-                os.write(posz+"\n");
-                posx="";
-                posz="";
-                
-                for(FirstBrakeList FBL:obj.TraceGroup){
-                    posx=posx+FBL.scoppio+";";
-                    posz=posz+"0.0"+";";
-                    
-                }
-                os.write(posx+"\n");
-                os.write(posz+"\n");
-                int i=0;
-                for(FirstBrakeList FBL:obj.TraceGroup){
-                    String tt="";
-                    for(FirstBrake fb:FBL.fb){
-                        tt=tt+fb.time+";";
+                    for(FirstBrake fb:fl.fb){
+                       posx=posx+fb.posx+";";
+                       posz=posz+fb.z+";";
                     }
-                    os.write("0\n");
-                    os.write(i+"\n");
-                    os.write(tt+"\n");
-                    i++;
+                    os.write(posx+"\n");
+                    os.write(posz+"\n");
+                    posx="";
+                    posz="";
+                
+                    for(FirstBrakeList FBL:obj.TraceGroup){
+                        posx=posx+FBL.scoppio+";";
+                        posz=posz+"0.0"+";";
+                    
+                    }
+                    os.write(posx+"\n");
+                    os.write(posz+"\n");
+                    int i=0;
+                    for(FirstBrakeList FBL:obj.TraceGroup){
+                        String tt="";
+                        for(FirstBrake fb:FBL.fb){
+                            tt=tt+fb.time+";";
+                        }
+                        os.write("0\n");
+                        os.write(i+"\n");
+                        os.write(tt+"\n");
+                        i++;
+                    }
+                
+                    os.flush();
                 }
-                
-                os.flush();
-                os.close();
-                fos.flush();
-                fos.close();
-                
+
             } catch (FileNotFoundException ex) {
                 Exceptions.printStackTrace(ex);
             } catch (IOException ex) {

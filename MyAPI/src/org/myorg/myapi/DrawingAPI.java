@@ -268,7 +268,7 @@ public class DrawingAPI {
     public void drawdr(Graphics g, double max, int w, int h) {
         int ymax = h;
         int xmax = w;
-        ArrFB = (FirstBrakeList) proj.stesa.get(indj);
+        ArrFB = proj.stesa.get(indj);
         int nchanel = xmax / (ArrFB.fb.length + 2);
         int ychn = (ymax - (5 * nchanel)) / nchanel;
         xshf = nchanel;
@@ -277,7 +277,7 @@ public class DrawingAPI {
         int ystp = (int) ((ymax - ((2 * margUp) * ymax)) / max);
 
         for (int j = 0; j < proj.stesa.size(); j++) {
-            FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(j);
+            FirstBrakeList fbl = proj.stesa.get(j);
 
             for (int i = 0; i < fbl.fb.length; i++) {
                 if (fbl.scoppio < ((i) * fbl.spaz) + fbl.spaz_in) {
@@ -358,7 +358,7 @@ public class DrawingAPI {
 
     public void drawDr(Graphics g, int w, int h, boolean print) {
         //g.drawLine(24, 0, 200, 200);
-        ArrFB = (FirstBrakeList) proj.stesa.get(indj);
+        ArrFB = proj.stesa.get(indj);
         int ymax = h;//this.getHeight();
         int xmax = w;
 
@@ -386,7 +386,7 @@ public class DrawingAPI {
         //ymax=ymax-(int)(2*margUp*ymax);
         double max = 0.00001;
         for (int j = 0; j < proj.stesa.size(); j++) {
-            FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(j);
+            FirstBrakeList fbl = proj.stesa.get(j);
             for (int i = 0; i < fbl.fb.length - 1; i++) {
                 if (max < (fbl.fb[i].time)) {
                     max = (int) (fbl.fb[i].time);
@@ -539,7 +539,7 @@ public class DrawingAPI {
 
                 for (int i = 0; i < proj.stesa.size(); i++) {
                     if (i != obj.trace_index) {
-                        FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(i);
+                        FirstBrakeList fbl = proj.stesa.get(i);
                         Path2D p = new Path2D.Double();
                         p.moveTo(0 * stepCh + stepCh / 2 + margine_dx, (fbl.fb[0].time * stepT / obj.tr[0].sampleInterval) / 1000);
                         for (int j = 0; j < fbl.fb.length; j++) {
@@ -588,7 +588,7 @@ public class DrawingAPI {
         int ymax = my;//this.getHeight();
         int xmax = mx;//this.getWidth();
 
-        ArrFB = (FirstBrakeList) proj.stesa.get(indj);
+        ArrFB = proj.stesa.get(indj);
         int nchanel = xmax / ArrFB.fb.length;
         int ychn = (ymax - (5 * nchanel)) / nchanel;
         xshf = nchanel;
@@ -602,7 +602,7 @@ public class DrawingAPI {
 
         double max = 0.00001;
         for (int j = 0; j < proj.stesa.size(); j++) {
-            FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(j);
+            FirstBrakeList fbl = proj.stesa.get(j);
             for (int i = 0; i < fbl.fb.length; i++) {
                 if (max < fbl.fb[i].time) {
                     max = (int) fbl.fb[i].time;
@@ -618,7 +618,7 @@ public class DrawingAPI {
             int fi = indi;
             int j = indj;
             int in = indi;
-            FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(j);
+            FirstBrakeList fbl = proj.stesa.get(j);
             double scoppio = ((fbl.scoppio - fbl.spaz_in) / fbl.spaz);
             for (int i = 0; i < fbl.fb.length; i++) {
                 int xx = (i * nchanel) + xshf;
@@ -648,7 +648,7 @@ public class DrawingAPI {
             double b = result[1];  //1 / (fbl.varianza(in, fi) / fbl.covarianza(in, fi));
             double a = result[0]; //fbl.media(in, fi) - b * fbl.mediax(in, fi);
 
-            fbl = (FirstBrakeList) proj.stesa.get(indj);
+            fbl = proj.stesa.get(indj);
             int yy = ymax - (int) (fbl.fb[fi].time * ystp) - yshf;
             int xx = (fi * nchanel);
             g.setFont(new Font("Dialog", Font.PLAIN, (int) (14)));
@@ -666,7 +666,7 @@ public class DrawingAPI {
 
     private void drawtick(Graphics g, double max, int w, int h) {
         double ystp = 0.0;
-        FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = h;
         int xmax = w;
         int nchanel = xmax / (ArrFB.fb.length + 2);
@@ -737,7 +737,7 @@ public class DrawingAPI {
     }
 
     public void drawAssi(Graphics g, int w, int h) {
-        FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = h;//this.getHeight();
         int xmax = w;//this.getWidth();
         int nchanel = xmax / ArrFB.fb.length;
@@ -772,7 +772,7 @@ public class DrawingAPI {
     }
 
     public void drawSezAssi(Graphics g, int w, int h, double scala, double stepy) {
-        FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = h;//this.getHeight();
         int xmax = w;//this.getWidth();
         int nchanel = (int) (scala * ArrFB.spaz);
@@ -807,7 +807,7 @@ public class DrawingAPI {
     public void draw_sez_tick(Graphics g, double max, double min, int w, int h, double step) {
 
         double ystp = 0.0;
-        FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = h;//this.getHeight();
         int xmax = w;//this.getWidth();
         int nchanel = (int) (step * ArrFB.spaz);
@@ -891,7 +891,7 @@ public class DrawingAPI {
     }
 
     public double[] maxmin() {
-        FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList ArrFB = proj.stesa.get(0);
         //     int ymax = h;//this.getHeight();
         //   int xmax = w;//this.getWidth();
         //   int nchanel = xmax / ArrFB.fb.length;
@@ -904,7 +904,7 @@ public class DrawingAPI {
          }*/
         double max = -999;
         double min = -9999;
-        FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList fbl = proj.stesa.get(0);
 
         if (proj.Zg2.length > 1) {
 
@@ -960,7 +960,7 @@ public class DrawingAPI {
 
     public void drawSezione(Graphics g, int w, int h, double step, double stepy) {
         double ystp = 0.0;
-        FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = h;//this.getHeight();
         int xmax = w;//this.getWidth();
         //int nchanel = xmax / ArrFB.fb.length;
@@ -980,7 +980,7 @@ public class DrawingAPI {
          drawGeo(g, (int) (xshf + (nchanel * i)), (int) ((margUp * ymax) + 15));
          }*/
         double max = -999;
-        FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList fbl = proj.stesa.get(0);
 
         if (proj.Zg2.length > 1) {
             //     g.drawString("ZG 2", 20, 60);
@@ -1264,7 +1264,7 @@ public class DrawingAPI {
 
     public void drawSezione2(Graphics g, int w, int h, double step, double stepy) {
         double ystp = 0.0;
-        FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = h;//this.getHeight();
         int xmax = w;//this.getWidth();
         //int nchanel = xmax / ArrFB.fb.length;
@@ -1285,7 +1285,7 @@ public class DrawingAPI {
          drawGeo(g, (int) (xshf + (nchanel * i)), (int) ((margUp * ymax) + 15));
          }*/
         double max = -999;
-        FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList fbl = proj.stesa.get(0);
 
         if (proj.Zg2.length > 1) {
             //     g.drawString("ZG 2", 20, 60);
@@ -1563,7 +1563,7 @@ public class DrawingAPI {
 
     private void drawLeg(Graphics2D g2, double V1, int i, int w, int h) {
         double ystp = 0.0;
-        FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = h;//this.getHeight();
         int xmax = w;//this.getWidth();
         int nchanel = xmax / ArrFB.fb.length;
@@ -1597,10 +1597,8 @@ public class DrawingAPI {
 
     private boolean[][] loadBrush(String path) {
         boolean[][] brush = new boolean[15][15];
-        try {
-
-            InputStreamReader isr = new InputStreamReader(getClass().getClassLoader().getResourceAsStream(path));
-            BufferedReader br = new BufferedReader(isr);
+        try (InputStreamReader isr = new InputStreamReader(getClass().getClassLoader().getResourceAsStream(path));
+             BufferedReader br = new BufferedReader(isr)) {
 
             String linea = br.readLine();
             // String[] module = new String[20];

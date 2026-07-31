@@ -163,11 +163,9 @@ public class ParsOpt extends OptionProcessor {
     }
 
     public void loadPrj(File f, APIObject obj, String base) {
-        try {
-            FileInputStream fis = new FileInputStream(f);
-
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
+        try (FileInputStream fis = new FileInputStream(f);
+             InputStreamReader isr = new InputStreamReader(fis);
+             BufferedReader br = new BufferedReader(isr)) {
 
             String linea = br.readLine();
             //int n=Integer.parseInt(linea);
@@ -271,7 +269,7 @@ public class ParsOpt extends OptionProcessor {
         }
 
         obj.sync();
-        obj.fb = (FirstBrakeList) obj.TraceGroup.get(obj.TraceGroup.size() - 1);
+        obj.fb = obj.TraceGroup.get(obj.TraceGroup.size() - 1);
         for (int i = 0; i < obj.proj.stesa.size(); i++) {
             FirstBrakeList fbl = obj.proj.stesa.get(i);
             for (int j = 0; j < fbl.fb.length - 1; j++) {
@@ -293,13 +291,10 @@ public class ParsOpt extends OptionProcessor {
         base = base.replace("\\", "/");
         File f = new File(projectnameList.get(0));
         String path = new File(base, (String) (projectnameList.get(0)).replace("\\", "/")).getPath();
-        FileInputStream fis;
-        try {
-            fis = new FileInputStream(f);
+        try (FileInputStream fis = new FileInputStream(f);
+             InputStreamReader isr = new InputStreamReader(fis);
+             BufferedReader br = new BufferedReader(isr)) {
             System.out.println("*** APERTO ***");
-
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
 
             String linea = br.readLine();
             while (linea != null) {

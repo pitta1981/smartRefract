@@ -70,6 +70,15 @@ public class Indagine {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Indagine.class.getName()).log(Level.SEVERE, null, ex);
         }
+        if (os == null) {
+            // Il resto della classe scrive su os senza controlli: con la home non
+            // scrivibile ogni elaborazione moriva di NullPointerException.
+            os = new OutputStreamWriter(new java.io.OutputStream() {
+                @Override
+                public void write(int b) {
+                }
+            });
+        }
 
         this.useManPhant[0] = new Bool(false);
         this.useManPhant[1] = new Bool(false);
@@ -121,9 +130,9 @@ public class Indagine {
         // ObjCp ocp = new ObjCp();
         for (int i = 0; i < stesa.size(); i++) {
 
-            if (!((FirstBrakeList) stesa.get(i)).strato1.equals("0-0")) {
-                ((FirstBrakeList) stesa.get(i)).dromo[0] = new JRetta();
-                split = ((FirstBrakeList) stesa.get(i)).strato1.split("-");
+            if (!(stesa.get(i)).strato1.equals("0-0")) {
+                (stesa.get(i)).dromo[0] = new JRetta();
+                split = (stesa.get(i)).strato1.split("-");
                 in = Integer.parseInt(split[0]);
                 fi = Integer.parseInt(split[1]);
                 int k, f;
@@ -137,40 +146,40 @@ public class Indagine {
                 double[][] data = new double[f - k + 2][2];
                 int index = 0;
                 for (int j = k; j <= f; j++) {
-                    data[index][0] = ((FirstBrakeList) stesa.get(i)).fb[j].posx;
-                    data[index][1] = ((FirstBrakeList) stesa.get(i)).fb[j].time;
+                    data[index][0] = (stesa.get(i)).fb[j].posx;
+                    data[index][1] = (stesa.get(i)).fb[j].time;
                     index++;
                 }
-                data[index][0] = ((FirstBrakeList) stesa.get(i)).scoppio;
+                data[index][0] = (stesa.get(i)).scoppio;
                 data[index][1] = 0.0;
                 index++;
                 try {
                     double[] regr = FirstBrakeList.getOLSRegression(data);
-                    ((FirstBrakeList) stesa.get(i)).dromo[0].b = regr[1];
-                    ((FirstBrakeList) stesa.get(i)).dromo[0].a = regr[0];
+                    (stesa.get(i)).dromo[0].b = regr[1];
+                    (stesa.get(i)).dromo[0].a = regr[0];
                 } catch (Exception ex) {
                     System.out.println("getOLS Error");
                 }
 
-                //((FirstBrakeList) stesa.get(i)).dromo[0].b = 1 / (((FirstBrakeList) stesa.get(i)).varianza(in, fi) / ((FirstBrakeList) stesa.get(i)).covarianza(in, fi));
-                //((FirstBrakeList) stesa.get(i)).dromo[0].a = ((FirstBrakeList) stesa.get(i)).media(in, fi) - ((FirstBrakeList) stesa.get(i)).dromo[0].b * ((FirstBrakeList) stesa.get(i)).mediax(in, fi);
+                //(stesa.get(i)).dromo[0].b = 1 / ((stesa.get(i)).varianza(in, fi) / (stesa.get(i)).covarianza(in, fi));
+                //(stesa.get(i)).dromo[0].a = (stesa.get(i)).media(in, fi) - (stesa.get(i)).dromo[0].b * (stesa.get(i)).mediax(in, fi);
                 // fiB.dromo[0]=(JRetta)ocp.copy(dromo[0]);
-                ((FirstBrakeList) stesa.get(i)).setLayer(in, fi, 1);
+                (stesa.get(i)).setLayer(in, fi, 1);
                 // fiB.strato1=strato1.getText();
 
             } else {
-                ((FirstBrakeList) stesa.get(i)).dromo[0] = new JRetta();
-                ((FirstBrakeList) stesa.get(i)).dromo[0].b = -999;
-                ((FirstBrakeList) stesa.get(i)).dromo[0].a = -999;
+                (stesa.get(i)).dromo[0] = new JRetta();
+                (stesa.get(i)).dromo[0].b = -999;
+                (stesa.get(i)).dromo[0].a = -999;
 
                 // fiB.dromo[0]=(JRetta)ocp.copy(dromo[0]);
-                ((FirstBrakeList) stesa.get(i)).setLayer(0, 0, 1);
+                (stesa.get(i)).setLayer(0, 0, 1);
                 //fiB.strato1=strato1.getText();
 
             }
-            if (!((FirstBrakeList) stesa.get(i)).strato2.equals("0-0")) {
-                ((FirstBrakeList) stesa.get(i)).dromo[1] = new JRetta();
-                split = ((FirstBrakeList) stesa.get(i)).strato2.split("-");
+            if (!(stesa.get(i)).strato2.equals("0-0")) {
+                (stesa.get(i)).dromo[1] = new JRetta();
+                split = (stesa.get(i)).strato2.split("-");
                 in = Integer.parseInt(split[0]);
                 fi = Integer.parseInt(split[1]);
 
@@ -185,16 +194,16 @@ public class Indagine {
                 double[][] data = new double[f - k + 1][2];
                 int index = 0;
                 for (int j = k; j <= f; j++) {
-                    data[index][0] = ((FirstBrakeList) stesa.get(i)).fb[j].posx;
-                    data[index][1] = ((FirstBrakeList) stesa.get(i)).fb[j].time;
+                    data[index][0] = (stesa.get(i)).fb[j].posx;
+                    data[index][1] = (stesa.get(i)).fb[j].time;
                     index++;
                 }
 
                 try {
                     double[] regr = FirstBrakeList.getOLSRegression(data);
-                    ((FirstBrakeList) stesa.get(i)).dromo[1].b = regr[1];
-                    ((FirstBrakeList) stesa.get(i)).dromo[1].a = regr[0];
-                    ((FirstBrakeList) stesa.get(i)).setLayer(in, fi, 2);
+                    (stesa.get(i)).dromo[1].b = regr[1];
+                    (stesa.get(i)).dromo[1].a = regr[0];
+                    (stesa.get(i)).setLayer(in, fi, 2);
                     // fiB.strato1=strato1.getText();
                 } catch (Exception ex) {
                     System.out.println("getOLS Error");
@@ -225,30 +234,36 @@ public class Indagine {
                 double[][] data = new double[f - k + 1][2];
                 int index = 0;
                 for (int j = k; j <= f; j++) {
-                    data[index][0] = ((FirstBrakeList) stesa.get(i)).fb[j].posx;
-                    data[index][1] = ((FirstBrakeList) stesa.get(i)).fb[j].time;
+                    data[index][0] = (stesa.get(i)).fb[j].posx;
+                    data[index][1] = (stesa.get(i)).fb[j].time;
                     index++;
                 }
 
-                double[] regr = FirstBrakeList.getOLSRegression(data);
-                ((FirstBrakeList) stesa.get(i)).dromo[2].b = regr[1];
-                ((FirstBrakeList) stesa.get(i)).dromo[2].a = regr[0];
-                ((FirstBrakeList) stesa.get(i)).setLayer(in, fi, 3);
+                try {
+                    double[] regr = FirstBrakeList.getOLSRegression(data);
+                    (stesa.get(i)).dromo[2].b = regr[1];
+                    (stesa.get(i)).dromo[2].a = regr[0];
+                } catch (IllegalArgumentException ex) {
+                    (stesa.get(i)).dromo[2].b = -999;
+                    (stesa.get(i)).dromo[2].a = -999;
+                    System.out.println("getOLS Error: " + ex.getMessage());
+                }
+                (stesa.get(i)).setLayer(in, fi, 3);
                 // fiB.strato1=strato1.getText();
 
             } else {
-                ((FirstBrakeList) stesa.get(i)).dromo[2] = new JRetta();
-                ((FirstBrakeList) stesa.get(i)).dromo[2].b = -999;
-                ((FirstBrakeList) stesa.get(i)).dromo[2].a = -999;
+                (stesa.get(i)).dromo[2] = new JRetta();
+                (stesa.get(i)).dromo[2].b = -999;
+                (stesa.get(i)).dromo[2].a = -999;
 
-                ((FirstBrakeList) stesa.get(i)).setLayer(0, 0, 3);
+                (stesa.get(i)).setLayer(0, 0, 3);
                 //fiB.strato1=strato1.getText();
 
             }
 
-            if (!((FirstBrakeList) stesa.get(i)).strato1R.equals("0-0")) {
-                ((FirstBrakeList) stesa.get(i)).dromoR[0] = new JRetta();
-                split = ((FirstBrakeList) stesa.get(i)).strato1R.split("-");
+            if (!(stesa.get(i)).strato1R.equals("0-0")) {
+                (stesa.get(i)).dromoR[0] = new JRetta();
+                split = (stesa.get(i)).strato1R.split("-");
                 in = Integer.parseInt(split[0]);
                 fi = Integer.parseInt(split[1]);
                 int k, f;
@@ -262,17 +277,23 @@ public class Indagine {
                 double[][] data = new double[f - k + 2][2];
                 int index = 0;
                 for (int j = k; j <= f; j++) {
-                    data[index][0] = ((FirstBrakeList) stesa.get(i)).fb[j].posx;
-                    data[index][1] = ((FirstBrakeList) stesa.get(i)).fb[j].time;
+                    data[index][0] = (stesa.get(i)).fb[j].posx;
+                    data[index][1] = (stesa.get(i)).fb[j].time;
                     index++;
                 }
-                data[index][0] = ((FirstBrakeList) stesa.get(i)).scoppio;
+                data[index][0] = (stesa.get(i)).scoppio;
                 data[index][1] = 0.0;
                 index++;
 
-                double[] regr = FirstBrakeList.getOLSRegression(data);
-                (stesa.get(i)).dromoR[0].b = regr[1];
-                (stesa.get(i)).dromoR[0].a = regr[0];
+                try {
+                    double[] regr = FirstBrakeList.getOLSRegression(data);
+                    (stesa.get(i)).dromoR[0].b = regr[1];
+                    (stesa.get(i)).dromoR[0].a = regr[0];
+                } catch (IllegalArgumentException ex) {
+                    (stesa.get(i)).dromoR[0].b = -999;
+                    (stesa.get(i)).dromoR[0].a = -999;
+                    System.out.println("getOLS Error: " + ex.getMessage());
+                }
 
                 (stesa.get(i)).setLayer(in, fi, 1);
                 // fiB.strato1=strato1.getText();
@@ -285,9 +306,9 @@ public class Indagine {
                 //fiB.strato1=strato1.getText();
 
             }
-            if (!((FirstBrakeList) stesa.get(i)).strato2R.equals("0-0")) {
-                ((FirstBrakeList) stesa.get(i)).dromoR[1] = new JRetta();
-                split = ((FirstBrakeList) stesa.get(i)).strato2R.split("-");
+            if (!(stesa.get(i)).strato2R.equals("0-0")) {
+                (stesa.get(i)).dromoR[1] = new JRetta();
+                split = (stesa.get(i)).strato2R.split("-");
                 in = Integer.parseInt(split[0]);
                 fi = Integer.parseInt(split[1]);
 
@@ -307,12 +328,14 @@ public class Indagine {
                     index++;
                 }
 
-                double[] regr = FirstBrakeList.getOLSRegression(data);
-                try{
+                try {
+                    double[] regr = FirstBrakeList.getOLSRegression(data);
                     (stesa.get(i)).dromoR[1].b = regr[1];
                     (stesa.get(i)).dromoR[1].a = regr[0];
-                }catch(Exception e){
-                    
+                } catch (IllegalArgumentException ex) {
+                    (stesa.get(i)).dromoR[1].b = -999;
+                    (stesa.get(i)).dromoR[1].a = -999;
+                    System.out.println("getOLS Error: " + ex.getMessage());
                 }
                 (stesa.get(i)).setLayer(in, fi, 2);
                 
@@ -330,7 +353,7 @@ public class Indagine {
             }
             if (!(stesa.get(i)).strato3R.equals("0-0")) {
                 (stesa.get(i)).dromoR[2] = new JRetta();
-                split = ((FirstBrakeList) stesa.get(i)).strato3R.split("-");
+                split = (stesa.get(i)).strato3R.split("-");
                 in = Integer.parseInt(split[0]);
                 fi = Integer.parseInt(split[1]);
 
@@ -346,14 +369,20 @@ public class Indagine {
                 double[][] data = new double[f - k + 1][2];
                 int index = 0;
                 for (int j = k; j <= f; j++) {
-                    data[index][0] = ((FirstBrakeList) stesa.get(i)).fb[j].posx;
-                    data[index][1] = ((FirstBrakeList) stesa.get(i)).fb[j].time;
+                    data[index][0] = (stesa.get(i)).fb[j].posx;
+                    data[index][1] = (stesa.get(i)).fb[j].time;
                     index++;
                 }
 
-                double[] regr = FirstBrakeList.getOLSRegression(data);
-                (stesa.get(i)).dromoR[2].b = regr[1];
-                (stesa.get(i)).dromoR[2].a = regr[0];
+                try {
+                    double[] regr = FirstBrakeList.getOLSRegression(data);
+                    (stesa.get(i)).dromoR[2].b = regr[1];
+                    (stesa.get(i)).dromoR[2].a = regr[0];
+                } catch (IllegalArgumentException ex) {
+                    (stesa.get(i)).dromoR[2].b = -999;
+                    (stesa.get(i)).dromoR[2].a = -999;
+                    System.out.println("getOLS Error: " + ex.getMessage());
+                }
                 (stesa.get(i)).setLayer(in, fi, 3);
 
             } else {
@@ -364,7 +393,7 @@ public class Indagine {
 
             }
 
-            // ((FirstBrakeList) stesa.get(i)).intersect();
+            // (stesa.get(i)).intersect();
         }
     }
 
@@ -510,7 +539,7 @@ public class Indagine {
         int i_A = 0, i_R = 0;
         try {
             for (int j = 0; j < stesa.size(); j++) {
-                FirstBrakeList fbl = (FirstBrakeList) stesa.get(j);
+                FirstBrakeList fbl = stesa.get(j);
                 VfB_A[1] = new FirstBrakeList(fbl.fb.length);
 
                 VfB_R[1] = new FirstBrakeList(fbl.fb.length);
@@ -615,7 +644,7 @@ public class Indagine {
                 int indx = 0;
                 double dxA = -99999, dxR = -99999;
                 //System.out.println("phantom : "+j);
-                FirstBrakeList fbl = (FirstBrakeList) stesa.get(j);
+                FirstBrakeList fbl = stesa.get(j);
 
                 //System.out.println("phantom : "+fbl.fb.length);
                 for (int i = 1; i < fbl.fb.length; i++) {
@@ -858,7 +887,7 @@ public class Indagine {
         FirstBrakeList fbl = stesa.get(0);
         double[] V1A = new double[fbl.fb.length];
         for (int j = 0; j < stesa.size(); j++) {
-            fbl = (FirstBrakeList) stesa.get(j);
+            fbl = stesa.get(j);
             if (fbl.dromo[0].b > -999) {
                 V1 = Math.abs(1 / fbl.dromo[0].b);
                 for (int i = 0; i < fbl.fb.length; i++) {
@@ -943,7 +972,7 @@ public class Indagine {
             int c2 = 0;
 
             for (int j = 0; j < stesa.size(); j++) {
-                FirstBrakeList fbl = (FirstBrakeList) stesa.get(j);
+                FirstBrakeList fbl = stesa.get(j);
                 if (fbl.dromo[0].b > -999) {
                     V1 = V1 + Math.abs(1 / fbl.dromo[0].b);
                     c1++;
@@ -1759,10 +1788,9 @@ public class Indagine {
         // We get the path by getting the system property with the 
         // defined key above. 
         String path = System.getProperty(userHome);
-        try {
-            FileInputStream fis = new FileInputStream(path + "/smartRefract-data/" + "dromo.txt");
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
+        try (FileInputStream fis = new FileInputStream(path + "/smartRefract-data/" + "dromo.txt");
+             InputStreamReader isr = new InputStreamReader(fis);
+             BufferedReader br = new BufferedReader(isr)) {
             String linea;
             linea = br.readLine();
             int tiro = 0;
@@ -1775,7 +1803,7 @@ public class Indagine {
 
                     try {
                         if (lay == 1) {
-                            fbl = new FirstBrakeList(((FirstBrakeList) stesa.get(0)).fb.length);
+                            fbl = new FirstBrakeList((stesa.get(0)).fb.length);
                             tiro++;
                             dir = 'N';
                         }
@@ -1836,10 +1864,9 @@ public class Indagine {
         fbl = null;
         System.out.println("3--");
 
-        try {
-            FileInputStream fis = new FileInputStream(path + "/smartRefract-data/" + "dromo.txt");
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
+        try (FileInputStream fis = new FileInputStream(path + "/smartRefract-data/" + "dromo.txt");
+             InputStreamReader isr = new InputStreamReader(fis);
+             BufferedReader br = new BufferedReader(isr)) {
             String linea;
             linea = br.readLine();
             int tiro = 0;
@@ -1852,7 +1879,7 @@ public class Indagine {
 
                     try {
                         if (lay == 1) {
-                            fbl = new FirstBrakeList(((FirstBrakeList) stesa.get(0)).fb.length);
+                            fbl = new FirstBrakeList((stesa.get(0)).fb.length);
                             tiro++;
                             dir = 'N';
                         }
@@ -1981,7 +2008,6 @@ public class Indagine {
 
     public void writeDromo() {
 
-        FileOutputStream fos = null;
         System.out.println("saving... 0");
 
         String userHome = "user.home";
@@ -1989,12 +2015,9 @@ public class Indagine {
         // We get the path by getting the system property with the 
         // defined key above. 
         String path = System.getProperty(userHome);
-        try {
-            File file = new File(path + "/smartRefract-data/" + "dromo.txt");
-            file.createNewFile();
-            fos = new FileOutputStream(file, false);
-
-            OutputStreamWriter os = new OutputStreamWriter(fos);
+        File file = new File(path + "/smartRefract-data/" + "dromo.txt");
+        try (FileOutputStream fos = new FileOutputStream(file, false);
+             OutputStreamWriter os = new OutputStreamWriter(fos)) {
 
             for (FirstBrakeList fbl : stesa) {
                 int[] direzioni = {0, 1};
@@ -2024,7 +2047,7 @@ public class Indagine {
 
                         if (!have_data) {
                             fbl.updateLayer(0, 0, l, direzione);
-                            os.write(0 + " " + (int) -5 + "\n");
+                            os.write(0 + " " + -5 + "\n");
                         } else {
                             fbl.updateLayer(in, fi, l, direzione);
                         }
@@ -2037,16 +2060,8 @@ public class Indagine {
             }
 
             os.flush();
-            os.close();
         } catch (IOException ex) {
-            //       Logger.getLogger(JRefractionView.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException ex) {
-                System.out.println("SetLayer IOEx  " + ex.getMessage());
-                //          Logger.getLogger(JRefractionView.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            System.out.println("writeDromo IOEx  " + ex.getMessage());
         }
 
     }

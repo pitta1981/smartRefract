@@ -82,6 +82,15 @@ public final class APIObject implements java.io.Externalizable {
             }
         } catch (DataFormatException ex) {
             Logger.getLogger(APIObject.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            // I lettori tengono aperti RandomAccessFile/FileChannel: vanno sempre chiusi,
+            // altrimenti ogni progetto caricato consuma descrittori fino a "Too many open files".
+            if (inf != null) {
+                inf.close();
+            }
+            if (infY != null) {
+                infY.close();
+            }
         }
         System.out.println("Aperto...");
         System.out.println("Letto...");
@@ -173,12 +182,20 @@ public final class APIObject implements java.io.Externalizable {
         } catch (DataFormatException ex) {
             Logger.getLogger(APIObject.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Errore data openprj " + ex);
+        } finally {
+            // Vedi loadSism(): senza close() ogni scoppio caricato lascia aperto un
+            // RandomAccessFile, e un progetto con molti file esaurisce i descrittori.
+            if (inf != null) {
+                inf.close();
+            }
+            if (infY != null) {
+                infY.close();
+            }
+            if (infU != null) {
+                infU.close();
+            }
         }
         System.out.println("Aperto...");
-        try {
-            //ts=inf.getTraceSet();
-        } catch (Exception e) {
-        }
         System.out.println("Letto...");
 
         //  Trace t=ts.getTrace(0);

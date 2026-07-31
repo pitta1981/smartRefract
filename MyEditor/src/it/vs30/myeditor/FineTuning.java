@@ -933,7 +933,7 @@ public class FineTuning extends javax.swing.JDialog {
             for (int i = 0; i < maxXY; i++) {
 
                 tv_Draw.tV2A[i] = grm.compute_tV(dati_sismici.man_Phant_and[1], dati_sismici.man_Phant_rit[1], tAB, dati_sismici.stesa.get(0).spaz * i);
-                //dati_sismici.DTTv(1, ((FirstBrakeList) dati_sismici.stesa.get(0)).spaz * i);
+                //dati_sismici.DTTv(1, (dati_sismici.stesa.get(0)).spaz * i);
                 for (int j = 0; j < tv_Draw.tV2A[i].length; j++) {
                     tv_Draw.tV2A[i][j] = tv_Draw.tV2A[i][j];// + (i * 15);
 
@@ -968,7 +968,7 @@ public class FineTuning extends javax.swing.JDialog {
             for (int i = 0; i < maxXY; i++) {
 
                 tv_Draw.tV1A[i] = grm.compute_tV(dati_sismici.man_Phant_and[0], dati_sismici.man_Phant_rit[0], tAB, dati_sismici.stesa.get(0).spaz * i);
-                //dati_sismici.DTTv(1, ((FirstBrakeList) dati_sismici.stesa.get(0)).spaz * i);
+                //dati_sismici.DTTv(1, (dati_sismici.stesa.get(0)).spaz * i);
                 for (int j = 0; j < tv_Draw.tV1A[i].length; j++) {
                     tv_Draw.tV1A[i][j] = tv_Draw.tV1A[i][j];// + (i * 15);
 
@@ -1287,7 +1287,7 @@ public class FineTuning extends javax.swing.JDialog {
             for (int i = 0; i < maxXY; i++) {
 
                 tg_Draw.tV1A[i] = grm.compute_tG(dati_sismici.man_Phant_and[0], dati_sismici.man_Phant_rit[0], tAB, dati_sismici.stesa.get(0).spaz * i, v1);
-                //dati_sismici.DTTv(1, ((FirstBrakeList) dati_sismici.stesa.get(0)).spaz * i);
+                //dati_sismici.DTTv(1, (dati_sismici.stesa.get(0)).spaz * i);
                 for (int j = 0; j < tg_Draw.tV1A[i].length; j++) {
                     tg_Draw.tV1A[i][j] = tg_Draw.tV1A[i][j];// + (i * 15);
 
@@ -1305,7 +1305,7 @@ public class FineTuning extends javax.swing.JDialog {
                 tg_Draw.tV1A[i] = grm.compute_tG(dati_sismici.VfB_A[1], dati_sismici.VfB_R[1], Math.max(dati_sismici.VfB_A[1].tAB, dati_sismici.VfB_R[1].tAB), dati_sismici.stesa.get(0).spaz * i, v1);
 
 
-                //tg_Draw.tV1A[i] = dati_sismici.DTTv(1, ((FirstBrakeList) dati_sismici.stesa.get(0)).spaz * i);
+                //tg_Draw.tV1A[i] = dati_sismici.DTTv(1, (dati_sismici.stesa.get(0)).spaz * i);
                 for (int j = 0; j < tg_Draw.tV1A[i].length; j++) {
                     tg_Draw.tV1A[i][j] = tg_Draw.tV1A[i][j];// + (i * 15);
 
@@ -1340,7 +1340,7 @@ public class FineTuning extends javax.swing.JDialog {
             for (int i = 0; i < maxXY; i++) {
 
                 tg_Draw.tV2A[i] = grm.compute_tG(dati_sismici.man_Phant_and[1], dati_sismici.man_Phant_rit[1], tAB, dati_sismici.stesa.get(1).spaz * i, v1);
-                //dati_sismici.DTTv(1, ((FirstBrakeList) dati_sismici.stesa.get(0)).spaz * i);
+                //dati_sismici.DTTv(1, (dati_sismici.stesa.get(0)).spaz * i);
                 /*for (int j = 0; j < tg_Draw.tV1A[i].length; j++) {
                  tg_Draw.tV1A[i][j] = tg_Draw.tV1A[i][j];// + (i * 15);
 
@@ -1358,7 +1358,7 @@ public class FineTuning extends javax.swing.JDialog {
                 tg_Draw.tV2A[i] = grm.compute_tG(dati_sismici.VfB_A[2], dati_sismici.VfB_R[2], Math.max(dati_sismici.VfB_A[2].tAB, dati_sismici.VfB_R[2].tAB), dati_sismici.stesa.get(0).spaz * i, v1);
 
 
-                //tg_Draw.tV1A[i] = dati_sismici.DTTv(1, ((FirstBrakeList) dati_sismici.stesa.get(0)).spaz * i);
+                //tg_Draw.tV1A[i] = dati_sismici.DTTv(1, (dati_sismici.stesa.get(0)).spaz * i);
             /*    for (int j = 0; j < tg_Draw.tV2A[i].length; j++) {
                  tg_Draw.tV2A[i][j] = tg_Draw.tV2A[i][j];// + (i * 15);
 
@@ -1585,7 +1585,15 @@ public class FineTuning extends javax.swing.JDialog {
         }
         double data[][] = arData.toArray(new double[arData.size()][2]);
 
-        double[] param = FirstBrakeList.getOLSRegression(data);
+        // Con meno di due picking validi la regressione non è calcolabile: senza questo
+        // controllo l'interpolazione dei tempi mancanti abortiva con un'eccezione.
+        double[] param;
+        try {
+            param = FirstBrakeList.getOLSRegression(data);
+        } catch (IllegalArgumentException ex) {
+            System.out.println("fillTT: regressione non calcolabile (" + ex.getMessage() + ")");
+            return;
+        }
         i = 0;
         for (FirstBrake fb : mfb) {
             if (fb.time < 0) {

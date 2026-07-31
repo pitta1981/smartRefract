@@ -81,8 +81,12 @@ public final class SaveProject implements ActionListener {
                     }
                     
                 } catch (Exception ex) {
+                    // Senza notifica l'utente credeva di aver salvato un progetto perso.
                     System.out.println("Error saving project: " + ex.getMessage());
                     ex.printStackTrace();
+                    javax.swing.JOptionPane.showMessageDialog(null,
+                            "Impossibile salvare il progetto:\n" + ex.getMessage(),
+                            "Errore di salvataggio", javax.swing.JOptionPane.ERROR_MESSAGE);
                 }
             } else {
                 //log.append("Open command cancelled by user." + newline);
@@ -92,38 +96,29 @@ public final class SaveProject implements ActionListener {
         // TODO implement action body
     }
 
-    public static void saveSmartRefractProject(File file,APIObject obj) {
-       FileOutputStream fos=null;
-        try {
-            fos = new FileOutputStream(file);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
+    public static void saveSmartRefractProject(File file, APIObject obj) throws IOException {
+        // L'eccezione va propagata: inghiottirla lasciava all'utente un file
+        // troncato o vuoto con la conferma di salvataggio avvenuto.
+        try (FileOutputStream fos = new FileOutputStream(file);
+             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(obj);
             oos.flush();
-            oos.close();
-        } catch (IOException ex) {
-
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException ex) {
-                // Handle exception
-            }
         }
-
     }
     
     /**
      * Saves project in legacy text format for backward compatibility
      */
     private void saveLegacyFormat(File file, APIObject obj) throws IOException {
-        FileOutputStream fos = null;
-        try {
-            if (!file.getPath().toLowerCase().endsWith(".txt")) {
-                file = new File(file.getPath() + ".txt");
-            }
+        if (obj.TraceGroup == null || obj.TraceGroup.isEmpty()) {
+            throw new IOException("Nessuno scoppio da salvare: il progetto è vuoto.");
+        }
+        if (!file.getPath().toLowerCase().endsWith(".txt")) {
+            file = new File(file.getPath() + ".txt");
+        }
 
-            fos = new FileOutputStream(file);
-            OutputStreamWriter os = new OutputStreamWriter(fos);
+        try (FileOutputStream fos = new FileOutputStream(file);
+             OutputStreamWriter os = new OutputStreamWriter(fos)) {
 
             FirstBrakeList fl = obj.TraceGroup.get(0);
             os.write(fl.ch + "\n");
@@ -131,7 +126,7 @@ public final class SaveProject implements ActionListener {
             os.write(fl.spaz + "\n");
 
             for (int i = 0; i < obj.TraceGroup.size(); i++) {
-                fl = (FirstBrakeList) obj.TraceGroup.get(i);
+                fl = obj.TraceGroup.get(i);
 
                 String path = fl.fbp;
                 String base = file.getParent();
@@ -163,21 +158,11 @@ public final class SaveProject implements ActionListener {
             }
 
             os.flush();
-            os.close();
-            
-            // Also save binary format for compatibility
-            File binaryFile = new File(file.getPath().replace(".txt", "") + ".srefract");
-            saveSmartRefractProject(binaryFile, obj);
-            
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException ex) {
-                    // Handle exception
-                }
-            }
         }
+
+        // Also save binary format for compatibility
+        File binaryFile = new File(file.getPath().replace(".txt", "") + ".srefract");
+        saveSmartRefractProject(binaryFile, obj);
     }
 
     class Seg2FileFilter extends javax.swing.filechooser.FileFilter {

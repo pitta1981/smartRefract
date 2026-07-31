@@ -56,7 +56,7 @@ public class Jgeometria_av extends javax.swing.JDialog {
         prj=proj;
 
         for (int i = 0; i < proj.stesa.size(); i++) {
-            FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(i);
+            FirstBrakeList fbl = proj.stesa.get(i);
             //fbl.scoppio=Double.parseDouble(geom[i].replace('m', '\0'));
           //  tm.addData(new Data("" +(new File(fbl.fbp)).getName(), "" + fbl.scoppio));
             tm.spaz = fbl.spaz;
@@ -66,7 +66,7 @@ public class Jgeometria_av extends javax.swing.JDialog {
         }
         Data dt=new Data(tm.ch);
         for (int i = 0; i < proj.stesa.size(); i++) {
-            FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(i);
+            FirstBrakeList fbl = proj.stesa.get(i);
             for(int j=0;j<fbl.fb.length;j++){
                 dt.x[j]=fbl.fb[j].posx;
                 
@@ -76,7 +76,7 @@ public class Jgeometria_av extends javax.swing.JDialog {
         tm.addData(dt);
         dt=new Data(tm.ch);
         for (int i = 0; i < proj.stesa.size(); i++) {
-            FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(i);
+            FirstBrakeList fbl = proj.stesa.get(i);
             for(int j=0;j<fbl.fb.length;j++){
                 dt.x[j]=fbl.fb[j].z;
                 
@@ -220,7 +220,7 @@ public class Jgeometria_av extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         for (int i = 0; i < prj.stesa.size(); i++) {
-            FirstBrakeList fbl = (FirstBrakeList) prj.stesa.get(i);
+            FirstBrakeList fbl = prj.stesa.get(i);
             for(int j=0;j<fbl.fb.length;j++){
                 fbl.fb[j].z=(Double)tm.getValueAt(1, j);
                 

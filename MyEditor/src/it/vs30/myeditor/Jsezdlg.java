@@ -417,7 +417,7 @@ public class Jsezdlg extends javax.swing.JDialog {
                 FirstBrakeList ArrFB =  proj.stesa.get(0);
 
                 // double[] mxmn=dAPI.maxmin();
-                // FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+                // FirstBrakeList ArrFB = proj.stesa.get(0);
                 double ascismax = (ArrFB.ch - 1) * ArrFB.spaz;
                 double x_step = (im_s.getWidth() / ArrFB.fb.length);
                 double x = (im_s.getWidth() - (2 * sV.dAPI.margine_dx) - (2 * sV.dAPI.margine_sx)) / ascismax;

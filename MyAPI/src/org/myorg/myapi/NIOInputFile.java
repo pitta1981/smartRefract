@@ -229,9 +229,19 @@ public class NIOInputFile {
     }
 
     public void close() {
+        // Chiusure indipendenti: se fCH è null (costruttore fallito) il file
+        // sottostante deve comunque essere rilasciato.
         try {
-            fCH.close();
-            fileInput.close();
+            if (fCH != null) {
+                fCH.close();
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        try {
+            if (fileInput != null) {
+                fileInput.close();
+            }
         } catch (Exception e) {
             System.err.println(e);
         }

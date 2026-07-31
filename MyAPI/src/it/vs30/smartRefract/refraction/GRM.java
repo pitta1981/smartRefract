@@ -99,7 +99,7 @@ public class GRM {
     public Integer getBestXYTv(double[][] tV1A,double dx) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Integer best=new Integer(0);
-        int maxXY=(int)(tV1A[0].length/4);
+        int maxXY=tV1A[0].length/4;
         double[] lap=new double[tV1A.length];
         double dlap=0.0;
         for(int j=0;j<tV1A.length;j++){
@@ -145,7 +145,7 @@ public class GRM {
 
     public Integer getBestXYTg(double[][] tV1A, double dx) {
         Integer best=new Integer(0);
-        int maxXY=(int)(tV1A[0].length/4);
+        int maxXY=tV1A[0].length/4;
         double[] lap=new double[tV1A.length];
         double dlap=0.0;
         for(int j=0;j<tV1A.length;j++){

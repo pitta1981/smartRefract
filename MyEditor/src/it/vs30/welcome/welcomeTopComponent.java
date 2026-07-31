@@ -10,7 +10,10 @@ import it.vs30.myeditor.DocumentEditor;
 import it.vs30.myeditor.OpenPrj;
 import it.vs30.myeditor.Set_geometry;
 import it.vs30.myeditor.folder_history;
-import java.awt.Color;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.geom.RoundRectangle2D;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,7 +22,7 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import javax.swing.JFileChooser;
+import javax.swing.*;
 import org.myorg.myapi.APIObject;
 import org.myorg.myapi.FirstBrakeList;
 import org.netbeans.api.settings.ConvertAsProperties;
@@ -40,7 +43,7 @@ import org.openide.windows.WindowManager;
         autostore = false)
 @TopComponent.Description(
         preferredID = "welcomeTopComponent",
-        //iconBase="SET/PATH/TO/ICON/HERE", 
+        //iconBase="SET/PATH/TO/ICON/HERE",
         persistenceType = TopComponent.PERSISTENCE_ALWAYS)
 @TopComponent.Registration(mode = "editor", openAtStartup = true)
 @ActionID(category = "Window", id = "it.vs30.welcome.welcomeTopComponent")
@@ -55,19 +58,30 @@ import org.openide.windows.WindowManager;
 })
 public final class welcomeTopComponent extends TopComponent {
 
+    // Windows 11 Fluent-inspired palette
+    private static final Color BG_WINDOW = new Color(0xF3, 0xF3, 0xF3);
+    private static final Color CARD_BG = Color.WHITE;
+    private static final Color CARD_BORDER = new Color(0xE1, 0xE1, 0xE1);
+    private static final Color ROW_HOVER = new Color(0x00, 0x00, 0x00, 22);
+    private static final Color SECONDARY_HOVER = new Color(0xF5, 0xF5, 0xF5);
+    private static final Color ACCENT = new Color(0xE8, 0x87, 0x1A);
+    private static final Color ACCENT_HOVER = new Color(0xCE, 0x76, 0x12);
+    private static final Color TEXT_PRIMARY = new Color(0x20, 0x1F, 0x1E);
+    private static final Color TEXT_SECONDARY = new Color(0x60, 0x5E, 0x5C);
+
     private boolean licenza = false;
     String[] lista = new String[3];
-    
+
     public int lra = 20;
-    
+
     public class STALTAPAR {
         public
         int lra ,sra;
         public
         double thrs;
-        
+
         public STALTAPAR(){}
-        
+
         public void set_par(int LRA, int SRA, double THRS)
         {
             lra = LRA;
@@ -114,7 +128,7 @@ public final class welcomeTopComponent extends TopComponent {
                 ex.printStackTrace();
             }
         }
-        
+
     };
 
     private final InstanceContent content = new InstanceContent();
@@ -124,7 +138,7 @@ public final class welcomeTopComponent extends TopComponent {
 
     private String recent_files = "recenti.list";
     private String autopick_par = "autopick.par";
-    private String tmpPath; 
+    private String tmpPath;
 
     public welcomeTopComponent() {
         initComponents();
@@ -140,7 +154,7 @@ public final class welcomeTopComponent extends TopComponent {
 
         String userHome = "user.home";
 
-        // We get the path by getting the system property with the 
+        // We get the path by getting the system property with the
         // defined key above. path+"/smartRefract-data/"
         String path = System.getProperty(userHome);
         tmpPath = path + "/smartRefract-data/";
@@ -148,9 +162,7 @@ public final class welcomeTopComponent extends TopComponent {
         ltasta_par = new STALTAPAR();
 
         ltasta_par.loadParametersFromFile(tmpPath + autopick_par);
-        
-        new_Button1.setText("New...");
-        jButton2.setText("Open...");
+
         boolean checkLic = true;
 
         /*    final JFXPanel jfxPanel = new JFXPanel();
@@ -196,15 +208,12 @@ public final class welcomeTopComponent extends TopComponent {
         }
         String userHome = "user.home";
         String path = System.getProperty(userHome);
-        try {
-            FileOutputStream fos = new FileOutputStream(path + "/smartRefract-data/" + "recenti.list");
-            OutputStreamWriter os = new OutputStreamWriter(fos);
+        try (FileOutputStream fos = new FileOutputStream(path + "/smartRefract-data/" + recent_files);
+             OutputStreamWriter os = new OutputStreamWriter(fos)) {
             for (int i = 0; i < 3; i++) {
                 os.write((lista[i] != null ? lista[i] : "") + "\n");
             }
             os.flush();
-            os.close();
-            fos.close();
         } catch(Exception ex){
             // Ignora errori di scrittura
         }
@@ -214,166 +223,188 @@ public final class welcomeTopComponent extends TopComponent {
     public void updateRecentProject() {
         String userHome = "user.home";
         String path = System.getProperty(userHome);
-        try {
-            FileInputStream fis = new FileInputStream(path + "/smartRefract-data/" + "recenti.list");
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
+        try (FileInputStream fis = new FileInputStream(path + "/smartRefract-data/" + recent_files);
+             InputStreamReader isr = new InputStreamReader(fis);
+             BufferedReader br = new BufferedReader(isr)) {
             for (int i = 0; i < 3; i++) {
                 String linea = br.readLine();
                 lista[i] = (linea != null) ? linea : "";
             }
-            br.close();
-            isr.close();
-            fis.close();
         } catch (Exception ex) {
             // Se il file non esiste o errore, azzera la lista
             for (int i = 0; i < 3; i++) lista[i] = "";
         }
-        String linea1 = lista[0];
-        if (linea1 != null && linea1.length() > 45) {
-            linea1 = linea1.substring(0, 10) + "..." + linea1.substring(linea1.length() - 32);
+
+        boolean anyRecent = false;
+        for (int i = 0; i < 3; i++) {
+            String entry = lista[i];
+            RecentItemButton row = recentButtons[i];
+            if (entry != null && !entry.isEmpty()) {
+                anyRecent = true;
+                File f = new File(entry);
+                String folder = f.getParent() != null ? f.getParent() : entry;
+                row.setRecentText(f.getName(), truncateMiddle(folder, 52));
+                row.setVisible(true);
+            } else {
+                row.setVisible(false);
+            }
         }
-        String linea2 = lista[1];
-        if (linea2 != null && linea2.length() > 45) {
-            linea2 = linea2.substring(0, 10) + "..." + linea2.substring(linea2.length() - 32);
+        emptyRecentLabel.setVisible(!anyRecent);
+        recentCard.setVisible(anyRecent);
+    }
+
+    private static String truncateMiddle(String s, int maxLen) {
+        if (s == null) {
+            return "";
         }
-        String linea3 = lista[2];
-        if (linea3 != null && linea3.length() > 45) {
-            linea3 = linea3.substring(0, 10) + "..." + linea3.substring(linea3.length() - 32);
+        if (s.length() <= maxLen) {
+            return s;
         }
-        jButton3.setText(linea1 != null ? linea1 : "");
-        jButton4.setText(linea2 != null ? linea2 : "");
-        jButton5.setText(linea3 != null ? linea3 : "");
+        int keepEnd = Math.max(maxLen - 13, 4);
+        return s.substring(0, 10) + "…" + s.substring(s.length() - keepEnd);
+    }
+
+    private static String escapeHtml(String s) {
+        if (s == null) {
+            return "";
+        }
+        return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
     }
 
     /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
+     * Builds the "start page" UI: a Windows 11 style layout with a header,
+     * two primary action cards (New / Open) and a card listing recent
+     * projects.
      */
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        new_Button1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        setLayout(new BorderLayout());
 
-        setLayout(new java.awt.GridLayout(1, 0));
+        JPanel root = new JPanel();
+        root.setOpaque(true);
+        root.setBackground(BG_WINDOW);
+        root.setLayout(new BoxLayout(root, BoxLayout.Y_AXIS));
 
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+        // ---- Header -------------------------------------------------
+        JPanel header = new JPanel();
+        header.setOpaque(false);
+        header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
+        header.setBorder(BorderFactory.createEmptyBorder(36, 40, 28, 40));
+        header.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        new_Button1.setBackground(new java.awt.Color(153, 255, 153));
-        new_Button1.setFont(new_Button1.getFont().deriveFont(new_Button1.getFont().getSize()+2f));
-        org.openide.awt.Mnemonics.setLocalizedText(new_Button1, org.openide.util.NbBundle.getMessage(welcomeTopComponent.class, "welcomeTopComponent.new_Button1.text")); // NOI18N
-        new_Button1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                new_Button1ActionPerformed(evt);
-            }
-        });
+        JLabel logo = new JLabel(loadLogo(56));
+        header.add(logo);
+        header.add(Box.createHorizontalStrut(18));
 
-        jButton2.setBackground(new java.awt.Color(255, 204, 102));
-        jButton2.setFont(jButton2.getFont().deriveFont(jButton2.getFont().getSize()+2f));
-        org.openide.awt.Mnemonics.setLocalizedText(jButton2, org.openide.util.NbBundle.getMessage(welcomeTopComponent.class, "welcomeTopComponent.jButton2.text")); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        JPanel titleBox = new JPanel();
+        titleBox.setOpaque(false);
+        titleBox.setLayout(new BoxLayout(titleBox, BoxLayout.Y_AXIS));
 
-        jButton3.setFont(jButton3.getFont().deriveFont(jButton3.getFont().getSize()+1f));
-        org.openide.awt.Mnemonics.setLocalizedText(jButton3, org.openide.util.NbBundle.getMessage(welcomeTopComponent.class, "welcomeTopComponent.jButton3.text")); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
+        JLabel title = new JLabel("smartRefract");
+        title.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 26));
+        title.setForeground(TEXT_PRIMARY);
+        title.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        jButton4.setFont(jButton4.getFont().deriveFont(jButton4.getFont().getSize()+1f));
-        org.openide.awt.Mnemonics.setLocalizedText(jButton4, org.openide.util.NbBundle.getMessage(welcomeTopComponent.class, "welcomeTopComponent.jButton4.text")); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
+        JLabel subtitle = new JLabel("Start a new project or continue where you left off");
+        subtitle.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        subtitle.setForeground(TEXT_SECONDARY);
+        subtitle.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        jButton5.setFont(jButton5.getFont().deriveFont(jButton5.getFont().getSize()+1f));
-        org.openide.awt.Mnemonics.setLocalizedText(jButton5, org.openide.util.NbBundle.getMessage(welcomeTopComponent.class, "welcomeTopComponent.jButton5.text")); // NOI18N
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
+        titleBox.add(title);
+        titleBox.add(Box.createVerticalStrut(4));
+        titleBox.add(subtitle);
+        header.add(titleBox);
+        header.add(Box.createHorizontalGlue());
 
-        jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD, jLabel2.getFont().getSize()+4));
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(welcomeTopComponent.class, "welcomeTopComponent.jLabel2.text")); // NOI18N
+        root.add(header);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(new_Button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(50, 50, 50)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel2))
-                .addContainerGap(54, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(new_Button1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)))
-                .addContainerGap(333, Short.MAX_VALUE))
-        );
+        // ---- Action cards (New / Open) ------------------------------
+        JPanel actions = new JPanel(new GridLayout(1, 2, 16, 0));
+        actions.setOpaque(false);
+        actions.setBorder(BorderFactory.createEmptyBorder(0, 40, 28, 40));
+        actions.setAlignmentX(Component.LEFT_ALIGNMENT);
+        actions.setMaximumSize(new Dimension(Integer.MAX_VALUE, 118));
 
-        jPanel1.add(jPanel3);
+        new_Button1 = new FluentButton(
+                "New", "Import trace files and start a project",
+                new PlusIcon(24, Color.WHITE), true);
+        new_Button1.addActionListener(evt -> new_Button1ActionPerformed(evt));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 517, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 593, Short.MAX_VALUE)
-        );
+        jButton2 = new FluentButton(
+                "Open", "Browse for an existing project file",
+                new FolderIcon(24, ACCENT), false);
+        jButton2.addActionListener(evt -> jButton2ActionPerformed(evt));
 
-        jPanel1.add(jPanel2);
+        actions.add(new_Button1);
+        actions.add(jButton2);
 
-        jScrollPane1.setViewportView(jPanel1);
+        root.add(actions);
 
-        add(jScrollPane1);
-    }// </editor-fold>//GEN-END:initComponents
+        // ---- Recent projects card ------------------------------------
+        JPanel recentSection = new JPanel();
+        recentSection.setOpaque(false);
+        recentSection.setLayout(new BoxLayout(recentSection, BoxLayout.Y_AXIS));
+        recentSection.setBorder(BorderFactory.createEmptyBorder(0, 40, 24, 40));
+        recentSection.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jLabel2 = new JLabel("Recent projects");
+        jLabel2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 15));
+        jLabel2.setForeground(TEXT_PRIMARY);
+        jLabel2.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jLabel2.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+        recentSection.add(jLabel2);
+
+        recentCard = new RoundedPanel(8);
+        recentCard.setLayout(new BoxLayout(recentCard, BoxLayout.Y_AXIS));
+        recentCard.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        recentCard.setAlignmentX(Component.LEFT_ALIGNMENT);
+        recentCard.setMaximumSize(new Dimension(Integer.MAX_VALUE, 220));
+
+        jButton3 = new RecentItemButton();
+        jButton3.addActionListener(evt -> jButton3ActionPerformed(evt));
+        jButton4 = new RecentItemButton();
+        jButton4.addActionListener(evt -> jButton4ActionPerformed(evt));
+        jButton5 = new RecentItemButton();
+        jButton5.addActionListener(evt -> jButton5ActionPerformed(evt));
+
+        recentButtons = new RecentItemButton[]{jButton3, jButton4, jButton5};
+
+        recentCard.add(jButton3);
+        recentCard.add(new Divider());
+        recentCard.add(jButton4);
+        recentCard.add(new Divider());
+        recentCard.add(jButton5);
+
+        recentSection.add(recentCard);
+
+        emptyRecentLabel = new JLabel("No recent projects yet — open or create one to see it here.");
+        emptyRecentLabel.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        emptyRecentLabel.setForeground(TEXT_SECONDARY);
+        emptyRecentLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        emptyRecentLabel.setBorder(BorderFactory.createEmptyBorder(6, 2, 0, 0));
+        recentSection.add(emptyRecentLabel);
+
+        root.add(recentSection);
+        root.add(Box.createVerticalGlue());
+
+        jScrollPane1 = new JScrollPane(root);
+        jScrollPane1.setBorder(BorderFactory.createEmptyBorder());
+        jScrollPane1.getViewport().setBackground(BG_WINDOW);
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
+
+        add(jScrollPane1, BorderLayout.CENTER);
+    }
+
+    private static ImageIcon loadLogo(int size) {
+        java.net.URL url = welcomeTopComponent.class.getResource("app_logo.png");
+        if (url == null) {
+            return new ImageIcon();
+        }
+        Image img = new ImageIcon(url).getImage().getScaledInstance(size, size, Image.SCALE_SMOOTH);
+        return new ImageIcon(img);
+    }
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         // Apri il progetto con OpenRefract
         OpenPrj opn = new OpenPrj();
         opn.actionPerformed(null);
@@ -384,9 +415,9 @@ public final class welcomeTopComponent extends TopComponent {
             updateRecentProject();
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         DocumentEditor editor = new DocumentEditor();
         editor.open();
@@ -478,9 +509,9 @@ public final class welcomeTopComponent extends TopComponent {
         editor.jTracePath.setText(editor.obj.fb.fbp);
 
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }
 
-    private void new_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_Button1ActionPerformed
+    private void new_Button1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         // TODO add your handling code here:
         System.getProperty("os.arch");
@@ -490,7 +521,7 @@ public final class welcomeTopComponent extends TopComponent {
         editor.open();
         editor.requestActive();
         JFileChooser fc = new JFileChooser();
-        //set the default directory of the file chooser to the last opened folder   
+        //set the default directory of the file chooser to the last opened folder
         fc.setCurrentDirectory(new File(fh.getLastOpenedFolder()));
 
         fc.setFileFilter(new Seg2FileFilter());
@@ -515,7 +546,7 @@ public final class welcomeTopComponent extends TopComponent {
 
             Set_geometry sg = new Set_geometry();
             sg.actionPerformed(evt);
-            
+
              TopComponent tc = WindowManager.getDefault().findTopComponent("geometryViewerTopComponent");
             geometryViewerTopComponent geomTC = (geometryViewerTopComponent) tc;
             geomTC.setActive(editor.obj);
@@ -532,9 +563,9 @@ public final class welcomeTopComponent extends TopComponent {
         }
 
 
-    }//GEN-LAST:event_new_Button1ActionPerformed
+    }
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         DocumentEditor editor = new DocumentEditor();
         editor.open();
@@ -545,7 +576,7 @@ public final class welcomeTopComponent extends TopComponent {
         String path = (new File(lista[1])).getAbsolutePath(); //fc.getSelectedFile().getAbsolutePath();
         String base = (new File(lista[1])).getParent();  // (fc.getSelectedFile().getParent());
         String relative = (new File(base)).toURI().relativize(new File(path).toURI()).getPath();// new File(base).toURI().relativize(new File(path).toURI()).getPath();
-        
+
         File file = new File(lista[1]);
         boolean mTxt = false;
         boolean mORefract = false;
@@ -587,7 +618,7 @@ public final class welcomeTopComponent extends TopComponent {
         }
         if (mTxt || mORefract) {
             try {
-                editor.obj.fb = (FirstBrakeList) editor.obj.TraceGroup.get(editor.obj.trace_index);
+                editor.obj.fb = editor.obj.TraceGroup.get(editor.obj.trace_index);
             } catch (Exception ex) {
                 // fallback: do nothing
             }
@@ -617,9 +648,9 @@ public final class welcomeTopComponent extends TopComponent {
 
         moveRecentFirst(lista[1]);
 
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
 
         DocumentEditor editor = new DocumentEditor();
         OpenPrj open = new OpenPrj();
@@ -662,20 +693,8 @@ public final class welcomeTopComponent extends TopComponent {
             editor.tv.repaint();
         }
 
-        String userHome = "user.home";
-
-        // We get the path by getting the system property with the 
-        // defined key above. path+"/smartRefract-data/"
-        String path1 = System.getProperty(userHome);
-
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(path1 + "/smartRefract-data/" + "recenti.list");
-        } catch (FileNotFoundException ex) {
-            //   Exceptions.printStackTrace(ex);
-        }
-        boolean pathPresent = false;
-
+        // La lista dei recenti viene letta da updateRecentProject(): lo stream aperto qui
+        // non era usato né chiuso, e lasciava un descrittore aperto a ogni progetto aperto.
         welcomeTopComponent wTopComponent = (welcomeTopComponent) WindowManager.getDefault().findTopComponent("welcomeTopComponent");
         updateRecentProject();
         if (!mTxt) {
@@ -725,20 +744,20 @@ public final class welcomeTopComponent extends TopComponent {
         moveRecentFirst(lista[2]);
 
 // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton new_Button1;
-    // End of variables declaration//GEN-END:variables
+    // ---- UI components ------------------------------------------------
+    private FluentButton new_Button1;
+    private FluentButton jButton2;
+    private RecentItemButton jButton3;
+    private RecentItemButton jButton4;
+    private RecentItemButton jButton5;
+    private RecentItemButton[] recentButtons;
+    private JLabel jLabel2;
+    private JLabel emptyRecentLabel;
+    private RoundedPanel recentCard;
+    private JScrollPane jScrollPane1;
+
     @Override
     public void componentOpened() {
         // TODO add custom code on component opening
@@ -778,6 +797,254 @@ public final class welcomeTopComponent extends TopComponent {
         @Override
         public String getDescription() {
             return "SEG2 file; SEGY file; SeismicUnix file";
+        }
+    }
+
+    // ==================================================================
+    //  Fluent-style building blocks
+    // ==================================================================
+
+    /** A flat rounded-corner panel used as a card container. */
+    private static class RoundedPanel extends JPanel {
+        private final int radius;
+
+        RoundedPanel(int radius) {
+            this.radius = radius;
+            setOpaque(false);
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(CARD_BG);
+            g2.fill(new RoundRectangle2D.Float(0, 0, getWidth(), getHeight(), radius, radius));
+            g2.setColor(CARD_BORDER);
+            g2.draw(new RoundRectangle2D.Float(0.5f, 0.5f, getWidth() - 1f, getHeight() - 1f, radius, radius));
+            g2.dispose();
+            super.paintComponent(g);
+        }
+    }
+
+    /** Hairline divider used between rows inside the recent-projects card. */
+    private static class Divider extends JComponent {
+        Divider() {
+            setOpaque(false);
+            setMaximumSize(new Dimension(Integer.MAX_VALUE, 1));
+            setPreferredSize(new Dimension(10, 1));
+            setAlignmentX(Component.LEFT_ALIGNMENT);
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            g.setColor(CARD_BORDER);
+            g.fillRect(14, 0, getWidth() - 28, 1);
+        }
+    }
+
+    /** Large primary/secondary action card, Windows 11 "Get started" style. */
+    private static class FluentButton extends JButton {
+        private final boolean primary;
+        private boolean hover;
+
+        FluentButton(String titleText, String descriptionText, Icon icon, boolean primary) {
+            this.primary = primary;
+            setIcon(icon);
+            setText("<html><div style='width:170px'>"
+                    + "<span style='font-size:14px;font-weight:bold;color:" + (primary ? "#FFFFFF" : "#201F1E") + "'>"
+                    + escapeHtml(titleText) + "</span><br>"
+                    + "<span style='font-size:11px;color:" + (primary ? "#FBE7D0" : "#605E5C") + "'>"
+                    + escapeHtml(descriptionText) + "</span></div></html>");
+            setHorizontalAlignment(SwingConstants.LEFT);
+            setVerticalTextPosition(SwingConstants.BOTTOM);
+            setHorizontalTextPosition(SwingConstants.LEFT);
+            setIconTextGap(10);
+            setFocusPainted(false);
+            setContentAreaFilled(false);
+            setBorderPainted(false);
+            setOpaque(false);
+            setBorder(BorderFactory.createEmptyBorder(18, 20, 16, 16));
+            setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    hover = true;
+                    repaint();
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    hover = false;
+                    repaint();
+                }
+            });
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            RoundRectangle2D shape = new RoundRectangle2D.Float(0.5f, 0.5f, getWidth() - 1f, getHeight() - 1f, 8, 8);
+            if (primary) {
+                g2.setColor(hover ? ACCENT_HOVER : ACCENT);
+                g2.fill(shape);
+            } else {
+                g2.setColor(hover ? SECONDARY_HOVER : CARD_BG);
+                g2.fill(shape);
+                g2.setColor(CARD_BORDER);
+                g2.draw(shape);
+            }
+            g2.dispose();
+            super.paintComponent(g);
+        }
+    }
+
+    /** Flat, hoverable row used inside the recent-projects card. */
+    private static class RecentItemButton extends JButton {
+        private boolean hover;
+
+        RecentItemButton() {
+            setIcon(new DocumentIcon());
+            setHorizontalAlignment(SwingConstants.LEFT);
+            setIconTextGap(12);
+            setFocusPainted(false);
+            setContentAreaFilled(false);
+            setBorderPainted(false);
+            setOpaque(false);
+            setBorder(BorderFactory.createEmptyBorder(10, 12, 10, 12));
+            setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            setAlignmentX(Component.LEFT_ALIGNMENT);
+            setMaximumSize(new Dimension(Integer.MAX_VALUE, 56));
+            addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    hover = true;
+                    repaint();
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    hover = false;
+                    repaint();
+                }
+            });
+        }
+
+        void setRecentText(String titleText, String subtitleText) {
+            setText("<html><div>"
+                    + "<span style='font-size:12px;color:#1A1A1A'>" + escapeHtml(titleText) + "</span><br>"
+                    + "<span style='font-size:11px;color:#605E5C'>" + escapeHtml(subtitleText) + "</span></div></html>");
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            if (hover) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setColor(ROW_HOVER);
+                g2.fill(new RoundRectangle2D.Float(2, 2, getWidth() - 4, getHeight() - 4, 6, 6));
+                g2.dispose();
+            }
+            super.paintComponent(g);
+        }
+    }
+
+    /** Simple flat "+" glyph used on the primary New button. */
+    private static class PlusIcon implements Icon {
+        private final int size;
+        private final Color color;
+
+        PlusIcon(int size, Color color) {
+            this.size = size;
+            this.color = color;
+        }
+
+        @Override
+        public void paintIcon(Component c, Graphics g, int x, int y) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(color);
+            g2.setStroke(new BasicStroke(2.4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+            int cx = x + size / 2;
+            int cy = y + size / 2;
+            int r = size / 2 - 2;
+            g2.drawLine(cx - r, cy, cx + r, cy);
+            g2.drawLine(cx, cy - r, cx, cy + r);
+            g2.dispose();
+        }
+
+        @Override
+        public int getIconWidth() {
+            return size;
+        }
+
+        @Override
+        public int getIconHeight() {
+            return size;
+        }
+    }
+
+    /** Simple flat folder glyph used on the secondary Open button. */
+    private static class FolderIcon implements Icon {
+        private final int size;
+        private final Color color;
+
+        FolderIcon(int size, Color color) {
+            this.size = size;
+            this.color = color;
+        }
+
+        @Override
+        public void paintIcon(Component c, Graphics g, int x, int y) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(color);
+            float w = size;
+            float h = size * 0.78f;
+            float top = y + size - h;
+            g2.fill(new RoundRectangle2D.Float(x, top, w * 0.42f, h * 0.26f, 3, 3));
+            g2.fill(new RoundRectangle2D.Float(x, top + h * 0.16f, w, h * 0.84f, 4, 4));
+            g2.dispose();
+        }
+
+        @Override
+        public int getIconWidth() {
+            return size;
+        }
+
+        @Override
+        public int getIconHeight() {
+            return size;
+        }
+    }
+
+    /** Small flat document glyph used on recent-project rows. */
+    private static class DocumentIcon implements Icon {
+        private final int size = 24;
+
+        @Override
+        public void paintIcon(Component c, Graphics g, int x, int y) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(new Color(0xF3, 0xF3, 0xF3));
+            g2.fillRoundRect(x + 3, y + 1, size - 8, size - 2, 3, 3);
+            g2.setColor(new Color(0xC8, 0xC6, 0xC4));
+            g2.drawRoundRect(x + 3, y + 1, size - 8, size - 2, 3, 3);
+            g2.setColor(ACCENT);
+            g2.fillRect(x + 6, y + 7, size - 14, 2);
+            g2.fillRect(x + 6, y + 12, size - 14, 2);
+            g2.fillRect(x + 6, y + 17, size - 18, 2);
+            g2.dispose();
+        }
+
+        @Override
+        public int getIconWidth() {
+            return size;
+        }
+
+        @Override
+        public int getIconHeight() {
+            return size;
         }
     }
 

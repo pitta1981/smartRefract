@@ -196,31 +196,31 @@ public class JSelStrato_dlg extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(indj);
+        FirstBrakeList fbl = proj.stesa.get(indj);
         double scoppio = ((fbl.scoppio - fbl.spaz_in) / fbl.spaz);
-        if (((FirstBrakeList) proj.stesa.get(indj)).spaz_in + (((FirstBrakeList) proj.stesa.get(indj)).spaz * (inizio)) > ((FirstBrakeList) proj.stesa.get(indj)).scoppio) {
-            ((FirstBrakeList) proj.stesa.get(indj)).setLayertoZero();
-          //  ((FirstBrakeList) proj.stesa.get(indj)).updateLayer(1,inizio,fine);
-            ((FirstBrakeList) proj.stesa.get(indj)).strato1 = inizio + "-" + fine;
+        if ((proj.stesa.get(indj)).spaz_in + ((proj.stesa.get(indj)).spaz * (inizio)) > (proj.stesa.get(indj)).scoppio) {
+            (proj.stesa.get(indj)).setLayertoZero();
+          //  (proj.stesa.get(indj)).updateLayer(1,inizio,fine);
+            (proj.stesa.get(indj)).strato1 = inizio + "-" + fine;
             proj.setdromo();
-            ((FirstBrakeList) proj.stesa.get(indj)).setLayertoZero();
-            ((FirstBrakeList) proj.stesa.get(indj)).setLayer(inizio, fine, 1);
-            ((FirstBrakeList) proj.stesa.get(indj)).intersect();
+            (proj.stesa.get(indj)).setLayertoZero();
+            (proj.stesa.get(indj)).setLayer(inizio, fine, 1);
+            (proj.stesa.get(indj)).intersect();
             proj.buildShots();
             proj.buildDromocrone();
-            ((FirstBrakeList) proj.stesa.get(indj)).dromo[0].b = b;
-            ((FirstBrakeList) proj.stesa.get(indj)).dromo[0].a = a;
+            (proj.stesa.get(indj)).dromo[0].b = b;
+            (proj.stesa.get(indj)).dromo[0].a = a;
         } else {
-            ((FirstBrakeList) proj.stesa.get(indj)).setLayertoZero();
-            ((FirstBrakeList) proj.stesa.get(indj)).strato1R = inizio + "-" + fine;
+            (proj.stesa.get(indj)).setLayertoZero();
+            (proj.stesa.get(indj)).strato1R = inizio + "-" + fine;
             proj.setdromo();
-            ((FirstBrakeList) proj.stesa.get(indj)).setLayer(inizio, fine, 1);
-            ((FirstBrakeList) proj.stesa.get(indj)).intersect();
+            (proj.stesa.get(indj)).setLayer(inizio, fine, 1);
+            (proj.stesa.get(indj)).intersect();
             proj.buildShots();
             proj.buildDromocrone();
 
-            ((FirstBrakeList) proj.stesa.get(indj)).dromoR[0].b = b;
-            ((FirstBrakeList) proj.stesa.get(indj)).dromoR[0].a = a;
+            (proj.stesa.get(indj)).dromoR[0].b = b;
+            (proj.stesa.get(indj)).dromoR[0].a = a;
 
 
         }
@@ -228,30 +228,30 @@ public class JSelStrato_dlg extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(indj);
+        FirstBrakeList fbl = proj.stesa.get(indj);
         double scoppio = ((fbl.scoppio - fbl.spaz_in) / fbl.spaz);
-        if (((FirstBrakeList) proj.stesa.get(indj)).spaz_in + (((FirstBrakeList) proj.stesa.get(indj)).spaz * (inizio)) > ((FirstBrakeList) proj.stesa.get(indj)).scoppio) {
-            ((FirstBrakeList) proj.stesa.get(indj)).setLayertoZero();
-            ((FirstBrakeList) proj.stesa.get(indj)).strato2 = inizio + "-" + fine;
+        if ((proj.stesa.get(indj)).spaz_in + ((proj.stesa.get(indj)).spaz * (inizio)) > (proj.stesa.get(indj)).scoppio) {
+            (proj.stesa.get(indj)).setLayertoZero();
+            (proj.stesa.get(indj)).strato2 = inizio + "-" + fine;
             proj.setdromo();
-            ((FirstBrakeList) proj.stesa.get(indj)).setLayer(inizio, fine, 2);
-            ((FirstBrakeList) proj.stesa.get(indj)).intersect();
+            (proj.stesa.get(indj)).setLayer(inizio, fine, 2);
+            (proj.stesa.get(indj)).intersect();
             proj.buildShots();
             proj.buildDromocrone();
 
-            ((FirstBrakeList) proj.stesa.get(indj)).dromo[1].b = b;
-            ((FirstBrakeList) proj.stesa.get(indj)).dromo[1].a = a;
+            (proj.stesa.get(indj)).dromo[1].b = b;
+            (proj.stesa.get(indj)).dromo[1].a = a;
         } else {
-            ((FirstBrakeList) proj.stesa.get(indj)).setLayertoZero();
-            ((FirstBrakeList) proj.stesa.get(indj)).strato2R = inizio + "-" + fine;
+            (proj.stesa.get(indj)).setLayertoZero();
+            (proj.stesa.get(indj)).strato2R = inizio + "-" + fine;
             proj.setdromo();
-            ((FirstBrakeList) proj.stesa.get(indj)).setLayer(inizio, fine, 2);
-            ((FirstBrakeList) proj.stesa.get(indj)).intersect();
+            (proj.stesa.get(indj)).setLayer(inizio, fine, 2);
+            (proj.stesa.get(indj)).intersect();
             proj.buildShots();
             proj.buildDromocrone();
 
-            ((FirstBrakeList) proj.stesa.get(indj)).dromoR[1].b = b;
-            ((FirstBrakeList) proj.stesa.get(indj)).dromoR[1].a = a;
+            (proj.stesa.get(indj)).dromoR[1].b = b;
+            (proj.stesa.get(indj)).dromoR[1].a = a;
 
 
         }
@@ -297,14 +297,14 @@ public class JSelStrato_dlg extends javax.swing.JDialog {
 
 private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 // TODO add your handling code here:
-    FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(indj);
+    FirstBrakeList fbl = proj.stesa.get(indj);
     double scoppio = ((fbl.scoppio - fbl.spaz_in) / fbl.spaz);
-    if (( proj.stesa.get(indj)).spaz_in + (((FirstBrakeList) proj.stesa.get(indj)).spaz * (inizio)) > ((FirstBrakeList) proj.stesa.get(indj)).scoppio) {
+    if (( proj.stesa.get(indj)).spaz_in + ((proj.stesa.get(indj)).spaz * (inizio)) > (proj.stesa.get(indj)).scoppio) {
         ( proj.stesa.get(indj)).setLayertoZero();
         ( proj.stesa.get(indj)).strato3 = inizio + "-" + fine;
         proj.setdromo();
         ( proj.stesa.get(indj)).setLayer(inizio, fine, 3);
-        //   ((FirstBrakeList) proj.stesa.get(indj)).intersect();
+        //   (proj.stesa.get(indj)).intersect();
         proj.buildShots();
         proj.buildDromocrone();
 
@@ -316,7 +316,7 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         ( proj.stesa.get(indj)).setLayer(inizio, fine, 3);
 
         proj.setdromo();
-        //  ((FirstBrakeList) proj.stesa.get(indj)).intersect();
+        //  (proj.stesa.get(indj)).intersect();
         proj.buildShots();
         proj.buildDromocrone();
 

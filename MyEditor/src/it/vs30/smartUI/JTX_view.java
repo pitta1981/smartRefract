@@ -83,7 +83,7 @@ public class JTX_view extends javax.swing.JPanel {
     public void paintComponent(Graphics g) {
         
         xmax = this.getWidth();
-        ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        ArrFB = proj.stesa.get(0);
         nchanel = xmax / (ArrFB.fb.length + 1);
         
         super.paintComponent(g);
@@ -155,7 +155,7 @@ public class JTX_view extends javax.swing.JPanel {
         // TODO add your handling code here:
         int ymax = this.getHeight();
         //   int xmax = this.getWidth();
-        ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        ArrFB = proj.stesa.get(0);
         //   int nchanel = xmax / ArrFB.fb.length;
         //    int ychn = (ymax - (5 * nchanel)) / nchanel;
         //     int xshf = nchanel;
@@ -175,7 +175,7 @@ public class JTX_view extends javax.swing.JPanel {
         int fi = indi;
         int j = indj;
         int in = indi;
-        FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(j);
+        FirstBrakeList fbl = proj.stesa.get(j);
         for (int i = 1; i < fbl.fb.length; i++) {
             int xx = (i * nchanel);
             int yy = ymax - (int) (fbl.fb[i].time * ystp);
@@ -190,10 +190,10 @@ public class JTX_view extends javax.swing.JPanel {
         }
 
         /*   if (assStr == 1) {
-         undo = ((FirstBrakeList) proj.stesa.get(indj)).strato1 + "";
+         undo = (proj.stesa.get(indj)).strato1 + "";
          undo_n = assStr;
          } else if (assStr == 2) {
-         undo = ((FirstBrakeList) proj.stesa.get(indj)).strato2 + "";
+         undo = (proj.stesa.get(indj)).strato2 + "";
          undo_n = assStr;
          }*/
 
@@ -225,7 +225,7 @@ public class JTX_view extends javax.swing.JPanel {
         int xshf = nchanel;
         double max = 0.00001;
         for (int j = 0; j < proj.stesa.size(); j++) {
-            FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(j);
+            FirstBrakeList fbl = proj.stesa.get(j);
             for (int i = 1; i < fbl.fb.length; i++) {
                 if (max < fbl.fb[i].time) {
                     max = (int) fbl.fb[i].time;
@@ -271,10 +271,10 @@ public class JTX_view extends javax.swing.JPanel {
         proj.writeDromo();
 
         /*   if (assStr == 1) {
-         undo = ((FirstBrakeList) proj.stesa.get(indj)).strato1 + "";
+         undo = (proj.stesa.get(indj)).strato1 + "";
          undo_n = assStr;
          } else if (assStr == 2) {
-         undo = ((FirstBrakeList) proj.stesa.get(indj)).strato2 + "";
+         undo = (proj.stesa.get(indj)).strato2 + "";
          undo_n = assStr;
          }*/
         if (dromoSelected.selected != 0) {
@@ -287,7 +287,7 @@ public class JTX_view extends javax.swing.JPanel {
         int ymax = this.getHeight();
         //  int xmax = this.getWidth();
 
-        ArrFB = (FirstBrakeList) proj.stesa.get(indj);
+        ArrFB = proj.stesa.get(indj);
         int xshf = nchanel;
         //g.setColor(Color.yellow);
 
@@ -349,7 +349,7 @@ public class JTX_view extends javax.swing.JPanel {
              dlg_Sel.setAB(a, b);
              dlg_Sel.setIndj(indj);
              dlg_Sel.update();*/
-            fbl = (FirstBrakeList) proj.stesa.get(indj);
+            fbl = proj.stesa.get(indj);
             int yy = ymax - (int) (fbl.fb[fi].time * ystp) - yshf;
             int xx = (fi * nchanel);
             g.setFont(new Font("Dialog", Font.PLAIN, (int) (14)));
@@ -362,24 +362,24 @@ public class JTX_view extends javax.swing.JPanel {
             g.drawLine((in * nchanel) + xshf, ymax - (int) ((b * ((in) * fbl.spaz + fbl.spaz_in) + a) * ystp) - yshf, (fi * nchanel) + xshf, ymax - (int) ((b * ((fi) * fbl.spaz + fbl.spaz_in) + a) * ystp) - yshf);
             //      undo_j = indj;
             /*    if (assStr == 1) {
-             // undo=((FirstBrakeList)proj.stesa.get(indj)).strato1+"";
+             // undo=(proj.stesa.get(indj)).strato1+"";
              // undo_n=assStr;
-             ((FirstBrakeList) proj.stesa.get(indj)).dromo[0].b = b;
-             ((FirstBrakeList) proj.stesa.get(indj)).dromo[0].a = a;
+             (proj.stesa.get(indj)).dromo[0].b = b;
+             (proj.stesa.get(indj)).dromo[0].a = a;
 
-             ((FirstBrakeList) proj.stesa.get(indj)).strato1 = in + "-" + fi;
-             ((FirstBrakeList) proj.stesa.get(indj)).setLayer(in, fi, 1);
-             System.out.println(undo + " " + ((FirstBrakeList) proj.stesa.get(indj)).strato1);
+             (proj.stesa.get(indj)).strato1 = in + "-" + fi;
+             (proj.stesa.get(indj)).setLayer(in, fi, 1);
+             System.out.println(undo + " " + (proj.stesa.get(indj)).strato1);
 
              } else if (assStr == 2) {
-             // undo=((FirstBrakeList)proj.stesa.get(indj)).strato2+"";
+             // undo=(proj.stesa.get(indj)).strato2+"";
              // undo_n=assStr;
 
-             ((FirstBrakeList) proj.stesa.get(indj)).dromo[1].b = b;
-             ((FirstBrakeList) proj.stesa.get(indj)).dromo[1].a = a;
-             ((FirstBrakeList) proj.stesa.get(indj)).setLayer(in, fi, 2);
+             (proj.stesa.get(indj)).dromo[1].b = b;
+             (proj.stesa.get(indj)).dromo[1].a = a;
+             (proj.stesa.get(indj)).setLayer(in, fi, 2);
 
-             ((FirstBrakeList) proj.stesa.get(indj)).strato2 = in + "-" + fi;
+             (proj.stesa.get(indj)).strato2 = in + "-" + fi;
              }*/
         } catch (Exception e1) {
         }
@@ -448,7 +448,7 @@ public class JTX_view extends javax.swing.JPanel {
             }
         }
         
-        FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(indj);
+        FirstBrakeList fbl = proj.stesa.get(indj);
         dAPI.indj = indj;
         TopComponent tc;/*= WindowManager.getDefault().findTopComponent("MyViewerTopComponent");
         Lookup tcLookup = tc.getLookup();
@@ -547,7 +547,7 @@ public class JTX_view extends javax.swing.JPanel {
         //ymax=ymax-(int)(2*margUp*ymax);
         double max = 0.00001;
         for (int j = 0; j < proj.stesa.size(); j++) {
-            FirstBrakeList fbl = (FirstBrakeList) proj.stesa.get(j);
+            FirstBrakeList fbl = proj.stesa.get(j);
             for (int i = 0; i < fbl.fb.length; i++) {
                 if (max < (fbl.fb[i].time)) {
                     max = (int) (fbl.fb[i].time);
@@ -575,7 +575,7 @@ public class JTX_view extends javax.swing.JPanel {
         
         for (int j = 0; j < proj.stesa.size(); j++) {
             
-            ArrFB = (FirstBrakeList) proj.stesa.get(j);
+            ArrFB = proj.stesa.get(j);
 
 //  /*
             Graphics2D g2 = (Graphics2D) g;
@@ -783,7 +783,7 @@ public class JTX_view extends javax.swing.JPanel {
     
     private void drawtick(Graphics g, double max, int w, int h) {
         double ystp = 0.0;
-        FirstBrakeList ArrFB = (FirstBrakeList) proj.stesa.get(0);
+        FirstBrakeList ArrFB = proj.stesa.get(0);
         int ymax = h;
         int xmax = w;
         int nchanel = xmax / (ArrFB.fb.length + 1);
@@ -874,7 +874,7 @@ public class JTX_view extends javax.swing.JPanel {
         int yshf = (int) (margUp * ymax);
         double ystp = ((ymax - ((2 * margUp) * ymax)) / max);
         
-        ArrFB = (FirstBrakeList) proj.stesa.get(indj);
+        ArrFB = proj.stesa.get(indj);
         //int ystp = (int) ((ymax - (2 * margUp * ymax)) / max);
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(2));
@@ -1073,21 +1073,23 @@ public class JTX_view extends javax.swing.JPanel {
         //FirstBrakeList.getList(fbl.fb, 1, 1);
         for (int i = 1; i <= 3; i++) {
             
+            // Un solo punto (o punti tutti alla stessa ascissa) non definisce una retta:
+            // la regressione solleva IllegalArgumentException e va trattata come "assente".
             double[][] data = FirstBrakeList.getList(fbl, i, true, fbl.scoppio, fbl.spaz_in);
-            if (data.length > 0) {
+            try {
                 double[] dromo = FirstBrakeList.getOLSRegression(data);
                 fbl.dromo[i - 1].a = dromo[0];
                 fbl.dromo[i - 1].b = dromo[1];
-            } else {
+            } catch (IllegalArgumentException ex) {
                 fbl.dromo[i - 1].a = -999;
                 fbl.dromo[i - 1].b = -999;
             }
             data = FirstBrakeList.getList(fbl, i, false, fbl.scoppio, fbl.spaz_in);
-            if (data.length > 0) {
+            try {
                 double[] dromo = FirstBrakeList.getOLSRegression(data);
                 fbl.dromoR[i - 1].a = dromo[0];
                 fbl.dromoR[i - 1].b = dromo[1];
-            } else {
+            } catch (IllegalArgumentException ex) {
                 fbl.dromoR[i - 1].a = -999;
                 fbl.dromoR[i - 1].b = -999;
             }
@@ -1100,7 +1102,7 @@ public class JTX_view extends javax.swing.JPanel {
     private void drawRette(Graphics g, double max, int w, int h) {
         int ymax = h;
         // int xmax = w;
-        ArrFB = (FirstBrakeList) proj.stesa.get(indj);
+        ArrFB = proj.stesa.get(indj);
         // int nchanel = xmax / (ArrFB.fb.length + 2);
         int ychn = (ymax - (5 * nchanel)) / nchanel;
         int xshf = nchanel;
