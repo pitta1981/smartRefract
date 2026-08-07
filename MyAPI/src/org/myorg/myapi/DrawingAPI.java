@@ -298,30 +298,33 @@ public class DrawingAPI {
 
                 // g.drawLine((i * nchanel) - 5 + xshf, ymax - (int) (fbl.fb[i].time * ystp) - yshf, (i * nchanel) + 5 + xshf, ymax - (int) (fbl.fb[i].time * ystp) - yshf);
             }
-            if (andata) {
-                if (!fbl.strato1.equals("0-0")) {
-                    String[] split = fbl.strato1.split("-");
-                    in0 = Integer.parseInt(split[0]);
-                    fi0 = Integer.parseInt(split[1]);
+            try {
+                if (andata) {
+                    if (!fbl.strato1.equals("0-0")) {
+                        String[] split = fbl.strato1.split("-");
+                        in0 = Integer.parseInt(split[0]);
+                        fi0 = Integer.parseInt(split[1]);
 
-                    g.setColor(new Color(0.0f, 0.5f, 0.0f));
+                        g.setColor(new Color(0.0f, 0.5f, 0.0f));
 
-                    g.drawLine((in0 * nchanel) + xshf, ymax - (int) ((fbl.dromo[0].b * ((in0) * fbl.spaz + fbl.spaz_in) + fbl.dromo[0].a) * ystp) - yshf, (fi0 * nchanel) + xshf, ymax - (int) ((fbl.dromo[0].b * ((fi0) * fbl.spaz + fbl.spaz_in) + fbl.dromo[0].a) * ystp) - yshf);
+                        g.drawLine((in0 * nchanel) + xshf, ymax - (int) ((fbl.dromo[0].b * ((in0) * fbl.spaz + fbl.spaz_in) + fbl.dromo[0].a) * ystp) - yshf, (fi0 * nchanel) + xshf, ymax - (int) ((fbl.dromo[0].b * ((fi0) * fbl.spaz + fbl.spaz_in) + fbl.dromo[0].a) * ystp) - yshf);
+                    }
+                    if (!fbl.strato2.equals("0-0")) {
+                        String[] split = fbl.strato2.split("-");
+                        in0 = Integer.parseInt(split[0]);
+                        fi0 = Integer.parseInt(split[1]);
+                        g.setColor(new Color(0.2f, 0.5f, 0.5f));
+                        g.drawLine((in0 * nchanel) + xshf, ymax - (int) ((fbl.dromo[1].b * ((in0) * fbl.spaz + fbl.spaz_in) + fbl.dromo[1].a) * ystp) - yshf, (fi0 * nchanel) + xshf, ymax - (int) ((fbl.dromo[1].b * ((fi0) * fbl.spaz + fbl.spaz_in) + fbl.dromo[1].a) * ystp) - yshf);
+                    }
+                    if (!fbl.strato3.equals("0-0")) {
+                        String[] split = fbl.strato3.split("-");
+                        in0 = Integer.parseInt(split[0]);
+                        fi0 = Integer.parseInt(split[1]);
+                        g.setColor(new Color(0.5f, 0.4f, 0.1f));
+                        g.drawLine((in0 * nchanel) + xshf, ymax - (int) ((fbl.dromo[2].b * ((in0) * fbl.spaz + fbl.spaz_in) + fbl.dromo[2].a) * ystp) - yshf, (fi0 * nchanel) + xshf, ymax - (int) ((fbl.dromo[2].b * ((fi0) * fbl.spaz + fbl.spaz_in) + fbl.dromo[2].a) * ystp) - yshf);
+                    }
                 }
-                if (!fbl.strato2.equals("0-0")) {
-                    String[] split = fbl.strato2.split("-");
-                    in0 = Integer.parseInt(split[0]);
-                    fi0 = Integer.parseInt(split[1]);
-                    g.setColor(new Color(0.2f, 0.5f, 0.5f));
-                    g.drawLine((in0 * nchanel) + xshf, ymax - (int) ((fbl.dromo[1].b * ((in0) * fbl.spaz + fbl.spaz_in) + fbl.dromo[1].a) * ystp) - yshf, (fi0 * nchanel) + xshf, ymax - (int) ((fbl.dromo[1].b * ((fi0) * fbl.spaz + fbl.spaz_in) + fbl.dromo[1].a) * ystp) - yshf);
-                }
-                if (!fbl.strato3.equals("0-0")) {
-                    String[] split = fbl.strato3.split("-");
-                    in0 = Integer.parseInt(split[0]);
-                    fi0 = Integer.parseInt(split[1]);
-                    g.setColor(new Color(0.5f, 0.4f, 0.1f));
-                    g.drawLine((in0 * nchanel) + xshf, ymax - (int) ((fbl.dromo[2].b * ((in0) * fbl.spaz + fbl.spaz_in) + fbl.dromo[2].a) * ystp) - yshf, (fi0 * nchanel) + xshf, ymax - (int) ((fbl.dromo[2].b * ((fi0) * fbl.spaz + fbl.spaz_in) + fbl.dromo[2].a) * ystp) - yshf);
-                }
+            } catch (Exception e1) {
             }
             try {
                 if (ritorno) {

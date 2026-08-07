@@ -130,11 +130,25 @@ public class Indagine {
         // ObjCp ocp = new ObjCp();
         for (int i = 0; i < stesa.size(); i++) {
 
+            boolean strato1Valid = true;
+            in = 0;
+            fi = 0;
             if (!(stesa.get(i)).strato1.equals("0-0")) {
+                try {
+                    split = (stesa.get(i)).strato1.split("-");
+                    in = Integer.parseInt(split[0]);
+                    fi = Integer.parseInt(split[1]);
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+                    // strato1 corrotto/malformato (es. progetto da versione incompatibile):
+                    // trattalo come "nessun layer" invece di propagare l'eccezione e bloccare setdromo()
+                    System.out.println("strato1 non valido: " + (stesa.get(i)).strato1);
+                    strato1Valid = false;
+                }
+            } else {
+                strato1Valid = false;
+            }
+            if (strato1Valid) {
                 (stesa.get(i)).dromo[0] = new JRetta();
-                split = (stesa.get(i)).strato1.split("-");
-                in = Integer.parseInt(split[0]);
-                fi = Integer.parseInt(split[1]);
                 int k, f;
                 if (in < fi) {
                     k = in;
@@ -177,11 +191,23 @@ public class Indagine {
                 //fiB.strato1=strato1.getText();
 
             }
+            boolean strato2Valid = true;
+            in = 0;
+            fi = 0;
             if (!(stesa.get(i)).strato2.equals("0-0")) {
+                try {
+                    split = (stesa.get(i)).strato2.split("-");
+                    in = Integer.parseInt(split[0]);
+                    fi = Integer.parseInt(split[1]);
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+                    System.out.println("strato2 non valido: " + (stesa.get(i)).strato2);
+                    strato2Valid = false;
+                }
+            } else {
+                strato2Valid = false;
+            }
+            if (strato2Valid) {
                 (stesa.get(i)).dromo[1] = new JRetta();
-                split = (stesa.get(i)).strato2.split("-");
-                in = Integer.parseInt(split[0]);
-                fi = Integer.parseInt(split[1]);
 
                 int k, f;
                 if (in < fi) {
@@ -216,11 +242,23 @@ public class Indagine {
                 (stesa.get(i)).setLayer(0, 0, 2);
 
             }
+            boolean strato3Valid = true;
+            in = 0;
+            fi = 0;
             if (!(stesa.get(i)).strato3.equals("0-0")) {
+                try {
+                    split = (stesa.get(i)).strato3.split("-");
+                    in = Integer.parseInt(split[0]);
+                    fi = Integer.parseInt(split[1]);
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+                    System.out.println("strato3 non valido: " + (stesa.get(i)).strato3);
+                    strato3Valid = false;
+                }
+            } else {
+                strato3Valid = false;
+            }
+            if (strato3Valid) {
                 (stesa.get(i)).dromo[2] = new JRetta();
-                split = (stesa.get(i)).strato3.split("-");
-                in = Integer.parseInt(split[0]);
-                fi = Integer.parseInt(split[1]);
 
                 int k, f;
                 if (in < fi) {
@@ -261,11 +299,23 @@ public class Indagine {
 
             }
 
+            boolean strato1RValid = true;
+            in = 0;
+            fi = 0;
             if (!(stesa.get(i)).strato1R.equals("0-0")) {
+                try {
+                    split = (stesa.get(i)).strato1R.split("-");
+                    in = Integer.parseInt(split[0]);
+                    fi = Integer.parseInt(split[1]);
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+                    System.out.println("strato1R non valido: " + (stesa.get(i)).strato1R);
+                    strato1RValid = false;
+                }
+            } else {
+                strato1RValid = false;
+            }
+            if (strato1RValid) {
                 (stesa.get(i)).dromoR[0] = new JRetta();
-                split = (stesa.get(i)).strato1R.split("-");
-                in = Integer.parseInt(split[0]);
-                fi = Integer.parseInt(split[1]);
                 int k, f;
                 if (in < fi) {
                     k = in;
@@ -306,11 +356,23 @@ public class Indagine {
                 //fiB.strato1=strato1.getText();
 
             }
+            boolean strato2RValid = true;
+            in = 0;
+            fi = 0;
             if (!(stesa.get(i)).strato2R.equals("0-0")) {
+                try {
+                    split = (stesa.get(i)).strato2R.split("-");
+                    in = Integer.parseInt(split[0]);
+                    fi = Integer.parseInt(split[1]);
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+                    System.out.println("strato2R non valido: " + (stesa.get(i)).strato2R);
+                    strato2RValid = false;
+                }
+            } else {
+                strato2RValid = false;
+            }
+            if (strato2RValid) {
                 (stesa.get(i)).dromoR[1] = new JRetta();
-                split = (stesa.get(i)).strato2R.split("-");
-                in = Integer.parseInt(split[0]);
-                fi = Integer.parseInt(split[1]);
 
                 int k, f;
                 if (in < fi) {
@@ -351,11 +413,23 @@ public class Indagine {
                 //fiB.strato1=strato1.getText();
 
             }
+            boolean strato3RValid = true;
+            in = 0;
+            fi = 0;
             if (!(stesa.get(i)).strato3R.equals("0-0")) {
+                try {
+                    split = (stesa.get(i)).strato3R.split("-");
+                    in = Integer.parseInt(split[0]);
+                    fi = Integer.parseInt(split[1]);
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+                    System.out.println("strato3R non valido: " + (stesa.get(i)).strato3R);
+                    strato3RValid = false;
+                }
+            } else {
+                strato3RValid = false;
+            }
+            if (strato3RValid) {
                 (stesa.get(i)).dromoR[2] = new JRetta();
-                split = (stesa.get(i)).strato3R.split("-");
-                in = Integer.parseInt(split[0]);
-                fi = Integer.parseInt(split[1]);
 
                 int k, f;
                 if (in < fi) {
@@ -727,6 +801,13 @@ public class Indagine {
             VfB_A[i] = new FirstBrakeList();
             VfB_R[i] = new FirstBrakeList();
         }*/
+
+        if (stesa == null || stesa.isEmpty()) {
+            // Nessuna stesa caricata: stesa.get(0) piu' sotto lancerebbe una
+            // IndexOutOfBoundsException non gestita (es. cambio tab prima di
+            // aprire un progetto). Non c'e' nulla da calcolare, quindi esci.
+            return;
+        }
 
         try {
             //   phantom1();

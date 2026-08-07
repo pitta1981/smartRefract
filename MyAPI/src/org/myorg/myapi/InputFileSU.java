@@ -38,6 +38,15 @@ public class InputFileSU {
                 Logger.getLogger(InputFileSgy.class.getName()).log(Level.SEVERE, null, ex);
             }
             short size=fileInput.readShort();
+            // Il valore letto arriva da un file esterno senza controllo di un
+            // magic number: se 240+size*4 <= 0 la divisione sotto lancia
+            // ArithmeticException/NegativeArraySizeException non gestita.
+            // Trattiamo il caso come formato non valido, coerentemente con
+            // gli altri reader (es. InputFileSg2), cosi' il chiamante
+            // (APIObject.loadSism) lo intercetta gia' come DataFormatException.
+            if (240 + (size * 4) <= 0) {
+                throw new java.util.zip.DataFormatException();
+            }
             //int b1 = fileInput.readUnsignedByte();
             //int b2 = fileInput.readUnsignedByte();
             int b3 = 0;//fileInput.readByte();
