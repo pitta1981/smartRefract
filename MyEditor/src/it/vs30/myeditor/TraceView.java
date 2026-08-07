@@ -107,6 +107,7 @@ public class TraceView extends javax.swing.JPanel {
     private int cachedHeight = -1;
     private boolean heatmapDirty = true;
     private boolean previousIsWhite = false;
+    private int cachedTraceIndex = -1;
 
     /**
      * Reference to the documentEditor object
@@ -179,8 +180,16 @@ public class TraceView extends javax.swing.JPanel {
 
         // Poi disegna la selezione sopra tutto
         if (selectionMode) {
-            this.drawMousePosition(offg, selected_trace);
-            this.drawSelected(offg);
+            try {
+                // obj.tr e' null finche' non viene caricato un progetto: senza
+                // questo try/catch un repaint in modalita' selezione prima del
+                // caricamento dati genera una NullPointerException non gestita
+                // ad ogni ridisegno, bloccando la vista tracce.
+                this.drawMousePosition(offg, selected_trace);
+                this.drawSelected(offg);
+            } catch (Exception ex) {
+                System.err.println("Errore in paintComponent (selezione): " + ex.getMessage());
+            }
         }
 
         g.drawImage(im, 0, 0, this);
@@ -323,23 +332,30 @@ public class TraceView extends javax.swing.JPanel {
          * { } dlg_Trc.setVisible(true);
          */
         // TODO add your handling code here:
-        double stepCh = (this.getWidth() - (2 * margine_X)) / obj.tr.length;
+        // obj.tr e' null finche' non viene caricato un progetto: a differenza di
+        // formMouseMoved/formMousePressed/formMouseDragged, questo handler non era
+        // protetto e generava una NullPointerException non gestita ad ogni click
+        // in modalita' selezione prima del caricamento dati.
+        try {
+            double stepCh = (this.getWidth() - (2 * margine_X)) / obj.tr.length;
 
-        if (selectionMode) {
-            if (evt.getX() > margine_X && evt.getX() < (margine_X + (this.getWidth() - (2 * margine_X)))) {
+            if (selectionMode) {
+                if (evt.getX() > margine_X && evt.getX() < (margine_X + (this.getWidth() - (2 * margine_X)))) {
 
-                // this.setToolTipText("Canale " + (int) ((evt.getX() - margine_X) / stepCh) + "
-                // tempo: " + (int) (evt.getY() * (1 / stepT)) * obj.tr[0].sampleInterval *
-                // 1000);
-                // super.paintComponent(g);
-                selected_trace = (int) ((evt.getX() - margine_X) / stepCh);
-                obj.TraceGroup.get(obj.trace_index).zoomTr[selected_trace].is_selected = !obj.TraceGroup
-                        .get(obj.trace_index).zoomTr[selected_trace].is_selected;
-                this.repaint();
-                invalidate();
+                    // this.setToolTipText("Canale " + (int) ((evt.getX() - margine_X) / stepCh) + "
+                    // tempo: " + (int) (evt.getY() * (1 / stepT)) * obj.tr[0].sampleInterval *
+                    // 1000);
+                    // super.paintComponent(g);
+                    selected_trace = (int) ((evt.getX() - margine_X) / stepCh);
+                    obj.TraceGroup.get(obj.trace_index).zoomTr[selected_trace].is_selected = !obj.TraceGroup
+                            .get(obj.trace_index).zoomTr[selected_trace].is_selected;
+                    this.repaint();
+                    invalidate();
+
+                }
 
             }
-
+        } catch (Exception ex) {
         }
 
     }// GEN-LAST:event_formMouseClicked
@@ -844,7 +860,7 @@ public class TraceView extends javax.swing.JPanel {
         if (obj.tr.length > 0) {
             int w = this.getWidth();
             int h = this.getHeight();
-            if (heatmapDirty || cachedHeatmap == null || cachedWidth != w || cachedHeight != h || is_white != previousIsWhite) {
+            if (heatmapDirty || cachedHeatmap == null || cachedWidth != w || cachedHeight != h || is_white != previousIsWhite || cachedTraceIndex != obj.trace_index) {
                 previousIsWhite = is_white;
                 // Ricalcola la heatmap
                 if (!is_white) {
@@ -930,6 +946,7 @@ public class TraceView extends javax.swing.JPanel {
                 cachedHeatmap = heatmapImage;
                 cachedWidth = w;
                 cachedHeight = h;
+                cachedTraceIndex = obj.trace_index;
                 heatmapDirty = false;
             }
             // Disegna la heatmap cached

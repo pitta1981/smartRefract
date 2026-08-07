@@ -194,10 +194,20 @@ public class set_autopick_par_dialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        lra = Integer.parseInt( this.ltaTF.getText() );
-        sra = Integer.parseInt( this.staTF.getText() );
-        thrs = Double.parseDouble( this.thresholdTF.getText() );
-        
+        try {
+            lra = Integer.parseInt( this.ltaTF.getText() );
+            sra = Integer.parseInt( this.staTF.getText() );
+            thrs = Double.parseDouble( this.thresholdTF.getText() );
+        } catch (NumberFormatException ex) {
+            // Campi liberamente editabili: un valore non numerico altrimenti
+            // lancia una NumberFormatException non gestita sull'EDT e blocca
+            // la chiusura del dialog di autopick.
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Valore non numerico in uno dei campi STA/LTA/soglia.",
+                    "Errore", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         doClose(RET_OK);
     }//GEN-LAST:event_okButtonActionPerformed
 

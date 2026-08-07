@@ -135,9 +135,19 @@ public final class OpenPrj implements ActionListener {
 
             editor.obj.proj_file = file;
             if (mTxt) {
-                loadtrace(editor.obj, base);
-                editor.obj.loadSism(0);
-                editor.obj.LoadTrace_For_Open();
+                // Se loadPrj() ha fallito il parsing dell'header (file .txt
+                // corrotto/non valido), TraceGroup resta vuoto: in_file_l
+                // sarebbe un array vuoto e loadSism(0)/LoadTrace_For_Open()
+                // lancerebbero ArrayIndexOutOfBoundsException non gestita.
+                if (editor.obj.TraceGroup != null && !editor.obj.TraceGroup.isEmpty()) {
+                    loadtrace(editor.obj, base);
+                    editor.obj.loadSism(0);
+                    editor.obj.LoadTrace_For_Open();
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(null,
+                        "Impossibile leggere il progetto: file non valido o formato non riconosciuto.\n" + file.getAbsolutePath(),
+                        "Errore", javax.swing.JOptionPane.ERROR_MESSAGE);
+                }
             }
             // TODO: Altri aggiornamenti UI se necessari
 
@@ -257,7 +267,11 @@ public final class OpenPrj implements ActionListener {
             obj.fb = obj.TraceGroup.get(0);
             //   jdromo.setProj(proj);
             //     jdromo.setFB(fiB);
-        } catch (IOException e1) {
+        } catch (IOException | NumberFormatException e1) {
+            // NumberFormatException e' inclusa perche' l'header (canali/spaziatura)
+            // viene letto con parseInt/parseDouble senza validare il formato: un
+            // file .txt legacy corrotto o non valido altrimenti fa risalire
+            // l'eccezione non gestita fuori da loadPrj() e blocca l'apertura file.
             System.out.println("Error You chose to open this file: " + e1);
         }
 

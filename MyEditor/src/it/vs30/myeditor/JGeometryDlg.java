@@ -626,8 +626,18 @@ public class JGeometryDlg extends javax.swing.JDialog {
             System.out.println("Geometry shot config file " + e1.getMessage());
 
         }
-        this.spaz_in = Double.parseDouble(this.jTextField1.getText());
-        this.spaz = Double.parseDouble((String) this.jComboBox1.getSelectedItem());
+        try {
+            this.spaz_in = Double.parseDouble(this.jTextField1.getText());
+            this.spaz = Double.parseDouble((String) this.jComboBox1.getSelectedItem());
+        } catch (NumberFormatException ex) {
+            // I campi sono liberamente editabili dall'utente: un valore non
+            // numerico altrimenti lancia una NumberFormatException non gestita
+            // sull'EDT, lasciando il dialog geometria bloccato.
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Valore non numerico per spaziatura/posizione.",
+                    "Errore", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         this.RETVALUE = 1;
         this.setVisible(false);
         // TODO add your handling code here:
@@ -635,7 +645,11 @@ public class JGeometryDlg extends javax.swing.JDialog {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         String spazia = (String) jComboBox1.getSelectedItem();
-        tm.spaz = Double.parseDouble(spazia);
+        try {
+            tm.spaz = Double.parseDouble(spazia);
+        } catch (NumberFormatException ex) {
+            return;
+        }
         this.setTable(prj, tm.spaz);
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
@@ -649,7 +663,12 @@ public class JGeometryDlg extends javax.swing.JDialog {
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         // TODO add your hansdling code here:
         String spazia = (String) jComboBox1.getSelectedItem();
-        tm.spaz = Double.parseDouble(spazia);
+        try {
+            tm.spaz = Double.parseDouble(spazia);
+        } catch (NumberFormatException ex) {
+            System.out.println("Selezionato " + jComboBox3.getSelectedItem());
+            return;
+        }
         this.setTable(prj, tm.spaz);
 
         System.out.println("Selezionato " + jComboBox3.getSelectedItem());
@@ -660,7 +679,11 @@ public class JGeometryDlg extends javax.swing.JDialog {
         // TODO add your handling code here:
         String spazia = this.jTextField1.getText();
 
-        tm.spaz_in = Double.parseDouble(spazia);
+        try {
+            tm.spaz_in = Double.parseDouble(spazia);
+        } catch (NumberFormatException ex) {
+            return;
+        }
         this.setTable(prj, tm.spaz);
     }//GEN-LAST:event_jTextField1ActionPerformed
 
