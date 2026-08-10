@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use smartRefract in your work, please cite this software."
+title: "smartRefract"
+version: "2025.0"
+abstract: "Software for seismic refraction project processing, editing, and exchange through the OpenRefract format."
+authors:
+  - given-names: "Simone"
+    family-names: "Pittaluga"
+    alias: "pitta1981"
+    orcid: "https://orcid.org/0000-0001-7416-3484"
+repository-code: "https://github.com/pitta1981/smartRefract"
+url: "https://github.com/pitta1981/smartRefract"
+license: "GPL-3.0-only"
+keywords:
+  - "seismic refraction"
+  - "geophysics"
+  - "OpenRefract"
+  - "NetBeans Platform"
+date-released: "2026-08-10"
