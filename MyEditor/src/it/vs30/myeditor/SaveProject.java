@@ -4,7 +4,6 @@
  */
 package it.vs30.myeditor;
 
-import it.vs30.geometryView.geometryViewerTopComponent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -82,7 +81,7 @@ public final class SaveProject implements ActionListener {
                     
                 } catch (Exception ex) {
                     // Senza notifica l'utente credeva di aver salvato un progetto perso.
-                    System.out.println("Error saving project: " + ex.getMessage());
+                    System.err.println("Error saving project: " + ex.getMessage());
                     ex.printStackTrace();
                     javax.swing.JOptionPane.showMessageDialog(null,
                             "Impossibile salvare il progetto:\n" + ex.getMessage(),
