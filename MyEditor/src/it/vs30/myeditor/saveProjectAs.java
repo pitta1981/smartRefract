@@ -152,7 +152,6 @@ public final class saveProjectAs implements ActionListener {
                 os.write(relative + "\n");
                 os.write("" + fl.scoppio + "\n");
                 for (int j = 0; j < fl.fb.length; j++) {
-                    System.out.println("saving... " + j);
                     os.write(fl.fb[j].time + " ");
                 }
                 os.write("\n");

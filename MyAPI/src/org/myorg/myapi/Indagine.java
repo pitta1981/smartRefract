@@ -2089,8 +2089,6 @@ public class Indagine {
 
     public void writeDromo() {
 
-        System.out.println("saving... 0");
-
         String userHome = "user.home";
 
         // We get the path by getting the system property with the 

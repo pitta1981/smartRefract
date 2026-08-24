@@ -372,7 +372,6 @@ public class FirstBrakeList implements Externalizable {
 
     public void setLayer(int in, int fi, int l) {
 
-        System.out.println("saving... 0");
         String userHome = "user.home";
 
         // We get the path by getting the system property with the
